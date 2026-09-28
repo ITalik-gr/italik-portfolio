@@ -1,0 +1,30 @@
+# private: personal data, plans, prompts, chat knowledge base
+/docs/
+/CLAUDE.md
+/.claude/
+
+# env / secrets
+.env*
+
+# deps & build
+node_modules/
+.pnpm-store/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+.vercel/
+
+# tests & screenshots
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+/tests/shots/output/
+
+# logs & os
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+*.pem
