@@ -26,7 +26,8 @@ const tagSchema = z.enum([
   "web-app",
 ]);
 
-const laneSchema = z.enum(["ingest", "storage", "core", "llm", "ui"]);
+export const LANES = ["ingest", "storage", "core", "llm", "ui"] as const;
+const laneSchema = z.enum(LANES);
 
 export const projectSchema = z
   .object({
@@ -70,17 +71,40 @@ export const projectSchema = z
         updateNote: z.string(),
       })
       .optional(),
-    features: z.array(z.object({ title: z.string(), text: z.string() })).optional(),
+    // image is optional: a screenshot path in /public, shown 4:3 above the text
+    features: z
+      .array(z.object({ title: z.string(), text: z.string(), image: z.string().optional() }))
+      .optional(),
     architecture: z
       .object({
         intro: z.string(),
-        steps: z.array(z.object({ lane: laneSchema, text: z.string() })).min(1),
+        // from: 1-based parent steps; defaults to the previous step
+        steps: z
+          .array(
+            z.object({
+              lane: laneSchema,
+              text: z.string(),
+              from: z.array(z.number().int().min(1)).optional(),
+            }),
+          )
+          .min(1),
       })
       .optional(),
     decisions: z
       .array(z.object({ chose: z.string(), over: z.string(), because: z.string() }))
       .optional(),
     aiSpecifics: z.array(z.object({ key: z.string(), value: z.string() })).optional(),
+    // client cases: extra screens under "What I did"; src is optional, a labelled frame stands in until it exists
+    gallery: z
+      .array(
+        z.object({
+          kind: z.enum(["desktop", "mobile"]),
+          label: z.string(),
+          url: z.string().optional(),
+          src: z.string().optional(),
+        }),
+      )
+      .optional(),
     highlights: z.array(z.object({ title: z.string(), text: z.string() })).optional(),
     outcome: z.array(z.object({ value: z.string(), label: z.string() })).optional(),
   })
@@ -105,4 +129,5 @@ export const experienceSchema = z.object({
 
 export type Project = z.infer<typeof projectSchema> & { body: string };
 export type Experience = z.infer<typeof experienceSchema> & { body: string };
+export type Lane = z.infer<typeof laneSchema>;
 export type ProjectStatus = z.infer<typeof statusSchema>;

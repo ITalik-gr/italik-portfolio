@@ -16,6 +16,12 @@ stack: [Astro, Strapi CMS → Astro content collections]
 links:
   live: https://ppc.io
 frameUrl: ppc.io
+# TODO: screenshots (src) for the gallery
+gallery:
+  - { kind: desktop, label: Agents collection, url: ppc.io/agents }
+  - { kind: mobile, label: Home }
+  - { kind: mobile, label: Tool page }
+  - { kind: desktop, label: Tool template, url: "ppc.io/tools/[slug]" }
 highlights:
   - title: Strapi → content collections
     text: The migration removed an external CMS dependency and made builds faster.

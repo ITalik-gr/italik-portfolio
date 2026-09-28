@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Archivo, JetBrains_Mono } from "next/font/google";
 import { AskFab } from "@/components/layout/AskFab";
-import { Header } from "@/components/layout/Header";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -25,7 +25,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? SITE.url),
   title: SITE.meta.title,
   description: SITE.meta.description,
-  openGraph: { url: "/" },
+  openGraph: { url: "/", siteName: "italik.dev", type: "website" },
+  twitter: { card: "summary_large_image" },
 };
 
 type Props = { children: ReactNode };
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: Props) {
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-bg text-text">
-        <Header />
+        <SmoothScroll />
         {children}
         <AskFab />
       </body>

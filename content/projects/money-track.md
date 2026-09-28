@@ -39,9 +39,9 @@ architecture:
     - { lane: core, text: "Canonical SQL: totals, budgets, trends" }
     - { lane: core, text: Every number is computed here }
     - { lane: llm, text: Advisor receives query results }
-    - { lane: llm, text: Explains and suggests, read-only }
-    - { lane: ui, text: Numbers rendered straight from SQL }
-    - { lane: ui, text: Advice shown next to the numbers }
+    - { lane: llm, text: "Explains and suggests, read-only" }
+    - { lane: ui, text: Numbers rendered straight from SQL, from: [6] }
+    - { lane: ui, text: Advice shown next to the numbers, from: [8, 9] }
 decisions:
   - chose: a canonical SQL layer
     over: letting the LLM compute totals

@@ -11,3 +11,9 @@ export function getProjectLinks(project: Project) {
     code: project.links.code,
   };
 }
+
+// where a project title leads: its case, then an on-site target, then the live site
+export function getProjectHref(project: Project) {
+  const { caseHref, live } = getProjectLinks(project);
+  return caseHref ?? project.internalLink ?? live;
+}

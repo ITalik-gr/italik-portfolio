@@ -72,6 +72,15 @@ export function Button({
     );
   }
 
+  // a file (cv.pdf) is not a route: next/link would try to prefetch it as a page
+  if (/\.\w+$/.test(href)) {
+    return (
+      <a href={href} className={classes}>
+        {content}
+      </a>
+    );
+  }
+
   return (
     <Link
       href={href}

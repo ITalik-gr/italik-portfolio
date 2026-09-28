@@ -23,6 +23,14 @@
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
   --animate-spin-slow: spin 20s linear infinite;
   --animate-marquee: marquee 90s linear infinite;
+  --animate-letter-in: letter-in 0.7s var(--ease-out-expo) both;
+
+  @keyframes letter-in {
+    from {
+      transform: translateY(60%);
+      opacity: 0;
+    }
+  }
 
   @keyframes marquee {
     to {

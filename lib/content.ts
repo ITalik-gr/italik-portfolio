@@ -72,6 +72,20 @@ export function getCaseStudies() {
   return getProjects().filter((project) => project.caseStudy);
 }
 
+// case bodies are "## Heading" blocks of plain paragraphs
+export function getBodySections(body: string) {
+  const sections: Record<string, string[]> = {};
+  for (const block of body.split(/^## /m).slice(1)) {
+    const [heading, ...rest] = block.split("\n");
+    sections[heading.trim()] = rest
+      .join("\n")
+      .split(/\n\s*\n/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean);
+  }
+  return sections;
+}
+
 export function getExperience(): Experience[] {
   return readCollection("experience", experienceSchema).sort(byOrder);
 }

@@ -1,0 +1,61 @@
+import { ImageFrame } from "@/components/ui/ImageFrame";
+import type { Project } from "@/lib/schemas";
+import { CaseLinks } from "./CaseLinks";
+import { CaseMeta } from "./CaseMeta";
+
+type Props = { project: Project; labPosition?: string };
+
+const KICKER_SIDE = "hidden text-muted | md:inline";
+
+// TODO: render project.cover via next/image once screenshots exist
+// personal cases lead with the key idea and one-liner; client cases go straight to the meta
+// buttons sit next to the one-liner on desktop but after the meta on mobile, so they render twice
+export function CaseHero({ project, labPosition }: Props) {
+  const isClient = project.kind === "client";
+
+  return (
+    <header className="px-gutter pt-fl-24/64">
+      <p className="flex items-center justify-between gap-[16px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase | md:text-[13px] md:leading-[17px] md:tracking-[0.08em]">
+        <span className="flex gap-[10px] | md:gap-[14px]">
+          <span className="text-accent">Case study</span>
+          <span className="text-text">{project.typeLabel}</span>
+        </span>
+        {labPosition && <span className={KICKER_SIDE}>{labPosition}</span>}
+        {project.via && <span className={KICKER_SIDE}>Via {project.via}</span>}
+      </p>
+
+      <div className="flex items-end justify-between gap-[40px]">
+        <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-bold tracking-[-0.06em] font-stretch-[88%] | md:text-fl-68/274">
+          {project.title}
+        </h1>
+        {isClient && (
+          <CaseLinks project={project} className="hidden shrink-0 | md:mb-[14px] md:flex" />
+        )}
+      </div>
+
+      {project.keyIdea && (
+        <p className="mt-fl-24/40 max-w-[760px] text-fl-20/30 leading-[1.25] tracking-[-0.015em] text-accent">
+          {project.keyIdea}
+        </p>
+      )}
+
+      {!isClient && (
+        <div className="hidden | md:mt-[14px] md:flex md:items-end md:justify-between md:gap-[40px]">
+          <p className="max-w-[760px] text-fl-17/21 leading-[1.45] text-text-3">
+            {project.summary}
+          </p>
+          <CaseLinks project={project} className="shrink-0" />
+        </div>
+      )}
+
+      <CaseMeta project={project} className="mt-fl-32/56" />
+      <CaseLinks project={project} className="mt-[24px] | md:hidden" />
+
+      <ImageFrame
+        url={project.frameUrl}
+        label={`${project.title} · screenshot`}
+        className="mt-fl-32/56"
+      />
+    </header>
+  );
+}

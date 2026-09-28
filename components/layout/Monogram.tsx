@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
-export function Monogram() {
+export function Monogram({ className }: { className?: string }) {
   return (
     <Link
       href="/"
-      aria-label={`${SITE.name}, home`}
-      className="group/mono flex items-center gap-[12px] text-text transition-colors duration-150 hover:text-accent focus-visible:text-accent"
+      aria-label={`${SITE.monogram}, ${SITE.name}, home`}
+      className={cn(
+        "group/mono flex items-center gap-[12px] text-text transition-colors duration-150 hover:text-accent focus-visible:text-accent",
+        className,
+      )}
     >
       <span className="flex size-[40px] items-center justify-center border border-current text-[17px] leading-none font-bold tracking-[-0.02em] font-stretch-[88%]">
         {SITE.monogram}

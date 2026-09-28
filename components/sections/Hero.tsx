@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/motion/SplitHeading";
 import { Button } from "@/components/ui/Button";
 import { HERO, SITE } from "@/lib/site";
 
@@ -10,16 +11,11 @@ export function Hero() {
       {/* TODO: phase 6 mounts the "working brain" canvas here */}
       <div aria-hidden className="absolute inset-0 | md:left-[44%]" />
 
-      <h1
+      <SplitHeading
         id="hero-title"
+        lines={HERO.lines}
         className="relative z-[1] text-fl-86/224 leading-[0.85] font-bold tracking-[-0.055em] font-stretch-[88%] | md:font-[680]"
-      >
-        {HERO.lines.map((line) => (
-          <span key={line} className="block">
-            {line}{" "}
-          </span>
-        ))}
-      </h1>
+      />
 
       <div className="relative z-[1] mt-auto flex flex-col gap-[24px] pt-[40px] | md:mt-[64px] md:pt-0 | lg:flex-row lg:items-end lg:justify-between lg:gap-[40px]">
         <p className="max-w-[640px] text-fl-21/26 leading-[1.3] tracking-[-0.015em] text-text">

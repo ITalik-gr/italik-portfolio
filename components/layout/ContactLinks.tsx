@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Arrow } from "@/components/ui/Button";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -15,6 +14,7 @@ const LINKS = [
   { label: "CV", href: SITE.cv, arrow: "↓", inlineArrow: true },
 ] as const;
 
+// none of these are routes (mailto, external, the CV file), so plain <a> and no prefetch
 export function ContactLinks({ variant, className }: Props) {
   const rows = variant === "rows";
 
@@ -28,7 +28,7 @@ export function ContactLinks({ variant, className }: Props) {
     >
       {LINKS.map((link) => (
         <li key={link.label} className={cn(rows && "border-b border-line last:border-b-0")}>
-          <Link
+          <a
             href={link.href}
             {...(link.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
             className={cn(
@@ -38,7 +38,7 @@ export function ContactLinks({ variant, className }: Props) {
           >
             <span>{link.label}</span>
             {(rows || link.inlineArrow) && <Arrow arrow={link.arrow} />}
-          </Link>
+          </a>
         </li>
       ))}
     </ul>
