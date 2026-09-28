@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/motion/Reveal";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import type { Project } from "@/lib/schemas";
@@ -20,7 +21,7 @@ function toRows(shots: Shot[]) {
 
 export function CaseGallery({ shots, title }: { shots: Shot[]; title: string }) {
   return (
-    <div className="mt-fl-48/96 flex flex-col gap-[24px] px-gutter">
+    <Reveal className="mt-fl-48/96 flex flex-col gap-[24px] px-gutter">
       {toRows(shots).map((row, index) => (
         <div
           key={index}
@@ -69,6 +70,6 @@ export function CaseGallery({ shots, title }: { shots: Shot[]; title: string }) 
           )}
         </div>
       ))}
-    </div>
+    </Reveal>
   );
 }

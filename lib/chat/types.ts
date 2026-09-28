@@ -1,4 +1,4 @@
-// shapes the phase 7 API will stream into; the UI only ever renders these
+// what the chat UI renders; the API streams into these through lib/chat/store.ts
 export type ChatSource = { label: string; href?: string };
 
 export type ChatMessage = {
@@ -8,4 +8,6 @@ export type ChatMessage = {
   status?: "streaming" | "done" | "error";
   sources?: ChatSource[];
   link?: { label: string; href: string };
+  // the sample exchange shown before the first real question
+  example?: boolean;
 };

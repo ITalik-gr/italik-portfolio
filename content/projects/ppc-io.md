@@ -2,6 +2,7 @@
 title: ppc.io
 slug: ppc-io
 kind: client
+show: [clients]
 caseStudy: true
 draft: true
 order: 10

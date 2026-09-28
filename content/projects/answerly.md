@@ -2,6 +2,7 @@
 title: Answerly
 slug: answerly
 kind: client
+show: [clients]
 order: 12
 status: offline
 statusNote: startup closed

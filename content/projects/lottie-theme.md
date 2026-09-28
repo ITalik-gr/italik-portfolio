@@ -2,10 +2,8 @@
 title: Lottie Theme
 slug: lottie-theme
 kind: personal
-featured: true
-lab: true
+show: [featured, lab]
 # TODO: case body comes from prompts/case-study-from-repo.md
-caseStudy: false
 order: 2
 status: live
 tags: [tool, mcp]

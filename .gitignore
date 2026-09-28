@@ -1,10 +1,11 @@
-# private: personal data, plans, prompts, chat knowledge base
+# private: personal data, plans, prompts (the chat knowledge base is public, in content/knowledge/)
 /docs/
 /CLAUDE.md
 /.claude/
 
 # env / secrets
 .env*
+!.env.example
 
 # deps & build
 node_modules/

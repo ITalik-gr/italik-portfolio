@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -20,11 +21,11 @@ export function CaseSection({ id, number, label, aside, children, className }: P
         className,
       )}
     >
-      <div>
+      <Reveal>
         <CaseLabel id={id} number={number} label={label} />
         {aside}
-      </div>
-      <div className="min-w-0 | lg:col-span-3">{children}</div>
+      </Reveal>
+      <Reveal className="min-w-0 | lg:col-span-3">{children}</Reveal>
     </section>
   );
 }

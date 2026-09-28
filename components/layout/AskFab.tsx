@@ -1,17 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { openChatDrawer, useChat } from "@/lib/chat/store";
 import { cn } from "@/lib/utils";
 
 // hide near the page end so the footer stays fully visible
 const BOTTOM_OFFSET = 100;
 
-// TODO: opens the chat drawer in phase 7; until then it jumps to the Ask AI section
 export function AskFab() {
   const [nearBottom, setNearBottom] = useState(false);
   const [ctaVisible, setCtaVisible] = useState(false);
-  const hidden = nearBottom || ctaVisible;
+  const { drawerOpen } = useChat();
+  const hidden = nearBottom || ctaVisible || drawerOpen;
 
   useEffect(() => {
     const update = () => {
@@ -27,7 +27,7 @@ export function AskFab() {
     };
   }, []);
 
-  // the hero has its own "Ask my AI" button, so the FAB waits until it scrolls away
+  // the first screen has its own "Ask my AI" button, so the FAB waits until the whole hero scrolls away
   useEffect(() => {
     const targets = document.querySelectorAll("[data-hides-fab]");
     if (targets.length === 0) return;
@@ -43,8 +43,10 @@ export function AskFab() {
   }, []);
 
   return (
-    <Link
-      href="/#ask"
+    <button
+      type="button"
+      onClick={openChatDrawer}
+      aria-haspopup="dialog"
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}
       className={cn(
@@ -54,6 +56,6 @@ export function AskFab() {
     >
       <span aria-hidden className="size-[7px] animate-pulse-dot rounded-full bg-accent" />
       Ask AI
-    </Link>
+    </button>
   );
 }

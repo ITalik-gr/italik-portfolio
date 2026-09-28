@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import type { ChatMessage } from "@/lib/chat/types";
+import { Emphasis } from "@/components/ui/Emphasis";
 import { ASK } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -20,23 +21,30 @@ export function ChatMessageView({ message }: { message: ChatMessage }) {
   }
 
   const status = message.status ?? "done";
+  // the model writes plain paragraphs, sometimes with **bold**: render both, never raw markdown
 
   return (
     <div className="flex max-w-full flex-col gap-[14px] self-start | md:max-w-[90%]">
       <p className="flex gap-[10px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase">
         <span className="text-accent">{ASK.assistantName}</span>
-        <span className="text-muted">{STATUS_LABEL[status]}</span>
+        <span className="text-muted">
+          {message.example ? "Example answer" : STATUS_LABEL[status]}
+        </span>
       </p>
-      <p className={cn("text-fl-16/18 leading-[1.55]", status === "error" && "text-text-3")}>
-        {message.content}
-        {/* static caret while tokens arrive; only the FAB is allowed to blink */}
-        {status === "streaming" && (
-          <span
-            aria-hidden
-            className="ml-[3px] inline-block h-[18px] w-[9px] bg-accent align-[-3px]"
-          />
+      <div
+        className={cn(
+          "flex flex-col gap-[12px] text-fl-16/18 leading-[1.55]",
+          status === "error" && "text-text-3",
         )}
-      </p>
+      >
+        {message.content.split(/\n{2,}/).map((paragraph, index, all) => (
+          <p key={index} className="whitespace-pre-line">
+            <Emphasis text={paragraph} />
+            {status === "streaming" && index === all.length - 1 && <Caret />}
+          </p>
+        ))}
+      </div>
+
       {message.sources && message.sources.length > 0 && (
         <div className="flex flex-wrap items-center gap-[6px] font-mono text-[11px] leading-[14px]">
           <span className="mr-[4px] text-muted uppercase">Sources</span>
@@ -66,5 +74,12 @@ export function ChatMessageView({ message }: { message: ChatMessage }) {
         </Button>
       )}
     </div>
+  );
+}
+
+// static caret while tokens arrive; only the FAB is allowed to blink
+function Caret() {
+  return (
+    <span aria-hidden className="ml-[3px] inline-block h-[18px] w-[9px] bg-accent align-[-3px]" />
   );
 }

@@ -15,6 +15,8 @@ export type LabItem = {
   stack: string[];
   frameUrl?: string;
   href?: string;
+  // false when the same project is already named in Featured
+  shareTitle: boolean;
 };
 
 // the last hovered or focused row stays active until the pointer leaves the whole block

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -19,7 +20,7 @@ export function Section({ id, labelledBy, children, className }: Props) {
         className,
       )}
     >
-      {children}
+      <Reveal>{children}</Reveal>
     </section>
   );
 }

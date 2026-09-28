@@ -1,4 +1,6 @@
-import type { FormEvent } from "react";
+"use client";
+
+import { useId, type FormEvent } from "react";
 import { ASK } from "@/lib/site";
 
 type Props = {
@@ -6,21 +8,25 @@ type Props = {
   onChange: (value: string) => void;
   onSubmit: () => void;
   disabled?: boolean;
+  autoFocus?: boolean;
 };
 
-export function ChatInput({ value, onChange, onSubmit, disabled }: Props) {
+export function ChatInput({ value, onChange, onSubmit, disabled, autoFocus }: Props) {
+  // the section and the drawer can both be on the page, so ids must be unique
+  const id = useId();
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    if (value.trim()) onSubmit();
+    if (value.trim() && !disabled) onSubmit();
   };
 
   return (
     <form onSubmit={submit} className="flex border-t border-line">
-      <label htmlFor="ask-input" className="sr-only">
+      <label htmlFor={id} className="sr-only">
         Ask a question about Vitaliy
       </label>
       <input
-        id="ask-input"
+        id={id}
+        autoFocus={autoFocus}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={ASK.placeholder}

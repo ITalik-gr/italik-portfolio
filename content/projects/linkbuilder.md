@@ -2,6 +2,7 @@
 title: Linkbuilder
 slug: linkbuilder
 kind: client
+show: [clients]
 order: 15
 status: archived
 statusNote: client migrated

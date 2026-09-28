@@ -44,7 +44,7 @@ export const HERO = {
 } as const;
 
 export const SECTIONS = {
-  featured: { number: "01", label: "Featured", title: "Featured", meta: "Live · open source" },
+  featured: { number: "01", label: "Featured", title: "Featured", meta: undefined },
   lab: { number: "02", label: "Lab", title: "Lab", meta: "Personal projects & agents" },
   nowBuilding: {
     number: "03",
@@ -83,12 +83,13 @@ export const ASK = {
     "How does Money Track avoid made-up numbers?",
     "Where is he based and how does he work?",
   ],
-  // TODO: confirm in phase 7; this is the v1 plan from docs/03-stack (whole knowledge base in a cached prompt)
+  // v1 architecture (phase 7): the whole knowledge base sits in one cached prompt, no embeddings
   pipeline: ["content", "knowledge base", "LLM", "answer"],
   pipelineAccent: "LLM",
   howItWorks:
     "Site content and my notes are loaded into one cached prompt. The model answers only from them and cites the files it used.",
   assistantName: "Italik.ai",
+  drawerTitle: "Ask AI about Vitaliy",
   channel: "Ask-italik",
   languageNote: "Answers in the language you ask",
   placeholder: "Ask anything…",

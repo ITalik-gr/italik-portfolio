@@ -1,3 +1,4 @@
+import { ProjectMorph } from "@/components/motion/ProjectMorph";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { cn } from "@/lib/utils";
 import type { LabItem } from "./LabList";
@@ -31,7 +32,9 @@ export function LabPreview({ items, active }: Props) {
               active === item.slug ? "translate-x-0 opacity-100" : "translate-x-[104%] opacity-0",
             )}
           >
-            <ImageFrame url={item.frameUrl} ratio="16/10" label={`${item.title} · preview`} />
+            <ProjectMorph slug={item.slug} part="cover" source="lab" primary={item.shareTitle}>
+              <ImageFrame url={item.frameUrl} ratio="16/10" label={`${item.title} · preview`} />
+            </ProjectMorph>
             <div className="flex justify-between font-mono text-[12px] leading-[16px] tracking-[0.06em] text-text-3 uppercase">
               <span>{item.title}</span>
               {item.href && <span>Open →</span>}

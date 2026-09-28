@@ -2,7 +2,15 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import type { z } from "zod";
-import { experienceSchema, projectSchema, type Experience, type Project } from "@/lib/schemas";
+import {
+  experienceSchema,
+  projectSchema,
+  type Experience,
+  type HOME_SECTIONS,
+  type Project,
+} from "@/lib/schemas";
+
+type HomeSection = (typeof HOME_SECTIONS)[number];
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
@@ -43,12 +51,15 @@ export function getProject(slug: string) {
   return getProjects().find((project) => project.slug === slug);
 }
 
+// which home section shows a project is decided only by its `show` list
+const inSection = (section: HomeSection) => (project: Project) => project.show.includes(section);
+
 export function getFeaturedProjects() {
-  return getProjects().filter((project) => project.featured);
+  return getProjects().filter(inSection("featured"));
 }
 
 export function getLabProjects() {
-  return getProjects().filter((project) => project.kind === "personal" && project.lab);
+  return getProjects().filter(inSection("lab"));
 }
 
 // active work first, then rewrites, then what's queued
@@ -60,12 +71,12 @@ const NOW_RANK: Partial<Record<Project["status"], number>> = {
 
 export function getNowBuilding() {
   return getProjects()
-    .filter((project) => project.nowBuilding)
+    .filter(inSection("now"))
     .sort((a, b) => (NOW_RANK[a.status] ?? 3) - (NOW_RANK[b.status] ?? 3));
 }
 
 export function getClientProjects() {
-  return getProjects().filter((project) => project.kind === "client");
+  return getProjects().filter(inSection("clients"));
 }
 
 export function getCaseStudies() {

@@ -2,6 +2,7 @@
 title: Backlinks
 slug: backlinks
 kind: client
+show: [clients]
 order: 14
 status: live
 statusNote: my version

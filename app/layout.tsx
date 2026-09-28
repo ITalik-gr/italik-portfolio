@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Archivo, JetBrains_Mono } from "next/font/google";
+import { ChatDrawer } from "@/components/chat/ChatDrawer";
 import { AskFab } from "@/components/layout/AskFab";
+import { CursorLabel } from "@/components/motion/CursorLabel";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SITE } from "@/lib/site";
 import "./globals.css";
@@ -32,6 +34,7 @@ export const metadata: Metadata = {
 type Props = { children: ReactNode };
 
 export default function RootLayout({ children }: Props) {
+  // the inline script marks that scripts run, so Reveal blocks can start hidden without a flash
   return (
     // browser extensions add attributes to <html> before React hydrates; this only silences that tag
     <html
@@ -39,10 +42,17 @@ export default function RootLayout({ children }: Props) {
       className={`${archivo.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
+      </head>
       <body className="min-h-dvh bg-bg text-text">
         <SmoothScroll />
         {children}
         <AskFab />
+        <ChatDrawer />
+        <CursorLabel />
       </body>
     </html>
   );

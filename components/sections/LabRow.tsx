@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { PointerEvent, ReactNode } from "react";
+import { ProjectMorph, claimMorph } from "@/components/motion/ProjectMorph";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { Status } from "@/components/ui/Status";
 import { cn } from "@/lib/utils";
@@ -32,14 +33,16 @@ export function LabRow({ item, index, dimmed, onActivate }: Props) {
         />
         <span>{item.tags.join(" · ")}</span>
       </p>
-      <h3
-        className={cn(
-          "text-fl-36/75 leading-[0.9] font-bold tracking-[-0.05em] font-stretch-[88%] transition-colors duration-300",
-          dimmed && "lg:text-line-strong",
-        )}
-      >
-        {item.title}
-      </h3>
+      <ProjectMorph slug={item.slug} part="title" source="lab" primary={item.shareTitle}>
+        <h3
+          className={cn(
+            "text-fl-36/75 leading-[0.9] font-bold tracking-[-0.05em] font-stretch-[88%] transition-colors duration-300",
+            dimmed && "lg:text-line-strong",
+          )}
+        >
+          {item.title}
+        </h3>
+      </ProjectMorph>
       <p className="text-[14px] leading-[1.45] text-text-3 | md:hidden">{item.summary}</p>
       <p className="hidden max-w-[620px] text-[18px] leading-[1.45] text-text-3 | md:block">
         {item.description}
@@ -66,6 +69,7 @@ export function LabRow({ item, index, dimmed, onActivate }: Props) {
         className={textClass}
         onPointerEnter={onMouseOnly(onActivate)}
         onFocus={onActivate}
+        onClick={() => claimMorph(item.slug, "lab", isDesktop() ? "lab" : "lab-row")}
       >
         {text}
       </Link>
@@ -75,7 +79,12 @@ export function LabRow({ item, index, dimmed, onActivate }: Props) {
   return (
     <li className="grid items-start gap-[16px] py-[24px] | md:grid-cols-[1fr_minmax(0,300px)] md:gap-[24px] | lg:grid-cols-1 lg:pt-[32px] lg:pb-[40px]">
       {body}
-      <ProjectCover label={item.title} className="| lg:hidden" />
+      <ProjectMorph slug={item.slug} part="cover" source="lab-row" primary={false}>
+        <ProjectCover label={item.title} className="| lg:hidden" />
+      </ProjectMorph>
     </li>
   );
 }
+
+// the side preview only exists from lg; below it the row shows its own cover
+const isDesktop = () => window.matchMedia("(min-width: 1024px)").matches;

@@ -29,3 +29,11 @@ test("reduced motion keeps the hero title static", async ({ browser }) => {
   await expect(letter).not.toHaveAttribute("style", /font-weight/);
   await page.close();
 });
+
+test("the working-brain canvas is decorative and pauses off screen", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const canvas = page.locator("section[aria-labelledby=hero-title] canvas");
+  await expect(canvas).toHaveAttribute("aria-hidden", "true");
+  await expect.poll(() => canvas.evaluate((c: HTMLCanvasElement) => c.width)).toBeGreaterThan(300);
+});

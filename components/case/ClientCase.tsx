@@ -1,5 +1,5 @@
-import { getBodySections, getClientProjects } from "@/lib/content";
-import { getProjectHref } from "@/lib/project-links";
+import { getBodySections, getProjects } from "@/lib/content";
+import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { CaseBlocks, sectionNumber, type CaseBlock } from "./CaseBlocks";
 import { CaseGallery } from "./CaseGallery";
@@ -44,11 +44,12 @@ export function ClientCase({ project }: { project: Project }) {
     });
   }
 
-  const related = getClientProjects()
-    .filter((item) => item.slug !== project.slug)
+  // other client work with somewhere to go, whether or not it is shown on the home page
+  const related = getProjects()
+    .filter((item) => item.kind === "client" && item.slug !== project.slug)
     .map((item) => ({
       title: item.title,
-      href: getProjectHref(item),
+      href: getProjectLinks(item).primary?.href,
       meta: item.stack.join(" · "),
     }))
     .filter((item): item is { title: string; href: string; meta: string } => Boolean(item.href));

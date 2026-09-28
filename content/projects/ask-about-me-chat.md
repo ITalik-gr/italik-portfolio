@@ -2,7 +2,7 @@
 title: Ask-about-me chat
 slug: ask-about-me-chat
 kind: personal
-lab: true
+show: [lab]
 order: 4
 # becomes live once the chat ships (phase 7)
 status: building

@@ -1,5 +1,5 @@
 import { getBodySections, getLabProjects } from "@/lib/content";
-import { getProjectHref } from "@/lib/project-links";
+import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { CaseArchitecture, CaseArchitectureIntro } from "./CaseArchitecture";
 import { CaseBlocks, sectionNumber, type CaseBlock } from "./CaseBlocks";
@@ -82,7 +82,11 @@ export function getLabPosition(project: Project) {
 // prev/next walk the Lab in a loop, skipping projects with nowhere to go
 function getLabNeighbours(project: Project) {
   const linked = getLabProjects()
-    .map((item) => ({ slug: item.slug, title: item.title, href: getProjectHref(item) }))
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      href: getProjectLinks(item).primary?.href,
+    }))
     .filter((item): item is { slug: string; title: string; href: string } => Boolean(item.href));
   const at = linked.findIndex((item) => item.slug === project.slug);
   if (at === -1 || linked.length < 2) return {};

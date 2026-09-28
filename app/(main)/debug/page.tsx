@@ -8,6 +8,7 @@ import {
   getLabProjects,
   getNowBuilding,
 } from "@/lib/content";
+import { getKnowledge } from "@/lib/chat/knowledge";
 import type { Project } from "@/lib/schemas";
 import { getSkillGroups, MORE_PROJECTS } from "@/lib/site-lists";
 
@@ -104,6 +105,13 @@ export default function DebugPage() {
             {item.name} <span className="font-mono text-[12px] text-muted">{item.category}</span>
           </p>
         ))}
+      </Block>
+      <Block
+        title={`Chat knowledge base · ${getKnowledge().text.length} chars ≈ ${Math.round(getKnowledge().text.length / 3.6)} tokens`}
+      >
+        <pre className="max-h-[600px] overflow-auto font-mono text-[12px] leading-[1.5] whitespace-pre-wrap text-text-3">
+          {getKnowledge().text}
+        </pre>
       </Block>
     </main>
   );

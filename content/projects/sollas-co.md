@@ -2,6 +2,7 @@
 title: sollas.co
 slug: sollas-co
 kind: client
+show: [clients]
 order: 11
 status: live
 # TODO verify: "~30% growth in organic search" (exact figure, metric, period) before it goes on the card

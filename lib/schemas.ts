@@ -27,6 +27,9 @@ const tagSchema = z.enum([
 ]);
 
 export const LANES = ["ingest", "storage", "core", "llm", "ui"] as const;
+// home sections a project can appear in; every project also belongs on the future /work page
+export const HOME_SECTIONS = ["featured", "lab", "clients", "now"] as const;
+
 const laneSchema = z.enum(LANES);
 
 export const projectSchema = z
@@ -34,7 +37,7 @@ export const projectSchema = z
     title: z.string().min(1),
     slug: z.string().regex(/^[a-z0-9-]+$/),
     kind: z.enum(["personal", "client"]),
-    featured: z.boolean().default(false),
+    show: z.array(z.enum(HOME_SECTIONS)).default([]),
     order: z.number().int(),
     status: statusSchema,
     statusNote: z.string().optional(),
@@ -57,7 +60,7 @@ export const projectSchema = z
     // two screenshots per project cover every layout: desktop 16:10 and a phone screen 9:19.5
     cover: z.string().optional(),
     coverMobile: z.string().optional(),
-    lab: z.boolean().default(false),
+    // true = the project has its own page at /work/<slug>
     caseStudy: z.boolean().default(false),
     draft: z.boolean().default(false),
     nowBuilding: z
@@ -110,6 +113,12 @@ export const projectSchema = z
   })
   .refine((p) => !(p.status === "nda" && !p.hideLinks), {
     message: "NDA projects must set hideLinks: true",
+  })
+  .refine((p) => !p.show.includes("now") || p.nowBuilding, {
+    message: "show: [now] needs a nowBuilding block",
+  })
+  .refine((p) => !(p.caseStudy && p.hideLinks), {
+    message: "a hidden (NDA) project cannot have a case study page",
   });
 
 export const experienceSchema = z.object({

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ProjectMorph } from "@/components/motion/ProjectMorph";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
@@ -17,6 +18,9 @@ const STATUS_TEXT: Record<Project["status"], string> = {
   archived: "Archived",
 };
 
+// the marker names where the card leads, so it can never say "Case study" and open the live site
+const MARKERS = { case: "Case study →", internal: "Open →", live: "Live ↗" } as const;
+
 // NDA cards only carry their note ("In progress"), everything else is "Status · note"
 function statusText(project: Project) {
   const note = project.statusNote;
@@ -25,10 +29,10 @@ function statusText(project: Project) {
 }
 
 export function ClientCard({ project }: Props) {
-  const { caseHref, live } = getProjectLinks(project);
-  const href = caseHref ?? live;
+  const { primary } = getProjectLinks(project);
+  const href = primary?.href;
   const nda = project.status === "nda";
-  const marker = caseHref ? "Case study →" : live ? "Live ↗" : nda ? "NDA" : undefined;
+  const marker = primary ? MARKERS[primary.kind] : nda ? "NDA" : undefined;
 
   const rows = [
     { key: "My role", value: project.role },
@@ -38,25 +42,29 @@ export function ClientCard({ project }: Props) {
 
   const card: ReactNode = (
     <>
-      <div className="relative">
-        <ProjectCover
-          label={project.title}
-          innerClassName={cn(
-            "transition-transform duration-600 ease-out-expo group-hover:scale-[1.015]",
-            nda && "blur-[10px] grayscale-[0.4]",
+      <ProjectMorph slug={project.slug} part="cover">
+        <div data-cursor={href ? "View" : undefined} className="relative">
+          <ProjectCover
+            label={project.title}
+            innerClassName={cn(
+              "transition-transform duration-600 ease-out-expo group-hover:scale-[1.015]",
+              nda && "blur-[10px] grayscale-[0.4]",
+            )}
+          />
+          {nda && (
+            <span className="absolute top-[12px] left-[12px] border border-line-strong bg-bg px-[8px] py-[4px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase">
+              NDA · details limited
+            </span>
           )}
-        />
-        {nda && (
-          <span className="absolute top-[12px] left-[12px] border border-line-strong bg-bg px-[8px] py-[4px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase">
-            NDA · details limited
-          </span>
-        )}
-      </div>
+        </div>
+      </ProjectMorph>
 
       <div className="flex items-baseline justify-between gap-[12px]">
-        <h3 className="text-fl-32/44 leading-[0.9] font-bold tracking-[-0.045em] font-stretch-[88%] transition-colors duration-150 group-hover:text-accent">
-          {project.title}
-        </h3>
+        <ProjectMorph slug={project.slug} part="title">
+          <h3 className="text-fl-32/44 leading-[0.9] font-bold tracking-[-0.045em] font-stretch-[88%] transition-colors duration-150 group-hover:text-accent">
+            {project.title}
+          </h3>
+        </ProjectMorph>
         {marker && (
           <span className="shrink-0 font-mono text-[12px] leading-[16px] text-text-3">
             {marker}

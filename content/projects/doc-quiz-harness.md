@@ -2,6 +2,7 @@
 title: Doc Quiz agent harness
 slug: doc-quiz-harness
 kind: personal
+show: [now]
 order: 5
 status: building
 tags: [agent]

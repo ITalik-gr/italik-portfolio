@@ -9,10 +9,14 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
-    "shots": "playwright test --config playwright.shots.config.ts"
+    "shots": "playwright test --config playwright.shots.config.ts",
+    "chat:evals": "node --env-file-if-exists=.env.local scripts/chat-evals.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
     "@gsap/react": "^2.1.2",
+    "@upstash/ratelimit": "^2.2.0",
+    "@upstash/redis": "^1.39.0",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "gsap": "^3.15.0",

@@ -2,7 +2,7 @@
 title: AI Telegram Assistant
 slug: tg-assistant
 kind: personal
-lab: true
+show: [lab, now]
 order: 3
 status: v2-in-progress
 tags: [agent, bot]

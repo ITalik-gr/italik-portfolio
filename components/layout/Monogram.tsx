@@ -8,7 +8,8 @@ export function Monogram({ className }: { className?: string }) {
       href="/"
       aria-label={`${SITE.monogram}, ${SITE.name}, home`}
       className={cn(
-        "group/mono flex items-center gap-[12px] text-text transition-colors duration-150 hover:text-accent focus-visible:text-accent",
+        // w-fit: as a grid item the link would otherwise stretch and catch hovers on empty space
+        "group/mono flex w-fit items-center gap-[12px] text-text transition-colors duration-150 hover:text-accent focus-visible:text-accent",
         className,
       )}
     >

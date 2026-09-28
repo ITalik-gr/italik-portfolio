@@ -2,8 +2,7 @@
 title: Money Track
 slug: money-track
 kind: personal
-featured: true
-lab: true
+show: [featured, lab]
 caseStudy: true
 # case copy is taken from the design reference; confirm against the repo
 draft: true

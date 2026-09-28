@@ -10,7 +10,6 @@ type Props = {
 
 const STAGGER_MS = 28;
 const REST_WEIGHT = 680;
-const MIN_WEIGHT = 520;
 const MAX_WEIGHT = 860;
 const RADIUS = 280;
 
@@ -67,13 +66,14 @@ function useCursorWeight(ref: RefObject<HTMLHeadingElement | null>) {
       let moving = false;
       letters.forEach((letter, i) => {
         let target = REST_WEIGHT;
+        // only letters near the cursor change; the rest keep the resting weight
         if (pointer) {
           const r = letter.getBoundingClientRect();
           const distance = Math.hypot(
             r.left + r.width / 2 - pointer.x,
             r.top + r.height / 2 - pointer.y,
           );
-          target = MIN_WEIGHT + (MAX_WEIGHT - MIN_WEIGHT) * Math.max(0, 1 - distance / RADIUS);
+          target = REST_WEIGHT + (MAX_WEIGHT - REST_WEIGHT) * Math.max(0, 1 - distance / RADIUS);
         }
         weights[i] += (target - weights[i]) * 0.15;
         if (Math.abs(target - weights[i]) > 0.5) moving = true;

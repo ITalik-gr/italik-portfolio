@@ -2,6 +2,7 @@
 title: Crypto dashboard
 slug: crypto-dashboard
 kind: client
+show: [clients]
 order: 13
 status: nda
 statusNote: in progress
