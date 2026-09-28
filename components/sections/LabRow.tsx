@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { PointerEvent, ReactNode } from "react";
-import { ProjectThumb } from "@/components/ui/ProjectThumb";
+import { ProjectCover } from "@/components/ui/ProjectCover";
 import { Status } from "@/components/ui/Status";
 import { cn } from "@/lib/utils";
 import type { LabItem } from "./LabList";
@@ -73,9 +73,9 @@ export function LabRow({ item, index, dimmed, onActivate }: Props) {
   }
 
   return (
-    <li className="grid grid-cols-[1fr_112px] items-start gap-[16px] py-[20px] | md:grid-cols-[1fr_144px] md:gap-[24px] | lg:grid-cols-1 lg:pt-[32px] lg:pb-[40px]">
+    <li className="grid items-start gap-[16px] py-[24px] | md:grid-cols-[1fr_minmax(0,300px)] md:gap-[24px] | lg:grid-cols-1 lg:pt-[32px] lg:pb-[40px]">
       {body}
-      <ProjectThumb label={item.title} className="| lg:hidden" />
+      <ProjectCover label={item.title} className="| lg:hidden" />
     </li>
   );
 }

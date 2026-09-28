@@ -75,6 +75,7 @@ export const ABOUT = [
 
 export const ASK = {
   title: "Ask my AI about me",
+  lines: ["Ask my AI", "about me"],
   sub: "It knows my projects, experience and how I work. Ask it anything a recruiter would.",
   chips: [
     "What AI agents has he built?",
@@ -82,7 +83,15 @@ export const ASK = {
     "How does Money Track avoid made-up numbers?",
     "Where is he based and how does he work?",
   ],
-  // TODO: "How this works" copy follows the final chat architecture (phase 7)
+  // TODO: confirm in phase 7; this is the v1 plan from docs/03-stack (whole knowledge base in a cached prompt)
+  pipeline: ["content", "knowledge base", "LLM", "answer"],
+  pipelineAccent: "LLM",
+  howItWorks:
+    "Site content and my notes are loaded into one cached prompt. The model answers only from them and cites the files it used.",
+  assistantName: "Italik.ai",
+  channel: "Ask-italik",
+  languageNote: "Answers in the language you ask",
+  placeholder: "Ask anything…",
 } as const;
 
 export const FOOTER = {

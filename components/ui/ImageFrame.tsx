@@ -31,7 +31,7 @@ export function ImageFrame({ url, ratio = "16/10", label, children, className }:
       </div>
       <div className={cn("relative overflow-hidden", RATIOS[ratio])}>
         {children ?? (
-          <div className="flex size-full items-center justify-center font-mono text-[12px] text-faint">
+          <div className="flex size-full items-center justify-center font-mono text-[12px] text-muted">
             {label ?? "Screenshot"}
           </div>
         )}

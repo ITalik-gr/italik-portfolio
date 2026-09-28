@@ -18,7 +18,7 @@ export function Contact() {
           <span className="text-accent">{number}</span>
           <span>{label}</span>
         </p>
-        <p className="flex items-center gap-[10px] text-fl-18/22 leading-[1.35] tracking-[-0.01em] text-text | md:gap-[12px]">
+        <p className="flex items-center gap-[10px] text-fl-17/22 leading-[1.35] tracking-[-0.01em] text-text | md:gap-[12px]">
           <span
             aria-hidden
             className="size-[8px] shrink-0 rounded-full bg-accent | md:size-[9px]"
@@ -38,7 +38,7 @@ export function Contact() {
         <MemojiSticker className="size-[120px] | md:absolute md:top-0 md:right-0 md:size-fl-100/150 | lg:right-[20px]" />
         <h2
           id="contact-title"
-          className="mt-[8px] text-fl-112/288 leading-[0.82] font-bold tracking-[-0.06em] font-stretch-[88%] | md:mt-0 md:whitespace-nowrap"
+          className="mt-[8px] text-fl-88/288 leading-[0.82] whitespace-nowrap font-bold tracking-[-0.06em] font-stretch-[88%] | md:mt-0"
         >
           <a
             href={`mailto:${SITE.email}`}
@@ -57,7 +57,7 @@ export function Contact() {
         </p>
       </div>
 
-      <div className="mt-[56px] flex flex-col gap-[8px] font-mono text-[11px] leading-[14px] tracking-[0.04em] text-faint | md:flex-row md:justify-between">
+      <div className="mt-[56px] flex flex-col gap-[8px] font-mono text-[11px] leading-[14px] tracking-[0.04em] text-muted | md:flex-row md:justify-between">
         <span>{FOOTER.credit}</span>
         <span>{FOOTER.copyright}</span>
       </div>

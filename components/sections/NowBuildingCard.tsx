@@ -48,7 +48,7 @@ export function NowBuildingCard({ project }: Props) {
           </TextLink>
         )}
         {!code && project.status === "next-up" && (
-          <span className="tracking-[0.04em] text-faint uppercase">No repo yet</span>
+          <span className="tracking-[0.04em] text-muted uppercase">No repo yet</span>
         )}
       </div>
     </li>

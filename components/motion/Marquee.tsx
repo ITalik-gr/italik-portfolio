@@ -12,7 +12,7 @@ export function Marquee({ items }: Props) {
     .repeat(COPIES_PER_HALF);
 
   return (
-    <div className="group overflow-hidden py-[10px] font-mono text-[11px] leading-[14px] tracking-[0.08em] text-faint uppercase">
+    <div className="group overflow-hidden py-[10px] font-mono text-[11px] leading-[14px] tracking-[0.08em] text-muted uppercase">
       <p className="sr-only">{items.join(", ")}</p>
       <div
         aria-hidden

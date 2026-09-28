@@ -1,10 +1,14 @@
 import { Marquee } from "@/components/motion/Marquee";
+import { About } from "@/components/sections/About";
+import { AskAI } from "@/components/sections/AskAI";
 import { ClientWork } from "@/components/sections/ClientWork";
 import { Contact } from "@/components/sections/Contact";
+import { Experience } from "@/components/sections/Experience";
 import { Featured } from "@/components/sections/Featured";
 import { Hero } from "@/components/sections/Hero";
 import { Lab } from "@/components/sections/Lab";
 import { NowBuilding } from "@/components/sections/NowBuilding";
+import { Skills } from "@/components/sections/Skills";
 import { HERO } from "@/lib/site";
 
 export default function Home() {
@@ -17,7 +21,10 @@ export default function Home() {
         <Lab />
         <NowBuilding />
         <ClientWork />
-        {/* TODO: sections 05–08 land here one by one (phase 3) */}
+        <Experience />
+        <About />
+        <AskAI />
+        <Skills />
       </main>
       <Contact />
     </>

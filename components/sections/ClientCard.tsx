@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ProjectCover } from "@/components/ui/ProjectCover";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
@@ -37,16 +38,14 @@ export function ClientCard({ project }: Props) {
 
   const card: ReactNode = (
     <>
-      {/* TODO: project.cover (16:10) via next/image; NDA covers stay blurred mock-ups */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-surface">
-        <div
-          className={cn(
-            "flex size-full items-center justify-center font-mono text-[12px] text-faint transition-transform duration-600 ease-out-expo group-hover:scale-[1.015]",
+      <div className="relative">
+        <ProjectCover
+          label={project.title}
+          innerClassName={cn(
+            "transition-transform duration-600 ease-out-expo group-hover:scale-[1.015]",
             nda && "blur-[10px] grayscale-[0.4]",
           )}
-        >
-          {project.title} · screenshot
-        </div>
+        />
         {nda && (
           <span className="absolute top-[12px] left-[12px] border border-line-strong bg-bg px-[8px] py-[4px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase">
             NDA · details limited
