@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Archivo, JetBrains_Mono } from "next/font/google";
+import { AskFab } from "@/components/layout/AskFab";
+import { Header } from "@/components/layout/Header";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -11,9 +13,12 @@ const archivo = Archivo({
   axes: ["wdth"],
 });
 
+// Google's cut has no "→", so glyphs it lacks must fall back to a monospace font, not Arial
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  fallback: ["ui-monospace", "Menlo", "monospace"],
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -27,8 +32,17 @@ type Props = { children: ReactNode };
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={`${archivo.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-dvh bg-bg text-text">{children}</body>
+    // browser extensions add attributes to <html> before React hydrates; this only silences that tag
+    <html
+      lang="en"
+      className={`${archivo.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-dvh bg-bg text-text">
+        <Header />
+        {children}
+        <AskFab />
+      </body>
     </html>
   );
 }

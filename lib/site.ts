@@ -21,14 +21,15 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
-  { label: "About", href: "#about" },
-  { label: "Ask AI", href: "#ask" },
+  { label: "Work", href: "/#work" },
+  { label: "Experience", href: "/#experience" },
+  { label: "About", href: "/#about" },
+  { label: "Ask AI", href: "/#ask" },
 ] as const;
 
 export const HERO = {
   title: "I build AI agents that ship",
+  lines: ["I build", "AI agents", "that ship"],
   sub: "Full-stack developer. I design, build and ship AI agents into real products.",
   stack: [
     "TypeScript",
@@ -68,7 +69,8 @@ export const ABOUT = [
   "Hi, I'm Vitaliy, or just Italik. I'm a full-stack developer from Kyiv who's been shipping for the web for 3+ years, taking products from a Figma file all the way to production.",
   "Websites have surrounded me for as long as I can remember, and what hooked me is simple: you build something and you see it working, live, for anyone.",
   "Now I'm focused on AI, because it's where software is heading and it opens up things that weren't possible to build a couple of years ago. I build agents from scratch, wire LLMs into real products, and make sure they stay honest about the data.",
-  "I enjoy owning a feature from idea to something that actually ships.",
+  "I enjoy owning a feature from idea to something that actually ships. I work remotely from Kyiv, alongside designers and, where there are any, the client's own developers, and I'm happy to own the whole stack or slot into an existing team.",
+  "I'm looking for full-time or contract roles in AI engineering or full-stack development.",
 ] as const;
 
 export const ASK = {

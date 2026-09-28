@@ -50,8 +50,12 @@ export const projectSchema = z
     shipsAs: z.array(z.string()).optional(),
     links: z.object({ live: optionalUrl, code: optionalUrl, demo: optionalUrl }).default({}),
     hideLinks: z.boolean().default(false),
+    // on-site target when a project has no page of its own, e.g. "/#ask"
+    internalLink: z.string().startsWith("/").optional(),
     frameUrl: z.string().optional(),
+    // two screenshots per project cover every layout: desktop 16:10 and a phone screen 9:19.5
     cover: z.string().optional(),
+    coverMobile: z.string().optional(),
     lab: z.boolean().default(false),
     caseStudy: z.boolean().default(false),
     draft: z.boolean().default(false),

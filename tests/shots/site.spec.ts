@@ -6,6 +6,7 @@ const ROUTES = [
   { name: "home", path: "/" },
   // temporary, removed with the page before launch
   { name: "debug", path: "/debug" },
+  { name: "ui", path: "/ui" },
 ];
 
 for (const route of ROUTES) {

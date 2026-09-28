@@ -51,8 +51,17 @@ export function getLabProjects() {
   return getProjects().filter((project) => project.kind === "personal" && project.lab);
 }
 
+// active work first, then rewrites, then what's queued
+const NOW_RANK: Partial<Record<Project["status"], number>> = {
+  building: 0,
+  "v2-in-progress": 1,
+  "next-up": 2,
+};
+
 export function getNowBuilding() {
-  return getProjects().filter((project) => project.nowBuilding);
+  return getProjects()
+    .filter((project) => project.nowBuilding)
+    .sort((a, b) => (NOW_RANK[a.status] ?? 3) - (NOW_RANK[b.status] ?? 3));
 }
 
 export function getClientProjects() {

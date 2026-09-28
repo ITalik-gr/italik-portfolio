@@ -19,6 +19,215 @@
 
   --ease-out-expo: cubic-bezier(0.2, 0.7, 0.1, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-marquee: marquee 90s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(0.8);
+    }
+  }
+}
+
+/*
+  Fluid sizes: `<prop>-fl-<mobile>/<desktop>` in px, e.g. `text-fl-86/224`.
+  The value is exact at the design widths (390 and 1440) and grows linearly in between.
+*/
+
+@utility text-fl-* {
+  font-size: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility mt-fl-* {
+  margin-top: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility mb-fl-* {
+  margin-bottom: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility pt-fl-* {
+  padding-top: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility pb-fl-* {
+  padding-bottom: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility px-fl-* {
+  padding-inline: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility py-fl-* {
+  padding-block: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility gap-fl-* {
+  gap: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility gap-x-fl-* {
+  column-gap: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility gap-y-fl-* {
+  row-gap: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility size-fl-* {
+  width: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+  height: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility w-fl-* {
+  width: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility h-fl-* {
+  height: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility top-fl-* {
+  top: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility right-fl-* {
+  right: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility bottom-fl-* {
+  bottom: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+@utility left-fl-* {
+  left: clamp(
+    calc(--value(integer) * 1px),
+    calc(
+      --value(integer) * 1px + (--modifier(integer) - --value(integer)) * (100vw - 390px) / 1050
+    ),
+    calc(--modifier(integer) * 1px)
+  );
+}
+
+/* page side padding: 20px on phones, 40px at 1440 */
+@utility px-gutter {
+  padding-inline: clamp(20px, calc(20px + 20 * (100vw - 390px) / 1050), 40px);
 }
 
 @layer base {
@@ -37,5 +246,15 @@
   ::selection {
     background-color: var(--color-accent);
     color: var(--color-accent-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

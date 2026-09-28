@@ -1,0 +1,46 @@
+import Link from "next/link";
+import { Arrow } from "@/components/ui/Button";
+import { SITE } from "@/lib/site";
+import { cn } from "@/lib/utils";
+
+type Props = {
+  variant: "rows" | "inline";
+  className?: string;
+};
+
+const LINKS = [
+  { label: SITE.email, href: `mailto:${SITE.email}`, arrow: "→", inlineArrow: false },
+  { label: "Telegram", href: SITE.socials.telegram, arrow: "↗", inlineArrow: true },
+  { label: "GitHub", href: SITE.socials.github, arrow: "↗", inlineArrow: true },
+  { label: "CV", href: SITE.cv, arrow: "↓", inlineArrow: true },
+] as const;
+
+export function ContactLinks({ variant, className }: Props) {
+  const rows = variant === "rows";
+
+  return (
+    <ul
+      className={cn(
+        "font-mono text-[14px] leading-[18px] text-text",
+        rows ? "flex flex-col" : "flex flex-wrap gap-x-[36px] gap-y-[12px]",
+        className,
+      )}
+    >
+      {LINKS.map((link) => (
+        <li key={link.label} className={cn(rows && "border-b border-line last:border-b-0")}>
+          <Link
+            href={link.href}
+            {...(link.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+            className={cn(
+              "group flex items-center gap-[8px] transition-colors duration-150 hover:text-accent",
+              rows && "justify-between py-[16px]",
+            )}
+          >
+            <span>{link.label}</span>
+            {(rows || link.inlineArrow) && <Arrow arrow={link.arrow} />}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}

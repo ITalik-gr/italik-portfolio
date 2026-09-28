@@ -11,8 +11,6 @@ typeLabel: Client · marketing site
 via: Sollas
 summary: A multi-page marketing site for a PPC tool company, with collections of AI agents and tools that the team keeps adding to.
 role: "Sole developer: Figma to deploy, then long-term maintenance (~1.5 years)"
-# TODO verify: team line comes from the design mock
-team: Sollas designers + me
 timeline: ~1.5 years
 stack: [Astro, Strapi CMS → Astro content collections]
 links:

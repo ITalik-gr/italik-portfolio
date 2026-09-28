@@ -26,7 +26,7 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
 function ProjectRow({ project }: { project: Project }) {
   return (
     <li className="flex flex-col gap-[4px]">
-      <span className="text-[19px] font-[700]">
+      <span className="text-[19px] font-bold">
         {project.title}
         {project.draft && <span className="ml-[8px] font-mono text-[12px] text-muted">draft</span>}
       </span>
@@ -56,8 +56,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
 
 export default function DebugPage() {
   return (
-    <main className="flex flex-col gap-[40px] px-[20px] py-[40px] | md:px-[40px]">
-      <h1 className="text-[48px] font-[700] tracking-[-0.05em]">Content debug</h1>
+    <main id="main" className="flex flex-col gap-[40px] px-gutter py-[40px]">
+      <h1 className="text-[48px] font-bold tracking-[-0.05em]">Content debug</h1>
       <Block title="Featured">
         <ProjectList projects={getFeaturedProjects()} />
       </Block>
@@ -77,7 +77,7 @@ export default function DebugPage() {
         <ul className="flex flex-col gap-[16px]">
           {getExperience().map((role) => (
             <li key={role.slug} className="flex flex-col gap-[4px]">
-              <span className="text-[19px] font-[700]">{role.company}</span>
+              <span className="text-[19px] font-bold">{role.company}</span>
               <span className="font-mono text-[13px] text-muted">
                 {role.role} · {role.start} — {role.end} · {role.type}
               </span>
