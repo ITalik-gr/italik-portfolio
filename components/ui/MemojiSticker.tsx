@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type Props = { className?: string };
@@ -5,7 +6,6 @@ type Props = { className?: string };
 const RING_TEXT = "SAY HELLO · SAY HELLO · SAY HELLO · ";
 
 // size comes from className (size-[120px] etc.); the ring and the face scale with it
-// TODO: swap the accent circle for the real Memoji image
 export function MemojiSticker({ className }: Props) {
   return (
     <div aria-hidden className={cn("relative size-[112px] shrink-0", className)}>
@@ -19,7 +19,15 @@ export function MemojiSticker({ className }: Props) {
           </textPath>
         </text>
       </svg>
-      <div className="absolute inset-[21.5%] rounded-full bg-accent" />
+      {/* the face sits inside the rotating ring, on the page background */}
+      <Image
+        src="/memoji.webp"
+        alt=""
+        width={512}
+        height={512}
+        sizes="150px"
+        className="absolute inset-[14%] size-[72%] max-w-none"
+      />
     </div>
   );
 }

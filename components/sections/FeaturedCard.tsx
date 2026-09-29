@@ -29,19 +29,20 @@ export function FeaturedCard({ project, mirrored }: Props) {
 
   const frame = (
     <ImageFrame url={project.frameUrl} ratio="16/10">
-      <Parallax>
-        {project.cover ? (
-          <CoverImage
-            src={project.cover}
-            alt={`${project.title}: screenshot`}
-            sizes="(min-width: 1024px) 58vw, 100vw"
-          />
-        ) : (
+      {/* a real screenshot stays whole: the taller parallax layer would zoom it and clip the UI */}
+      {project.cover ? (
+        <CoverImage
+          src={project.cover}
+          alt={`${project.title}: screenshot`}
+          sizes="(min-width: 1024px) 58vw, 100vw"
+        />
+      ) : (
+        <Parallax>
           <div className="flex size-full items-center justify-center bg-surface font-mono text-[12px] text-muted">
             {project.title} · screenshot
           </div>
-        )}
-      </Parallax>
+        </Parallax>
+      )}
     </ImageFrame>
   );
 

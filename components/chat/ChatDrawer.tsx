@@ -10,15 +10,24 @@ import { ChatPanel } from "./ChatPanel";
 export function ChatDrawer() {
   const { drawerOpen } = useChat();
   const returnFocus = useRef<HTMLElement | null>(null);
+  const dialog = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!drawerOpen) return;
     returnFocus.current = document.activeElement as HTMLElement | null;
     // overflow: hidden also pauses Lenis (autoToggle)
     document.documentElement.style.overflow = "hidden";
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && closeChatDrawer();
+    // focused here, not via autoFocus: autoFocus would run first and returnFocus would record the input
+    const frame = requestAnimationFrame(() =>
+      dialog.current?.querySelector<HTMLElement>("textarea, input")?.focus(),
+    );
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeChatDrawer();
+      if (event.key === "Tab") trapTab(event, dialog.current);
+    };
     window.addEventListener("keydown", onKey);
     return () => {
+      cancelAnimationFrame(frame);
       document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
       returnFocus.current?.focus();
@@ -28,8 +37,9 @@ export function ChatDrawer() {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 transition-[visibility] duration-400",
-        drawerOpen ? "visible" : "invisible",
+        // visible at once on open (so focus can land), hidden only after the slide-out on close
+        "fixed inset-0 z-50",
+        drawerOpen ? "visible" : "invisible transition-[visibility] duration-400",
       )}
     >
       <button
@@ -43,6 +53,7 @@ export function ChatDrawer() {
         )}
       />
       <div
+        ref={dialog}
         role="dialog"
         aria-modal="true"
         aria-labelledby="chat-drawer-title"
@@ -68,8 +79,29 @@ export function ChatDrawer() {
             ✕
           </button>
         </div>
-        {drawerOpen && <ChatPanel variant="drawer" autoFocus className="min-h-0 flex-1" />}
+        {drawerOpen && <ChatPanel variant="drawer" className="min-h-0 flex-1" />}
       </div>
     </div>
   );
+}
+
+// aria-modal alone doesn't stop Tab from reaching the page behind, so keep it cycling inside
+function trapTab(event: KeyboardEvent, root: HTMLElement | null) {
+  if (!root) return;
+  const items = [
+    ...root.querySelectorAll<HTMLElement>(
+      "a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex='-1'])",
+    ),
+  ].filter((item) => item.offsetParent !== null);
+  if (items.length === 0) return;
+  const first = items[0];
+  const last = items[items.length - 1];
+  const active = document.activeElement;
+  if (event.shiftKey && (active === first || !root.contains(active))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (active === last || !root.contains(active))) {
+    event.preventDefault();
+    first.focus();
+  }
 }

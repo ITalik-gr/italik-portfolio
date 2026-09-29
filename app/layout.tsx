@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@/components/analytics/Analytics";
 import { ChatDrawer } from "@/components/chat/ChatDrawer";
 import { AskFab } from "@/components/layout/AskFab";
 import { CursorLabel } from "@/components/motion/CursorLabel";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { siteUrl } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -24,11 +26,25 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? SITE.url),
+  metadataBase: new URL(siteUrl),
   title: SITE.meta.title,
   description: SITE.meta.description,
-  openGraph: { url: "/", siteName: "italik.dev", type: "website" },
-  twitter: { card: "summary_large_image" },
+  authors: [{ name: SITE.name, url: siteUrl }],
+  creator: SITE.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    url: "/",
+    siteName: "italik.dev",
+    type: "website",
+    locale: "en_US",
+    title: SITE.meta.title,
+    description: SITE.meta.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.meta.title,
+    description: SITE.meta.description,
+  },
 };
 
 type Props = { children: ReactNode };
@@ -53,6 +69,7 @@ export default function RootLayout({ children }: Props) {
         <AskFab />
         <ChatDrawer />
         <CursorLabel />
+        <Analytics />
       </body>
     </html>
   );

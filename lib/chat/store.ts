@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { track } from "@/lib/analytics";
 import { SITE } from "@/lib/site";
 import type { ChatErrorCode, ChatEvent } from "./protocol";
 import type { ChatMessage } from "./types";
@@ -28,7 +29,10 @@ export function useChat() {
   );
 }
 
-export const openChatDrawer = () => set({ drawerOpen: true });
+export const openChatDrawer = () => {
+  track("chat_open", { from: window.location.pathname });
+  set({ drawerOpen: true });
+};
 export const closeChatDrawer = () => set({ drawerOpen: false });
 
 const ERROR_TEXT: Record<ChatErrorCode, string> = {

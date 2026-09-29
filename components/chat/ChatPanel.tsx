@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { track } from "@/lib/analytics";
 import { DEMO_MESSAGES } from "@/lib/chat/demo";
 import { sendQuestion, useChat } from "@/lib/chat/store";
 import { ASK } from "@/lib/site";
@@ -12,11 +13,10 @@ import { SuggestionChips } from "./SuggestionChips";
 type Props = {
   // "section" sits in the Ask AI block; "drawer" fills the sheet opened by the FAB
   variant?: "section" | "drawer";
-  autoFocus?: boolean;
   className?: string;
 };
 
-export function ChatPanel({ variant = "section", autoFocus, className }: Props) {
+export function ChatPanel({ variant = "section", className }: Props) {
   const { messages, busy } = useChat();
   const [input, setInput] = useState("");
   const logRef = useRef<HTMLDivElement>(null);
@@ -33,6 +33,8 @@ export function ChatPanel({ variant = "section", autoFocus, className }: Props) 
   }, [shown.length, lastLength, busy]);
 
   const send = (question = input) => {
+    // only the fact and the size of a question are tracked, never its text
+    track("chat_message", { place: variant, chars: question.trim().length });
     void sendQuestion(question);
     setInput("");
   };
@@ -77,13 +79,7 @@ export function ChatPanel({ variant = "section", autoFocus, className }: Props) 
         active={lastQuestion}
         onPick={(question) => (busy ? setInput(question) : send(question))}
       />
-      <ChatInput
-        value={input}
-        onChange={setInput}
-        onSubmit={() => send()}
-        disabled={busy}
-        autoFocus={autoFocus}
-      />
+      <ChatInput value={input} onChange={setInput} onSubmit={() => send()} disabled={busy} />
     </div>
   );
 }

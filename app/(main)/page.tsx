@@ -9,12 +9,15 @@ import { Hero } from "@/components/sections/Hero";
 import { Lab } from "@/components/sections/Lab";
 import { NowBuilding } from "@/components/sections/NowBuilding";
 import { Skills } from "@/components/sections/Skills";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { homeJsonLd } from "@/lib/seo";
 import { HERO } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
       <main id="main">
+        <JsonLd data={homeJsonLd()} />
         <Hero />
         <Marquee items={HERO.stack} />
         <Featured />

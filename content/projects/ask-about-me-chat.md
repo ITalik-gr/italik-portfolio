@@ -33,7 +33,7 @@ architecture:
   intro: Deterministic code builds the knowledge base and enforces every limit. The model sees one cached prompt and the visitor's last few messages, and only writes the answer.
   steps:
     - { lane: ingest, text: "Project, experience, about-me files" }
-    - { lane: core, text: "Build the knowledge base, skip TODOs" }
+    - { lane: core, text: "Build the knowledge base, skip drafts" }
     - { lane: ingest, text: Visitor asks a question }
     - { lane: core, text: Zod validation and length limits }
     - { lane: storage, text: "Rate limit and daily budget in Redis" }

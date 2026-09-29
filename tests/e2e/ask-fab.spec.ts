@@ -29,3 +29,24 @@ test("Ask AI button hides on the hero after client navigation back home", async 
 
   await expect(fab).toHaveCSS("opacity", "0");
 });
+
+test("the chat drawer takes keyboard focus and keeps Tab inside", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/work/money-track");
+  await page.evaluate(() => window.scrollTo(0, 2500));
+  const fab = page.locator("button.fixed", { hasText: "Ask AI" });
+  await expect(fab).toHaveCSS("opacity", "1");
+
+  await fab.focus();
+  await page.keyboard.press("Enter");
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.getByRole("textbox")).toBeFocused();
+
+  for (let i = 0; i < 12; i++) {
+    await page.keyboard.press("Tab");
+    expect(await dialog.evaluate((el) => el.contains(document.activeElement))).toBe(true);
+  }
+
+  await page.keyboard.press("Escape");
+  await expect(fab).toBeFocused();
+});

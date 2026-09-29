@@ -72,10 +72,10 @@ export function Button({
     );
   }
 
-  // a file (cv.pdf) is not a route: next/link would try to prefetch it as a page
+  // a file (cv.pdf) is not a route: next/link would try to prefetch it as a page; it opens in a new tab
   if (/\.\w+$/.test(href)) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} target="_blank" rel="noopener" className={classes}>
         {content}
       </a>
     );

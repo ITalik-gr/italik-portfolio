@@ -21,8 +21,18 @@ links:
   demo: https://money.italik.dev/demo
   code: https://github.com/ITalik-gr/money-track
 frameUrl: money.italik.dev/demo
-cover: /work/money-track/cover.png
-coverMobile: /work/money-track/cover-mobile.png
+cover: /work/money-track/dashboard-desktop-dark.png
+coverMobile: /work/money-track/dashboard-mobile-dark.png
+# both themes on purpose: dark leads, light shows the app is themed end to end
+gallery:
+  - { kind: desktop, label: AI chat, url: money.italik.dev/demo, src: /work/money-track/chat-desktop-dark.png }
+  - { kind: mobile, label: AI chat, src: /work/money-track/chat-mobile-dark.png }
+  - { kind: mobile, label: AI overview, src: /work/money-track/statistics-mobile-dark.png }
+  - { kind: desktop, label: AI financial overview, url: money.italik.dev/demo, src: /work/money-track/statistics-desktop-dark.png }
+  - { kind: mobile, label: Dashboard, src: /work/money-track/dashboard-mobile-light.png }
+  - { kind: mobile, label: Subscriptions, src: /work/money-track/subscriptions-mobile-light.png }
+  - { kind: desktop, label: Monthly trends, url: money.italik.dev/demo, src: /work/money-track/statistics-trends-desktop-light.png }
+  - { kind: desktop, label: Subscriptions, url: money.italik.dev/demo, src: /work/money-track/subscriptions-desktop-dark.png }
 features:
   - title: Grounded AI advisor
     text: Chat, advice and reports read the same snapshot the screens use; a check drops any figure or date the data doesn't contain.

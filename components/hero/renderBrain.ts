@@ -1,13 +1,13 @@
 import type { Brain } from "./brain";
+import type { Pulse } from "./runs";
 
-export type Pulse = { path: number[]; segment: number; progress: number; step: number };
 export type Label = { node: number; text: string; age: number };
 type Projected = { x: number; y: number; near: number };
 
 export type Scene = {
   brain: Brain;
   edgeHeat: Float32Array;
-  pulse: Pulse | null;
+  pulses: Pulse[];
   labels: Label[];
   width: number;
   height: number;
@@ -45,7 +45,7 @@ function project(scene: Scene): Projected[] {
 }
 
 export function renderBrain(ctx: CanvasRenderingContext2D, scene: Scene) {
-  const { brain, edgeHeat, pulse, labels, width, height, mouse, colors } = scene;
+  const { brain, edgeHeat, pulses, labels, width, height, mouse, colors } = scene;
   const at = project(scene);
 
   ctx.clearRect(0, 0, width, height);
@@ -88,34 +88,52 @@ export function renderBrain(ctx: CanvasRenderingContext2D, scene: Scene) {
     }
   });
 
-  if (pulse) {
+  ctx.strokeStyle = colors.accent;
+  ctx.fillStyle = colors.accent;
+  ctx.lineWidth = 1.6;
+  pulses.forEach((pulse) => {
     const a = at[pulse.path[pulse.segment]];
     const b = at[pulse.path[pulse.segment + 1]];
     const x = a.x + (b.x - a.x) * pulse.progress;
     const y = a.y + (b.y - a.y) * pulse.progress;
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = colors.accent;
-    ctx.fillStyle = colors.accent;
-    ctx.lineWidth = 1.6;
+    // fast burst impulses are smaller, so a wave reads as a spread, not a swarm of big dots
+    const size = pulse.speed > 1 ? 0.6 : 1;
+    ctx.globalAlpha = pulse.speed > 1 ? 0.8 : 1;
     ctx.beginPath();
     ctx.moveTo(a.x, a.y);
     ctx.lineTo(x, y);
     ctx.stroke();
     ctx.beginPath();
-    ctx.arc(x, y, 2.4 + (a.near + b.near) * 0.8, 0, Math.PI * 2);
+    ctx.arc(x, y, (2.4 + (a.near + b.near) * 0.8) * size, 0, Math.PI * 2);
     ctx.fill();
-  }
+  });
 
   ctx.font = scene.font;
   ctx.fillStyle = colors.accent;
-  labels.forEach((label) => {
-    const p = at[label.node];
-    const t = label.age / LABEL_LIFE;
-    ctx.globalAlpha = scene.still ? 1 : Math.min(1, t * 6, (1 - t) * 3);
-    // keep the label inside the canvas: flip it left of the node near the right edge
-    const w = ctx.measureText(label.text).width;
-    const x = p.x + 10 + w > width - 8 ? p.x - 10 - w : p.x + 10;
-    ctx.fillText(label.text, x, p.y - 10);
-  });
+  // several runs overlap, so labels can land on top of each other: the older one keeps its place,
+  // a newer one tries a line above or below, and is skipped for this frame if both are taken
+  const placed: Box[] = [];
+  [...labels]
+    .sort((a, b) => b.age - a.age)
+    .forEach((label) => {
+      const p = at[label.node];
+      const t = label.age / LABEL_LIFE;
+      // keep the label inside the canvas: flip it left of the node near the right edge
+      const w = ctx.measureText(label.text).width;
+      const x = p.x + 10 + w > width - 8 ? p.x - 10 - w : p.x + 10;
+      const y = [p.y - 10, p.y - 10 - LINE, p.y - 10 + LINE].find(
+        (top) => !placed.some((box) => overlaps(box, { x, y: top, w })),
+      );
+      if (y === undefined) return;
+      placed.push({ x, y, w });
+      ctx.globalAlpha = scene.still ? 1 : Math.min(1, t * 6, (1 - t) * 3);
+      ctx.fillText(label.text, x, y);
+    });
   ctx.globalAlpha = 1;
 }
+
+type Box = { x: number; y: number; w: number };
+const LINE = 16;
+// text boxes with a little air around them; y is the baseline
+const overlaps = (a: Box, b: Box) =>
+  a.x < b.x + b.w + 8 && b.x < a.x + a.w + 8 && Math.abs(a.y - b.y) < LINE - 2;

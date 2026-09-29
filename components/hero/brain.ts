@@ -10,9 +10,6 @@ export type Brain = {
   edgeIndex: Map<string, number>;
 };
 
-// one agent run lights one step per cluster, in this order
-export const AGENT_STEPS = ["plan", "tool: search", "memory.write", "respond"] as const;
-
 // a slightly wide, slightly flat blob reads as a brain rather than a ball
 const RADII = { x: 1, y: 0.78, z: 0.82 };
 const CLUSTERS = 10;
@@ -163,4 +160,42 @@ export function planPath(brain: Brain, start: number, target: number, random: ()
   const path = [pool[Math.floor(random() * pool.length)]];
   while (path[0] !== start) path.unshift(previous.get(path[0])!);
   return path;
+}
+
+// BFS over the whole graph from start: parent of every reachable node, and its depth
+function explore(brain: Brain, start: number) {
+  const parent = new Map<number, number>([[start, -1]]);
+  const depth = new Map<number, number>([[start, 0]]);
+  const queue = [start];
+  while (queue.length > 0) {
+    const here = queue.shift()!;
+    for (const next of brain.neighbours[here]) {
+      if (parent.has(next)) continue;
+      parent.set(next, here);
+      depth.set(next, depth.get(here)! + 1);
+      queue.push(next);
+    }
+  }
+  return { parent, depth };
+}
+
+// shortest route to one exact node, so several impulses can converge on the same point
+export function pathTo(brain: Brain, start: number, goal: number) {
+  const { parent } = explore(brain, start);
+  if (!parent.has(goal) || goal === start) return [start];
+  const path = [goal];
+  while (path[0] !== start) path.unshift(parent.get(path[0])!);
+  return path;
+}
+
+// routes from start to every node exactly `depth` hops away: the shape of a signal spreading out
+export function spread(brain: Brain, start: number, depth: number) {
+  const { parent, depth: hops } = explore(brain, start);
+  return [...hops.entries()]
+    .filter(([, d]) => d === depth)
+    .map(([node]) => {
+      const path = [node];
+      while (path[0] !== start) path.unshift(parent.get(path[0])!);
+      return path;
+    });
 }

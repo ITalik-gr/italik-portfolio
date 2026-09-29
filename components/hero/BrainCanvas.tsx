@@ -1,21 +1,32 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { AGENT_STEPS, createBrain, createRandom, edgeOf, planPath } from "./brain";
-import { LABEL_LIFE, renderBrain, type Pulse, type Scene } from "./renderBrain";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+import { createBrain, createRandom } from "./brain";
+import { LABEL_LIFE, renderBrain, type Scene } from "./renderBrain";
+import { createRunner, type RunEvents } from "./runs";
 
-const PAUSE_BETWEEN_RUNS = 1200;
+// "working brain": a grey graph where accent impulses act out agent work: loops, subagents, retrieval, checks
+const MOBILE = "(max-width: 767px)";
+const subscribe = (change: () => void) => {
+  const query = window.matchMedia(MOBILE);
+  query.addEventListener("change", change);
+  return () => query.removeEventListener("change", change);
+};
 
-// "working brain": a grey graph where accent impulses walk one agent loop (plan → tool → memory → respond)
 export function BrainCanvas() {
   const ref = useRef<HTMLCanvasElement>(null);
+  // crossing the breakpoint rebuilds the graph (size, node count, speed), not just a reload
+  const mobile = useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(MOBILE).matches,
+    () => false,
+  );
 
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    const mobile = window.matchMedia("(max-width: 767px)").matches;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // a step takes about the same time however many edges its route has
     const stepTime = mobile ? 2000 : 1300;
@@ -25,7 +36,7 @@ export function BrainCanvas() {
     const scene: Scene = {
       brain,
       edgeHeat: new Float32Array(brain.edges.length),
-      pulse: null,
+      pulses: [],
       labels: [],
       width: 0,
       height: 0,
@@ -41,36 +52,25 @@ export function BrainCanvas() {
       still,
     };
 
-    let cluster = brain.nodes[0].cluster;
+    const runner = createRunner(brain, random, stepTime);
+    const events: RunEvents = {
+      edge: (edge) => (scene.edgeHeat[edge] = 1),
+      touch: (node, strength) => {
+        const hit = brain.nodes[node];
+        hit.flash = Math.max(hit.flash, strength);
+        // the end of a stage lights its whole cluster a little
+        if (strength >= 1) {
+          brain.clusters[hit.cluster].members.forEach(
+            (m) => (brain.nodes[m].flash = Math.max(brain.nodes[m].flash, 0.35)),
+          );
+        }
+      },
+      label: (node, text) => scene.labels.push({ node, text, age: 0 }),
+    };
     let pointer = { nx: 0, ny: 0 };
-    let waitUntil = 0;
     let frame = 0;
     let last = 0;
     let running = false;
-
-    // each step heads for one of the far clusters, so the four labels spread across the graph
-    const nextPulse = (step: number, from: number): Pulse => {
-      const here = brain.clusters[cluster];
-      const far = brain.clusters
-        .map((c, i) => ({ i, d: Math.hypot(c.x - here.x, c.y - here.y, c.z - here.z) }))
-        .filter((c) => c.i !== cluster)
-        .sort((a, b) => b.d - a.d)
-        .slice(0, 3);
-      cluster = far[Math.floor(random() * far.length)].i;
-      return { path: planPath(brain, from, cluster, random), segment: 0, progress: 0, step };
-    };
-
-    const finishStep = (pulse: Pulse, node: number, now: number) => {
-      brain.clusters[brain.nodes[node].cluster].members.forEach(
-        (m) => (brain.nodes[m].flash = Math.max(brain.nodes[m].flash, 0.35)),
-      );
-      brain.nodes[node].flash = 1;
-      scene.labels.push({ node, text: AGENT_STEPS[pulse.step], age: 0 });
-      const step = pulse.step + 1;
-      if (step < AGENT_STEPS.length) return nextPulse(step, node);
-      waitUntil = now + PAUSE_BETWEEN_RUNS;
-      return null;
-    };
 
     const advance = (dt: number, now: number) => {
       // slow turn plus a lean towards the mouse, eased so it never snaps
@@ -85,26 +85,8 @@ export function BrainCanvas() {
         .map((l) => ({ ...l, age: l.age + dt }))
         .filter((l) => l.age < LABEL_LIFE);
 
-      if (!scene.pulse) {
-        if (now < waitUntil) return;
-        scene.pulse = nextPulse(0, brain.clusters[cluster].members[0]);
-      }
-      // an isolated node has nowhere to go: count the step as done where it stands
-      if (scene.pulse.path.length < 2) {
-        scene.pulse = finishStep(scene.pulse, scene.pulse.path[0], now);
-        return;
-      }
-      scene.pulse.progress += (dt * (scene.pulse.path.length - 1)) / stepTime;
-      while (scene.pulse && scene.pulse.progress >= 1) {
-        const pulse = scene.pulse;
-        const edge = edgeOf(brain, pulse.path[pulse.segment], pulse.path[pulse.segment + 1]);
-        if (edge !== undefined) scene.edgeHeat[edge] = 1;
-        pulse.progress -= 1;
-        pulse.segment += 1;
-        const node = pulse.path[pulse.segment];
-        brain.nodes[node].flash = 0.6;
-        if (pulse.segment >= pulse.path.length - 1) scene.pulse = finishStep(pulse, node, now);
-      }
+      runner.update(dt, events);
+      scene.pulses = runner.pulses();
     };
 
     const loop = (now: number) => {
@@ -159,19 +141,14 @@ export function BrainCanvas() {
       if (!running) renderBrain(ctx, scene);
     };
 
-    // reduced motion: one finished run, drawn once and left still
+    // reduced motion: one finished run, simulated up front and drawn once, left still
     if (still) {
-      let from = brain.clusters[cluster].members[0];
-      AGENT_STEPS.forEach((text, step) => {
-        const pulse = nextPulse(step, from);
-        pulse.path.slice(1).forEach((n, i) => {
-          const edge = edgeOf(brain, pulse.path[i], n);
-          if (edge !== undefined) scene.edgeHeat[edge] = 0.35;
-        });
-        from = pulse.path[pulse.path.length - 1];
-        brain.nodes[from].flash = 1;
-        scene.labels.push({ node: from, text, age: 0 });
-      });
+      const trace: RunEvents = {
+        edge: (edge) => (scene.edgeHeat[edge] = 0.35),
+        touch: (node, strength) => strength >= 1 && (brain.nodes[node].flash = 1),
+        label: events.label,
+      };
+      for (let i = 0; i < 2000 && (i === 0 || !runner.idle()); i++) runner.update(50, trace, false);
     }
 
     const onMove = (event: PointerEvent) => {
@@ -206,7 +183,7 @@ export function BrainCanvas() {
       document.removeEventListener("visibilitychange", sync);
       window.removeEventListener("pointermove", onMove);
     };
-  }, []);
+  }, [mobile]);
 
   return <canvas ref={ref} aria-hidden className="block size-full font-mono" />;
 }

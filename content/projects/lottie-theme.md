@@ -21,9 +21,9 @@ links:
   live: https://lottie.italik.dev
   code: https://github.com/ITalik-gr/lottie-theme
 frameUrl: lottie.italik.dev
-cover: /work/lottie-theme/cover.png
+cover: /work/lottie-theme/landing.png
 gallery:
-  - { kind: desktop, label: Landing page, url: lottie.italik.dev, src: /work/lottie-theme/landing.png }
+  - { kind: desktop, label: Editor, url: lottie.italik.dev/editor, src: /work/lottie-theme/editor.png }
 features:
   - title: Click-to-recolour editor
     text: Click a shape, see every colour under the pointer and recolour it. All edits go through one undo stack.
@@ -63,7 +63,7 @@ aiSpecifics:
   - { key: Tool use, value: "Browser: Anthropic tool runner, 16-step cap. MCP: 12 tools incl. render_preview" }
   - { key: Memory, value: "Conversation kept in the page; the edit set can be embedded in the file" }
   - { key: Cost controls, value: "Prompt caching, stale tool results cleared, per-instruction spend ceiling, live cost estimate" }
-  - { key: Evals, value: "TODO: no agent eval set yet; unit, parity and headless smoke tests exist" }
+  - { key: Evals, value: "No agent eval set yet; unit, parity and headless smoke tests" }
 ---
 
 ## Problem

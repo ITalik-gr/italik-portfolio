@@ -14,9 +14,7 @@ const ROUTES = [
   { name: "case-answerly", path: "/work/answerly" },
   { name: "case-sollas-co", path: "/work/sollas-co" },
   { name: "case-backlinks", path: "/work/backlinks" },
-  // temporary, removed with the page before launch
-  { name: "debug", path: "/debug" },
-  { name: "ui", path: "/ui" },
+  { name: "not-found", path: "/missing-page" },
 ];
 
 for (const route of ROUTES) {

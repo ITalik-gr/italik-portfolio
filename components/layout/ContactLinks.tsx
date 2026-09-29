@@ -30,7 +30,7 @@ export function ContactLinks({ variant, className }: Props) {
         <li key={link.label} className={cn(rows && "border-b border-line last:border-b-0")}>
           <a
             href={link.href}
-            {...(link.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+            {...(/^https?:|\.pdf$/.test(link.href) && { target: "_blank", rel: "noopener noreferrer" })}
             className={cn(
               "group flex items-center gap-[8px] transition-colors duration-150 hover:text-accent",
               rows && "justify-between py-[16px]",

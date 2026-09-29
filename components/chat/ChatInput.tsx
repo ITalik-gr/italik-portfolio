@@ -8,10 +8,9 @@ type Props = {
   onChange: (value: string) => void;
   onSubmit: () => void;
   disabled?: boolean;
-  autoFocus?: boolean;
 };
 
-export function ChatInput({ value, onChange, onSubmit, disabled, autoFocus }: Props) {
+export function ChatInput({ value, onChange, onSubmit, disabled }: Props) {
   // the section and the drawer can both be on the page, so ids must be unique
   const id = useId();
   const submit = (event: FormEvent) => {
@@ -26,7 +25,6 @@ export function ChatInput({ value, onChange, onSubmit, disabled, autoFocus }: Pr
       </label>
       <input
         id={id}
-        autoFocus={autoFocus}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={ASK.placeholder}

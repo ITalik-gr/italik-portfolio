@@ -18,6 +18,8 @@ shipsAs: [Telegram bot]
 links:
   code: https://github.com/ITalik-gr/tg_chat_bot
 frameUrl: t.me · group chat
+# illustration, not a real screenshot: the live chat is private, so names and messages are made up
+cover: /work/tg-assistant/cover.png
 nowBuilding:
   title: AI Telegram Assistant v2
   summary: "A ground-up rewrite: function calling instead of a hardcoded router, tests, and smarter memory recall."
@@ -64,7 +66,7 @@ aiSpecifics:
   - { key: Tool use, value: "None yet: intent classifier plus a hardcoded dispatch; function calling is next" }
   - { key: Memory, value: "Facts per member in D1, aliases, profiles, Vectorize (bge-m3), a nightly vibe note" }
   - { key: Cost controls, value: "Deterministic gates, static-first prompts for caching, classifier capped at 200 tokens" }
-  - { key: Evals, value: "TODO: none yet" }
+  - { key: Evals, value: "None yet" }
 ---
 
 ## Problem
