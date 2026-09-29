@@ -23,7 +23,8 @@ export function SplitHeading({ id, lines, className }: Props) {
   return (
     <h1 ref={ref} id={id} aria-label={lines.join(" ")} className={className}>
       {lines.map((line) => (
-        <span key={line} aria-hidden className="block">
+        // a line never wraps: before the web font loads, the wider fallback would stack every word
+        <span key={line} aria-hidden className="block whitespace-nowrap">
           {line.split(" ").map((word, wordIndex) => (
             <span key={wordIndex}>
               {wordIndex > 0 && " "}

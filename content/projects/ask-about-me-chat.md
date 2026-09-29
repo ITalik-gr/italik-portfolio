@@ -5,8 +5,7 @@ kind: personal
 show: [lab]
 caseStudy: true
 order: 7
-# becomes live once the site ships (phase 8)
-status: building
+status: live
 tags: [agent, llm]
 typeLabel: Personal · AI feature
 summary: The AI chat on this site. It answers recruiters' questions from my real content and nothing else.
@@ -66,7 +65,7 @@ A recruiter has 30 to 90 seconds and one specific question: has he used Stripe, 
 
 ## What I'd do differently
 
-I'd write the eval set even earlier. The first runs showed the model repeating the wording of its own rules when refusing an injection, and formatting answers in Markdown despite being told not to; both were cheap to fix once a test caught them.
+I'd rely less on rules in the prompt. Told not to use Markdown, the model still formatted answers now and then, so the UI now renders paragraphs and bold instead of fighting it. Asked to refuse a prompt injection, it quoted its own rules back; a neutral refusal fixed that.
 
 ## Results
 

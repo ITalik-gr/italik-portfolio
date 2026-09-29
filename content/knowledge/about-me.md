@@ -29,7 +29,7 @@
   - Node.js, Firebase, Stripe Checkout and Connect: Answerly, where he was the sole developer (realtime chat, auth, payments, payouts, webhooks).
   - Cloudflare Workers, Durable Objects, D1, Hono: Money Track (per-user data isolation with Durable Objects, bank sync through Monobank webhooks).
   - Cloudflare Workers, D1, grammY: the AI Telegram Assistant.
-  - Strapi as a headless CMS: ppc.io and the Backlinks Tool.
+  - Strapi as a headless CMS: ppc.io and the Backlinks site.
   - PostgreSQL and Express in client work at Sollas; NestJS in his personal back-end projects.
 - AI: puts LLMs into real products (Anthropic API, xAI Grok API) and builds agent harnesses.
 - Reliable AI features: he makes sure the model can't invent data. In Money Track a deterministic core owns every number, and validation blocks any figure the model didn't take from the canonical SQL. His rule: an instruction to the model is not a guarantee; a check is.
@@ -56,9 +56,9 @@
 - Builds agents himself: harnesses from scratch in TypeScript on Node.js, Hono or NestJS, with tools, subagents, memory and human-in-the-loop steps, no framework required. He can also work with popular agent frameworks when a project uses them.
 
 ## Experience
-- **Sollas**, Full-Stack Developer (Contract), 10/2023 – present, remote. A design agency. Web apps and marketing sites end to end with Next.js, React, Astro + Strapi, PostgreSQL, Firebase and Stripe. Projects: ppc.io (front-end, evolved for about two years, his main long-running project), sollas.co, Answerly (sole developer), the Backlinks Tool, part of linkbuilder.io, a crypto/finance dashboard under NDA (Next.js), and WordPress pages for The HOTH and Authority Builders.
-- **Metamorfosi Agency (client: Bold, UK)**, Front-End Developer (Contract), 06/2024 – 05/2026, remote. 25+ responsive marketing and landing sites as part of a team, 1–2 a week, pixel-perfect from Figma: HTML, PostCSS, JavaScript, WordPress/PHP integration.
-- **Freelance Front-End Developer**, 03/2023 – 10/2023, remote. Client front-ends, forms, speed and SEO optimization, WordPress.
+- **Sollas**, Full-Stack Developer (Contract), 10/2023 – present, remote. A design agency. Web apps and marketing sites end to end with Next.js, React, TypeScript, Astro + Strapi, Node.js, PostgreSQL, Firebase, Stripe and Cloudflare Workers. Projects: ppc.io (built the front-end solo and migrated it from Strapi to MDX content collections himself; evolved it for about 22 months, his main long-running project), sollas.co (Figma to deploy, owns its SEO with automated pre- and post-deploy checks), Answerly (sole developer), the Backlinks site (sole developer, end to end, including the Strapi setup; no design work), the linkbuilder.io front-end (built solo, then took part in the client's migration to another stack), a real-time crypto/finance dashboard under NDA (front-end: live charts and bot management, Next.js + TypeScript), and WordPress pages for The HOTH and Authority Builders.
+- **Metamorfosi Agency (client: Bold, UK)**, Front-End Developer (Contract), 06/2024 – 05/2026, remote. 25+ responsive marketing and landing sites for Bold's UK clients as part of a team, 1–2 production sites a week, pixel-perfect from Figma across breakpoints. Wrote reusable HTML, PostCSS and JavaScript that the back-end team integrated into WordPress; also worked on Bold's own agency site.
+- **Freelance Front-End Developer**, 03/2023 – 10/2023, remote. Front-ends, forms and landing pages for client websites; sped up and SEO-optimized existing sites; set up and customized WordPress where needed.
 - The Sollas and Metamorfosi contracts ran in parallel for about two years.
 
 ## Stack and years
@@ -74,12 +74,12 @@ Years of experience with each technology overall, not strictly commercial time.
 ## Projects at a glance
 Full details are in each project's file; these lines are only a quick reference.
 - **Money Track**: AI personal-finance tracker; a deterministic core owns the numbers and the LLM advises. React, TypeScript, Cloudflare Workers, Durable Objects, D1, Hono, Anthropic API, RTK Query, PWA. Open source. Live demo with a demo account: money.italik.dev/demo · code: github.com/ITalik-gr/money-track
-- **Lottie Theme**: turns dark Lottie animations into light ones and back. Web app and CLI on one shared core; it also has a small local MCP server so an AI agent can use it. lottie.italik.dev
+- **Lottie Theme**: turns dark Lottie animations into light ones and back, without After Effects. One core with four shells: a browser editor, a CLI, an MCP server with 12 tools, and a live editor–agent bridge; all published to npm. Open source, 231 tests plus browser and agent end-to-end checks. lottie.italik.dev · code: github.com/ITalik-gr/lottie-theme
 - **Quiz Dock (agent harness)**: discuss a document with an agent and get quizzed on it; the model writes the questions, code grades them. Hand-written agent loop in TypeScript on the raw Anthropic SDK, no framework. The CLI works; a web version is in progress, then subagents for multi-page docs. Code: github.com/ITalik-gr/quiz-dock
 - **Job Radar**: his own job-search tool: at most 10 vacancies a day, free code filters before any model call, Haiku extracts facts as strict JSON, code does the scoring. He picks every company and sends every letter himself; the tool only drafts a first paragraph that code validates. Code: github.com/ITalik-gr/job-radar
 - **AI Telegram Assistant**: serverless bot for group chats (TypeScript, Cloudflare Workers, grammY, D1, xAI Grok API). Keeps recent messages raw, compacts older ones into rolling summaries, keeps memory per member and assembles context for each question. Code: github.com/ITalik-gr/tg_chat_bot. v1 runs in a live chat; v2 is a full rewrite: voice messages, and a new model setup that picks a fast, cheap model where it's enough.
 - **This site's AI chat**: Next.js Route Handler, Anthropic API, Upstash rate limiting.
-- **Client work**: ppc.io (Astro, Strapi → content collections), sollas.co (Next.js, built solo apart from the design, plus SEO), Answerly (React, Node.js, Firebase, Stripe; sole developer; no live version anymore), Backlinks Tool (Next.js + Strapi; demo at backlinks-dun.vercel.app), a crypto/finance dashboard under NDA (Next.js, front-end), Metamorfosi/Bold marketing sites.
+- **Client work**: ppc.io (Astro, Strapi → content collections), sollas.co (Next.js, built solo apart from the design, plus SEO), Answerly (React, Node.js, Firebase, Stripe; sole developer; no live version anymore), Backlinks site (Next.js + Strapi, sole developer; demo at backlinks-dun.vercel.app), a crypto/finance dashboard under NDA (Next.js, front-end), Metamorfosi/Bold marketing sites.
 
 ## Honest limits
 - Python: understands the syntax and can read it; hasn't used it commercially.
@@ -97,10 +97,10 @@ Full details are in each project's file; these lines are only a quick reference.
 - Q: Can he start soon? A: Yes, within a few days.
 - Q: Does he know Python? A: He understands the syntax and can read it, but his commercial work is in TypeScript and JavaScript.
 - Q: Has he worked in a team? A: Yes. He has worked in teams of up to 20 people, including the agency team for Bold and with designers and client developers at Sollas. He has also been the sole developer on several products.
-- Q: Can he own a project alone? A: Yes. Answerly, sollas.co and the Backlinks Tool were built solo, from Figma to deploy. On ppc.io he owned the whole front-end for about two years while other people handled content and other parts.
+- Q: Can he own a project alone? A: Yes. Answerly, sollas.co and the Backlinks site were built solo, from Figma to deploy. On ppc.io he owned the whole front-end for about 22 months and did the Strapi-to-MDX migration himself while other people handled content and other parts.
 - Q: Has he shipped AI features? A: Yes, in his own live products: Money Track's LLM advisor, the AI Telegram Assistant, and this chat.
 - Q: How does he use AI for coding? A: Claude Code every day with his own skills. He plans the work with the agent, delegates the repetitive parts, and reviews and verifies everything it produces.
-- Q: Does he write tests? A: Unit and integration tests at a basic level (Jest in commercial work); no commercial E2E testing yet.
+- Q: Does he write tests? A: Yes. His own projects are well tested: Job Radar has 726 tests, Money Track 232 plus golden analytics snapshots, Lottie Theme 231 plus browser and agent end-to-end checks, and this site runs Playwright end-to-end tests. In commercial work he writes unit and integration tests with Jest.
 - Q: Is he open to front-end-only roles? A: Yes, although his focus is full-stack and AI.
 - Q: Office or remote? A: Remote first; office or hybrid in Kyiv also works, and he is open to moving within Ukraine.
 - Q: Can he work on a B2B contract? A: Yes, as a Ukrainian sole proprietor (FOP), which he can set up within a few days.

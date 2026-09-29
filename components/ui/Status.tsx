@@ -1,3 +1,4 @@
+import { STATUS_LABELS } from "@/lib/format";
 import type { ProjectStatus } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 
@@ -8,16 +9,6 @@ type Props = {
   // neutral: grey text, only the dot carries the status colour (Lab rows)
   tone?: "default" | "neutral";
   className?: string;
-};
-
-const LABELS: Record<ProjectStatus, string> = {
-  live: "Live",
-  building: "Building",
-  "v2-in-progress": "v2 in progress",
-  "next-up": "Next up",
-  nda: "NDA",
-  offline: "Offline",
-  archived: "Archived",
 };
 
 const TONES: Record<ProjectStatus, { text: string; dot: string }> = {
@@ -45,7 +36,7 @@ export function Status({
           dot: TONES[status].text === "text-accent" ? "bg-accent" : "bg-muted",
         }
       : TONES[status];
-  const label = note ? `${LABELS[status]} · ${note}` : LABELS[status];
+  const label = note ? `${STATUS_LABELS[status]} · ${note}` : STATUS_LABELS[status];
 
   if (status === "nda") {
     return (

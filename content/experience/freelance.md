@@ -8,10 +8,10 @@ end: 10/2023
 type: Freelance
 location: Remote
 highlights:
-  - Built front-ends and forms for **client websites**.
-  - Speed and **SEO optimization**, plus one **WordPress** integration.
-stack: [Front-end, WordPress]
+  - "Built **front-ends, forms and landing pages** for client websites."
+  - "**Sped up and SEO-optimized** existing sites; set up and customized **WordPress** where needed."
+stack: [JavaScript, HTML, CSS, WordPress]
 ---
 
-- Built front-ends and forms for client websites.
-- Speed and SEO optimization, plus one WordPress integration.
+- Built front-ends, forms and landing pages for client websites.
+- Sped up and SEO-optimized existing sites; set up and customized WordPress where needed.

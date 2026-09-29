@@ -132,7 +132,7 @@ export const experienceSchema = z.object({
   type: z.string(),
   location: z.string(),
   // short lines for the timeline; **bold** marks the key result
-  highlights: z.array(z.string()).min(1).max(4),
+  highlights: z.array(z.string()).min(1).max(5),
   stack: z.array(z.string()),
 });
 

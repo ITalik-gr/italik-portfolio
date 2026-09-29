@@ -10,8 +10,8 @@ hideLinks: true
 tags: [marketing-site]
 typeLabel: Client · marketing site
 via: Sollas
-summary: Marketing site; the client later migrated to another stack.
-role: Front-end developer
+summary: A marketing site whose front-end I built solo, then helped migrate to the client's new stack.
+role: Sole front-end developer, then part of the migration
 # TODO verify: Next.js, later adapted pages for the client's WordPress
 stack: [Next.js]
 cover: /work/linkbuilder/cover.jpg

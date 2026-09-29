@@ -48,7 +48,7 @@ export function CaseGallery({ shots, title }: { shots: Shot[]; title: string }) 
             </ImageFrame>
           )}
           {row.phones.length > 0 && (
-            <div className="grid grid-cols-2 gap-[16px] | md:flex md:gap-[24px]">
+            <div className="grid grid-cols-2 items-start gap-[16px] | md:flex md:gap-[24px]">
               {row.phones.map((phone, phoneIndex) => (
                 <PhoneFrame
                   key={phone.label}

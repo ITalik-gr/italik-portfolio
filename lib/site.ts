@@ -67,10 +67,9 @@ export const SECTIONS = {
 
 export const ABOUT = [
   "Hi, I'm Vitaliy, or just Italik. I'm a full-stack developer from Kyiv who's been shipping for the web for 3+ years, taking products from a Figma file all the way to production.",
-  "Websites have surrounded me for as long as I can remember, and what hooked me is simple: you build something and you see it working, live, for anyone.",
-  "Now I'm focused on AI, because it's where software is heading and it opens up things that weren't possible to build a couple of years ago. I build agents from scratch, wire LLMs into real products, and make sure they stay honest about the data.",
+  "Now I focus on AI: I build agents from scratch, wire LLMs into real products and keep them honest about the data. In Money Track the model never computes a number.",
   "I enjoy owning a feature from idea to something that actually ships. I work remotely from Kyiv, alongside designers and, where there are any, the client's own developers, and I'm happy to own the whole stack or slot into an existing team.",
-  "I'm looking for full-time or contract roles in AI engineering or full-stack development.",
+  "Next, I want to build AI products with a team, as an AI engineer or full-stack developer. Full-time, contract or part-time all work for me.",
 ] as const;
 
 export const ASK = {

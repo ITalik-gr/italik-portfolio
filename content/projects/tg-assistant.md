@@ -74,7 +74,7 @@ Our friends' group chat produces hundreds of messages a day, and anyone who step
 
 ## What I'd do differently
 
-It grew fast to about 6,400 lines. Two files became god files, the persona is duplicated across three prompts, and there are no tests. I'd start with tests and a config module. An early prompt-injection loop also taught me to treat chat history as untrusted input from day one.
+It grew to about 6,400 lines before it got structure: two files took on too much and the persona lived in three prompts. v2 starts from tests and a config module. An early prompt-injection loop taught me to treat chat history as untrusted input, not as instructions.
 
 ## Results
 
@@ -82,4 +82,4 @@ Deployed and running in a live group chat: 14 D1 migrations, about 35 modules, a
 
 ## Next
 
-Split the god files and add lint and tests. Replace the classifier and switch with Grok function calling. Add reranking and hybrid search to memory recall.
+Split the two largest modules and add lint and tests. Replace the classifier and switch with Grok function calling. Add reranking and hybrid search to memory recall.

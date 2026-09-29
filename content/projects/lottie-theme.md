@@ -10,13 +10,12 @@ statusNote: open source
 tags: [tool, mcp, agent, llm, web-app, open-source]
 typeLabel: Personal · tool · MCP
 summary: Turn a dark Lottie animation into a light one, by hand, by script or by agent.
-description: A browser editor, a CLI and an MCP server that find every colour in a Lottie file, remap it and render the result to check it. All three are thin shells over one core package, so a hand edit and a scripted edit come out identical.
+description: A browser editor, a CLI, an MCP server and a live editor–agent bridge that find every colour in a Lottie file, remap it and render the result to check it. All four are thin shells over one core package, published to npm, so a hand edit, a script and an agent come out identical.
 keyIdea: The agent must look at what it rendered.
 role: Solo · design, front-end, tooling, AI
 timeline: 2026 · ~1 month
-stack: [TypeScript, Next.js, React, Zustand, lottie-web, Tailwind CSS, MCP SDK, Anthropic SDK]
-shipsAs: [Web app, CLI, MCP server, Live sync bridge]
-# the CLI isn't on npm, so no npx commands anywhere
+stack: [TypeScript, Next.js, React, Zustand, lottie-web, Tailwind CSS, shadcn/ui, MCP SDK, Anthropic SDK, GitHub Actions]
+shipsAs: [Web app, CLI on npm, MCP server, Live sync bridge]
 links:
   live: https://lottie.italik.dev
   code: https://github.com/ITalik-gr/lottie-theme
@@ -26,13 +25,13 @@ gallery:
   - { kind: desktop, label: Editor, url: lottie.italik.dev/editor, src: /work/lottie-theme/editor.png }
 features:
   - title: Click-to-recolour editor
-    text: Click a shape, see every colour under the pointer and recolour it. All edits go through one undo stack.
+    text: "Palette, layer tree, gradient stops you can add and remove (animated ramps too), shadow colours, pick from canvas and match to a reference screenshot. One undo stack; files stay in the browser, kept in IndexedDB between visits."
   - title: Batch CLI
-    text: Work out a theme on one animation, save it, then apply the same edit set to a whole folder.
+    text: "report, suggest, apply and batch: work out a theme on one animation, then apply it to a whole folder. Themes match by colour, so they carry over to other files."
   - title: MCP tools with a renderer
-    text: An agent reads palettes, gradients and effect colours, edits them, then renders through Chrome to check its own work.
+    text: 12 tools let an agent read palettes, gradients and effect colours, edit them, then render the result on the target background to check its own work.
   - title: Live editor–agent bridge
-    text: An agent sees the open file and the selected colour, and pushes edits you watch land in the editor.
+    text: An agent sees the open file and the selected colour, and its edits land in the editor as undoable steps.
 architecture:
   intro: The core holds all colour logic in plain TypeScript, with no filesystem or UI code. The LLM only chooses edits and calls tools; it never touches the JSON directly.
   steps:
@@ -50,7 +49,10 @@ architecture:
 decisions:
   - chose: one core package with thin shells
     over: separate logic for the editor, CLI and agent
-    because: a hand edit and a scripted edit have to come out identical. A parity test against the original Python version locks slot numbering across the whole corpus.
+    because: a hand edit, a script and an agent have to come out identical, so every colour rule lives once, in the core.
+  - chose: themes matched by colour
+    over: themes matched by slot index
+    because: "a saved theme applied to a folder used to recolour other files by slot position, silently. Now a theme is portable and stamped with the structure it came from."
   - chose: sending edit sets between editor and agent
     over: sending whole animations
     because: "an agent's change arrives like a click, lands in the same undo stack and reverts as one step. Nothing is written to disk until the user presses write."
@@ -58,12 +60,12 @@ decisions:
     over: a backend proxy
     because: "the deployed app has no server, so files never leave the machine. The cost is that the user brings their own key, stored only in that browser."
 aiSpecifics:
-  - { key: Models, value: "claude-opus-5 by default, claude-sonnet-5, claude-haiku-4-5; switchable in settings" }
+  - { key: Models, value: "Opus 5.5 by default, Sonnet 5.5, Haiku 4.5, Fable 5.1, or any OpenAI-compatible endpoint; the user's own key" }
   - { key: Grounding, value: "Tools return real document data; the agent must check the rendered canvas" }
   - { key: Tool use, value: "Browser: Anthropic tool runner, 16-step cap. MCP: 12 tools incl. render_preview" }
-  - { key: Memory, value: "Conversation kept in the page; the edit set can be embedded in the file" }
-  - { key: Cost controls, value: "Prompt caching, stale tool results cleared, per-instruction spend ceiling, live cost estimate" }
-  - { key: Tests, value: "Unit, parity and headless smoke tests; no agent evals yet" }
+  - { key: Memory, value: "Conversation saved per file and survives panel switches; the edit set can be embedded in the file" }
+  - { key: Cost controls, value: "Prompt caching, stale tool results cleared, per-request spend ceiling, live cost readout" }
+  - { key: Tests, value: "Pixel eval of the light theme; 22 agent end-to-end checks on a scripted API; no eval of a real model yet" }
 ---
 
 ## Problem
@@ -72,12 +74,12 @@ Dark-theme Lottie animations often have no source file left, and exporters scatt
 
 ## What I'd do differently
 
-I built the browser agent and the sync bridge early and haven't re-tested them since the gradient, effect and bitmap work landed. The agent's first version also cost a few dollars per instruction: the cost controls came after the bill, not before.
+I'd put a test on every flow the README promises before writing it down. "Save a theme, apply it to a folder" was documented and quietly recoloured other files by slot index. Path checks in the MCP server, sync hub and dev server followed symlinks lexically, so a link inside the workspace could reach any file. Both are fixed now and covered by tests.
 
 ## Results
 
-It works today as an editor, a CLI and an MCP server, with before/after examples in the README. Without the private corpus, `pnpm test` runs 114 core, 12 sync and 8 MCP tests; the rest need my local set of 53 real files.
+All four packages are on npm (v0.1.0), released from a git tag with provenance. CI runs typecheck, tests, a production build and browser smoke tests on every push. On a fresh clone there are 231 tests (core 176, CLI 15, sync 13, MCP 27), plus 74 browser smoke checks, 22 agent end-to-end checks and 18 editor, hub and MCP end-to-end checks. A pixel-based eval of the light-theme suggestion drove the latest algorithm: mean lightness on the card fixture went from .65 to .80, and contrast findings from 11 to 0.
 
 ## Next
 
-Canvas selection synced with the layer tree. Editable shadow-effect colours in the browser. Adding and removing gradient stops. Publishing the core package to npm.
+An eval of how well a real model recolours, not only the tool pipeline. Large soft shadows on light pages, which lottie-web clips to the layer box. Trusted Publishing on npm instead of a token. Fresh before/after examples in the README.

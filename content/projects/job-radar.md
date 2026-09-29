@@ -71,7 +71,7 @@ Job boards optimise for volume, and a list of 40 positions leads to no letters a
 
 ## What I'd do differently
 
-At first I called the model before the free filters, and it burned the 500-call daily limit on 498 vacancies, 6 of them relevant. I'd design the filter order and a spend budget on day one, and start an eval set early.
+At first I called the model before the free filters, and it burned the 500-call daily limit on 498 vacancies, 6 of them relevant. Now I set the filter order and a spend budget before the first model call, not after the first bill.
 
 ## Results
 

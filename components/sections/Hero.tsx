@@ -17,7 +17,7 @@ export function Hero() {
       <SplitHeading
         id="hero-title"
         lines={HERO.lines}
-        className="relative z-[1] text-fl-86/224 leading-[0.85] font-bold tracking-[-0.055em] font-stretch-[88%] | md:font-[680]"
+        className="relative z-[1] text-fl-78/224 leading-[0.85] font-bold tracking-[-0.055em] font-stretch-[88%] | md:font-[680]"
       />
 
       <div
