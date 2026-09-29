@@ -5,6 +5,8 @@ export type CaseBlock = {
   key: string;
   label: string;
   aside?: ReactNode;
+  wide?: boolean;
+  meta?: string;
   content: ReactNode;
   // full-width content under the section, e.g. the screenshot gallery
   after?: ReactNode;
@@ -20,6 +22,8 @@ export function CaseBlocks({ blocks }: { blocks: CaseBlock[] }) {
         number={sectionNumber(index)}
         label={block.label}
         aside={block.aside}
+        wide={block.wide}
+        meta={block.meta}
       >
         {block.content}
       </CaseSection>

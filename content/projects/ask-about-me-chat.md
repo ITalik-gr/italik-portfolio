@@ -29,34 +29,32 @@ features:
   - title: Hard spend limits
     text: "A per-IP rate limit, a daily token budget and a request timeout, with a friendly fallback to my email."
 architecture:
-  intro: Deterministic code builds the knowledge base and enforces every limit. The model sees one cached prompt and the visitor's last few messages, and only writes the answer.
+  summary: Deterministic code builds the knowledge base and enforces every limit.
+  highlight: The model sees one cached prompt and the visitor's last few messages, and only writes the answer.
   steps:
-    - { lane: ingest, text: "Project, experience, about-me files" }
-    - { lane: core, text: "Build the knowledge base, skip drafts" }
-    - { lane: ingest, text: Visitor asks a question }
-    - { lane: core, text: Zod validation and length limits }
-    - { lane: storage, text: "Rate limit and daily budget in Redis" }
-    - { lane: llm, text: Haiku answers from the cached prompt, from: [2, 5] }
-    - { lane: core, text: Sources line stripped from the stream }
-    - { lane: storage, text: Spend recorded per day, from: [6] }
-    - { lane: ui, text: "Streamed answer, source chips", from: [7] }
+    - { kind: input, title: Visitor asks a question }
+    - { kind: code, title: Zod validation and length limits, note: Rate limit and daily budget in Redis }
+    - { kind: llm, title: The model answers from the cached prompt }
+    - { kind: code, title: Sources line stripped from the stream, note: Spend recorded per day }
+    - { kind: output, title: "Streamed answer, source chips" }
+  background: { kind: code, label: Build time, text: "Project, experience and about-me files → knowledge base, drafts skipped" }
 decisions:
   - chose: the whole knowledge base in a cached prompt
     over: embeddings and retrieval
-    because: "it is about 4.6k tokens, so everything fits. Prompt caching makes repeat reads cost a tenth, and there is no retrieval step that could miss the right fact."
+    because: "it is about 19k tokens, so everything fits. Prompt caching makes repeat reads cost a tenth, and there is no retrieval step that could miss the right fact."
   - chose: building the knowledge from site content
     over: a separate hand-written chat document
     because: one definition of every fact. When I edit a project page, the chat knows it on the next build.
   - chose: a budget in input-token equivalents
     over: counting requests
-    because: "output, cache writes and cache reads cost different amounts. One weighted number caps the real daily spend, about $1.5 on Haiku."
+    because: "output, cache writes and cache reads cost different amounts. One weighted number caps the real daily spend, whichever model runs: about $3 a day on Sonnet 5.5."
 aiSpecifics:
-  - { key: Model, value: "claude-haiku-4-5 by default, swappable through CHAT_MODEL without a code change" }
+  - { key: Model, value: "The one I pick through CHAT_MODEL, no code change; now Claude Sonnet 5.5" }
   - { key: Grounding, value: "Knowledge base only; unknown answers point to my email" }
   - { key: Tool use, value: "None: one streamed call per question" }
   - { key: Memory, value: "Last 10 messages of the current page; nothing stored on the server" }
   - { key: Cost controls, value: "Prompt caching (~16 fresh input tokens per question), 20 requests per 10 min, daily budget" }
-  - { key: Evals, value: "25 golden questions: facts, refusals, NDA, injection, language; 25/25 for about $0.035 a run" }
+  - { key: Evals, value: "25 golden questions: facts, refusals, NDA, injection, language; 25/25 on Haiku 4.5 for about $0.035 a run" }
 ---
 
 ## Problem
@@ -69,7 +67,7 @@ I'd rely less on rules in the prompt. Told not to use Markdown, the model still 
 
 ## Results
 
-Works end to end with streaming, source chips, a floating drawer on every page and the section on the home page. The eval set passes 25 of 25, and the prompt cache holds: after the first request, each question reads about 4.6k cached tokens.
+Works end to end with streaming, source chips, a floating drawer on every page and the section on the home page. The eval set passes 25 of 25, and the prompt cache holds: after the first request, each question reads about 19k cached tokens and costs well under a cent.
 
 ## Next
 

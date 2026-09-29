@@ -33,19 +33,16 @@ features:
   - title: Live editor–agent bridge
     text: An agent sees the open file and the selected colour, and its edits land in the editor as undoable steps.
 architecture:
-  intro: The core holds all colour logic in plain TypeScript, with no filesystem or UI code. The LLM only chooses edits and calls tools; it never touches the JSON directly.
+  summary: The core holds all colour logic in plain TypeScript, with no filesystem or UI code.
+  highlight: The LLM only chooses edits and calls tools; it never touches the JSON directly.
   steps:
-    - { lane: ingest, text: Lottie JSON dropped or read from disk }
-    - { lane: ingest, text: Screenshot sampled for reference colours }
-    - { lane: core, text: Find colour slots in eight JSON shapes }
-    - { lane: core, text: "Build palette, gradients, effects" }
-    - { lane: core, text: Draft opposite theme with a WCAG audit }
-    - { lane: llm, text: Agent picks edits via tool calls }
-    - { lane: core, text: Apply the edit set to the document }
-    - { lane: core, text: Render in Chrome / lottie-web }
-    - { lane: llm, text: "Agent looks at the render, corrects", from: [8] }
-    - { lane: storage, text: "Write file, edit set kept in meta" }
-    - { lane: ui, text: "Editor canvas, undo stack, CLI output", from: [7, 10] }
+    - { kind: input, title: Lottie JSON dropped or read from disk, note: Screenshot sampled for reference colours }
+    - { kind: code, title: Find colour slots in eight JSON shapes, note: "Build palette, gradients, effects; draft opposite theme with a WCAG audit" }
+    - { kind: llm, title: Agent picks edits via tool calls }
+    - { kind: code, title: "Apply the edit set, render in Chrome / lottie-web" }
+    - { kind: llm, title: "Agent looks at the render, corrects" }
+    - { kind: code, title: "Write file, edit set kept in meta" }
+    - { kind: output, title: "Editor canvas, undo stack, CLI output" }
 decisions:
   - chose: one core package with thin shells
     over: separate logic for the editor, CLI and agent

@@ -32,20 +32,16 @@ features:
   - title: Event-driven output
     text: The core emits typed events instead of printing, so the same loop can drive a CLI or a web UI.
 architecture:
-  intro: Code splits a Markdown document into sections. The model decides which sections to read and when to quiz; parsing, validation and grading are deterministic code.
+  summary: Code splits a Markdown document into sections.
+  highlight: The model decides which sections to read and when to quiz; parsing, validation and grading are deterministic code.
   steps:
-    - { lane: ingest, text: Markdown file via CLI flags }
-    - { lane: core, text: Split into sections by headings }
-    - { lane: ingest, text: User message in the terminal }
-    - { lane: llm, text: Model plans from the section index }
-    - { lane: core, text: readSection returns section text }
-    - { lane: llm, text: Model answers from that text }
-    - { lane: llm, text: Model writes a quiz as tool input }
-    - { lane: core, text: Zod validates the questions }
-    - { lane: ui, text: User picks options by number }
-    - { lane: core, text: Code grades the answers }
-    - { lane: llm, text: Model explains the mistakes }
-    - { lane: ui, text: Events rendered in the terminal, from: [6, 11] }
+    - { kind: input, title: Markdown file via CLI flags, note: User message in the terminal }
+    - { kind: code, title: Split into sections by headings }
+    - { kind: llm, title: Model plans from the section index, note: "readSection returns section text; it answers from that text" }
+    - { kind: llm, title: Model writes a quiz as tool input }
+    - { kind: check, title: Zod validates the questions }
+    - { kind: code, title: Code grades the answers, note: User picks options by number }
+    - { kind: llm, title: Model explains the mistakes, note: Events rendered in the terminal }
 decisions:
   - chose: my own agent loop on the raw SDK
     over: an agent framework

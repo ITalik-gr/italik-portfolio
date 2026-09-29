@@ -37,19 +37,17 @@ features:
   - title: Learns from reactions
     text: Reactions and replies to the bot's messages are distilled nightly into a tone note that steers later replies.
 architecture:
-  intro: The webhook returns 200 at once and the work runs in the background. Deterministic code filters, logs and routes; Grok is called only to classify, reply or distil.
+  summary: The webhook returns 200 at once and the work runs in the background.
+  highlight: Deterministic code filters, logs and routes; Grok is called only to classify, reply or distil.
   steps:
-    - { lane: ingest, text: "Telegram webhook, secret check" }
-    - { lane: ingest, text: "Voice, photo, video, docs to text" }
-    - { lane: storage, text: Log the message in D1 }
-    - { lane: core, text: "Gates: addressed, cooldown, chance" }
-    - { lane: llm, text: "Grok classifies intent, argument" }
-    - { lane: core, text: Dispatch to a handler }
-    - { lane: storage, text: "Recall facts, moods, vibe", from: [6] }
-    - { lane: llm, text: Grok replies in persona, from: [6, 7] }
-    - { lane: ui, text: Reply sent to the chat }
-    - { lane: storage, text: "Log reply, reaction scores", from: [9] }
-    - { lane: llm, text: "Nightly digests, facts, style", from: [3, 10] }
+    - { kind: input, title: "Telegram webhook, secret check", note: "Voice, photo, video, docs to text" }
+    - { kind: code, title: Log the message in D1 }
+    - { kind: check, title: "Gates: addressed, cooldown, chance" }
+    - { kind: llm, title: "Grok classifies intent, argument" }
+    - { kind: code, title: Dispatch to a handler, note: "Recall facts, moods, vibe" }
+    - { kind: llm, title: Grok replies in persona }
+    - { kind: output, title: Reply sent to the chat, note: "Log reply, reaction scores" }
+  background: { kind: llm, label: Nightly, text: "Digests, facts, style" }
 decisions:
   - chose: an AI intent classifier with keyword hints
     over: keyword routing and regex alone

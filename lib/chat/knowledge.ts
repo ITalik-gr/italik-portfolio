@@ -3,6 +3,7 @@ import path from "node:path";
 import { getExperience, getProjects } from "@/lib/content";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
+import type { Architecture } from "@/lib/schemas-architecture";
 import { ABOUT, HERO, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 import type { ChatSource } from "./types";
@@ -20,6 +21,33 @@ const clean = (text: string) =>
     .join("\n")
     .trim();
 
+function architectureLines(arch: Architecture) {
+  const head =
+    arch.variant === "map"
+      ? `${arch.title} ${arch.summary}`
+      : [arch.summary, arch.highlight].filter(Boolean).join(" ");
+  if (arch.variant === "flow") {
+    return [
+      head,
+      ...arch.steps.map(
+        (step) => `${step.kind}: ${step.title}${step.note ? ` (${step.note})` : ""}`,
+      ),
+      ...(arch.background ? [`background ${arch.background.label}: ${arch.background.text}`] : []),
+      ...(arch.notes ?? []),
+    ];
+  }
+  const title = (id: string) => arch.nodes.find((node) => node.id === id)?.title ?? id;
+  return [
+    head,
+    ...arch.nodes.map((node) => `${node.kind}: ${node.title}${node.sub ? ` (${node.sub})` : ""}`),
+    ...arch.edges.map(
+      (edge) => `${title(edge.from)} → ${title(edge.to)}${edge.label ? `: ${edge.label}` : ""}`,
+    ),
+    `Example "${arch.trace.question}": ${arch.trace.steps.map((step) => step.text).join("; ")}`,
+    ...arch.guarantees.map((item) => `${item.title} ${item.caption}`),
+  ];
+}
+
 function projectDoc(project: Project): Doc {
   const { case: casePage, live, code, primary } = getProjectLinks(project);
   const facts: Record<string, unknown> = {
@@ -36,7 +64,7 @@ function projectDoc(project: Project): Doc {
     stack: project.stack,
     shipsAs: project.shipsAs,
     features: project.features?.map(({ title, text }) => `${title}: ${text}`),
-    architecture: project.architecture?.steps.map((s) => `${s.lane}: ${s.text}`),
+    architecture: project.architecture && architectureLines(project.architecture),
     decisions: project.decisions?.map(
       (d) => `Chose ${d.chose} over ${d.over} because ${d.because}`,
     ),

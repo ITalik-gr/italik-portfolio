@@ -1,7 +1,7 @@
 import { getBodySections, getLabProjects } from "@/lib/content";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
-import { CaseArchitecture, CaseArchitectureIntro } from "./CaseArchitecture";
+import { ArchitectureSection, architectureMeta } from "./architecture/ArchitectureSection";
 import { CaseBlocks, sectionNumber, type CaseBlock } from "./CaseBlocks";
 import { CaseClosing } from "./CaseClosing";
 import { CaseDecisions } from "./CaseDecisions";
@@ -35,8 +35,9 @@ export function PersonalCase({ project }: { project: Project }) {
     blocks.push({
       key: "architecture",
       label: "Architecture",
-      aside: <CaseArchitectureIntro architecture={project.architecture} />,
-      content: <CaseArchitecture architecture={project.architecture} />,
+      wide: true,
+      meta: architectureMeta(project.architecture, project.title),
+      content: <ArchitectureSection architecture={project.architecture} />,
     });
   }
   if (project.decisions) {

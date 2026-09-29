@@ -13,6 +13,10 @@
   --color-faint: #555555;
   --color-accent: #7fee64;
   --color-accent-ink: #000000;
+  /* accent at ~5% on black: LLM blocks in case architecture */
+  --color-accent-bg: #0a1208;
+  --color-zone: #050505;
+  --color-zone-line: #1c1c1c;
 
   --font-display: var(--font-archivo), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;

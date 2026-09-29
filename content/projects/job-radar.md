@@ -32,20 +32,17 @@ features:
   - title: Faster, personal letters
     text: "I choose who to write to and press send myself; drafts start from my own templates, and replies are tracked so nobody gets chased twice."
 architecture:
-  intro: Fetchers and normalised page diffs feed a deterministic filter chain. The model only extracts facts from new text as strict JSON; scoring, dedupe and sending rules are plain code.
+  summary: Fetchers and normalised page diffs feed a deterministic filter chain.
+  highlight: The model only extracts facts from new text as strict JSON; scoring, dedupe and sending rules are plain code.
   steps:
-    - { lane: ingest, text: "ATS APIs, RSS, job boards" }
-    - { lane: ingest, text: Chrome extension scrapes catalogues }
-    - { lane: core, text: "Normalise pages, block-level diff", from: [1, 2] }
-    - { lane: storage, text: Vacancies and snapshots in D1 }
-    - { lane: core, text: "Stop words, role, geo filters" }
-    - { lane: llm, text: Haiku extracts strict JSON }
-    - { lane: core, text: "Zod check, score, dedupe" }
-    - { lane: ui, text: "Daily queue, 10 cards" }
-    - { lane: llm, text: Sonnet drafts the first paragraph, from: [8] }
-    - { lane: core, text: "Validate, else use my template", from: [9] }
-    - { lane: ui, text: "I review, edit and send by hand" }
-    - { lane: ui, text: "Reply tracking, Telegram digest" }
+    - { kind: input, title: "ATS APIs, RSS, job boards", note: Chrome extension scrapes catalogues }
+    - { kind: code, title: "Normalise pages, block-level diff", note: "Vacancies and snapshots in D1; stop words, role, geo filters" }
+    - { kind: llm, title: Haiku extracts strict JSON }
+    - { kind: check, title: "Zod check, score, dedupe" }
+    - { kind: llm, title: Sonnet drafts the first paragraph }
+    - { kind: check, title: "Validate, else use my template" }
+    - { kind: output, title: "Daily queue, 10 cards", note: "I review, edit and send by hand" }
+  notes: ["Reply tracking, Telegram digest"]
 decisions:
   - chose: deterministic scoring in code
     over: letting the model score vacancies

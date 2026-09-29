@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { architectureSchema } from "./schemas-architecture";
 
 const optionalUrl = z.url().optional();
 
@@ -26,11 +27,8 @@ const tagSchema = z.enum([
   "web-app",
 ]);
 
-export const LANES = ["ingest", "storage", "core", "llm", "ui"] as const;
 // home sections a project can appear in; every project also belongs on the future /work page
 export const HOME_SECTIONS = ["featured", "lab", "clients", "now"] as const;
-
-const laneSchema = z.enum(LANES);
 
 export const projectSchema = z
   .object({
@@ -78,21 +76,7 @@ export const projectSchema = z
     features: z
       .array(z.object({ title: z.string(), text: z.string(), image: z.string().optional() }))
       .optional(),
-    architecture: z
-      .object({
-        intro: z.string(),
-        // from: 1-based parent steps; defaults to the previous step
-        steps: z
-          .array(
-            z.object({
-              lane: laneSchema,
-              text: z.string(),
-              from: z.array(z.number().int().min(1)).optional(),
-            }),
-          )
-          .min(1),
-      })
-      .optional(),
+    architecture: architectureSchema.optional(),
     decisions: z
       .array(z.object({ chose: z.string(), over: z.string(), because: z.string() }))
       .optional(),
@@ -138,5 +122,4 @@ export const experienceSchema = z.object({
 
 export type Project = z.infer<typeof projectSchema> & { body: string };
 export type Experience = z.infer<typeof experienceSchema> & { body: string };
-export type Lane = z.infer<typeof laneSchema>;
 export type ProjectStatus = z.infer<typeof statusSchema>;

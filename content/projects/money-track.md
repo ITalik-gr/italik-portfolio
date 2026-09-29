@@ -43,18 +43,56 @@ features:
   - title: Throwaway public demo
     text: /demo creates a private sandbox with six months of seeded data that resets after 24 hours.
 architecture:
-  intro: Bank rows go through one deterministic parser into each user's own SQLite. Models only classify unknown rows or phrase answers. Every figure comes from canonical SQL and is checked before it renders.
-  steps:
-    - { lane: ingest, text: "Monobank webhook, CSV, quick-add" }
-    - { lane: core, text: One normaliser per bank provider }
-    - { lane: storage, text: "Upsert into the user's Durable Object" }
-    - { lane: core, text: "Rules ladder: alias, subscription, MCC" }
-    - { lane: llm, text: Jev judges; Haiku below threshold }
-    - { lane: storage, text: "AI changes logged, revertible" }
-    - { lane: core, text: Canonical SQL builds the snapshot, from: [3] }
-    - { lane: llm, text: Claude answers via read-only tools }
-    - { lane: core, text: Grounding check rejects unknown numbers }
-    - { lane: ui, text: "Web PWA, Telegram, MCP clients", from: [7, 9] }
+  variant: map
+  title: The model never touches the data.
+  summary: "Every number is computed by deterministic code inside the user's own Durable Object. Models only classify rows the rules can't settle and phrase answers, and every answer passes a grounding check before it renders."
+  zones:
+    - { id: clients, label: Clients, x: 0, y: 0, w: 272, h: 640 }
+    - { id: edge, label: "Cloudflare edge · deterministic", x: 304, y: 0, w: 648, h: 640 }
+    - { id: external, label: External, x: 984, y: 0, w: 376, h: 640 }
+    - { id: llm, label: "LLM zone · read-only, no writes", kind: llm, parent: external, x: 1016, y: 160, w: 312, h: 296 }
+  nodes:
+    - { id: web, zone: clients, kind: output, title: Web app, sub: PWA · React, x: 32, y: 104, w: 208 }
+    - { id: tg, zone: clients, kind: output, title: Telegram bot, sub: Bot · mini app, x: 32, y: 208, w: 208 }
+    - { id: mcp, zone: clients, kind: output, title: MCP client, sub: Claude · URL + consent, x: 32, y: 312, w: 208 }
+    - { id: worker, zone: edge, kind: code, title: Worker, sub: Hono · auth · routing, x: 336, y: 208, w: 208 }
+    - { id: oauth, zone: edge, kind: code, title: OAuth 2.1 server, sub: PKCE · rotating tokens, x: 336, y: 344, w: 208 }
+    - { id: normaliser, zone: edge, kind: code, title: Bank normaliser, sub: One per provider · CSV, x: 640, y: 48, w: 280 }
+    - { id: do, zone: edge, kind: code, title: "User's Durable Object", sub: Own SQLite · rules ladder, x: 640, y: 208, w: 280 }
+    - { id: sql, zone: edge, kind: code, title: Canonical SQL, sub: Builds the snapshot, x: 640, y: 344, w: 280 }
+    - { id: grounding, zone: edge, kind: check, title: Grounding check, sub: Drops unknown numbers, x: 640, y: 512, w: 280 }
+    - { id: monobank, zone: external, kind: external, title: Monobank API, sub: Webhooks · pull, x: 1040, y: 48, w: 264 }
+    - { id: jev, zone: llm, kind: llm, title: Jev → Haiku, sub: "Rows the rules can't settle", x: 1040, y: 208, w: 264 }
+    - { id: claude, zone: llm, kind: llm, title: Claude, sub: Model routed per task, x: 1040, y: 344, w: 264 }
+  edges:
+    - { from: web, to: worker, points: [[240, 140], [288, 140], [288, 244], [336, 244]] }
+    - { from: tg, to: worker, points: [[240, 244], [336, 244]] }
+    - { from: mcp, to: worker, points: [[240, 348], [288, 348], [288, 244], [336, 244]] }
+    - { from: monobank, to: normaliser, label: webhook, points: [[1040, 84], [920, 84]], labelAt: [980, 74], labelAnchor: middle }
+    - { from: normaliser, to: do, label: upsert, points: [[780, 120], [780, 208]], labelAt: [792, 168] }
+    - { from: worker, to: do, label: routes, points: [[544, 244], [640, 244]], labelAt: [592, 234], labelAnchor: middle }
+    - { from: worker, to: oauth, label: MCP auth, points: [[440, 280], [440, 344]], labelAt: [452, 316], dashed: true }
+    - { from: do, to: jev, label: unknown rows, points: [[920, 232], [1040, 232]], labelAt: [980, 222], labelAnchor: middle }
+    - { from: jev, to: do, label: category, points: [[1040, 256], [920, 256]], labelAt: [980, 276], labelAnchor: middle }
+    - { from: do, to: sql, label: read, points: [[780, 280], [780, 344]], labelAt: [792, 316] }
+    - { from: sql, to: claude, label: snapshot, points: [[920, 368], [1040, 368]], labelAt: [980, 358], labelAnchor: middle }
+    - { from: sql, to: claude, label: + tools, points: [[920, 392], [1040, 392]], labelAt: [980, 412], labelAnchor: middle }
+    - { from: claude, to: grounding, label: draft answer, points: [[1172, 416], [1172, 548], [920, 548]], labelAt: [1184, 500] }
+    - { from: grounding, to: mcp, label: checked answer, points: [[640, 548], [136, 548], [136, 384]], labelAt: [392, 538], labelAnchor: middle, emphasis: true }
+  trace:
+    question: Can I afford a $400 laptop this month?
+    steps:
+      - { kind: code, text: "Worker checks the session and routes to the user's own Durable Object" }
+      - { kind: code, text: "Canonical SQL builds the snapshot the screens use: balances, burn, budgets" }
+      - { kind: llm, text: "Claude gets the snapshot plus read-only tools: query_spend, find_transactions" }
+      - { kind: llm, text: It drafts the answer and explains it. It never computes a total itself }
+      - { kind: check, text: "Grounding check drops any figure or date the snapshot doesn't contain" }
+      - { kind: code, text: "The checked answer streams to the web app, Telegram or an MCP client" }
+  guarantees:
+    - { title: Every figure comes from SQL., caption: Checked before it renders }
+    - { title: AI changes are logged and revertible., caption: No silent writes }
+    - { title: 35 / 36 on held-out merchants., accent: 35 / 36, caption: npm run eval · $0.03 per run }
+    - { title: Public demo capped at $1 a day., caption: Cost is a feature }
 decisions:
   - chose: one Durable Object per user
     over: user_id filters on shared tables

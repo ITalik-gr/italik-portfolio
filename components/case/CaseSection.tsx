@@ -6,13 +6,36 @@ type Props = {
   id: string;
   number: string;
   label: string;
-  // extra copy under the label in the left column (Architecture intro)
   aside?: ReactNode;
+  // wide: the content takes the full width under a label row, with meta on the right
+  wide?: boolean;
+  meta?: string;
   children: ReactNode;
   className?: string;
 };
 
-export function CaseSection({ id, number, label, aside, children, className }: Props) {
+export function CaseSection({ id, number, label, aside, wide, meta, children, className }: Props) {
+  if (wide) {
+    return (
+      <section
+        aria-labelledby={id}
+        className={cn(
+          "mt-fl-96/160 border-t border-line px-gutter pt-[20px] | md:pt-[24px]",
+          className,
+        )}
+      >
+        <div className="flex items-baseline justify-between gap-[24px]">
+          <CaseLabel id={id} number={number} label={label} />
+          {meta && (
+            <p className="hidden font-mono text-[13px] leading-[17px] tracking-[0.08em] text-muted uppercase | md:block">
+              {meta}
+            </p>
+          )}
+        </div>
+        <div className="mt-fl-32/48">{children}</div>
+      </section>
+    );
+  }
   return (
     <section
       aria-labelledby={id}
