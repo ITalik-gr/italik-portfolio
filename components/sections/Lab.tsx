@@ -18,6 +18,7 @@ export function Lab() {
     description: project.description ?? project.summary,
     stack: project.stack.map((item) => item.toLowerCase()),
     frameUrl: project.frameUrl,
+    cover: project.cover,
     href: getProjectLinks(project).primary?.href,
     shareTitle: !project.show.includes("featured"),
   }));

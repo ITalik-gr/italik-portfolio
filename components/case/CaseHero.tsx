@@ -1,5 +1,6 @@
 import { ProjectMorph } from "@/components/motion/ProjectMorph";
 import { Reveal } from "@/components/motion/Reveal";
+import { CoverImage } from "@/components/ui/CoverImage";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import type { Project } from "@/lib/schemas";
 import { CaseLinks } from "./CaseLinks";
@@ -9,7 +10,6 @@ type Props = { project: Project; labPosition?: string };
 
 const KICKER_SIDE = "hidden text-muted | md:inline";
 
-// TODO: render project.cover via next/image once screenshots exist
 // personal cases lead with the key idea and one-liner; client cases go straight to the meta
 // the title and cover morph in from the home page, so only the rest goes through Reveal
 // buttons sit next to the one-liner on desktop but after the meta on mobile, so they render twice
@@ -66,13 +66,19 @@ export function CaseHero({ project, labPosition }: Props) {
         <CaseLinks project={project} className="mt-[24px] | md:hidden" />
       </Reveal>
 
-      <ProjectMorph slug={project.slug} part="cover">
-        <ImageFrame
-          url={project.frameUrl}
-          label={`${project.title} · screenshot`}
-          className="mt-fl-32/56"
-        />
-      </ProjectMorph>
+      {/* no screenshot yet: skip the frame rather than show an empty grey box */}
+      {project.cover && (
+        <ProjectMorph slug={project.slug} part="cover">
+          <ImageFrame url={project.frameUrl} className="mt-fl-32/56">
+            <CoverImage
+              src={project.cover}
+              alt={`${project.title}: screenshot`}
+              sizes="100vw"
+              priority
+            />
+          </ImageFrame>
+        </ProjectMorph>
+      )}
     </header>
   );
 }

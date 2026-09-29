@@ -6,6 +6,7 @@ import { CaseBlocks, sectionNumber, type CaseBlock } from "./CaseBlocks";
 import { CaseClosing } from "./CaseClosing";
 import { CaseDecisions } from "./CaseDecisions";
 import { CaseFeatures } from "./CaseFeatures";
+import { CaseGallery } from "./CaseGallery";
 import { CaseNav } from "./CaseNav";
 import { CaseProblem } from "./CaseProblem";
 import { CaseSpecs } from "./CaseSpecs";
@@ -27,6 +28,7 @@ export function PersonalCase({ project }: { project: Project }) {
       key: "built",
       label: "What I built",
       content: <CaseFeatures features={project.features} />,
+      after: project.gallery && <CaseGallery shots={project.gallery} title={project.title} />,
     });
   }
   if (project.architecture) {

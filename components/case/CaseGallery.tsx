@@ -19,10 +19,13 @@ function toRows(shots: Shot[]) {
   return rows;
 }
 
+// only screens that exist are shown; a missing phone shot never leaves an empty frame
 export function CaseGallery({ shots, title }: { shots: Shot[]; title: string }) {
+  const ready = shots.filter((shot) => shot.src);
+  if (ready.length === 0) return null;
   return (
     <Reveal className="mt-fl-48/96 flex flex-col gap-[24px] px-gutter">
-      {toRows(shots).map((row, index) => (
+      {toRows(ready).map((row, index) => (
         <div
           key={index}
           className="flex flex-col gap-[16px] | md:flex-row md:items-start md:gap-[24px]"

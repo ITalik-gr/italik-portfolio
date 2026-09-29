@@ -1,4 +1,5 @@
 import { ProjectMorph } from "@/components/motion/ProjectMorph";
+import { CoverImage } from "@/components/ui/CoverImage";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { cn } from "@/lib/utils";
 import type { LabItem } from "./LabList";
@@ -33,7 +34,11 @@ export function LabPreview({ items, active }: Props) {
             )}
           >
             <ProjectMorph slug={item.slug} part="cover" source="lab" primary={item.shareTitle}>
-              <ImageFrame url={item.frameUrl} ratio="16/10" label={`${item.title} · preview`} />
+              <ImageFrame url={item.frameUrl} ratio="16/10" label={`${item.title} · preview`}>
+                {item.cover ? (
+                  <CoverImage src={item.cover} alt="" sizes="45vw" />
+                ) : undefined}
+              </ImageFrame>
             </ProjectMorph>
             <div className="flex justify-between font-mono text-[12px] leading-[16px] tracking-[0.06em] text-text-3 uppercase">
               <span>{item.title}</span>

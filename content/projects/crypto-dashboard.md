@@ -13,7 +13,8 @@ via: Sollas
 summary: A crypto and finance dashboard with real-time data and trading-bot analytics.
 role: Front-end developer
 stack: [Next.js, TypeScript]
-# visuals must be blurred or redrawn with mock data
+# the screenshot is pre-blurred at 36px wide, so nothing can be recovered from the file
+cover: /work/crypto-dashboard/cover.jpg
 ---
 
 Building the front-end: data-dense views with many charts, real-time updates, bot monitoring screens. Details limited by NDA.

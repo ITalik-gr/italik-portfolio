@@ -14,6 +14,7 @@ export type LabItem = {
   description: string;
   stack: string[];
   frameUrl?: string;
+  cover?: string;
   href?: string;
   // false when the same project is already named in Featured
   shareTitle: boolean;

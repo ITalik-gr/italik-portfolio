@@ -4,40 +4,45 @@ slug: ppc-io
 kind: client
 show: [clients]
 caseStudy: true
-draft: true
 order: 10
 status: live
 tags: [marketing-site]
 typeLabel: Client · marketing site
 via: Sollas
-summary: A multi-page marketing site for a PPC tool company, with collections of AI agents and tools that the team keeps adding to.
-role: "Sole developer: Figma to deploy, then long-term maintenance (~1.5 years)"
-timeline: ~1.5 years
-stack: [Astro, Strapi CMS → Astro content collections]
+summary: A PPC agency needed a fast marketing site and a free-tools library that turns visitors into email subscribers.
+role: "Front-end developer: design to Astro and React, then new sections, tool pages and animations"
+# TODO: team (repo has 5 committers; roles unknown)
+timeline: 2024–2026 · ~22 months
+stack: [Astro, React, TypeScript, Tailwind CSS, MDX, Cloudflare Workers]
 links:
   live: https://ppc.io
 frameUrl: ppc.io
-# TODO: screenshots (src) for the gallery
+cover: /work/ppc-io/cover.jpg
 gallery:
-  - { kind: desktop, label: Agents collection, url: ppc.io/agents }
-  - { kind: mobile, label: Home }
-  - { kind: mobile, label: Tool page }
-  - { kind: desktop, label: Tool template, url: "ppc.io/tools/[slug]" }
+  - { kind: desktop, label: Agents page, url: ppc.io/agents, src: /work/ppc-io/agents.jpg }
+  - { kind: desktop, label: Free tools library, url: ppc.io/free-tools, src: /work/ppc-io/free-tools.jpg }
+  - { kind: desktop, label: AI consulting, url: ppc.io, src: /work/ppc-io/ai-consulting.jpg }
+  - { kind: desktop, label: ROI calculator, url: ppc.io, src: /work/ppc-io/calculator.jpg }
 highlights:
+  - title: Searchable toolkit grid
+    text: "A React island inside static Astro pages: search, category tabs, filtering and pagination over the tools and agents collections."
+  - title: Animated sections
+    text: Scroll-triggered GSAP and Lottie animations and Swiper carousels, built to keep static pages fast.
   - title: Strapi → content collections
-    text: The migration removed an external CMS dependency and made builds faster.
-  - title: Templated collections
-    text: New agents and tools pages ship without a developer.
+    text: "I migrated the content from Strapi to typed Astro collections: no external CMS to run, faster builds, and a bad entry fails the build."
 outcome:
-  - { value: "~10", label: Pages + 2 dynamic templates }
-  - { value: 1.5y, label: Maintained solo }
+  - { value: ~22 mo, label: Front-end in my hands }
+  - { value: "96", label: Tool pages on one template }
+  - { value: "2", label: Home page rebuilds }
   # TODO: Lighthouse / build time before → after
 ---
 
 ## Brief
 
-A multi-page marketing site for a PPC tool company, with collections of AI agents and tools that the team keeps adding to.
+ppc.io is a paid-search (PPC) agency. It needed a marketing site that sells its services, plus a library of free tools, prompts and AI agents that collects email leads.
 
 ## What I did
 
-Built the complete site single-handedly (~10 pages plus 2 dynamic templates for the agents and tools collections). Maintained and evolved it as the main long-running project. Migrated content from Strapi CMS to Astro content collections.
+I turned the design into Astro components and sections: the home page, pricing, agents and toolkit pages. I rebuilt the home page twice, in 2025 and 2026, and built the agents and toolkit pages with search, filtering, pagination and scroll animations.
+
+I migrated the content from Strapi to in-repo MDX collections validated by Zod, which removed the external CMS and sped up builds. Around that move the free-tools library grew from 19 to about 78 tools, gated behind an email signup, and I built the tool pages and card components.

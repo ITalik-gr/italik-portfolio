@@ -48,11 +48,14 @@ export function ClientCase({ project }: { project: Project }) {
   const related = getProjects()
     .filter((item) => item.kind === "client" && item.slug !== project.slug)
     .map((item) => ({
+      slug: item.slug,
       title: item.title,
       href: getProjectLinks(item).primary?.href,
       meta: item.stack.join(" · "),
     }))
-    .filter((item): item is { title: string; href: string; meta: string } => Boolean(item.href));
+    .filter((item): item is { slug: string; title: string; href: string; meta: string } =>
+      Boolean(item.href),
+    );
 
   return (
     <>

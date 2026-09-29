@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { openChatDrawer, useChat } from "@/lib/chat/store";
 import { cn } from "@/lib/utils";
@@ -9,8 +10,11 @@ const BOTTOM_OFFSET = 100;
 
 export function AskFab() {
   const [nearBottom, setNearBottom] = useState(false);
-  const [ctaVisible, setCtaVisible] = useState(false);
+  // remembers which page the hero was seen on, so a stale "visible" never carries over after navigation
+  const [ctaSeenOn, setCtaSeenOn] = useState<string | null>(null);
   const { drawerOpen } = useChat();
+  const pathname = usePathname();
+  const ctaVisible = ctaSeenOn === pathname;
   const hidden = nearBottom || ctaVisible || drawerOpen;
 
   useEffect(() => {
@@ -36,11 +40,12 @@ export function AskFab() {
       entries.forEach((entry) =>
         entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target),
       );
-      setCtaVisible(visible.size > 0);
+      setCtaSeenOn(visible.size > 0 ? pathname : null);
     });
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
-  }, []);
+    // the layout survives client navigation, so re-observe the new page's targets
+  }, [pathname]);
 
   return (
     <button

@@ -1,13 +1,21 @@
 import Image from "next/image";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import type { Project } from "@/lib/schemas";
+import { cn } from "@/lib/utils";
 
 type Props = { features: NonNullable<Project["features"]> };
 
 // a feature without a screenshot shows its number in the image's place
+// four features read better as a 2×2 than as three plus an orphan
 export function CaseFeatures({ features }: Props) {
+  const pairs = features.length % 2 === 0;
   return (
-    <ol className="grid gap-[40px] | md:grid-cols-3 md:gap-[24px]">
+    <ol
+      className={cn(
+        "grid gap-[40px] | md:gap-[24px]",
+        pairs ? "md:grid-cols-2 md:gap-y-[48px]" : "md:grid-cols-3",
+      )}
+    >
       {features.map((feature, index) => (
         <li key={feature.title}>
           {feature.image ? (
@@ -16,7 +24,11 @@ export function CaseFeatures({ features }: Props) {
                 src={feature.image}
                 alt={`${feature.title} screenshot`}
                 fill
-                sizes="(min-width: 1024px) 322px, (min-width: 768px) 33vw, 100vw"
+                sizes={
+                  pairs
+                    ? "(min-width: 1024px) 495px, (min-width: 768px) 50vw, 100vw"
+                    : "(min-width: 1024px) 322px, (min-width: 768px) 33vw, 100vw"
+                }
                 className="object-cover"
               />
             </ImageFrame>

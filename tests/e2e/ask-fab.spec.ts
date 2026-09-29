@@ -15,3 +15,17 @@ test("Ask AI button stays hidden on the first screen and near the page end", asy
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await expect(fab).toHaveCSS("opacity", "0");
 });
+
+test("Ask AI button hides on the hero after client navigation back home", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const fab = page.locator("button.fixed", { hasText: "Ask AI" });
+
+  // client-side navigation keeps the layout (and the button) mounted
+  await page.locator('a[href^="/work/"]').first().click();
+  await page.waitForURL(/\/work\//);
+  await page.locator('a[href="/"]').first().click();
+  await page.waitForURL(/\/$/);
+
+  await expect(fab).toHaveCSS("opacity", "0");
+});

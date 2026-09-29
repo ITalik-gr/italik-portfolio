@@ -14,5 +14,5 @@ summary: Marketing site; the client later migrated to another stack.
 role: Front-end developer
 # TODO verify: Next.js, later adapted pages for the client's WordPress
 stack: [Next.js]
-# TODO: screenshots of my version
+cover: /work/linkbuilder/cover.jpg
 ---

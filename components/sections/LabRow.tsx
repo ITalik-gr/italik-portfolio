@@ -80,7 +80,12 @@ export function LabRow({ item, index, dimmed, onActivate }: Props) {
     <li className="grid items-start gap-[16px] py-[24px] | md:grid-cols-[1fr_minmax(0,300px)] md:gap-[24px] | lg:grid-cols-1 lg:pt-[32px] lg:pb-[40px]">
       {body}
       <ProjectMorph slug={item.slug} part="cover" source="lab-row" primary={false}>
-        <ProjectCover label={item.title} className="| lg:hidden" />
+        <ProjectCover
+          label={item.title}
+          src={item.cover}
+          sizes="(min-width: 768px) 300px, 100vw"
+          className="| lg:hidden"
+        />
       </ProjectMorph>
     </li>
   );

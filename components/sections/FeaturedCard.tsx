@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MorphSource, ProjectMorph } from "@/components/motion/ProjectMorph";
 import { Parallax } from "@/components/motion/Parallax";
 import { Button } from "@/components/ui/Button";
+import { CoverImage } from "@/components/ui/CoverImage";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import { MetaTable } from "@/components/ui/MetaTable";
 import { Status } from "@/components/ui/Status";
@@ -26,13 +27,20 @@ export function FeaturedCard({ project, mirrored }: Props) {
       : { key: "Stack", value: project.stack.join(" · ") },
   ];
 
-  // TODO: project.cover via next/image inside the parallax layer once screenshots exist
   const frame = (
     <ImageFrame url={project.frameUrl} ratio="16/10">
       <Parallax>
-        <div className="flex size-full items-center justify-center bg-surface font-mono text-[12px] text-muted">
-          {project.title} · screenshot
-        </div>
+        {project.cover ? (
+          <CoverImage
+            src={project.cover}
+            alt={`${project.title}: screenshot`}
+            sizes="(min-width: 1024px) 58vw, 100vw"
+          />
+        ) : (
+          <div className="flex size-full items-center justify-center bg-surface font-mono text-[12px] text-muted">
+            {project.title} · screenshot
+          </div>
+        )}
       </Parallax>
     </ImageFrame>
   );

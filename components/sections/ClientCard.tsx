@@ -46,6 +46,8 @@ export function ClientCard({ project }: Props) {
         <div data-cursor={href ? "View" : undefined} className="relative">
           <ProjectCover
             label={project.title}
+            src={project.cover}
+            sizes="(min-width: 768px) 50vw, 100vw"
             innerClassName={cn(
               "transition-transform duration-600 ease-out-expo group-hover:scale-[1.015]",
               nda && "blur-[10px] grayscale-[0.4]",
