@@ -1,4 +1,5 @@
-import { OG_ACCENT, OG_SIZE, renderOgCard } from "@/components/og/OgCard";
+import { OgBrain } from "@/components/og/OgBrain";
+import { OG_ACCENT, OG_NODE, OG_SIZE, renderOgCard } from "@/components/og/OgCard";
 import { HERO, SITE } from "@/lib/site";
 
 export const alt = `${SITE.name}: ${HERO.title}`;
@@ -17,5 +18,6 @@ export default function Image() {
     titleSize: 108,
     lead: HERO.sub,
     path: "",
+    art: <OgBrain width={600} height={470} accent={OG_ACCENT} node={OG_NODE} />,
   });
 }

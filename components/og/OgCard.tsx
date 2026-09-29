@@ -31,6 +31,8 @@ type Props = {
   lead?: string;
   leadAccent?: boolean;
   path: string;
+  // optional picture on the right half, drawn behind the text
+  art?: ReactNode;
 };
 
 // og images take inline styles only (satori), so Tailwind classes can't be used here
@@ -41,6 +43,7 @@ export async function renderOgCard({
   lead,
   leadAccent,
   path: url,
+  art,
 }: Props) {
   const [display, body, mono] = await fonts;
 
@@ -56,8 +59,12 @@ export async function renderOgCard({
         background: COLORS.bg,
         color: COLORS.text,
         fontFamily: "Archivo",
+        position: "relative",
       }}
     >
+      {art && (
+        <div style={{ position: "absolute", top: 40, right: 20, display: "flex" }}>{art}</div>
+      )}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div
@@ -150,4 +157,5 @@ export async function renderOgCard({
 }
 
 export const OG_ACCENT = COLORS.accent;
+export const OG_NODE = COLORS.text3;
 export const OG_TEXT = COLORS.text;

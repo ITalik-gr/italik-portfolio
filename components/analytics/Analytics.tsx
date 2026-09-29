@@ -20,10 +20,10 @@ export function Analytics() {
 
   return (
     <Script
-      src="/stats/script.js"
+      // loaded straight from Umami: proxied through this domain, every visit showed the Vercel edge's country
+      src="https://cloud.umami.is/script.js"
       strategy="lazyOnload"
       data-website-id={UMAMI_WEBSITE_ID}
-      data-host-url="/stats"
       data-domains={UMAMI_DOMAINS}
       onLoad={flushAnalytics}
     />
