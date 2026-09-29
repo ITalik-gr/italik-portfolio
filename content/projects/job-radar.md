@@ -62,7 +62,7 @@ aiSpecifics:
   - { key: Tool use, value: "None: single-shot calls with structured JSON output" }
   - { key: Memory, value: "Company state and outreach history in the DB; LLM cache keyed by model and prompt version" }
   - { key: Cost controls, value: "Free filters first, daily call limit, text truncation, cache, AI Gateway" }
-  - { key: Evals, value: "No eval set yet; 726 unit tests with the model call stubbed" }
+  - { key: Tests, value: "726 unit tests with the model call stubbed; no eval set yet" }
 ---
 
 ## Problem

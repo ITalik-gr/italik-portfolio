@@ -63,7 +63,7 @@ aiSpecifics:
   - { key: Tool use, value: "Browser: Anthropic tool runner, 16-step cap. MCP: 12 tools incl. render_preview" }
   - { key: Memory, value: "Conversation kept in the page; the edit set can be embedded in the file" }
   - { key: Cost controls, value: "Prompt caching, stale tool results cleared, per-instruction spend ceiling, live cost estimate" }
-  - { key: Evals, value: "No agent eval set yet; unit, parity and headless smoke tests" }
+  - { key: Tests, value: "Unit, parity and headless smoke tests; no agent evals yet" }
 ---
 
 ## Problem

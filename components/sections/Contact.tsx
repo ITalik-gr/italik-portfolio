@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactLinks } from "@/components/layout/ContactLinks";
-import { KyivTime } from "@/components/layout/KyivTime";
+import { KyivOffset, KyivTime } from "@/components/layout/KyivTime";
 import { MemojiSticker } from "@/components/ui/MemojiSticker";
 import { FOOTER, SECTIONS, SITE } from "@/lib/site";
 
@@ -55,7 +55,7 @@ export function Contact() {
           <ContactLinks variant="rows" className="md:hidden" />
           <ContactLinks variant="inline" className="hidden | md:flex" />
           <p className="font-mono text-[12px] leading-[16px] text-text-3 | md:text-[14px] md:leading-[18px]">
-            Kyiv · <KyivTime /> · {SITE.location.utc}
+            Kyiv · <KyivTime /> · <KyivOffset />
           </p>
         </div>
 

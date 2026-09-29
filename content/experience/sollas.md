@@ -9,7 +9,7 @@ type: Contract
 location: Remote
 highlights:
   - "Sole developer of the Answerly startup: **real-time chat, auth and Stripe Checkout + Connect** payouts."
-  - Built ppc.io solo and **maintained it for ~1.5 years**, then moved it from Strapi to Astro content collections.
+  - Built the ppc.io front-end and **kept evolving it for ~2 years**, including the move from Strapi to Astro content collections.
   # TODO verify: add "~30% organic growth" once confirmed
   - Built sollas.co from scratch and **own its SEO**.
 stack: [Next.js, React, Astro, Strapi, PostgreSQL, Firebase, Stripe]
@@ -19,7 +19,7 @@ Project-based work for a design agency, covering the full stack across client we
 
 - Built and shipped web apps and marketing sites end to end with Next.js, React and Astro, paired with Strapi CMS, PostgreSQL and Firebase.
 - Sole developer of a client startup (Answerly): real-time chat, auth and Stripe Checkout + Connect payments with webhook-driven payouts.
-- Built ppc.io single-handedly and maintained it for ~1.5 years; migrated it from Strapi to Astro content collections to drop the CMS dependency and speed up builds.
+- Built the ppc.io front-end (pages, tool and agent templates, animations) and kept evolving it for ~2 years; migrated it from Strapi to Astro content collections to drop the CMS dependency and speed up builds.
 - Built sollas.co from scratch and own its SEO.
 - Currently building the front-end of a real-time crypto and finance dashboard in Next.js (NDA).
 - Contributed pages to established WordPress sites, including The HOTH and Authority Builders.

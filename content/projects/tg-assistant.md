@@ -66,7 +66,6 @@ aiSpecifics:
   - { key: Tool use, value: "None yet: intent classifier plus a hardcoded dispatch; function calling is next" }
   - { key: Memory, value: "Facts per member in D1, aliases, profiles, Vectorize (bge-m3), a nightly vibe note" }
   - { key: Cost controls, value: "Deterministic gates, static-first prompts for caching, classifier capped at 200 tokens" }
-  - { key: Evals, value: "None yet" }
 ---
 
 ## Problem

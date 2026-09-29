@@ -4,7 +4,7 @@ export const SITE = {
   monogram: "VH",
   roleLine: "Full-stack developer · AI agents & integrations",
   url: "https://www.italik.dev",
-  location: { city: "Kyiv", country: "Ukraine", utc: "UTC+3", timeZone: "Europe/Kyiv" },
+  location: { city: "Kyiv", country: "Ukraine", timeZone: "Europe/Kyiv" },
   openTo: ["full-time", "contract", "part-time"],
   email: "italik.gr@gmail.com",
   cv: "/cv.pdf",
@@ -50,7 +50,7 @@ export const SECTIONS = {
     number: "03",
     label: "Now building",
     title: "Now building",
-    meta: "Updated from content",
+    meta: "Work in progress",
   },
   clientWork: {
     number: "04",
@@ -59,9 +59,9 @@ export const SECTIONS = {
     meta: "Via Sollas · Metamorfosi · Freelance",
   },
   experience: { number: "05", label: "Experience", title: "Experience", meta: "3+ yrs · remote" },
-  about: { number: "06", label: "About", title: "About", meta: "Kyiv · UTC+3" },
+  about: { number: "06", label: "About", title: "About", meta: "Kyiv, Ukraine" },
   ask: { number: "07", label: "Ask AI", title: "Ask my AI about me", meta: "Live demo" },
-  skills: { number: "08", label: "Skills", title: "Skills", meta: "Grouped" },
+  skills: { number: "08", label: "Skills", title: "Skills", meta: "By area" },
   contact: { number: "09", label: "Contact", title: "Say hello", meta: "" },
 } as const;
 

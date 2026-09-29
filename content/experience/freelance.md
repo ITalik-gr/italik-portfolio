@@ -8,9 +8,10 @@ end: 10/2023
 type: Freelance
 location: Remote
 highlights:
-  - Front-ends for **client websites**.
-  - Plus **one WordPress integration**.
+  - Built front-ends and forms for **client websites**.
+  - Speed and **SEO optimization**, plus one **WordPress** integration.
 stack: [Front-end, WordPress]
 ---
 
-- Front-ends for client websites plus one WordPress integration.
+- Built front-ends and forms for client websites.
+- Speed and SEO optimization, plus one WordPress integration.

@@ -62,7 +62,6 @@ aiSpecifics:
   - { key: Tool use, value: "readSection, startQuiz, askHuman; parallel tool calls off for quizzes" }
   - { key: Memory, value: "Full message history per session, in process memory" }
   - { key: Cost controls, value: "Step limit, max_tokens 1024, token usage summed per run" }
-  - { key: Evals, value: "None yet" }
 ---
 
 ## Problem

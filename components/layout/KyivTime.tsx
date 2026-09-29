@@ -34,3 +34,19 @@ export function KyivTime({ className }: { className?: string }) {
 
   return <time className={`inline-block min-w-[5ch] tabular-nums ${className ?? ""}`}>{time}</time>;
 }
+
+const offsetFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: SITE.location.timeZone,
+  timeZoneName: "shortOffset",
+});
+
+// Kyiv moves between UTC+2 and UTC+3, so the offset is read from the clock, not hard-coded
+const getOffset = () =>
+  offsetFormatter
+    .formatToParts(new Date())
+    .find((part) => part.type === "timeZoneName")
+    ?.value.replace("GMT", "UTC") ?? "";
+
+export function KyivOffset() {
+  return <span>{useSyncExternalStore(subscribe, getOffset, getServerTime)}</span>;
+}

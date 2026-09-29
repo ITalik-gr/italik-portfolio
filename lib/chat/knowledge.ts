@@ -124,7 +124,7 @@ function buildDocs(): Doc[] {
         `telegram: ${SITE.socials.telegram}`,
         `github: ${SITE.socials.github}`,
         `cv: ${SITE.cv}`,
-        `location: ${SITE.location.city}, ${SITE.location.country} (${SITE.location.utc})`,
+        `location: ${SITE.location.city}, ${SITE.location.country} (Europe/Kyiv: UTC+2 in winter, UTC+3 in summer)`,
         `open to: ${SITE.openTo.join(", ")}`,
       ].join("\n"),
       source: { label: "contact.md", href: "/#contact" },

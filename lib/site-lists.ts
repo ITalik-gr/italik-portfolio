@@ -16,8 +16,12 @@ const SKILL_GROUPS: SkillGroup[] = [
         "MCP servers",
         "prompt design",
         "Claude Code (custom skills & workflows)",
+        // backed by the case studies: Money Track, the site chat, Job Radar, the Telegram bot
+        "structured outputs",
+        "prompt caching",
+        "evals",
+        "embeddings (Vectorize)",
       ),
-      ...unverified("RAG / embeddings", "structured outputs", "prompt caching", "evals"),
     ],
   },
   {
@@ -44,7 +48,6 @@ const SKILL_GROUPS: SkillGroup[] = [
     label: "Data",
     items: [
       ...ok("PostgreSQL", "Prisma", "MongoDB", "Cloudflare D1", "Supabase", "Firebase"),
-      ...unverified("Vectorize"),
     ],
   },
   {
@@ -57,7 +60,8 @@ const SKILL_GROUPS: SkillGroup[] = [
   },
   {
     label: "Quality",
-    items: [...ok("Core Web Vitals", "SEO"), ...unverified("Vitest / Playwright")],
+    // Playwright runs this site's e2e tests; Vitest is still unconfirmed
+    items: [...ok("Core Web Vitals", "SEO", "Playwright"), ...unverified("Vitest")],
   },
   { label: "Tools", items: ok("Git/GitHub", "Figma", "Vite", "Chrome DevTools") },
 ];
@@ -70,7 +74,7 @@ export function getSkillGroups() {
 }
 
 export const MORE_PROJECTS = {
-  caption: "+25 marketing sites for UK agency clients",
+  caption: "+25 marketing sites for agency clients",
   items: [
     { name: "Bold", category: "Agency site + our work", href: "https://www.boldgrp.io" },
     { name: "Axioma Search", category: "Marketing site", href: "https://www.axiomasearch.com" },

@@ -56,7 +56,7 @@
 - Builds agents himself: harnesses from scratch in TypeScript on Node.js, Hono or NestJS, with tools, subagents, memory and human-in-the-loop steps, no framework required. He can also work with popular agent frameworks when a project uses them.
 
 ## Experience
-- **Sollas**, Full-Stack Developer (Contract), 10/2023 – present, remote. A design agency. Web apps and marketing sites end to end with Next.js, React, Astro + Strapi, PostgreSQL, Firebase and Stripe. Projects: ppc.io (maintained for about 1.5 years, his main long-running project), sollas.co, Answerly (sole developer), the Backlinks Tool, part of linkbuilder.io, a crypto/finance dashboard under NDA (Next.js), and WordPress pages for The HOTH and Authority Builders.
+- **Sollas**, Full-Stack Developer (Contract), 10/2023 – present, remote. A design agency. Web apps and marketing sites end to end with Next.js, React, Astro + Strapi, PostgreSQL, Firebase and Stripe. Projects: ppc.io (front-end, evolved for about two years, his main long-running project), sollas.co, Answerly (sole developer), the Backlinks Tool, part of linkbuilder.io, a crypto/finance dashboard under NDA (Next.js), and WordPress pages for The HOTH and Authority Builders.
 - **Metamorfosi Agency (client: Bold, UK)**, Front-End Developer (Contract), 06/2024 – 05/2026, remote. 25+ responsive marketing and landing sites as part of a team, 1–2 a week, pixel-perfect from Figma: HTML, PostCSS, JavaScript, WordPress/PHP integration.
 - **Freelance Front-End Developer**, 03/2023 – 10/2023, remote. Client front-ends, forms, speed and SEO optimization, WordPress.
 - The Sollas and Metamorfosi contracts ran in parallel for about two years.
@@ -75,15 +75,16 @@ Years of experience with each technology overall, not strictly commercial time.
 Full details are in each project's file; these lines are only a quick reference.
 - **Money Track**: AI personal-finance tracker; a deterministic core owns the numbers and the LLM advises. React, TypeScript, Cloudflare Workers, Durable Objects, D1, Hono, Anthropic API, RTK Query, PWA. Open source. Live demo with a demo account: money.italik.dev/demo · code: github.com/ITalik-gr/money-track
 - **Lottie Theme**: turns dark Lottie animations into light ones and back. Web app and CLI on one shared core; it also has a small local MCP server so an AI agent can use it. lottie.italik.dev
-- **Agent harness (Doc Quiz)**: generates quizzes from documentation using subagents and a human-in-the-loop step. Built from scratch in TypeScript; in progress.
-- **AI Telegram Assistant**: serverless bot for group chats (TypeScript, Cloudflare Workers, grammY, D1, xAI Grok API). Keeps recent messages raw, compacts older ones into rolling summaries, keeps memory per member and assembles context for each question. The code is private. v1 is basic; v2 is a full rewrite: voice messages, and a new model setup that picks a fast, cheap model where it's enough.
+- **Quiz Dock (agent harness)**: discuss a document with an agent and get quizzed on it; the model writes the questions, code grades them. Hand-written agent loop in TypeScript on the raw Anthropic SDK, no framework. The CLI works; a web version is in progress, then subagents for multi-page docs. Code: github.com/ITalik-gr/quiz-dock
+- **Job Radar**: his own job-search tool: at most 10 vacancies a day, free code filters before any model call, Haiku extracts facts as strict JSON, code does the scoring. He picks every company and sends every letter himself; the tool only drafts a first paragraph that code validates. Code: github.com/ITalik-gr/job-radar
+- **AI Telegram Assistant**: serverless bot for group chats (TypeScript, Cloudflare Workers, grammY, D1, xAI Grok API). Keeps recent messages raw, compacts older ones into rolling summaries, keeps memory per member and assembles context for each question. Code: github.com/ITalik-gr/tg_chat_bot. v1 runs in a live chat; v2 is a full rewrite: voice messages, and a new model setup that picks a fast, cheap model where it's enough.
 - **This site's AI chat**: Next.js Route Handler, Anthropic API, Upstash rate limiting.
 - **Client work**: ppc.io (Astro, Strapi → content collections), sollas.co (Next.js, built solo apart from the design, plus SEO), Answerly (React, Node.js, Firebase, Stripe; sole developer; no live version anymore), Backlinks Tool (Next.js + Strapi; demo at backlinks-dun.vercel.app), a crypto/finance dashboard under NDA (Next.js, front-end), Metamorfosi/Bold marketing sites.
 
 ## Honest limits
 - Python: understands the syntax and can read it; hasn't used it commercially.
 - Test coverage: basic unit and integration tests (Jest in commercial work); no commercial E2E testing yet.
-- Not used commercially yet: AWS, GCP, Azure, Kubernetes, GraphQL, Angular, .NET, CI/CD pipelines, RAG and vector databases (he knows the concepts).
+- Not used commercially yet: AWS, GCP, Azure, Kubernetes, GraphQL, Angular, .NET, CI/CD pipelines, RAG and vector databases (he used embeddings with Cloudflare Vectorize for memory recall in his own Telegram bot).
 - React Native / Expo: some hands-on experience, no shipped app.
 
 ## Languages
@@ -96,7 +97,7 @@ Full details are in each project's file; these lines are only a quick reference.
 - Q: Can he start soon? A: Yes, within a few days.
 - Q: Does he know Python? A: He understands the syntax and can read it, but his commercial work is in TypeScript and JavaScript.
 - Q: Has he worked in a team? A: Yes. He has worked in teams of up to 20 people, including the agency team for Bold and with designers and client developers at Sollas. He has also been the sole developer on several products.
-- Q: Can he own a project alone? A: Yes. Answerly, ppc.io, sollas.co and the Backlinks Tool were built solo, from Figma to deploy.
+- Q: Can he own a project alone? A: Yes. Answerly, sollas.co and the Backlinks Tool were built solo, from Figma to deploy. On ppc.io he owned the whole front-end for about two years while other people handled content and other parts.
 - Q: Has he shipped AI features? A: Yes, in his own live products: Money Track's LLM advisor, the AI Telegram Assistant, and this chat.
 - Q: How does he use AI for coding? A: Claude Code every day with his own skills. He plans the work with the agent, delegates the repetitive parts, and reviews and verifies everything it produces.
 - Q: Does he write tests? A: Unit and integration tests at a basic level (Jest in commercial work); no commercial E2E testing yet.

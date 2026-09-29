@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { MemojiSticker } from "@/components/ui/MemojiSticker";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ABOUT, SECTIONS } from "@/lib/site";
+import { ABOUT, SECTIONS, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function About() {
@@ -14,10 +15,14 @@ export function About() {
       <div className="mt-fl-32/56 grid items-start gap-[56px] | md:grid-cols-[220px_1fr] md:gap-fl-64/72 | lg:grid-cols-[280px_1fr]">
         {/* the photo stays small on purpose: the words matter more than the face */}
         <div className="relative w-fl-200/280 max-w-full | md:w-full">
-          {/* TODO: real photo via next/image, monochrome */}
-          <div className="flex aspect-[4/5] items-center justify-center bg-surface font-mono text-[12px] text-muted grayscale">
-            Photo
-          </div>
+          <Image
+            src="/about.jpg"
+            alt={SITE.name}
+            width={872}
+            height={1090}
+            sizes="(min-width: 1024px) 280px, (min-width: 768px) 220px, 280px"
+            className="aspect-[4/5] w-full bg-surface object-cover grayscale"
+          />
           {/* hangs off the bottom-right corner by ~43% / 37% of its own size, as in the design */}
           <MemojiSticker className="absolute right-0 bottom-0 size-fl-100/130 translate-x-[43%] translate-y-[37%]" />
         </div>

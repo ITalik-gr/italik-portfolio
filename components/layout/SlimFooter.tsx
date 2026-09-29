@@ -1,5 +1,5 @@
 import { SITE } from "@/lib/site";
-import { KyivTime } from "./KyivTime";
+import { KyivOffset, KyivTime } from "./KyivTime";
 
 export function SlimFooter() {
   return (
@@ -8,7 +8,7 @@ export function SlimFooter() {
         {SITE.email}
       </a>
       <p>
-        Kyiv · <KyivTime /> · {SITE.location.utc}
+        Kyiv · <KyivTime /> · <KyivOffset />
       </p>
     </footer>
   );
