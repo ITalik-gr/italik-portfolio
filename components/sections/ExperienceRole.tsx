@@ -6,7 +6,7 @@ type Props = { role: Experience };
 
 export function ExperienceRole({ role }: Props) {
   const current = role.end === "present";
-  const dates = `${role.start} — ${current ? "Present" : role.end}`;
+  const dates = `${role.start} – ${current ? "Present" : role.end}`;
   const title = role.client ? `${role.role} · client: ${role.client}` : role.role;
 
   return (
@@ -36,9 +36,7 @@ export function ExperienceRole({ role }: Props) {
               key={line}
               className="grid grid-cols-[18px_1fr] text-fl-15/19 leading-[1.45] text-text-3 | md:grid-cols-[22px_1fr]"
             >
-              <span aria-hidden className="text-faint">
-                —
-              </span>
+              <span aria-hidden className="mt-[0.6em] size-[5px] bg-line-strong" />
               <span>
                 <Emphasis text={line} />
               </span>
@@ -46,8 +44,8 @@ export function ExperienceRole({ role }: Props) {
           ))}
         </ul>
         {role.stack.length > 0 && (
-          <p className="hidden pl-[22px] font-mono text-[12px] leading-[16px] text-muted | md:block">
-            {role.stack.map((item) => item.toLowerCase()).join(" · ")}
+          <p className="hidden pl-[22px] text-[14px] leading-[20px] text-muted | md:block">
+            {role.stack.join(" · ")}
           </p>
         )}
       </div>

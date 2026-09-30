@@ -15,12 +15,12 @@ test("services page: one h1, nav anchors lead home, the project CTA mails with a
   await expect(page.getByRole("dialog")).toBeVisible();
 });
 
-test("home links to services from the header and the contact footer", async ({ page }) => {
+test("services stay out of the nav and live in the contact footer", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await expect(
     page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Services" }),
-  ).toHaveAttribute("href", "/services");
+  ).toHaveCount(0);
   await expect(page.locator("#contact").getByRole("link", { name: /See services/ })).toHaveAttribute(
     "href",
     "/services",

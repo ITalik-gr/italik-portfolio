@@ -28,13 +28,13 @@ export const CV_BY_HOME: Record<string, string> = {
   "/fullstack": "/cv/Vitaliy_Hrytsenko_Fullstack.pdf",
 };
 
-// same-page anchors on home pages; elsewhere NavLink points them at the last home page seen
+// same-page anchors on home pages; elsewhere NavLink points them at the last home page seen.
+// no Services here on purpose: an employer on the home page shouldn't read "he takes clients"; it lives in the footers
 export const NAV = [
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
   { label: "Ask AI", href: "#ask" },
-  { label: "Services", href: "/services" },
 ] as const;
 
 export const HERO = {
