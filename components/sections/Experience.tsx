@@ -5,14 +5,12 @@ import { SECTIONS } from "@/lib/site";
 import { ExperienceRole } from "./ExperienceRole";
 
 export function Experience() {
-  const { number, label, title, meta } = SECTIONS.experience;
+  const { title, meta } = SECTIONS.experience;
 
   return (
     <Section id="experience" labelledBy="experience-title">
       <SectionHeader
         id="experience-title"
-        number={number}
-        label={label}
         meta={meta}
         title={title}
       />

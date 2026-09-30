@@ -35,7 +35,7 @@ export function ChatInput({ value, onChange, onSubmit, disabled }: Props) {
       <button
         type="submit"
         disabled={disabled}
-        className="bg-text px-[18px] font-mono text-[13px] tracking-[0.04em] text-bg uppercase transition-colors hover:bg-accent disabled:bg-line-strong disabled:text-muted | md:px-[22px]"
+        className="bg-text px-[18px] text-[15px] text-bg transition-colors hover:bg-accent disabled:bg-line-strong disabled:text-muted | md:px-[22px]"
       >
         <span className="hidden | md:inline">Send </span>↵
       </button>

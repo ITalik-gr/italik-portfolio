@@ -2,16 +2,18 @@ import Image from "next/image";
 import { MemojiSticker } from "@/components/ui/MemojiSticker";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ABOUT, SECTIONS, SITE } from "@/lib/site";
+import { SECTIONS, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-export function About() {
-  const { number, label, title, meta } = SECTIONS.about;
-  const last = ABOUT.length - 1;
+type Props = { paragraphs: readonly string[] };
+
+export function About({ paragraphs }: Props) {
+  const { title, meta } = SECTIONS.about;
+  const last = paragraphs.length - 1;
 
   return (
     <Section id="about" labelledBy="about-title">
-      <SectionHeader id="about-title" number={number} label={label} meta={meta} title={title} />
+      <SectionHeader id="about-title" meta={meta} title={title} />
       <div className="mt-fl-32/56 grid items-start gap-[56px] | md:grid-cols-[220px_1fr] md:gap-fl-64/72 | lg:grid-cols-[280px_1fr]">
         {/* the photo stays small on purpose: the words matter more than the face */}
         <div className="relative w-fl-200/280 max-w-full | md:w-full">
@@ -28,7 +30,7 @@ export function About() {
         </div>
 
         <div className="flex max-w-[780px] flex-col gap-fl-20/24">
-          {ABOUT.map((paragraph, index) => (
+          {paragraphs.map((paragraph, index) => (
             <p
               key={paragraph.slice(0, 24)}
               className={cn(

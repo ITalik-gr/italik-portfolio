@@ -19,7 +19,7 @@ export function CaseHero({ project, labPosition }: Props) {
   return (
     <header className="px-gutter pt-fl-24/64">
       <Reveal>
-        <p className="flex items-center justify-between gap-[16px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase | md:text-[13px] md:leading-[17px] md:tracking-[0.08em]">
+        <p className="flex items-center justify-between gap-[16px] text-[13px] leading-[18px] | md:text-[15px] md:leading-[21px]">
           <span className="flex gap-[10px] | md:gap-[14px]">
             <span className="text-accent">Case study</span>
             <span className="text-text">{project.typeLabel}</span>
@@ -31,7 +31,7 @@ export function CaseHero({ project, labPosition }: Props) {
 
       <div className="flex items-end justify-between gap-[40px]">
         <ProjectMorph slug={project.slug} part="title">
-          <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-bold tracking-[-0.06em] font-stretch-[88%] | md:text-fl-68/274">
+          <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-semibold tracking-[-0.05em] | md:text-fl-68/274">
             {project.title}
           </h1>
         </ProjectMorph>

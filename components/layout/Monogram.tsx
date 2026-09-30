@@ -1,11 +1,10 @@
-import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { HomeLink } from "./HomeLink";
 
 export function Monogram({ className }: { className?: string }) {
   return (
-    <Link
-      href="/"
+    <HomeLink
       aria-label={`${SITE.monogram}, ${SITE.name}, home`}
       className={cn(
         // w-fit: as a grid item the link would otherwise stretch and catch hovers on empty space
@@ -13,7 +12,7 @@ export function Monogram({ className }: { className?: string }) {
         className,
       )}
     >
-      <span className="flex size-[40px] items-center justify-center border border-current text-[17px] leading-none font-bold tracking-[-0.02em] font-stretch-[88%]">
+      <span className="flex size-[40px] items-center justify-center border border-current text-[17px] leading-none font-semibold tracking-[-0.02em]">
         {SITE.monogram}
       </span>
       <span
@@ -22,6 +21,6 @@ export function Monogram({ className }: { className?: string }) {
       >
         {SITE.name}
       </span>
-    </Link>
+    </HomeLink>
   );
 }

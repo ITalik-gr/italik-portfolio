@@ -2,13 +2,12 @@ import Link from "next/link";
 import type { PointerEvent, ReactNode } from "react";
 import { ProjectMorph, claimMorph } from "@/components/motion/ProjectMorph";
 import { ProjectCover } from "@/components/ui/ProjectCover";
-import { Status } from "@/components/ui/Status";
+import { ProjectTags } from "@/components/ui/ProjectTags";
 import { cn } from "@/lib/utils";
 import type { LabItem } from "./LabList";
 
 type Props = {
   item: LabItem;
-  index: number;
   dimmed: boolean;
   onActivate: () => void;
 };
@@ -18,25 +17,17 @@ const onMouseOnly = (handler: () => void) => (event: PointerEvent) => {
   if (event.pointerType === "mouse") handler();
 };
 
-export function LabRow({ item, index, dimmed, onActivate }: Props) {
+export function LabRow({ item, dimmed, onActivate }: Props) {
   const external = item.href?.startsWith("http");
   const textClass = "flex min-w-0 flex-col gap-[8px] | lg:w-fit lg:max-w-full lg:gap-[14px]";
 
   const text = (
     <>
-      <p className="flex flex-wrap items-center gap-x-[18px] gap-y-[4px] font-mono text-[10px] leading-[13px] tracking-[0.06em] text-muted uppercase | md:text-[12px] md:leading-[16px]">
-        <span className="hidden | lg:inline">{String(index + 1).padStart(2, "0")}</span>
-        <Status
-          status={item.status}
-          tone="neutral"
-          className="text-[10px] leading-[13px] | md:text-[12px] md:leading-[16px]"
-        />
-        <span>{item.tags.join(" · ")}</span>
-      </p>
+      <ProjectTags status={item.status} tags={item.tags} />
       <ProjectMorph slug={item.slug} part="title" source="lab" primary={item.shareTitle}>
         <h3
           className={cn(
-            "text-fl-36/75 leading-[0.9] font-bold tracking-[-0.05em] font-stretch-[88%] transition-colors duration-300",
+            "text-fl-36/75 leading-[0.9] font-semibold tracking-[-0.045em] transition-colors duration-300",
             dimmed && "lg:text-line-strong",
           )}
         >
@@ -48,7 +39,7 @@ export function LabRow({ item, index, dimmed, onActivate }: Props) {
         {item.description}
       </p>
       {item.stack.length > 0 && (
-        <p className="hidden font-mono text-[12px] leading-[16px] text-muted | lg:block">
+        <p className="hidden text-[14px] leading-[20px] text-muted | lg:block">
           {item.stack.join(" · ")}
         </p>
       )}

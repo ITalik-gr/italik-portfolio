@@ -18,8 +18,9 @@
   --color-zone: #050505;
   --color-zone-line: #1c1c1c;
 
-  --font-display: var(--font-archivo), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: var(--font-aeonik), system-ui, sans-serif;
+  --font-display: var(--font-aeonik), system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 
   --ease-out-expo: cubic-bezier(0.2, 0.7, 0.1, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -28,6 +29,18 @@
   --animate-spin-slow: spin 20s linear infinite;
   --animate-marquee: marquee 90s linear infinite;
   --animate-letter-in: letter-in 0.7s var(--ease-out-expo) both;
+
+  /* 32px of travel, back and forth; each shot sets its own duration */
+  --animate-drift: drift 22s ease-in-out infinite alternate;
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, -16px, 0);
+    }
+    to {
+      transform: translate3d(0, 16px, 0);
+    }
+  }
 
   @keyframes letter-in {
     from {

@@ -8,7 +8,6 @@ type Props = {
   variant?: "primary" | "ghost" | "disabled";
   size?: "sm" | "md" | "lg";
   arrow?: "→" | "↗" | "↓";
-  dot?: boolean;
   external?: boolean;
   className?: string;
 };
@@ -23,19 +22,19 @@ const VARIANTS = {
 // ghost keeps the same outer size as primary by eating 1px of padding for the border
 const SIZES = {
   primary: {
-    sm: "px-[16px] py-[11px] text-[12px] font-medium tracking-[0.06em]",
-    md: "px-[18px] py-[13px] text-[13px] tracking-[0.04em]",
-    lg: "px-[22px] py-[16px] text-[13px] tracking-[0.04em]",
+    sm: "px-[16px] py-[11px] text-[14px] leading-[18px]",
+    md: "px-[18px] py-[13px] text-[15px] leading-[19px]",
+    lg: "px-[24px] py-[17px] text-[16px] leading-[20px]",
   },
   disabled: {
-    sm: "px-[15px] py-[10px] text-[12px] font-medium tracking-[0.06em]",
-    md: "px-[17px] py-[12px] text-[13px] tracking-[0.04em]",
-    lg: "px-[21px] py-[15px] text-[13px] tracking-[0.04em]",
+    sm: "px-[15px] py-[10px] text-[14px] leading-[18px]",
+    md: "px-[17px] py-[12px] text-[15px] leading-[19px]",
+    lg: "px-[23px] py-[16px] text-[16px] leading-[20px]",
   },
   ghost: {
-    sm: "px-[15px] py-[10px] text-[12px] font-medium tracking-[0.06em]",
-    md: "px-[17px] py-[12px] text-[13px] tracking-[0.04em]",
-    lg: "px-[21px] py-[15px] text-[13px] tracking-[0.04em]",
+    sm: "px-[15px] py-[10px] text-[14px] leading-[18px]",
+    md: "px-[17px] py-[12px] text-[15px] leading-[19px]",
+    lg: "px-[23px] py-[16px] text-[16px] leading-[20px]",
   },
 };
 
@@ -45,20 +44,18 @@ export function Button({
   variant = "primary",
   size = "md",
   arrow,
-  dot,
   external,
   className,
 }: Props) {
   const isExternal = external ?? /^(https?:|mailto:)/.test(href);
   const classes = cn(
-    "group inline-flex items-center gap-[10px] font-mono leading-[17px] uppercase transition-colors duration-150 ease-out-expo",
+    "group inline-flex items-center gap-[10px] font-medium transition-colors duration-150 ease-out-expo",
     VARIANTS[variant],
     SIZES[variant][size],
     className,
   );
   const content = (
     <>
-      {dot && <span aria-hidden className="size-[7px] rounded-full bg-accent" />}
       <span>{children}</span>
       {arrow && <Arrow arrow={arrow} />}
     </>

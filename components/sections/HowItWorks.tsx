@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 export function HowItWorks({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-col gap-[14px]", className)}>
-      <h3 className="font-mono text-[11px] leading-[14px] tracking-[0.06em] text-muted uppercase">
+      <h3 className="text-[13px] leading-[18px] text-muted">
         How this works
       </h3>
       <ol className="flex flex-wrap items-center gap-[8px] font-mono text-[12px] leading-[16px]">

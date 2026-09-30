@@ -27,7 +27,7 @@ export function CaseSection({ id, number, label, aside, wide, meta, children, cl
         <div className="flex items-baseline justify-between gap-[24px]">
           <CaseLabel id={id} number={number} label={label} />
           {meta && (
-            <p className="hidden font-mono text-[13px] leading-[17px] tracking-[0.08em] text-muted uppercase | md:block">
+            <p className="hidden text-[15px] leading-[21px] text-muted | md:block">
               {meta}
             </p>
           )}
@@ -57,7 +57,7 @@ export function CaseLabel({ id, number, label }: { id: string; number: string; l
   return (
     <h2
       id={id}
-      className="flex gap-[12px] font-mono text-[12px] leading-[16px] tracking-[0.08em] text-text uppercase | md:gap-[14px] md:text-[13px] md:leading-[17px]"
+      className="flex gap-[12px] text-[14px] leading-[20px] text-text | md:gap-[14px] md:text-[15px] md:leading-[21px]"
     >
       <span className="text-accent">{number}</span>
       <span>{label}</span>

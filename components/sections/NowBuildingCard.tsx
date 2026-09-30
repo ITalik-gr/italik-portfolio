@@ -1,5 +1,5 @@
 import { Progress } from "@/components/ui/Progress";
-import { Status } from "@/components/ui/Status";
+import { ProjectTags } from "@/components/ui/ProjectTags";
 import { TextLink } from "@/components/ui/TextLink";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
@@ -16,15 +16,14 @@ export function NowBuildingCard({ project }: Props) {
   return (
     // on lg the cards share row tracks (subgrid), so titles, bars and footers line up across columns
     <li className="flex flex-col gap-[12px] bg-surface p-[20px] | md:gap-[22px] md:px-fl-20/28 md:py-fl-24/32 | lg:row-span-5 lg:grid lg:grid-rows-subgrid">
-      <div className="flex items-center justify-between gap-[12px] font-mono text-[11px] leading-[14px] tracking-[0.06em] text-muted uppercase | md:text-[12px] md:leading-[16px]">
-        <Status
-          status={project.status}
-          className="text-[11px] leading-[14px] | md:text-[12px] md:leading-[16px]"
-        />
-        <span>{phase}</span>
+      <div className="flex items-start justify-between gap-[12px]">
+        <ProjectTags status={project.status} tags={project.tags} />
+        <span className="shrink-0 text-[13px] leading-[18px] text-muted | md:text-[14px] md:leading-[20px]">
+          {phase}
+        </span>
       </div>
 
-      <h3 className="text-fl-28/44 leading-[0.92] font-bold tracking-[-0.04em] font-stretch-[88%]">
+      <h3 className="text-fl-28/44 leading-[0.92] font-semibold tracking-[-0.035em]">
         {now.title ?? project.title}
       </h3>
       <p className="hidden text-fl-16/18 leading-[1.45] text-text-3 | md:block">
@@ -37,7 +36,7 @@ export function NowBuildingCard({ project }: Props) {
         <span aria-hidden className="hidden | lg:block" />
       )}
 
-      <div className="flex flex-col gap-[14px] font-mono text-[11px] leading-[1.6] | md:mt-auto md:text-[12px] | lg:mt-0">
+      <div className="flex flex-col gap-[14px] text-[13px] leading-[1.5] | md:mt-auto md:text-[14px] | lg:mt-0">
         <p className="text-text-3">
           <span className="text-muted">{now.lastUpdate} · </span>
           {now.updateNote}
@@ -47,9 +46,7 @@ export function NowBuildingCard({ project }: Props) {
             Repo
           </TextLink>
         )}
-        {!code && project.status === "next-up" && (
-          <span className="tracking-[0.04em] text-muted uppercase">No repo yet</span>
-        )}
+        {!code && project.status === "next-up" && <span className="text-muted">No repo yet</span>}
       </div>
     </li>
   );

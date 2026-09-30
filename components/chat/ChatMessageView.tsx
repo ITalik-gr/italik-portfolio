@@ -25,7 +25,7 @@ export function ChatMessageView({ message }: { message: ChatMessage }) {
 
   return (
     <div className="flex max-w-full flex-col gap-[14px] self-start | md:max-w-[90%]">
-      <p className="flex gap-[10px] font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase">
+      <p className="flex gap-[10px] text-[13px] leading-[18px]">
         <span className="text-accent">{ASK.assistantName}</span>
         <span className="text-muted">
           {message.example ? "Example answer" : STATUS_LABEL[status]}
@@ -47,7 +47,7 @@ export function ChatMessageView({ message }: { message: ChatMessage }) {
 
       {message.sources && message.sources.length > 0 && (
         <div className="flex flex-wrap items-center gap-[6px] font-mono text-[11px] leading-[14px]">
-          <span className="mr-[4px] text-muted uppercase">Sources</span>
+          <span className="mr-[4px] text-muted">Sources</span>
           {message.sources.map((source) =>
             source.href ? (
               <Link

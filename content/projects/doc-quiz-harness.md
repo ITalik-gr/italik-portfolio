@@ -6,7 +6,7 @@ show: [now]
 caseStudy: true
 order: 5
 status: building
-tags: [agent, llm, tool]
+tags: [agent, tool, llm]
 typeLabel: Personal · agent
 summary: Discuss any document with an agent and get quizzed on it, grounded in the document's text.
 description: A hand-written agent harness in TypeScript on the raw Anthropic SDK, with no agent framework. The model navigates a document through a section-reading tool, writes quiz questions as validated tool input, and code grades the answers.

@@ -67,7 +67,7 @@ export function MobileMenu() {
                   className="flex items-baseline gap-[16px] py-[6px] text-text transition-colors hover:text-accent"
                 >
                   <span className="font-mono text-[12px] text-accent">0{index + 1}</span>
-                  <span className="text-fl-56/80 leading-[0.9] font-bold tracking-[-0.05em] font-stretch-[88%]">
+                  <span className="text-fl-56/80 leading-[0.9] font-semibold tracking-[-0.045em]">
                     {item.label}
                   </span>
                 </Link>
@@ -81,7 +81,7 @@ export function MobileMenu() {
           className={cn("mt-[40px]", REVEAL, shown)}
           onClick={(event) => (event.target as HTMLElement).closest("a") && setOpen(false)}
         >
-          <Button href="/#ask" variant="ghost" size="lg" dot className="w-full justify-center">
+          <Button href="#ask" variant="ghost" size="lg" className="w-full justify-center">
             Ask my AI about me
           </Button>
         </div>
@@ -95,7 +95,7 @@ export function MobileMenu() {
             <span>
               Kyiv · <KyivTime /> · UTC+3
             </span>
-            <span className="tracking-[0.06em] text-muted uppercase">Open to work</span>
+            <span className="text-muted">Open to work</span>
           </p>
         </div>
       </div>

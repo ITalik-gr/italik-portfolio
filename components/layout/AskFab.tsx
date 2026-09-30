@@ -55,7 +55,7 @@ export function AskFab() {
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}
       className={cn(
-        "fixed right-fl-16/28 bottom-fl-16/28 z-30 flex items-center gap-[10px] border border-text bg-bg px-[18px] py-[14px] font-mono text-[13px] leading-[17px] tracking-[0.06em] text-text uppercase transition-[opacity,translate,color,border-color] duration-400 ease-out-expo hover:border-accent hover:text-accent",
+        "fixed right-fl-16/28 bottom-fl-16/28 z-30 flex items-center gap-[10px] border border-text bg-bg px-[18px] py-[14px] text-[15px] leading-[21px] text-text transition-[opacity,translate,color,border-color] duration-400 ease-out-expo hover:border-accent hover:text-accent",
         hidden && "pointer-events-none translate-y-[16px] opacity-0",
       )}
     >

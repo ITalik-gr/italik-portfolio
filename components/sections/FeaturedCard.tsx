@@ -20,7 +20,7 @@ export function FeaturedCard({ project, mirrored }: Props) {
     { key: "Type", value: project.typeLabel },
     {
       key: "Status",
-      value: <Status status={project.status} note={project.statusNote} size="meta" />,
+      value: <Status status={project.status} note={project.statusNote} />,
     },
     project.shipsAs
       ? { key: "Ships as", value: project.shipsAs.join(" · ") }
@@ -38,7 +38,7 @@ export function FeaturedCard({ project, mirrored }: Props) {
         />
       ) : (
         <Parallax>
-          <div className="flex size-full items-center justify-center bg-surface font-mono text-[12px] text-muted">
+          <div className="flex size-full items-center justify-center bg-surface text-[14px] text-muted">
             {project.title} · screenshot
           </div>
         </Parallax>
@@ -78,7 +78,7 @@ export function FeaturedCard({ project, mirrored }: Props) {
             <ProjectMorph slug={project.slug} part="title" source="featured">
               <h3
                 id={titleId}
-                className="text-fl-56/92 leading-[0.86] font-bold tracking-[-0.05em] font-stretch-[88%]"
+                className="text-fl-56/92 leading-[0.86] font-semibold tracking-[-0.045em]"
               >
                 {caseHref ? (
                   <Link
@@ -111,9 +111,12 @@ export function FeaturedCard({ project, mirrored }: Props) {
                 {liveLabel}
               </Button>
             )}
-            <Button href={code ?? "#"} variant={code ? "ghost" : "disabled"} arrow="↗">
-              Code
-            </Button>
+            {/* client code is never public, so a disabled button would only read as something missing */}
+            {(code || project.kind === "personal") && (
+              <Button href={code ?? "#"} variant={code ? "ghost" : "disabled"} arrow="↗">
+                Code
+              </Button>
+            )}
           </div>
         </div>
       </MorphSource>

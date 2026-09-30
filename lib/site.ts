@@ -20,11 +20,12 @@ export const SITE = {
   },
 } as const;
 
+// same-page anchors: the nav only lives on home pages, and a role page must not jump back to "/"
 export const NAV = [
-  { label: "Work", href: "/#work" },
-  { label: "Experience", href: "/#experience" },
-  { label: "About", href: "/#about" },
-  { label: "Ask AI", href: "/#ask" },
+  { label: "Work", href: "#work" },
+  { label: "Experience", href: "#experience" },
+  { label: "About", href: "#about" },
+  { label: "Ask AI", href: "#ask" },
 ] as const;
 
 export const HERO = {
@@ -42,6 +43,25 @@ export const HERO = {
     "MCP",
   ],
 } as const;
+
+// two heroes: a big ask-my-AI field (every home page) or a cursor trail of project screenshots (/trail, for showing the design)
+export type HeroVariant = "ask" | "trail";
+export const HERO_VARIANT: HeroVariant = "ask";
+
+export const HERO_TRAIL = [
+  { title: "Money Track", src: "/hero-trail/money-track.webp" },
+  { title: "Lottie Theme", src: "/hero-trail/lottie-theme.webp" },
+  { title: "AI Telegram Assistant", src: "/hero-trail/tg-assistant.webp" },
+  { title: "ppc.io", src: "/hero-trail/ppc-io.webp" },
+  { title: "sollas.co", src: "/hero-trail/sollas.webp" },
+] as const;
+
+export const HERO_QUESTIONS = [
+  "Has he shipped AI to production?",
+  "Can he start next week?",
+  "What did he build at Sollas?",
+  "Is he a fit for a full-stack AI role?",
+] as const;
 
 export const SECTIONS = {
   featured: { number: "01", label: "Featured", title: "Featured", meta: undefined },

@@ -14,9 +14,10 @@ type Props = {
   // "section" sits in the Ask AI block; "drawer" fills the sheet opened by the FAB
   variant?: "section" | "drawer";
   className?: string;
+  suggestions?: readonly string[];
 };
 
-export function ChatPanel({ variant = "section", className }: Props) {
+export function ChatPanel({ variant = "section", className, suggestions = ASK.chips }: Props) {
   const { messages, busy } = useChat();
   const [input, setInput] = useState("");
   const logRef = useRef<HTMLDivElement>(null);
@@ -48,7 +49,7 @@ export function ChatPanel({ variant = "section", className }: Props) {
       )}
     >
       {variant === "section" && (
-        <div className="flex items-center justify-between gap-[12px] px-[18px] py-[14px] font-mono text-[11px] leading-[14px] tracking-[0.06em] text-muted uppercase">
+        <div className="flex items-center justify-between gap-[12px] px-[18px] py-[14px] text-[13px] leading-[18px] text-muted">
           <span className="flex items-center gap-[8px]">
             <span aria-hidden className="size-[6px] rounded-full bg-accent" />
             {ASK.channel}
@@ -75,7 +76,7 @@ export function ChatPanel({ variant = "section", className }: Props) {
       </div>
 
       <SuggestionChips
-        suggestions={ASK.chips}
+        suggestions={suggestions}
         active={lastQuestion}
         onPick={(question) => (busy ? setInput(question) : send(question))}
       />

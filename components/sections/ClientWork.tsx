@@ -5,15 +5,17 @@ import { SECTIONS } from "@/lib/site";
 import { ClientCard } from "./ClientCard";
 import { MoreProjects } from "./MoreProjects";
 
-export function ClientWork() {
-  const { number, label, title, meta } = SECTIONS.clientWork;
+type Props = { featured: ReadonlySet<string> };
+
+export function ClientWork({ featured }: Props) {
+  const { title, meta } = SECTIONS.clientWork;
 
   return (
     <Section id="clients" labelledBy="clients-title">
-      <SectionHeader id="clients-title" number={number} label={label} meta={meta} title={title} />
+      <SectionHeader id="clients-title" meta={meta} title={title} />
       <ul className="mt-fl-32/56 grid gap-y-fl-48/72 | md:grid-cols-2 md:gap-x-[24px] | lg:grid-cols-3">
         {getClientProjects().map((project) => (
-          <ClientCard key={project.slug} project={project} />
+          <ClientCard key={project.slug} project={project} shared={!featured.has(project.slug)} />
         ))}
       </ul>
       <MoreProjects />

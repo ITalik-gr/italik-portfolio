@@ -65,7 +65,7 @@ export function ChatDrawer() {
         <div className="flex items-center justify-between gap-[12px] border-b border-line py-[10px] pr-[10px] pl-[18px]">
           <h2
             id="chat-drawer-title"
-            className="flex items-center gap-[8px] font-mono text-[12px] leading-[16px] tracking-[0.06em] uppercase"
+            className="flex items-center gap-[8px] text-[14px] leading-[20px]"
           >
             <span aria-hidden className="size-[6px] rounded-full bg-accent" />
             {ASK.drawerTitle}

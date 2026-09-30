@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 export const OG_SIZE = { width: 1200, height: 630 };
 
 // satori can't read the @theme variables, so these mirror app/globals.css
-const COLORS = {
+export const OG_COLORS = {
   bg: "#000000",
   text: "#ffffff",
   text3: "#a8a8a8",
@@ -18,10 +18,20 @@ const COLORS = {
 
 const FONTS_DIR = path.join(process.cwd(), "assets/fonts");
 const fonts = Promise.all([
-  readFile(path.join(FONTS_DIR, "Archivo-SemiCondensed-Bold.ttf")),
-  readFile(path.join(FONTS_DIR, "Archivo-Regular.ttf")),
-  readFile(path.join(FONTS_DIR, "JetBrainsMono-Regular.ttf")),
+  readFile(path.join(FONTS_DIR, "GeneralSans-Semibold.otf")),
+  readFile(path.join(FONTS_DIR, "GeneralSans-Regular.otf")),
+  readFile(path.join(FONTS_DIR, "DMMono-Regular.ttf")),
 ]);
+
+// the three faces every og image uses, in the shape ImageResponse wants
+export async function ogFonts() {
+  const [display, body, mono] = await fonts;
+  return [
+    { name: "Sans Display", data: display, weight: 700 as const, style: "normal" as const },
+    { name: "Sans", data: body, weight: 400 as const, style: "normal" as const },
+    { name: "DM Mono", data: mono, weight: 400 as const, style: "normal" as const },
+  ];
+}
 
 type Props = {
   kicker: ReactNode;
@@ -31,8 +41,6 @@ type Props = {
   lead?: string;
   leadAccent?: boolean;
   path: string;
-  // optional picture on the right half, drawn behind the text
-  art?: ReactNode;
 };
 
 // og images take inline styles only (satori), so Tailwind classes can't be used here
@@ -43,9 +51,8 @@ export async function renderOgCard({
   lead,
   leadAccent,
   path: url,
-  art,
 }: Props) {
-  const [display, body, mono] = await fonts;
+  const fontOptions = await ogFonts();
 
   return new ImageResponse(
     <div
@@ -56,15 +63,12 @@ export async function renderOgCard({
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 64,
-        background: COLORS.bg,
-        color: COLORS.text,
-        fontFamily: "Archivo",
+        background: OG_COLORS.bg,
+        color: OG_COLORS.text,
+        fontFamily: "Sans",
         position: "relative",
       }}
     >
-      {art && (
-        <div style={{ position: "absolute", top: 40, right: 20, display: "flex" }}>{art}</div>
-      )}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div
@@ -74,15 +78,15 @@ export async function renderOgCard({
               justifyContent: "center",
               width: 56,
               height: 56,
-              border: `2px solid ${COLORS.text}`,
-              fontFamily: "Archivo Display",
+              border: `2px solid ${OG_COLORS.text}`,
+              fontFamily: "Sans Display",
               fontSize: 24,
               letterSpacing: "-0.02em",
             }}
           >
             {SITE.monogram}
           </div>
-          <div style={{ fontFamily: "JetBrains Mono", fontSize: 20, color: COLORS.muted }}>
+          <div style={{ fontFamily: "DM Mono", fontSize: 20, color: OG_COLORS.muted }}>
             italik.dev
           </div>
         </div>
@@ -90,7 +94,7 @@ export async function renderOgCard({
           style={{
             display: "flex",
             gap: 16,
-            fontFamily: "JetBrains Mono",
+            fontFamily: "DM Mono",
             fontSize: 20,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
@@ -105,7 +109,7 @@ export async function renderOgCard({
           <div
             key={line}
             style={{
-              fontFamily: "Archivo Display",
+              fontFamily: "Sans Display",
               fontSize: titleSize,
               lineHeight: 0.85,
               letterSpacing: "-0.06em",
@@ -122,7 +126,7 @@ export async function renderOgCard({
               fontSize: 32,
               lineHeight: 1.25,
               letterSpacing: "-0.015em",
-              color: leadAccent ? COLORS.accent : COLORS.text3,
+              color: leadAccent ? OG_COLORS.accent : OG_COLORS.text3,
             }}
           >
             {lead}
@@ -135,10 +139,10 @@ export async function renderOgCard({
           display: "flex",
           justifyContent: "space-between",
           paddingTop: 24,
-          borderTop: `1px solid ${COLORS.line}`,
-          fontFamily: "JetBrains Mono",
+          borderTop: `1px solid ${OG_COLORS.line}`,
+          fontFamily: "DM Mono",
           fontSize: 20,
-          color: COLORS.muted,
+          color: OG_COLORS.muted,
         }}
       >
         <div>{`${SITE.name} · Full-stack developer`}</div>
@@ -147,15 +151,10 @@ export async function renderOgCard({
     </div>,
     {
       ...OG_SIZE,
-      fonts: [
-        { name: "Archivo Display", data: display, weight: 700, style: "normal" },
-        { name: "Archivo", data: body, weight: 400, style: "normal" },
-        { name: "JetBrains Mono", data: mono, weight: 400, style: "normal" },
-      ],
+      fonts: fontOptions,
     },
   );
 }
 
-export const OG_ACCENT = COLORS.accent;
-export const OG_NODE = COLORS.text3;
-export const OG_TEXT = COLORS.text;
+export const OG_ACCENT = OG_COLORS.accent;
+export const OG_TEXT = OG_COLORS.text;

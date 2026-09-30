@@ -1,33 +1,35 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type Props = {
   id: string;
-  number: string;
-  label: string;
   meta?: ReactNode;
   title?: ReactNode;
   className?: string;
 };
 
+// the big title speaks for itself; meta sits at its bottom right (from md).
 // id goes on the h2 so the section can point aria-labelledby at it
-export function SectionHeader({ id, number, label, meta, title, className }: Props) {
+export function SectionHeader({ id, meta, title, className }: Props) {
+  const note = meta && (
+    <p className="hidden shrink-0 text-[15px] leading-[20px] text-muted | md:block">
+      {meta}
+    </p>
+  );
+
+  if (!title) return note ? <header className={cn("flex justify-end", className)}>{note}</header> : null;
+
   return (
-    <header className={className}>
-      <div className="flex items-center justify-between gap-[16px] font-mono text-[12px] leading-[16px] tracking-[0.08em] text-muted uppercase | md:text-[13px] md:leading-[17px]">
-        <span className="flex shrink-0 gap-[14px]">
-          <span className="text-accent">{number}</span>
-          <span className="text-text">{label}</span>
-        </span>
-        {meta && <span className="hidden text-right | md:inline">{meta}</span>}
-      </div>
-      {title && (
-        <h2
-          id={id}
-          className="mt-fl-24/40 font-display text-fl-56/144 leading-[0.85] font-bold tracking-[-0.055em] font-stretch-[88%]"
-        >
-          {title}
-        </h2>
-      )}
+    <header
+      className={cn("mt-fl-24/40 flex items-end justify-between gap-[24px]", className)}
+    >
+      <h2
+        id={id}
+        className="font-display text-fl-56/144 leading-[0.85] font-semibold tracking-[-0.045em]"
+      >
+        {title}
+      </h2>
+      {note}
     </header>
   );
 }

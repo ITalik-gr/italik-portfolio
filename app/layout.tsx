@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@/components/analytics/Analytics";
 import { ChatDrawer } from "@/components/chat/ChatDrawer";
 import { AskFab } from "@/components/layout/AskFab";
@@ -10,16 +11,18 @@ import { siteUrl } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
-// wdth axis is needed: display type in the design is set at font-stretch 88%
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  axes: ["wdth"],
+// General Sans stands in for Aeonik until the licensed files land in public/fonts/aeonik/; swap the src only
+const sans = localFont({
+  variable: "--font-aeonik",
+  src: "../public/fonts/general-sans/GeneralSans-Variable.woff2",
+  weight: "200 700",
+  display: "swap",
 });
 
-// Google's cut has no "→", so glyphs it lacks must fall back to a monospace font, not Arial
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+// arrows and other glyphs the cut lacks must fall back to a monospace font, not Arial
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  weight: ["400", "500"],
   subsets: ["latin"],
   fallback: ["ui-monospace", "Menlo", "monospace"],
   adjustFontFallback: false,
@@ -55,7 +58,7 @@ export default function RootLayout({ children }: Props) {
     // browser extensions add attributes to <html> before React hydrates; this only silences that tag
     <html
       lang="en"
-      className={`${archivo.variable} ${jetbrainsMono.variable}`}
+      className={`${sans.variable} ${dmMono.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -20,11 +20,11 @@ export function ExperienceRole({ role }: Props) {
       />
 
       <div className="flex flex-col gap-[8px] | md:gap-[12px]">
-        <h3 className="text-fl-34/56 leading-[0.92] font-bold tracking-[-0.045em] font-stretch-[88%]">
+        <h3 className="text-fl-34/56 leading-[0.92] font-semibold tracking-[-0.04em]">
           {role.company}
         </h3>
         <p className="text-fl-15/19 leading-[1.15]">{title}</p>
-        <p className="font-mono text-[11px] leading-[14px] tracking-[0.04em] text-muted uppercase | md:text-[13px] md:leading-[17px] md:normal-case">
+        <p className="text-[13px] leading-[18px] text-muted | md:text-[15px] md:leading-[21px]">
           {dates} · {role.type} · {role.location}
         </p>
       </div>

@@ -8,11 +8,11 @@ export function NowBuilding() {
   const projects = getNowBuilding();
   if (projects.length === 0) return null;
 
-  const { number, label, title, meta } = SECTIONS.nowBuilding;
+  const { title, meta } = SECTIONS.nowBuilding;
 
   return (
     <Section id="now" labelledBy="now-title">
-      <SectionHeader id="now-title" number={number} label={label} meta={meta} title={title} />
+      <SectionHeader id="now-title" meta={meta} title={title} />
       <ul className="mt-fl-24/40 grid gap-[12px] | lg:grid-cols-3 lg:gap-x-fl-16/24 lg:gap-y-0">
         {projects.map((project) => (
           <NowBuildingCard key={project.slug} project={project} />

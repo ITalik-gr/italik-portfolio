@@ -30,11 +30,10 @@ export function LabList({ items }: { items: LabItem[] }) {
       onMouseLeave={() => setActive(null)}
     >
       <ol>
-        {items.map((item, index) => (
+        {items.map((item) => (
           <LabRow
             key={item.slug}
             item={item}
-            index={index}
             dimmed={active !== null && active !== item.slug}
             onActivate={() => setActive(item.slug)}
           />

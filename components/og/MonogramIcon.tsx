@@ -3,7 +3,7 @@ import path from "node:path";
 import { ImageResponse } from "next/og";
 import { SITE } from "@/lib/site";
 
-const font = readFile(path.join(process.cwd(), "assets/fonts/Archivo-SemiCondensed-Bold.ttf"));
+const font = readFile(path.join(process.cwd(), "assets/fonts/GeneralSans-Semibold.otf"));
 
 // the header monogram as an icon; a frame is only drawn where the icon is big enough to carry it
 export async function renderMonogramIcon(size: number, inset: number, frame = true) {
@@ -26,7 +26,7 @@ export async function renderMonogramIcon(size: number, inset: number, frame = tr
           justifyContent: "center",
           border: frame ? `${stroke}px solid #ffffff` : "none",
           color: "#ffffff",
-          fontFamily: "Archivo",
+          fontFamily: "Sans",
           fontSize: size * (frame ? 0.42 : 0.5),
           letterSpacing: "-0.02em",
         }}
@@ -37,7 +37,7 @@ export async function renderMonogramIcon(size: number, inset: number, frame = tr
     {
       width: size,
       height: size,
-      fonts: [{ name: "Archivo", data: await font, weight: 700, style: "normal" }],
+      fonts: [{ name: "Sans", data: await font, weight: 700, style: "normal" }],
     },
   );
 }

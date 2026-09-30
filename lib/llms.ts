@@ -1,6 +1,7 @@
 import { getKnowledge } from "@/lib/chat/knowledge";
 import { getExperience, getProjects } from "@/lib/content";
 import { STATUS_LABELS } from "@/lib/format";
+import { ROLE_PROFILES } from "@/lib/profiles";
 import { getProjectLinks, isExternal } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { siteUrl } from "@/lib/seo";
@@ -17,10 +18,9 @@ const status = (project: Project) =>
 function projectLine(project: Project) {
   const { primary, live, code } = getProjectLinks(project);
   const title = primary ? `[${project.title}](${absolute(primary.href)})` : project.title;
-  const extra = [
-    live && primary?.href !== live && `live: ${live}`,
-    code && `code: ${code}`,
-  ].filter(Boolean);
+  const extra = [live && primary?.href !== live && `live: ${live}`, code && `code: ${code}`].filter(
+    Boolean,
+  );
   return `- ${title}: ${project.summary} (${project.typeLabel} · ${status(project)}${extra.length ? ` · ${extra.join(" · ")}` : ""})`;
 }
 
@@ -48,6 +48,10 @@ export function buildLlmsTxt() {
     `- GitHub: ${SITE.socials.github}`,
     `- [CV (PDF)](${absolute(SITE.cv)})`,
     `- [Ask the AI chat about him](${siteUrl}/#ask): answers from this site's content only`,
+    ...ROLE_PROFILES.map(
+      (profile) =>
+        `- [${profile.meta.title}](${siteUrl}${profile.path}): the same portfolio, focused on this role`,
+    ),
     "",
     "## AI and personal projects",
     "",

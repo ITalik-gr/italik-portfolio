@@ -18,7 +18,7 @@ export function TextLink({ href, children, arrow = "→", className }: Props) {
       href={href}
       {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
       className={cn(
-        "group inline-flex items-center gap-[8px] font-mono text-[12px] leading-[16px] tracking-[0.06em] text-text uppercase transition-colors duration-150 hover:text-accent",
+        "group inline-flex items-center gap-[8px] text-[15px] leading-[19px] font-medium text-text transition-colors duration-150 hover:text-accent",
         className,
       )}
     >

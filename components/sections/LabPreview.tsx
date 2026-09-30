@@ -18,7 +18,7 @@ export function LabPreview({ items, active }: Props) {
       <div style={{ top: STICKY_TOP }} className="sticky grid overflow-hidden">
         <div
           className={cn(
-            "flex items-center justify-center bg-surface/50 font-mono text-[12px] tracking-[0.06em] text-muted uppercase transition-opacity duration-400 [grid-area:1/1]",
+            "flex items-center justify-center bg-surface/50 text-[14px] text-muted transition-opacity duration-400 [grid-area:1/1]",
             active && "opacity-0",
           )}
         >
@@ -40,7 +40,7 @@ export function LabPreview({ items, active }: Props) {
                 ) : undefined}
               </ImageFrame>
             </ProjectMorph>
-            <div className="flex justify-between font-mono text-[12px] leading-[16px] tracking-[0.06em] text-text-3 uppercase">
+            <div className="flex justify-between text-[14px] leading-[20px] text-text-3">
               <span>{item.title}</span>
               {item.href && <span>Open →</span>}
             </div>

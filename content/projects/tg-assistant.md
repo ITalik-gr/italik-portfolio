@@ -6,7 +6,7 @@ show: [lab, now]
 caseStudy: true
 order: 3
 status: v2-in-progress
-tags: [bot, agent, llm, rag, automation]
+tags: [bot, rag, agent, llm, automation]
 typeLabel: Personal · AI bot
 summary: A group-chat bot that summarises, remembers who is who and answers in the chat's voice, for a few dollars a month.
 description: A serverless Telegram bot for a friends' group chat. It logs messages, summarises on demand and answers as a persona with semantic memory. An LLM intent classifier routes requests, and cheap deterministic gates decide whether a model is called at all.

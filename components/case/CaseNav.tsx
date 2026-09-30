@@ -32,11 +32,11 @@ function NavLink({ item, label, className }: { item: Item; label: string; classN
       {...(external && { target: "_blank", rel: "noopener noreferrer" })}
       className={cn("group block px-gutter py-[32px] | md:py-[40px]", className)}
     >
-      <span className="font-mono text-[12px] leading-[16px] tracking-[0.06em] text-muted uppercase">
+      <span className="text-[14px] leading-[20px] text-muted">
         {label}
       </span>
       <ProjectMorph slug={item.slug} part="title">
-        <span className="mt-[16px] block text-fl-44/86 leading-[0.85] font-bold tracking-[-0.05em] font-stretch-[88%] transition-colors duration-150 group-hover:text-accent">
+        <span className="mt-[16px] block text-fl-44/86 leading-[0.85] font-semibold tracking-[-0.045em] transition-colors duration-150 group-hover:text-accent">
           {item.title}
         </span>
       </ProjectMorph>

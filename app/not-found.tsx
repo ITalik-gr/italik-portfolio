@@ -18,11 +18,11 @@ export default function NotFound() {
         id="main"
         className="flex min-h-[calc(100dvh-160px)] flex-col justify-center px-gutter py-fl-56/96"
       >
-        <p className="font-mono text-[11px] leading-[14px] tracking-[0.06em] uppercase | md:text-[13px] md:leading-[17px] md:tracking-[0.08em]">
+        <p className="text-[13px] leading-[18px] | md:text-[15px] md:leading-[21px]">
           <span className="text-accent">404</span>
           <span className="ml-[10px] text-text | md:ml-[14px]">Page not found</span>
         </p>
-        <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-bold tracking-[-0.06em] font-stretch-[88%] | md:text-fl-68/274">
+        <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-semibold tracking-[-0.05em] | md:text-fl-68/274">
           Nothing
           <br />
           here
@@ -35,7 +35,7 @@ export default function NotFound() {
           <Button href="/" size="lg" arrow="→">
             Back to home
           </Button>
-          <Button href="/#ask" variant="ghost" size="lg" dot>
+          <Button href="/#ask" variant="ghost" size="lg">
             Ask my AI
           </Button>
         </div>

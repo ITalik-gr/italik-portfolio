@@ -6,7 +6,7 @@ show: [lab]
 caseStudy: true
 order: 4
 status: live
-tags: [tool, llm, automation, web-app]
+tags: [tool, automation, llm, web-app]
 typeLabel: Personal · AI tool
 summary: A job-search radar that shows at most 10 vacancies a day and remembers every decision.
 description: A personal tool that collects vacancies and company catalogues, filters them with plain code and calls a cheap model only on new text. The score is deterministic. I pick every company and send every letter myself; the tool only drafts a first paragraph, and code checks it before I see it.

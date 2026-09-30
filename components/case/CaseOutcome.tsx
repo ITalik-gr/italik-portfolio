@@ -10,7 +10,7 @@ export function CaseOutcome({ outcome }: Props) {
           <dt className="mt-[10px] font-mono text-[12px] leading-[16px] text-text-3 | md:text-[13px] md:leading-[17px]">
             {item.label}
           </dt>
-          <dd className="text-fl-56/96 leading-[0.85] font-bold tracking-[-0.05em] font-stretch-[88%]">
+          <dd className="text-fl-56/96 leading-[0.85] font-semibold tracking-[-0.045em]">
             {item.value}
           </dd>
         </div>

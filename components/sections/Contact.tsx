@@ -3,11 +3,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ContactLinks } from "@/components/layout/ContactLinks";
 import { KyivOffset, KyivTime } from "@/components/layout/KyivTime";
 import { MemojiSticker } from "@/components/ui/MemojiSticker";
-import { FOOTER, SECTIONS, SITE } from "@/lib/site";
+import { FOOTER, SITE } from "@/lib/site";
 
 export function Contact() {
-  const { number, label } = SECTIONS.contact;
-
   return (
     <footer
       id="contact"
@@ -16,10 +14,6 @@ export function Contact() {
     >
       <Reveal>
         <div className="flex flex-col gap-[28px] | md:flex-row md:items-center md:justify-between md:gap-[24px]">
-          <p className="flex gap-[12px] font-mono text-[12px] leading-[16px] tracking-[0.08em] text-text uppercase | md:gap-[14px] md:text-[13px] md:leading-[17px]">
-            <span className="text-accent">{number}</span>
-            <span>{label}</span>
-          </p>
           <p className="flex items-center gap-[10px] text-fl-17/22 leading-[1.35] tracking-[-0.01em] text-text | md:gap-[12px]">
             <span
               aria-hidden
@@ -40,7 +34,7 @@ export function Contact() {
           <MemojiSticker className="size-[120px] | md:absolute md:top-0 md:right-0 md:size-fl-100/150 | lg:right-[20px]" />
           <h2
             id="contact-title"
-            className="mt-[8px] text-fl-88/288 leading-[0.82] whitespace-nowrap font-bold tracking-[-0.06em] font-stretch-[88%] | md:mt-0"
+            className="mt-[8px] text-fl-88/288 leading-[0.82] whitespace-nowrap font-semibold tracking-[-0.05em] | md:mt-0"
           >
             <a
               href={`mailto:${SITE.email}`}

@@ -7,7 +7,7 @@ caseStudy: true
 order: 2
 status: live
 statusNote: open source
-tags: [tool, mcp, agent, llm, web-app, open-source]
+tags: [mcp, open-source, tool, agent, llm, web-app]
 typeLabel: Personal · tool · MCP
 summary: Turn a dark Lottie animation into a light one, by hand, by script or by agent.
 description: A browser editor, a CLI, an MCP server and a live editor–agent bridge that find every colour in a Lottie file, remap it and render the result to check it. All four are thin shells over one core package, published to npm, so a hand edit, a script and an agent come out identical.

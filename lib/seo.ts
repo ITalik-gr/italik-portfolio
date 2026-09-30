@@ -1,3 +1,4 @@
+import type { Profile } from "./profiles";
 import type { Project } from "./schemas";
 import { SITE } from "./site";
 
@@ -29,7 +30,9 @@ const person = {
   ],
 };
 
-export function homeJsonLd() {
+// every home page is a profile of the same person; role pages differ only in the page node
+export function homeJsonLd(profile: Profile) {
+  const url = profile.path === "/" ? siteUrl : `${siteUrl}${profile.path}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -43,7 +46,11 @@ export function homeJsonLd() {
       },
       {
         "@type": "ProfilePage",
-        url: siteUrl,
+        "@id": `${url}#page`,
+        url,
+        name: profile.meta.title,
+        description: profile.meta.description,
+        isPartOf: { "@id": `${siteUrl}/#website` },
         mainEntity: { "@id": person["@id"] },
       },
     ],

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProjectMorph } from "@/components/motion/ProjectMorph";
 import { Reveal } from "@/components/motion/Reveal";
+import { HomeLink } from "@/components/layout/HomeLink";
 import { CaseLabel } from "./CaseSection";
 
 type Item = { slug: string; title: string; href: string; meta: string };
@@ -15,18 +16,18 @@ export function CaseRelated({ id, number, items }: Props) {
       <Reveal>
         <div className="flex items-center justify-between gap-[16px]">
           <CaseLabel id={id} number={number} label="Related projects" />
-          <Link
-            href="/#clients"
-            className="font-mono text-[12px] leading-[16px] tracking-[0.08em] text-muted uppercase transition-colors duration-150 hover:text-accent | md:text-[13px] md:leading-[17px]"
+          <HomeLink
+            hash="#clients"
+            className="text-[14px] leading-[20px] text-muted transition-colors duration-150 hover:text-accent | md:text-[15px] md:leading-[21px]"
           >
             All client work →
-          </Link>
+          </HomeLink>
         </div>
         <ul className="mt-fl-32/40 flex flex-col gap-fl-24/40">
           {items.map((item) => {
             const external = item.href.startsWith("http");
             const title = (
-              <span className="text-fl-44/101 leading-[0.85] font-bold tracking-[-0.055em] font-stretch-[88%] transition-colors duration-150 group-hover:text-accent">
+              <span className="text-fl-44/101 leading-[0.85] font-semibold tracking-[-0.045em] transition-colors duration-150 group-hover:text-accent">
                 {item.title}
               </span>
             );

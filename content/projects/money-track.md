@@ -7,7 +7,7 @@ caseStudy: true
 order: 1
 status: live
 statusNote: open source
-tags: [product, llm, mcp, web-app, bot, open-source]
+tags: [web-app, mcp, product, llm, bot, open-source]
 typeLabel: Personal · AI product
 summary: A personal finance tracker whose AI advisor is not allowed to invent a single figure.
 description: A multi-user finance app that syncs Monobank and CSV statements, categorises spending and answers questions about your money. Each user's data lives in its own Durable Object. A small judgment model and Claude share categorisation in a measured cascade. The same numbers are exposed to Claude over an MCP server with built-in OAuth 2.1.

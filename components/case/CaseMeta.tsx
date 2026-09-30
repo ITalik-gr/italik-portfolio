@@ -25,8 +25,7 @@ export function CaseMeta({ project, className }: Props) {
             <Status
               status={project.status}
               note={project.statusNote}
-              size="meta"
-              className="text-[13px] leading-[20px] text-text-2 | lg:leading-[21px]"
+              className="text-[14px] leading-[20px] | lg:leading-[21px]"
             />
           ),
         },
@@ -35,7 +34,7 @@ export function CaseMeta({ project, className }: Props) {
   return (
     <dl
       className={cn(
-        "grid gap-y-[12px] border-y border-line py-[14px] font-mono | lg:gap-x-[24px] lg:py-[20px]",
+        "grid gap-y-[12px] border-y border-line py-[14px] | lg:gap-x-[24px] lg:py-[20px]",
         isClient ? "lg:auto-cols-fr lg:grid-flow-col" : "lg:grid-cols-[1fr_1fr_2fr_1fr]",
         className,
       )}
@@ -47,10 +46,10 @@ export function CaseMeta({ project, className }: Props) {
             key={row.key}
             className="grid grid-cols-[84px_1fr] | lg:flex lg:flex-col lg:gap-[5px]"
           >
-            <dt className="text-[13px] leading-[20px] text-muted uppercase | lg:text-[11px] lg:leading-[17.6px] lg:tracking-[0.06em]">
+            <dt className="text-[14px] leading-[20px] text-muted | lg:text-[13px] lg:leading-[18px]">
               {row.key}
             </dt>
-            <dd className="text-[13px] leading-[20px] text-text-2 | lg:leading-[21px] lg:pr-[24px]">
+            <dd className="text-[14px] leading-[20px] text-text-2 | lg:leading-[21px] lg:pr-[24px]">
               {row.value}
             </dd>
           </div>

@@ -54,7 +54,7 @@ aiSpecifics:
   - { key: Tool use, value: "None: one streamed call per question" }
   - { key: Memory, value: "Last 10 messages of the current page; nothing stored on the server" }
   - { key: Cost controls, value: "Prompt caching (~16 fresh input tokens per question), 20 requests per 10 min, daily budget" }
-  - { key: Evals, value: "25 golden questions: facts, refusals, NDA, injection, language; 25/25 on Haiku 4.5 for about $0.035 a run" }
+  - { key: Evals, value: "25 golden questions: facts, refusals, NDA, injection, language; 25/25 on Sonnet 5.5 for about $0.21 a run" }
 ---
 
 ## Problem

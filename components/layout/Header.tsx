@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { NAV, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { HomeLink } from "./HomeLink";
 import { KyivTime } from "./KyivTime";
 import { MobileMenu } from "./MobileMenu";
 import { Monogram } from "./Monogram";
@@ -24,12 +25,12 @@ export function Header({ variant = "home" }: Props) {
         {isCase ? (
           <div className="flex items-center gap-[20px]">
             <Monogram className="hidden | md:flex" />
-            <Link
-              href="/#work"
-              className="font-mono text-[12px] leading-[16px] tracking-[0.06em] text-text-3 uppercase transition-colors duration-150 hover:text-accent"
+            <HomeLink
+              hash="#work"
+              className="text-[14px] leading-[20px] text-text-3 transition-colors duration-150 hover:text-accent"
             >
               ← All work
-            </Link>
+            </HomeLink>
           </div>
         ) : (
           <Monogram />
@@ -51,9 +52,9 @@ export function Header({ variant = "home" }: Props) {
         </nav>
 
         <div className="flex items-center justify-end gap-[8px] | md:col-start-3 md:gap-[24px]">
-          <div className="hidden items-center gap-[24px] font-mono text-[12px] leading-[16px] tracking-[0.06em] text-muted uppercase | lg:flex">
+          <div className="hidden items-center gap-[24px] text-[14px] leading-[20px] text-muted | lg:flex">
             <span>
-              Kyiv <KyivTime />
+              Kyiv <span className="font-mono text-[13px]"><KyivTime /></span>
             </span>
             <span>Open to work</span>
           </div>
