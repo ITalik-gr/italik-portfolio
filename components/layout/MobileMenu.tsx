@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { BurgerIcon } from "./BurgerIcon";
 import { ContactLinks } from "./ContactLinks";
+import { NavLink, useNavHref } from "./HomeLink";
 import { KyivTime } from "./KyivTime";
 
 // each block slides up a little after the previous one while opening
@@ -19,6 +19,7 @@ const REVEAL =
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const askHref = useNavHref("#ask");
 
   useEffect(() => {
     if (!open) return;
@@ -61,16 +62,13 @@ export function MobileMenu() {
           <ul className="flex flex-col gap-[8px]">
             {NAV.map((item, index) => (
               <li key={item.href} style={stagger(open, index)} className={cn(REVEAL, shown)}>
-                <Link
+                <NavLink
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-baseline gap-[16px] py-[6px] text-text transition-colors hover:text-accent"
+                  className="block py-[6px] text-fl-56/80 leading-[0.9] font-semibold tracking-[-0.045em] text-text transition-colors hover:text-accent"
                 >
-                  <span className="font-mono text-[12px] text-accent">0{index + 1}</span>
-                  <span className="text-fl-56/80 leading-[0.9] font-semibold tracking-[-0.045em]">
-                    {item.label}
-                  </span>
-                </Link>
+                  {item.label}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -81,7 +79,7 @@ export function MobileMenu() {
           className={cn("mt-[40px]", REVEAL, shown)}
           onClick={(event) => (event.target as HTMLElement).closest("a") && setOpen(false)}
         >
-          <Button href="#ask" variant="ghost" size="lg" className="w-full justify-center">
+          <Button href={askHref} variant="ghost" size="lg" className="w-full justify-center">
             Ask my AI about me
           </Button>
         </div>

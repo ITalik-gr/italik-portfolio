@@ -63,9 +63,23 @@ export function HomeLink({ hash = "", backToSection, ...props }: Props) {
   return <Link href={`${home}${target}`} {...props} />;
 }
 
+// home pages have the sections a same-page anchor points at; any other page sends it to the last home seen
+export function useNavHref(href: string) {
+  const pathname = usePathname();
+  const home = useSyncExternalStore(subscribe, readHome, () => "/");
+  const onHome = pathname in CV_BY_HOME;
+  return href.startsWith("#") && !onHome ? `${home}${href}` : href;
+}
+
+export function NavLink({ href, ...props }: ComponentProps<typeof Link> & { href: string }) {
+  return <Link href={useNavHref(href)} {...props} />;
+}
+
 // a home page knows its role from the URL (already on the server); anywhere else, the last home seen decides
 export function useCv() {
   const pathname = usePathname();
   const home = useSyncExternalStore(subscribe, readHome, () => "/");
+  // client work is the main, AI-focused CV, whatever role page the visitor came from
+  if (pathname === "/services") return SITE.cv;
   return CV_BY_HOME[pathname] ?? CV_BY_HOME[home] ?? SITE.cv;
 }

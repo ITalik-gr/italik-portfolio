@@ -6,6 +6,7 @@ import { siteUrl } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/services`, changeFrequency: "monthly", priority: 0.9 },
     ...ROLE_PROFILES.map((profile) => ({
       url: `${siteUrl}${profile.path}`,
       changeFrequency: "weekly" as const,

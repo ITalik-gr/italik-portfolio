@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { KyivOffset, KyivTime } from "./KyivTime";
 
@@ -7,6 +8,9 @@ export function SlimFooter() {
       <a href={`mailto:${SITE.email}`} className="transition-colors duration-150 hover:text-accent">
         {SITE.email}
       </a>
+      <Link href="/services" className="transition-colors duration-150 hover:text-accent">
+        Services →
+      </Link>
       <p>
         Kyiv · <KyivTime /> · <KyivOffset />
       </p>

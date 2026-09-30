@@ -29,18 +29,6 @@
   --animate-marquee: marquee 90s linear infinite;
   --animate-letter-in: letter-in 0.7s var(--ease-out-expo) both;
 
-  /* 32px of travel, back and forth; each shot sets its own duration */
-  --animate-drift: drift 22s ease-in-out infinite alternate;
-
-  @keyframes drift {
-    from {
-      transform: translate3d(0, -16px, 0);
-    }
-    to {
-      transform: translate3d(0, 16px, 0);
-    }
-  }
-
   @keyframes letter-in {
     from {
       transform: translateY(60%);
@@ -377,6 +365,34 @@
 
 @keyframes reveal-failsafe {
   to {
+    opacity: 1;
+  }
+}
+
+.makermap-badge {
+  display: none!important;
+}
+
+/*
+  FAQ: <details> opens and closes smoothly where the browser can animate ::details-content
+  (Chrome, Safari 18.4+); elsewhere it just toggles. Height is animated on purpose here:
+  one small block, only on a click.
+*/
+@supports selector(::details-content) {
+  .faq-item {
+    interpolate-size: allow-keywords;
+  }
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: clip;
+    opacity: 0;
+    transition:
+      block-size 0.5s var(--ease-out-expo),
+      opacity 0.35s ease,
+      content-visibility 0.5s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
     opacity: 1;
   }
 }

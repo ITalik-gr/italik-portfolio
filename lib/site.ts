@@ -11,12 +11,13 @@ export const SITE = {
   socials: {
     telegram: "https://t.me/ITalik_gr",
     github: "https://github.com/ITalik-gr",
+    x: "https://x.com/italikdev",
     // no LinkedIn yet; add it here when it exists
   },
   meta: {
     title: "Vitaliy Hrytsenko — Full-stack developer building AI agents",
     description:
-      "Full-stack developer building AI agents and LLM-powered products, from the agent loop to the interface. React, Next.js, Node.js, Cloudflare.",
+      "Full-stack developer in Kyiv building AI agents and LLM products end to end with React, Next.js, Node.js and Cloudflare. Open to remote full-time or contract work.",
   },
 } as const;
 
@@ -27,12 +28,13 @@ export const CV_BY_HOME: Record<string, string> = {
   "/fullstack": "/cv/Vitaliy_Hrytsenko_Fullstack.pdf",
 };
 
-// same-page anchors: the nav only lives on home pages, and a role page must not jump back to "/"
+// same-page anchors on home pages; elsewhere NavLink points them at the last home page seen
 export const NAV = [
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
   { label: "Ask AI", href: "#ask" },
+  { label: "Services", href: "/services" },
 ] as const;
 
 export const HERO = {
@@ -50,18 +52,6 @@ export const HERO = {
     "MCP",
   ],
 } as const;
-
-// two heroes: a big ask-my-AI field (every home page) or a cursor trail of project screenshots (/trail, for showing the design)
-export type HeroVariant = "ask" | "trail";
-export const HERO_VARIANT: HeroVariant = "ask";
-
-export const HERO_TRAIL = [
-  { title: "Money Track", src: "/hero-trail/money-track.webp" },
-  { title: "Lottie Theme", src: "/hero-trail/lottie-theme.webp" },
-  { title: "AI Telegram Assistant", src: "/hero-trail/tg-assistant.webp" },
-  { title: "ppc.io", src: "/hero-trail/ppc-io.webp" },
-  { title: "sollas.co", src: "/hero-trail/sollas.webp" },
-] as const;
 
 export const HERO_QUESTIONS = [
   "Has he shipped AI to production?",

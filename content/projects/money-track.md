@@ -124,7 +124,7 @@ I'd write the eval set before the first prompt. A judgment model tuned on my dat
 
 ## Results
 
-Live in production with open Google sign-up and a public demo. `npm run check` runs 23 lint checks plus 232 tests, including golden analytics snapshots. Latest held-out eval: Haiku gets 35 of 36 root categories right, for $0.03 per run.
+Live in production with open Google sign-up and a public demo. `npm run check` runs lint and the tests, including golden analytics snapshots. Latest held-out eval: Haiku gets 35 of 36 root categories right, for $0.03 per run.
 
 ## Next
 

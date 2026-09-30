@@ -14,6 +14,15 @@
 - Most interested in: AI agents and LLM features inside real products, owning features end to end, product-focused teams.
 - Why he's looking: his recent roles have been contracts, and he wants stable, long-term work with one team.
 
+## Client projects (services)
+- Besides a role, he also takes client projects himself. Details: italik.dev/services.
+- What he builds for clients: AI agents and LLM features inside a product (tool use, MCP servers, answers grounded in the product's own data, evals, cost limits); full-stack web apps and MVPs (React, Next.js, Node.js, NestJS, auth, payments, deployment); fast marketing sites in Next.js or Astro (less of a focus).
+- Formats: fixed-scope project, monthly contract, or hourly / part-time.
+- Process: intro call, written scope and estimate, build with a weekly demo and a short written report every week (more detail on request), launch and handover.
+- Terms: everything stays with the client (code, repositories, accounts, data); NDA on request; B2B contract as a Ukrainian sole proprietor (FOP); can start within a few days.
+- Support: the first month after launch is free, then by agreement or by the hour.
+- Rates: on request, by email or Telegram; the chat does not quote prices.
+
 ## Availability and logistics
 - Can start within a few days.
 - Hours: flexible; he can commit as many hours per week as the role needs.
@@ -74,7 +83,7 @@ Years of experience with each technology overall, not strictly commercial time.
 ## Projects at a glance
 Full details are in each project's file; these lines are only a quick reference.
 - **Money Track**: AI personal-finance tracker; a deterministic core owns the numbers and the LLM advises. React, TypeScript, Cloudflare Workers, Durable Objects, D1, Hono, Anthropic API, RTK Query, PWA. Open source. Live demo with a demo account: money.italik.dev/demo · code: github.com/ITalik-gr/money-track
-- **Lottie Theme**: turns dark Lottie animations into light ones and back, without After Effects. One core with four shells: a browser editor, a CLI, an MCP server with 12 tools, and a live editor–agent bridge; all published to npm. Open source, 231 tests plus browser and agent end-to-end checks. lottie.italik.dev · code: github.com/ITalik-gr/lottie-theme
+- **Lottie Theme**: turns dark Lottie animations into light ones and back, without After Effects. One core with four shells: a browser editor, a CLI, an MCP server with 12 tools, and a live editor–agent bridge; all published to npm. Open source, with unit tests plus browser and agent end-to-end checks. lottie.italik.dev · code: github.com/ITalik-gr/lottie-theme
 - **Quiz Dock (agent harness)**: discuss a document with an agent and get quizzed on it; the model writes the questions, code grades them. Hand-written agent loop in TypeScript on the raw Anthropic SDK, no framework. The CLI works; a web version is in progress, then subagents for multi-page docs. Code: github.com/ITalik-gr/quiz-dock
 - **Job Radar**: his own job-search tool: at most 10 vacancies a day, free code filters before any model call, Haiku extracts facts as strict JSON, code does the scoring. He picks every company and sends every letter himself; the tool only drafts a first paragraph that code validates. Code: github.com/ITalik-gr/job-radar
 - **AI Telegram Assistant**: serverless bot for group chats (TypeScript, Cloudflare Workers, grammY, D1, xAI Grok API). Keeps recent messages raw, compacts older ones into rolling summaries, keeps memory per member and assembles context for each question. Code: github.com/ITalik-gr/tg_chat_bot. v1 runs in a live chat; v2 is a full rewrite: voice messages, and a new model setup that picks a fast, cheap model where it's enough.
@@ -100,10 +109,13 @@ Full details are in each project's file; these lines are only a quick reference.
 - Q: Can he own a project alone? A: Yes. Answerly, sollas.co and the Backlinks site were built solo, from Figma to deploy. On ppc.io he owned the whole front-end for about 22 months and did the Strapi-to-MDX migration himself while other people handled content and other parts.
 - Q: Has he shipped AI features? A: Yes, in his own live products: Money Track's LLM advisor, the AI Telegram Assistant, and this chat.
 - Q: How does he use AI for coding? A: Claude Code every day with his own skills. He plans the work with the agent, delegates the repetitive parts, and reviews and verifies everything it produces.
-- Q: Does he write tests? A: Yes. His own projects are well tested: Job Radar has 726 tests, Money Track 232 plus golden analytics snapshots, Lottie Theme 231 plus browser and agent end-to-end checks, and this site runs Playwright end-to-end tests. In commercial work he writes unit and integration tests with Jest.
+- Q: Does he write tests? A: Yes. His own projects have unit tests where the logic matters, plus golden analytics snapshots in Money Track, browser and agent end-to-end checks in Lottie Theme, and Playwright end-to-end tests on this site. In commercial work he writes unit and integration tests with Jest.
 - Q: Is he open to front-end-only roles? A: Yes, although his focus is full-stack and AI.
 - Q: Office or remote? A: Remote first; office or hybrid in Kyiv also works, and he is open to moving within Ukraine.
 - Q: Can he work on a B2B contract? A: Yes, as a Ukrainian sole proprietor (FOP), which he can set up within a few days.
+- Q: Does he take freelance or client projects? A: Yes. He builds AI agents and LLM features, full-stack web apps and MVPs, and marketing sites for clients, as a fixed-scope project, a monthly contract or by the hour. See italik.dev/services; rates on request.
+- Q: Who owns the code on a client project? A: The client: code, repositories, accounts and data. He signs an NDA on request.
+- Q: Does he support a project after launch? A: Yes. The first month is free, then by agreement or by the hour.
 - Q: Why is he looking for a new role? A: His recent roles have been contracts, and he wants stable, long-term work with one team.
 - Q: Why AI? A: He sees it as where software is heading. It makes things possible that weren't a couple of years ago, and he enjoys making AI features reliable, not just impressive.
 

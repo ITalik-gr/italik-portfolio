@@ -59,7 +59,7 @@ aiSpecifics:
   - { key: Tool use, value: "None: single-shot calls with structured JSON output" }
   - { key: Memory, value: "Company state and outreach history in the DB; LLM cache keyed by model and prompt version" }
   - { key: Cost controls, value: "Free filters first, daily call limit, text truncation, cache, AI Gateway" }
-  - { key: Tests, value: "726 unit tests with the model call stubbed; no eval set yet" }
+  - { key: Tests, value: "Unit tests with the model call stubbed; no eval set yet" }
 ---
 
 ## Problem
@@ -72,7 +72,7 @@ At first I called the model before the free filters, and it burned the 500-call 
 
 ## Results
 
-It runs daily on Cloudflare Workers with D1. The repo has 726 passing tests across 56 files and a fixture test for every source adapter. Model cost fell from about $15 to an estimated $1–2 a month.
+It runs daily on Cloudflare Workers with D1. Every source adapter has a fixture test, and the model call is stubbed in the unit tests. Model cost fell from about $15 to an estimated $1–2 a month.
 
 ## Next
 

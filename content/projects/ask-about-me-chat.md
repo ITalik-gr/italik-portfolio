@@ -54,7 +54,7 @@ aiSpecifics:
   - { key: Tool use, value: "None: one streamed call per question" }
   - { key: Memory, value: "Last 10 messages of the current page; nothing stored on the server" }
   - { key: Cost controls, value: "Prompt caching (~16 fresh input tokens per question), 20 requests per 10 min, daily budget" }
-  - { key: Evals, value: "25 golden questions: facts, refusals, NDA, injection, language; 25/25 on Sonnet 5.5 for about $0.21 a run" }
+  - { key: Evals, value: "29 golden questions: facts, refusals, NDA, injection, language, client work; all pass on Sonnet 5.5" }
 ---
 
 ## Problem
@@ -67,7 +67,7 @@ I'd rely less on rules in the prompt. Told not to use Markdown, the model still 
 
 ## Results
 
-Works end to end with streaming, source chips, a floating drawer on every page and the section on the home page. The eval set passes 25 of 25, and the prompt cache holds: after the first request, each question reads about 19k cached tokens and costs well under a cent.
+Works end to end with streaming, source chips, a floating drawer on every page and the section on the home page. The eval set passes 29 of 29, and the prompt cache holds: after the first request, each question reads about 19k cached tokens and costs well under a cent.
 
 ## Next
 

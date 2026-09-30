@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { NAV } from "@/lib/site";
 import { CvButton } from "./CvButton";
-import { HomeLink } from "./HomeLink";
+import { HomeLink, NavLink } from "./HomeLink";
 import { KyivTime } from "./KyivTime";
 import { MobileMenu } from "./MobileMenu";
 import { Monogram } from "./Monogram";
@@ -41,12 +40,12 @@ export function Header({ variant = "home" }: Props) {
             <ul className="flex gap-[32px]">
               {NAV.map((item) => (
                 <li key={item.href}>
-                  <Link
+                  <NavLink
                     href={item.href}
                     className="text-[16px] leading-[20px] font-medium text-text transition-colors duration-150 hover:text-accent"
                   >
                     {item.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>

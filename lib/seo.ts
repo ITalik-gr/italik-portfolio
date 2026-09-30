@@ -1,5 +1,6 @@
 import type { Profile } from "./profiles";
 import type { Project } from "./schemas";
+import { SERVICES, SERVICES_PAGE, SERVICE_FAQ } from "./services";
 import { SITE } from "./site";
 
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? SITE.url).replace(/\/$/, "");
@@ -12,7 +13,9 @@ const person = {
   url: siteUrl,
   jobTitle: "Full-stack developer",
   description: SITE.meta.description,
+  image: `${siteUrl}/about.jpg`,
   email: `mailto:${SITE.email}`,
+  knowsLanguage: ["en", "uk"],
   address: {
     "@type": "PostalAddress",
     addressLocality: SITE.location.city,
@@ -22,10 +25,15 @@ const person = {
   knowsAbout: [
     "AI agents",
     "LLM integration",
+    "MCP servers",
+    "Anthropic API",
+    "Full-stack web development",
     "React",
     "Next.js",
+    "Astro",
     "TypeScript",
     "Node.js",
+    "NestJS",
     "Cloudflare Workers",
   ],
 };
@@ -79,6 +87,52 @@ export function caseJsonLd(project: Project) {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
           { "@type": "ListItem", position: 2, name: project.title, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+// client work: what he offers (no prices, rates are on request) plus the FAQ as structured answers
+export function servicesJsonLd() {
+  const url = `${siteUrl}/services`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": `${url}#service`,
+        url,
+        name: `${SITE.name}, development services`,
+        description: SERVICES_PAGE.meta.description,
+        provider: { "@id": person["@id"] },
+        founder: person,
+        areaServed: "Worldwide",
+        address: person.address,
+        email: SITE.email,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Services",
+          itemListElement: SERVICES.map((service) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: service.title, description: service.text },
+          })),
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: SERVICE_FAQ.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+          { "@type": "ListItem", position: 2, name: "Services", item: url },
         ],
       },
     ],

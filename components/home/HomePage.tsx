@@ -16,11 +16,8 @@ import { getFeaturedProjects, getNowBuilding, getProject } from "@/lib/content";
 import type { HomeSectionKey, Profile } from "@/lib/profiles";
 import type { Project } from "@/lib/schemas";
 import { homeJsonLd } from "@/lib/seo";
-import type { HeroVariant } from "@/lib/site";
 
-type Props = { profile: Profile; heroVariant?: HeroVariant };
-
-export function HomePage({ profile, heroVariant }: Props) {
+export function HomePage({ profile }: { profile: Profile }) {
   const featured = getFeatured(profile);
   // a project featured on this page lets its other copies step aside in page transitions
   const featuredSlugs = new Set(featured.map((project) => project.slug));
@@ -47,12 +44,13 @@ export function HomePage({ profile, heroVariant }: Props) {
       <main id="main">
         <JsonLd data={homeJsonLd(profile)} />
         <RememberHome path={profile.path} />
-        <Hero hero={profile.hero} variant={heroVariant} />
+        <Hero hero={profile.hero} />
         <Marquee items={profile.stack} />
         {shown.map((key) => (
           <Fragment key={key}>{render[key]()}</Fragment>
         ))}
       </main>
+      <script src="https://www.makermap.lol/badge/italikdev.js" data-position="corner" async></script>
       <Contact />
     </>
   );

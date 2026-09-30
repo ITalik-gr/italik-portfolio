@@ -38,6 +38,20 @@ const SIZES = {
   },
 };
 
+// shared with buttons that aren't links (e.g. one that opens the chat)
+export function buttonClasses(
+  variant: keyof typeof VARIANTS = "primary",
+  size: "sm" | "md" | "lg" = "md",
+  className?: string,
+) {
+  return cn(
+    "group inline-flex items-center gap-[10px] font-medium transition-colors duration-150 ease-out-expo",
+    VARIANTS[variant],
+    SIZES[variant][size],
+    className,
+  );
+}
+
 export function Button({
   href,
   children,
@@ -48,12 +62,7 @@ export function Button({
   className,
 }: Props) {
   const isExternal = external ?? /^(https?:|mailto:)/.test(href);
-  const classes = cn(
-    "group inline-flex items-center gap-[10px] font-medium transition-colors duration-150 ease-out-expo",
-    VARIANTS[variant],
-    SIZES[variant][size],
-    className,
-  );
+  const classes = buttonClasses(variant, size, className);
   const content = (
     <>
       <span>{children}</span>

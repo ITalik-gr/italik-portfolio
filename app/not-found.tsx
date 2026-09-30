@@ -22,7 +22,7 @@ export default function NotFound() {
           <span className="text-accent">404</span>
           <span className="ml-[10px] text-text | md:ml-[14px]">Page not found</span>
         </p>
-        <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-semibold tracking-[-0.05em] | md:text-fl-68/274">
+        <h1 className="mt-fl-22/36 text-fl-80/180 leading-[0.86] font-semibold tracking-[-0.045em]">
           Nothing
           <br />
           here

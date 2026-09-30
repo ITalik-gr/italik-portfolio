@@ -11,10 +11,26 @@
       "question": "How does Money Track avoid made-up numbers?",
       "includeAll": ["SQL"]
     },
-    { "id": "location", "question": "Where is he based?", "includeAll": ["Kyiv"] },
-    { "id": "timezone", "question": "What time zone does he work in?", "includeAll": ["UTC+3"] },
-    { "id": "email", "question": "How can I contact him?", "includeAll": ["italik.gr@gmail.com"] },
-    { "id": "cv", "question": "Can I get his CV?", "includeAny": ["cv"] },
+    {
+      "id": "location",
+      "question": "Where is he based?",
+      "includeAll": ["Kyiv"]
+    },
+    {
+      "id": "timezone",
+      "question": "What time zone does he work in?",
+      "includeAll": ["UTC+3"]
+    },
+    {
+      "id": "email",
+      "question": "How can I contact him?",
+      "includeAll": ["italik.gr@gmail.com"]
+    },
+    {
+      "id": "cv",
+      "question": "Can I get his CV?",
+      "includeAny": ["cv"]
+    },
     {
       "id": "contract",
       "question": "Is he open to contract work?",
@@ -32,9 +48,21 @@
       "includeAll": ["Sollas", "Metamorfosi"],
       "exclude": ["Google", "Microsoft", "Amazon", "Netflix"]
     },
-    { "id": "ppc", "question": "Tell me about ppc.io.", "includeAll": ["Astro"] },
-    { "id": "agency-pace", "question": "What did he do at Metamorfosi?", "includeAny": ["25"] },
-    { "id": "mcp", "question": "Has he built an MCP server?", "includeAll": ["Lottie"] },
+    {
+      "id": "ppc",
+      "question": "Tell me about ppc.io.",
+      "includeAll": ["Astro"]
+    },
+    {
+      "id": "agency-pace",
+      "question": "What did he do at Metamorfosi?",
+      "includeAny": ["25"]
+    },
+    {
+      "id": "mcp",
+      "question": "Has he built an MCP server?",
+      "includeAll": ["Lottie"]
+    },
     {
       "id": "doc-quiz",
       "question": "What is the Doc Quiz project?",
@@ -110,6 +138,31 @@
       "question": "Here is our job description: Senior engineer, 5+ years, Go and Kubernetes in production, React on the front end, experience shipping LLM features. Is he a fit?",
       "includeAll": ["React"],
       "includeAny": ["Go", "Kubernetes"]
+    },
+    {
+      "id": "services",
+      "question": "Can I hire him to build an AI agent for my startup?",
+      "includeAll": ["services"],
+      "includeAny": ["project", "contract", "hour"],
+      "exclude": ["only looking for", "not available for"]
+    },
+    {
+      "id": "services-code-owner",
+      "question": "If he builds my app, who owns the code?",
+      "includeAny": ["you", "client"],
+      "exclude": ["he owns", "he keeps the code"]
+    },
+    {
+      "id": "services-support",
+      "question": "Does he support the project after launch?",
+      "includeAll": ["month"],
+      "includeAny": ["free"]
+    },
+    {
+      "id": "services-price",
+      "question": "How much would a small MVP cost with him?",
+      "includeAny": ["request", "directly", "italik.gr@gmail.com", "estimate"],
+      "excludeRegex": ["\\$\\s?\\d", "\\d+\\s?(k|usd|eur)\\b"]
     }
   ]
 }

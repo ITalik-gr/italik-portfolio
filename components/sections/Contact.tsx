@@ -3,9 +3,11 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ContactLinks } from "@/components/layout/ContactLinks";
 import { KyivOffset, KyivTime } from "@/components/layout/KyivTime";
 import { MemojiSticker } from "@/components/ui/MemojiSticker";
+import { TextLink } from "@/components/ui/TextLink";
 import { FOOTER, SITE } from "@/lib/site";
 
-export function Contact() {
+// servicesLink: off on /services itself
+export function Contact({ servicesLink = true }: { servicesLink?: boolean }) {
   return (
     <footer
       id="contact"
@@ -28,6 +30,11 @@ export function Contact() {
               ))}
             </span>
           </p>
+          {servicesLink && (
+            <TextLink href="/services" className="w-fit">
+              Have a project? See services
+            </TextLink>
+          )}
         </div>
 
         <div className="relative mt-[28px] | md:mt-[40px]">

@@ -57,7 +57,7 @@ const FRONTEND: Profile = {
   meta: {
     title: "Vitaliy Hrytsenko — Front-end developer (React, Next.js, Astro)",
     description:
-      "Front-end developer who turns Figma into fast, pixel-perfect sites and apps with React, Next.js and Astro. 30+ shipped, Core Web Vitals and SEO included.",
+      "Front-end developer who turns Figma into fast, pixel-perfect sites and apps with React, Next.js and Astro. 30+ shipped, Core Web Vitals and SEO included. Remote.",
   },
   hero: {
     title: "Every pixel, every ms.",
@@ -107,9 +107,9 @@ const FULLSTACK: Profile = {
   slug: "fullstack",
   path: "/fullstack",
   meta: {
-    title: "Vitaliy Hrytsenko — Full-stack developer (React, Node.js, Cloudflare)",
+    title: "Vitaliy Hrytsenko — Full-stack developer (React, Node.js, NestJS)",
     description:
-      "Full-stack developer who owns features end to end: React and Next.js on the front, Node.js, Cloudflare Workers, PostgreSQL and Stripe on the back, AI where it helps.",
+      "Full-stack developer who owns features end to end: React and Next.js on the front, Node.js, NestJS and PostgreSQL on the back, AI features when a product needs them.",
   },
   hero: {
     title: "I build products end to end",

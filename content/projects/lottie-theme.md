@@ -62,7 +62,7 @@ aiSpecifics:
   - { key: Tool use, value: "Browser: Anthropic tool runner, 16-step cap. MCP: 12 tools incl. render_preview" }
   - { key: Memory, value: "Conversation saved per file and survives panel switches; the edit set can be embedded in the file" }
   - { key: Cost controls, value: "Prompt caching, stale tool results cleared, per-request spend ceiling, live cost readout" }
-  - { key: Tests, value: "Pixel eval of the light theme; 22 agent end-to-end checks on a scripted API; no eval of a real model yet" }
+  - { key: Tests, value: "Pixel eval of the light theme; agent end-to-end checks on a scripted API; no eval of a real model yet" }
 ---
 
 ## Problem
@@ -75,7 +75,7 @@ I'd put a test on every flow the README promises before writing it down. "Save a
 
 ## Results
 
-All four packages are on npm (v0.1.0), released from a git tag with provenance. CI runs typecheck, tests, a production build and browser smoke tests on every push. On a fresh clone there are 231 tests (core 176, CLI 15, sync 13, MCP 27), plus 74 browser smoke checks, 22 agent end-to-end checks and 18 editor, hub and MCP end-to-end checks. A pixel-based eval of the light-theme suggestion drove the latest algorithm: mean lightness on the card fixture went from .65 to .80, and contrast findings from 11 to 0.
+All four packages are on npm (v0.1.0), released from a git tag with provenance. CI runs typecheck, tests, a production build and browser smoke tests on every push. Unit tests cover the core, the CLI, the sync bridge and the MCP server, with browser smoke checks and agent and editor end-to-end checks on top. A pixel-based eval of the light-theme suggestion drove the latest algorithm: mean lightness on the card fixture went from .65 to .80, and contrast findings from 11 to 0.
 
 ## Next
 
