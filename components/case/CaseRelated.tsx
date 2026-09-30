@@ -5,9 +5,9 @@ import { HomeLink } from "@/components/layout/HomeLink";
 import { CaseLabel } from "./CaseSection";
 
 type Item = { slug: string; title: string; href: string; meta: string };
-type Props = { id: string; number: string; items: Item[] };
+type Props = { id: string; items: Item[] };
 
-export function CaseRelated({ id, number, items }: Props) {
+export function CaseRelated({ id, items }: Props) {
   return (
     <section
       aria-labelledby={id}
@@ -15,7 +15,7 @@ export function CaseRelated({ id, number, items }: Props) {
     >
       <Reveal>
         <div className="flex items-center justify-between gap-[16px]">
-          <CaseLabel id={id} number={number} label="Related projects" />
+          <CaseLabel id={id} label="Related projects" />
           <HomeLink
             hash="#clients"
             className="text-[14px] leading-[20px] text-muted transition-colors duration-150 hover:text-accent | md:text-[15px] md:leading-[21px]"

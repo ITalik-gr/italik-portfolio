@@ -2,7 +2,7 @@ import { getBodySections, getLabProjects } from "@/lib/content";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { ArchitectureSection, architectureMeta } from "./architecture/ArchitectureSection";
-import { CaseBlocks, sectionNumber, type CaseBlock } from "./CaseBlocks";
+import { CaseBlocks, type CaseBlock } from "./CaseBlocks";
 import { CaseClosing } from "./CaseClosing";
 import { CaseDecisions } from "./CaseDecisions";
 import { CaseFeatures } from "./CaseFeatures";
@@ -59,7 +59,6 @@ export function PersonalCase({ project }: { project: Project }) {
     .filter((heading) => body[heading])
     .map((heading, index) => ({
       id: `case-closing-${index}`,
-      number: sectionNumber(blocks.length + index),
       label: heading,
       paragraphs: body[heading],
     }));
@@ -79,7 +78,8 @@ export function getLabPosition(project: Project) {
   const lab = getLabProjects();
   const index = lab.findIndex((item) => item.slug === project.slug);
   if (index === -1) return undefined;
-  return `${sectionNumber(index)} / ${String(lab.length).padStart(2, "0")} in Lab`;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${pad(index + 1)} / ${pad(lab.length)} in Lab`;
 }
 
 // prev/next walk the Lab in a loop, skipping projects with nowhere to go

@@ -26,7 +26,11 @@ export function About({ paragraphs }: Props) {
             className="aspect-[4/5] w-full bg-surface object-cover grayscale"
           />
           {/* hangs off the bottom-right corner by ~43% / 37% of its own size, as in the design */}
-          <MemojiSticker className="absolute right-0 bottom-0 size-fl-100/130 translate-x-[43%] translate-y-[37%]" />
+          <MemojiSticker
+            href="#contact"
+            label="Say hello: jump to contacts"
+            className="absolute right-0 bottom-0 size-fl-100/130 translate-x-[43%] translate-y-[37%]"
+          />
         </div>
 
         <div className="flex max-w-[780px] flex-col gap-fl-20/24">

@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { track } from "@/lib/analytics";
 import { SITE } from "@/lib/site";
-import type { ChatErrorCode, ChatEvent } from "./protocol";
+import type { ChatErrorCode, ChatEvent, ChatRequest } from "./protocol";
 import type { ChatMessage } from "./types";
 
 type State = { messages: ChatMessage[]; busy: boolean; drawerOpen: boolean };
@@ -76,7 +76,9 @@ export async function sendQuestion(question: string) {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ messages: [...history, { role: "user", content: text }] }),
+      body: JSON.stringify({
+        messages: [...history, { role: "user", content: text }],
+      } satisfies ChatRequest),
     });
     if (!response.body) return failWith("failed");
 

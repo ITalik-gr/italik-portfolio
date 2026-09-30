@@ -27,7 +27,7 @@
 - Front-end: React, Next.js, Astro, TypeScript; pixel-perfect, fast, animated interfaces; Core Web Vitals and SEO.
 - Back-end, and where he used it:
   - Node.js, Firebase, Stripe Checkout and Connect: Answerly, where he was the sole developer (realtime chat, auth, payments, payouts, webhooks).
-  - Cloudflare Workers, Durable Objects, D1, Hono: Money Track (per-user data isolation with Durable Objects, bank sync through Monobank webhooks).
+  - Cloudflare Workers, Durable Objects, D1, Hono: Money Track (per-user data isolation with Durable Objects, D1 as the shared directory of users, shared rates and OAuth clients, bank sync through Monobank webhooks).
   - Cloudflare Workers, D1, grammY: the AI Telegram Assistant.
   - Strapi as a headless CMS: ppc.io and the Backlinks site.
   - PostgreSQL and Express in client work at Sollas; NestJS in his personal back-end projects.

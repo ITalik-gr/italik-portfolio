@@ -14,7 +14,7 @@ description: A multi-user finance app that syncs Monobank and CSV statements, ca
 keyIdea: The model never computes a number.
 role: Solo · design, front-end, back-end, AI
 timeline: 2026 · ~3 months
-stack: [TypeScript, React, RTK Query, Cloudflare Workers, Durable Objects (SQLite), Hono, Anthropic API, TypeSafe Jev]
+stack: [TypeScript, React, RTK Query, Cloudflare Workers, Durable Objects (SQLite), D1, Hono, Anthropic API, TypeSafe Jev]
 shipsAs: [Web app (PWA), MCP server, Telegram bot + Mini App]
 links:
   live: https://money.italik.dev

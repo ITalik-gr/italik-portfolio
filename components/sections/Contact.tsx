@@ -31,7 +31,11 @@ export function Contact() {
         </div>
 
         <div className="relative mt-[28px] | md:mt-[40px]">
-          <MemojiSticker className="size-[120px] | md:absolute md:top-0 md:right-0 md:size-fl-100/150 | lg:right-[20px]" />
+          <MemojiSticker
+            href={`mailto:${SITE.email}`}
+            label={`Email ${SITE.email}`}
+            className="size-[120px] | md:absolute md:top-0 md:right-0 md:size-fl-100/150 | lg:right-[20px]"
+          />
           <h2
             id="contact-title"
             className="mt-[8px] text-fl-88/288 leading-[0.82] whitespace-nowrap font-semibold tracking-[-0.05em] | md:mt-0"

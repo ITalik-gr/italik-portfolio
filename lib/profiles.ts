@@ -40,11 +40,11 @@ const AI: Profile = {
   sections: [
     "featured",
     "lab",
-    "nowBuilding",
-    "clientWork",
     "experience",
+    "clientWork",
     "about",
     "ask",
+    "nowBuilding",
     "skills",
   ],
   about: ABOUT,
@@ -62,7 +62,7 @@ const FRONTEND: Profile = {
   hero: {
     title: "Every pixel, every ms.",
     lines: ["Every pixel,", "every ms."],
-    sub: "Front-end developer. I turn Figma into fast, pixel-perfect sites and apps in React, Next.js and Astro. 30+ shipped.",
+    sub: "Front-end developer. React, Next.js, Astro. Pixel-perfect to the design, fast in Core Web Vitals, 30+ shipped.",
   },
   stack: [
     "TypeScript",
@@ -114,7 +114,7 @@ const FULLSTACK: Profile = {
   hero: {
     title: "I build products end to end",
     lines: ["I build", "products", "end to end"],
-    sub: "Full-stack developer. React and Next.js on the front, Node.js, Cloudflare Workers and Stripe on the back, AI where it actually helps.",
+    sub: "Full-stack developer. React and Next.js on the front, Node.js and NestJS on the back, and AI features when a product needs them.",
   },
   stack: [
     "TypeScript",

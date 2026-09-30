@@ -5,7 +5,7 @@ import { ROLE_PROFILES } from "@/lib/profiles";
 import { getProjectLinks, isExternal } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { siteUrl } from "@/lib/seo";
-import { ABOUT, HERO, SITE } from "@/lib/site";
+import { ABOUT, CV_BY_HOME, HERO, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 
 // llms.txt (llmstxt.org): a plain Markdown index of the site for AI assistants and crawlers
@@ -47,6 +47,8 @@ export function buildLlmsTxt() {
     `- Telegram: ${SITE.socials.telegram}`,
     `- GitHub: ${SITE.socials.github}`,
     `- [CV (PDF)](${absolute(SITE.cv)})`,
+    `- [Front-end CV (PDF)](${absolute(CV_BY_HOME["/frontend"])})`,
+    `- [Full-stack CV (PDF)](${absolute(CV_BY_HOME["/fullstack"])})`,
     `- [Ask the AI chat about him](${siteUrl}/#ask): answers from this site's content only`,
     ...ROLE_PROFILES.map(
       (profile) =>

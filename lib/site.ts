@@ -20,6 +20,13 @@ export const SITE = {
   },
 } as const;
 
+// each home page hands out its own CV; case pages use the one of the home page the visitor came from
+export const CV_BY_HOME: Record<string, string> = {
+  "/": SITE.cv,
+  "/frontend": "/cv/Vitaliy_Hrytsenko_Frontend.pdf",
+  "/fullstack": "/cv/Vitaliy_Hrytsenko_Fullstack.pdf",
+};
+
 // same-page anchors: the nav only lives on home pages, and a role page must not jump back to "/"
 export const NAV = [
   { label: "Work", href: "#work" },
@@ -64,25 +71,20 @@ export const HERO_QUESTIONS = [
 ] as const;
 
 export const SECTIONS = {
-  featured: { number: "01", label: "Featured", title: "Featured", meta: undefined },
-  lab: { number: "02", label: "Lab", title: "Lab", meta: "Personal projects & agents" },
+  featured: { title: "Featured", meta: undefined },
+  lab: { title: "Lab", meta: "Personal projects & agents" },
   nowBuilding: {
-    number: "03",
-    label: "Now building",
     title: "Now building",
     meta: "Work in progress",
   },
   clientWork: {
-    number: "04",
-    label: "Client work",
     title: "Client work",
     meta: "Via Sollas · Metamorfosi · Freelance",
   },
-  experience: { number: "05", label: "Experience", title: "Experience", meta: "3+ yrs · remote" },
-  about: { number: "06", label: "About", title: "About", meta: "Kyiv, Ukraine" },
-  ask: { number: "07", label: "Ask AI", title: "Ask my AI about me", meta: "Live demo" },
-  skills: { number: "08", label: "Skills", title: "Skills", meta: "By area" },
-  contact: { number: "09", label: "Contact", title: "Say hello", meta: "" },
+  experience: { title: "Experience", meta: "3+ yrs · remote" },
+  about: { title: "About", meta: "Kyiv, Ukraine" },
+  ask: { title: "Ask my AI about me", meta: "Live demo" },
+  skills: { title: "Skills", meta: "By area" },
 } as const;
 
 export const ABOUT = [
@@ -93,7 +95,6 @@ export const ABOUT = [
 ] as const;
 
 export const ASK = {
-  title: "Ask my AI about me",
   lines: ["Ask my AI", "about me"],
   sub: "It knows my projects, experience and how I work. Ask it anything a recruiter would.",
   chips: [

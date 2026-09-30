@@ -1,7 +1,7 @@
 import { getBodySections, getProjects } from "@/lib/content";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
-import { CaseBlocks, sectionNumber, type CaseBlock } from "./CaseBlocks";
+import { CaseBlocks, type CaseBlock } from "./CaseBlocks";
 import { CaseGallery } from "./CaseGallery";
 import { CaseHighlights } from "./CaseHighlights";
 import { CaseOutcome } from "./CaseOutcome";
@@ -61,7 +61,7 @@ export function ClientCase({ project }: { project: Project }) {
     <>
       <CaseBlocks blocks={blocks} />
       {related.length > 0 && (
-        <CaseRelated id="case-related" number={sectionNumber(blocks.length)} items={related} />
+        <CaseRelated id="case-related" items={related} />
       )}
     </>
   );

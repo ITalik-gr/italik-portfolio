@@ -40,7 +40,9 @@ const CONTACT_HOSTS: Record<string, string> = {
 
 function classify(url: URL): { event: string; data: Record<string, string> } | null {
   const here = window.location.origin;
-  if (url.pathname.endsWith(".pdf")) return { event: "cv_download", data: {} };
+  if (url.pathname.endsWith(".pdf")) {
+    return { event: "cv_download", data: { cv: url.pathname.split("/").pop() ?? "" } };
+  }
   if (url.protocol === "mailto:") return { event: "contact_click", data: { channel: "email" } };
   if (CONTACT_HOSTS[url.host]) {
     return { event: "contact_click", data: { channel: CONTACT_HOSTS[url.host] } };

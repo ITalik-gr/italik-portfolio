@@ -42,8 +42,10 @@ export function Reveal({
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const items = [...el.children];
-        gsap.set(items, { opacity: 0, y });
         el.dataset.revealed = "true";
+        // nothing rendered inside (optional content): gsap would only warn about an empty target
+        if (items.length === 0) return;
+        gsap.set(items, { opacity: 0, y });
         const tween = { opacity: 1, y: 0, duration, ease: "expo.out", stagger };
 
         if (ScrollTrigger.isInViewport(el, 0.05)) gsap.to(items, { ...tween, delay: 0.1 + delay });

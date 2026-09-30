@@ -12,14 +12,11 @@ export type CaseBlock = {
   after?: ReactNode;
 };
 
-export const sectionNumber = (index: number) => String(index + 1).padStart(2, "0");
-
 export function CaseBlocks({ blocks }: { blocks: CaseBlock[] }) {
-  return blocks.map((block, index) => (
+  return blocks.map((block) => (
     <div key={block.key}>
       <CaseSection
         id={`case-${block.key}`}
-        number={sectionNumber(index)}
         label={block.label}
         aside={block.aside}
         wide={block.wide}

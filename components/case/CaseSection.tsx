@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   id: string;
-  number: string;
   label: string;
   aside?: ReactNode;
   // wide: the content takes the full width under a label row, with meta on the right
@@ -14,7 +13,7 @@ type Props = {
   className?: string;
 };
 
-export function CaseSection({ id, number, label, aside, wide, meta, children, className }: Props) {
+export function CaseSection({ id, label, aside, wide, meta, children, className }: Props) {
   if (wide) {
     return (
       <section
@@ -25,7 +24,7 @@ export function CaseSection({ id, number, label, aside, wide, meta, children, cl
         )}
       >
         <div className="flex items-baseline justify-between gap-[24px]">
-          <CaseLabel id={id} number={number} label={label} />
+          <CaseLabel id={id} label={label} />
           {meta && (
             <p className="hidden text-[15px] leading-[21px] text-muted | md:block">
               {meta}
@@ -45,7 +44,7 @@ export function CaseSection({ id, number, label, aside, wide, meta, children, cl
       )}
     >
       <Reveal>
-        <CaseLabel id={id} number={number} label={label} />
+        <CaseLabel id={id} label={label} />
         {aside}
       </Reveal>
       <Reveal className="min-w-0 | lg:col-span-3">{children}</Reveal>
@@ -53,14 +52,10 @@ export function CaseSection({ id, number, label, aside, wide, meta, children, cl
   );
 }
 
-export function CaseLabel({ id, number, label }: { id: string; number: string; label: string }) {
+export function CaseLabel({ id, label }: { id: string; label: string }) {
   return (
-    <h2
-      id={id}
-      className="flex gap-[12px] text-[14px] leading-[20px] text-text | md:gap-[14px] md:text-[15px] md:leading-[21px]"
-    >
-      <span className="text-accent">{number}</span>
-      <span>{label}</span>
+    <h2 id={id} className="text-[14px] leading-[20px] text-text | md:text-[15px] md:leading-[21px]">
+      {label}
     </h2>
   );
 }

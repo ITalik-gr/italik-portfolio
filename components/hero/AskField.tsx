@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { openChatDrawer, sendQuestion } from "@/lib/chat/store";
+import { openChatDrawer, sendQuestion, useChat } from "@/lib/chat/store";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -17,6 +17,7 @@ const HOLD_MS = 1800;
 export function AskField({ questions, className }: Props) {
   const [value, setValue] = useState("");
   const [focused, setFocused] = useState(false);
+  const { busy } = useChat();
   const form = useRef<HTMLFormElement>(null);
   const ghost = useRef<HTMLSpanElement>(null);
   // the question currently on screen, sent when the field is empty
@@ -76,9 +77,10 @@ export function AskField({ questions, className }: Props) {
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    const question = value.trim() || questions[current.current];
     openChatDrawer();
-    void sendQuestion(question);
+    // while an answer is still streaming the chat drops new questions, so keep the text for a second try
+    if (busy) return;
+    void sendQuestion(value.trim() || questions[current.current]);
     setValue("");
   };
 

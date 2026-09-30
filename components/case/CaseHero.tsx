@@ -3,12 +3,20 @@ import { Reveal } from "@/components/motion/Reveal";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { ImageFrame } from "@/components/ui/ImageFrame";
 import type { Project } from "@/lib/schemas";
+import { cn } from "@/lib/utils";
 import { CaseLinks } from "./CaseLinks";
 import { CaseMeta } from "./CaseMeta";
 
 type Props = { project: Project; labPosition?: string };
 
 const KICKER_SIDE = "hidden text-muted | md:inline";
+
+// the longer the name, the smaller the title, so "AI Telegram Assistant" breaks into lines, not into single words
+function titleSize(title: string) {
+  if (title.length <= 12) return "text-fl-72/200";
+  if (title.length <= 18) return "text-fl-56/160";
+  return "text-fl-48/132";
+}
 
 // personal cases lead with the key idea and one-liner; client cases go straight to the meta
 // the title and cover morph in from the home page, so only the rest goes through Reveal
@@ -31,7 +39,12 @@ export function CaseHero({ project, labPosition }: Props) {
 
       <div className="flex items-end justify-between gap-[40px]">
         <ProjectMorph slug={project.slug} part="title">
-          <h1 className="mt-fl-22/36 text-fl-92/274 leading-[0.82] font-semibold tracking-[-0.05em] | md:text-fl-68/274">
+          <h1
+            className={cn(
+              "mt-fl-22/36 leading-[0.86] font-semibold tracking-[-0.045em] text-balance",
+              titleSize(project.title),
+            )}
+          >
             {project.title}
           </h1>
         </ProjectMorph>

@@ -4,7 +4,7 @@ import { getExperience, getProjects } from "@/lib/content";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import type { Architecture } from "@/lib/schemas-architecture";
-import { ABOUT, HERO, SITE } from "@/lib/site";
+import { ABOUT, CV_BY_HOME, HERO, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 import type { ChatSource } from "./types";
 
@@ -151,7 +151,7 @@ function buildDocs(): Doc[] {
         `email: ${SITE.email}`,
         `telegram: ${SITE.socials.telegram}`,
         `github: ${SITE.socials.github}`,
-        `cv: ${SITE.cv}`,
+        `cv: ${SITE.cv} (front-end version: ${CV_BY_HOME["/frontend"]}, full-stack version: ${CV_BY_HOME["/fullstack"]})`,
         `location: ${SITE.location.city}, ${SITE.location.country} (Europe/Kyiv: UTC+2 in winter, UTC+3 in summer)`,
         `open to: ${SITE.openTo.join(", ")}`,
       ].join("\n"),

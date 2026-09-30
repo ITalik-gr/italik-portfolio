@@ -6,6 +6,9 @@ test("only the text of a Lab row switches the preview", async ({ page }) => {
   const rows = page.locator("#lab li");
   const previews = page.locator("[data-lab-preview]");
 
+  // hover scrolls the row into view; let smooth scroll settle first, or the page moves under the mouse
+  await rows.nth(1).scrollIntoViewIfNeeded();
+  await page.waitForTimeout(600);
   await rows.nth(1).locator("h3").hover();
   await expect(rows.nth(0).locator("h3")).toHaveCSS("color", "rgb(58, 58, 58)");
   await expect(previews.nth(1)).toHaveCSS("opacity", "1");
