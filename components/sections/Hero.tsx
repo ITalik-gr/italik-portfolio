@@ -21,7 +21,8 @@ export function Hero({ hero, questions }: Props) {
       <p className="mt-fl-16/24 max-w-[560px] text-fl-17/24 leading-[1.35] tracking-[-0.01em] text-text-3">
         {hero.sub}
       </p>
-      <AskField questions={questions} className="mt-fl-40/72" />
+      {/* on wide screens the field stops at its 1440 width instead of running across the whole page */}
+      <AskField questions={questions} className="mt-fl-40/72 | 2xl:max-w-[1360px]" />
       <HeroActions className="mt-fl-24/36 | md:self-start" />
     </section>
   );

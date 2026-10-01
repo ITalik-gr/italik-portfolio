@@ -10,16 +10,17 @@ import { Featured } from "@/components/sections/Featured";
 import { RememberHome } from "@/components/layout/HomeLink";
 import { Hero } from "@/components/sections/Hero";
 import { HowIWork } from "@/components/sections/HowIWork";
+import { Writing } from "@/components/sections/Writing";
 import { Lab } from "@/components/sections/Lab";
 import { NowBuilding } from "@/components/sections/NowBuilding";
 import { Skills } from "@/components/sections/Skills";
 import { ServiceList } from "@/components/services/ServiceList";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getFeaturedProjects, getNowBuilding, getProject } from "@/lib/content";
+import { getFeaturedProjects, getNowBuilding, getPosts, getProject } from "@/lib/content";
 import type { HomeSectionKey, Profile } from "@/lib/profiles";
 import type { Project } from "@/lib/schemas";
 import { homeJsonLd } from "@/lib/seo";
-import { HOMES } from "@/lib/site";
+import { ASK, HOMES } from "@/lib/site";
 
 export function HomePage({ profile }: { profile: Profile }) {
   const featured = getFeatured(profile);
@@ -29,6 +30,7 @@ export function HomePage({ profile }: { profile: Profile }) {
   const shown = profile.sections.filter((key) => {
     if (key === "featured") return featured.length > 0;
     if (key === "nowBuilding") return getNowBuilding().length > 0;
+    if (key === "writing") return getPosts().length > 0;
     return true;
   });
   
@@ -37,13 +39,14 @@ export function HomePage({ profile }: { profile: Profile }) {
   const render: Record<HomeSectionKey, () => ReactNode> = {
     offers: () => <ServiceList compact />,
     howIWork: () => <HowIWork />,
+    writing: () => <Writing />,
     featured: () => <Featured projects={featured} />,
     lab: () => <Lab featured={featuredSlugs} />,
     nowBuilding: () => <NowBuilding />,
     clientWork: () => <ClientWork featured={featuredSlugs} />,
     experience: () => <Experience />,
     about: () => <About paragraphs={profile.about} />,
-    ask: () => <AskAI chips={profile.askChips} />,
+    ask: () => <AskAI chips={profile.askChips} sub={profile.askSub ?? ASK.sub} />,
     skills: () => <Skills order={profile.skillsOrder} />,
   };
 

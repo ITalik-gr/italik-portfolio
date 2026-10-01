@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import type { NavItem } from "@/lib/site";
+import { REPLY_NOTE, type NavItem } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { BurgerIcon } from "./BurgerIcon";
 import { ContactLinks } from "./ContactLinks";
@@ -92,11 +92,14 @@ export function MobileMenu({ nav }: { nav: readonly NavItem[] }) {
         >
           <ContactLinks variant="rows" className="border-t border-line" />
           <p className="mt-[12px] flex justify-between font-mono text-[12px] leading-[16px] text-text-3">
-            <span>
-              Kyiv · <KyivTime /> · UTC+3
-            </span>
             <ForAudience audience="employer">
+              <span>
+                Kyiv · <KyivTime /> · UTC+3
+              </span>
               <span className="text-muted">Open to work</span>
+            </ForAudience>
+            <ForAudience audience="client">
+              <span>{REPLY_NOTE}</span>
             </ForAudience>
           </p>
         </div>

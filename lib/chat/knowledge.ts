@@ -1,9 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
-import { getExperience, getProjects } from "@/lib/content";
+import { getExperience, getPosts, getProjects } from "@/lib/content";
+import { toPlainText } from "@/lib/markdown";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import type { Architecture } from "@/lib/schemas-architecture";
+import {
+  HOW_I_WORK,
+  SERVICES,
+  SERVICE_FAQ,
+  SERVICE_FORMATS,
+  SERVICE_STEPS,
+  SERVICE_TERMS,
+} from "@/lib/services";
 import { ABOUT, HERO, HOMES, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 import type { ChatSource } from "./types";
@@ -107,6 +116,30 @@ function projectDoc(project: Project): Doc {
   };
 }
 
+// the /services page as the chat sees it, built from the same copy so the two never disagree
+function servicesDoc(): Doc {
+  return {
+    id: "site/services.md",
+    text: [
+      "What he offers founders:",
+      ...SERVICES.map((service) => `- ${service.title}: ${service.text} Proof: ${service.result}`),
+      "",
+      "How he works:",
+      ...HOW_I_WORK.map((item) => `- ${item.title}. ${item.text} Proof: ${item.proof}`),
+      "",
+      "Process:",
+      ...SERVICE_STEPS.map((step, index) => `${index + 1}. ${step.title}: ${step.text}`),
+      "",
+      `Formats: ${SERVICE_FORMATS.join(", ")}.`,
+      `Terms: ${SERVICE_TERMS.join("; ")}.`,
+      "",
+      "FAQ:",
+      ...SERVICE_FAQ.map((item) => `- Q: ${item.q} A: ${item.a}`),
+    ].join("\n"),
+    source: { label: "services", href: "/services" },
+  };
+}
+
 function buildDocs(): Doc[] {
   const projects = getProjects().map(projectDoc);
   const experience = getExperience().map((job) => ({
@@ -159,7 +192,13 @@ function buildDocs(): Doc[] {
       source: { label: "contact.md", href: "/#contact" },
     },
   ];
-  return [...site, ...knowledge, ...experience, ...projects];
+  // published articles only; a draft never reaches the model
+  const posts: Doc[] = getPosts().map((post) => ({
+    id: `posts/${post.slug}.md`,
+    text: clean([`title: ${post.title}`, `date: ${post.date}`, `summary: ${post.summary}`, "", toPlainText(post.body)].join("\n")),
+    source: { label: `${post.slug}.md`, href: `/blog/${post.slug}` },
+  }));
+  return [...site, servicesDoc(), ...knowledge, ...experience, ...projects, ...posts];
 }
 
 // server only: reads content/ from disk

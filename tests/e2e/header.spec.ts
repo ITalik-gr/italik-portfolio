@@ -11,11 +11,15 @@ test("mobile menu opens, locks scroll and closes on Escape", async ({ page }) =>
   await expect(page.getByRole("navigation", { name: "Mobile" })).toBeHidden();
 });
 
-test("desktop header shows nav and Kyiv time", async ({ page }) => {
+test("desktop header: Kyiv time for employers, the reply promise for clients", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  await page.goto("/ai");
   await expect(page.getByRole("navigation", { name: "Main" })).toBeVisible();
   await expect(page.locator("header time").first()).toHaveText(/^\d{2}:\d{2}$/);
+
+  await page.goto("/");
+  await expect(page.locator("header time")).toHaveCount(0);
+  await expect(page.locator("header").getByText("Replies the same day").first()).toBeVisible();
 });
 
 async function navLabels(page: Page, name: string) {

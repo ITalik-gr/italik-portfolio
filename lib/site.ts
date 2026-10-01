@@ -40,11 +40,11 @@ export const isClientPage = (pathname: string) =>
 export type NavItem = { label: string; href: string; samePage?: boolean };
 
 // employers get no Services on purpose: they shouldn't read "he takes clients"; it lives in the footers
-// TODO phase 5: Blog in the client nav once an article is published
 export const NAV: Record<Audience, readonly NavItem[]> = {
   client: [
     { label: "Work", href: "#work" },
     { label: "Services", href: "/services" },
+    { label: "Blog", href: "/blog" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact", samePage: true },
   ],
@@ -58,6 +58,9 @@ export const NAV: Record<Audience, readonly NavItem[]> = {
 
 // the employer portfolio linked from client pages: old links in applications and CVs land on "/"
 export const HIRING = { label: "Hiring? See my developer portfolio", href: "/ai" } as const;
+
+// clients don't care what time it is in Kyiv; they care how fast I answer
+export const REPLY_NOTE = "Replies the same day";
 
 export const HERO = {
   title: "I build AI agents that ship",
@@ -125,6 +128,17 @@ export const ASK = {
   channel: "Ask-italik",
   languageNote: "Answers in the language you ask",
   placeholder: "Ask anything…",
+} as const;
+
+export const BLOG = {
+  kicker: "Blog",
+  title: "Writing",
+  sub: "How I solve problems in real products: what didn't work, what did, and the numbers.",
+  meta: {
+    title: "Writing · Vitaliy Hrytsenko",
+    description:
+      "Articles by Vitaliy Hrytsenko on building AI features and products: the problem, what didn't work, the fix and the numbers.",
+  },
 } as const;
 
 export const FOOTER = {

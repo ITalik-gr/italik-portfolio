@@ -78,7 +78,11 @@ export function FeaturedCard({ project, mirrored }: Props) {
             <ProjectMorph slug={project.slug} part="title" source="featured">
               <h3
                 id={titleId}
-                className="text-fl-56/92 leading-[0.86] font-semibold tracking-[-0.045em]"
+                className={cn(
+                  "leading-[0.86] font-semibold tracking-[-0.045em]",
+                  // long names ("AI Telegram Assistant") step down so their lines fit the column
+                  project.title.length > 14 ? "text-fl-44/68" : "text-fl-56/92",
+                )}
               >
                 {caseHref ? (
                   <Link
@@ -125,10 +129,17 @@ export function FeaturedCard({ project, mirrored }: Props) {
 }
 
 // the design stacks each word of the name on its own line
+// one word per line, but a short word ("AI") rides with the next one instead of standing alone
 function TitleWords({ title }: { title: string }) {
-  return title.split(" ").map((word) => (
-    <span key={word} className="block">
-      {word}{" "}
+  const lines = title.split(" ").reduce<string[]>((acc, word) => {
+    const last = acc.at(-1);
+    if (last && last.length <= 3 && !last.includes(" ")) acc[acc.length - 1] = `${last} ${word}`;
+    else acc.push(word);
+    return acc;
+  }, []);
+  return lines.map((line) => (
+    <span key={line} className="block">
+      {line}{" "}
     </span>
   ));
 }

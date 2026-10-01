@@ -1,5 +1,5 @@
 import { getKnowledge } from "@/lib/chat/knowledge";
-import { getExperience, getProjects } from "@/lib/content";
+import { getExperience, getPosts, getProjects } from "@/lib/content";
 import { STATUS_LABELS } from "@/lib/format";
 import { PROFILES, ROLE_PROFILES } from "@/lib/profiles";
 import { getProjectLinks, isExternal } from "@/lib/project-links";
@@ -28,6 +28,7 @@ export function buildLlmsTxt() {
   const projects = getProjects().filter((project) => !project.draft);
   const personal = projects.filter((project) => project.kind === "personal");
   const client = projects.filter((project) => project.kind === "client");
+  const posts = getPosts();
 
   return [
     `# ${SITE.name} (${SITE.handle})`,
@@ -73,6 +74,14 @@ export function buildLlmsTxt() {
     "",
     ...client.map(projectLine),
     "",
+    ...(posts.length > 0
+      ? [
+          "## Writing",
+          "",
+          ...posts.map((post) => `- [${post.title}](${siteUrl}/blog/${post.slug}): ${post.summary} (${post.date})`),
+          "",
+        ]
+      : []),
     "## Experience",
     "",
     ...getExperience().map(

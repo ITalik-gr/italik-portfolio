@@ -4,9 +4,11 @@ import matter from "gray-matter";
 import type { z } from "zod";
 import {
   experienceSchema,
+  postSchema,
   projectSchema,
   type Experience,
   type HOME_SECTIONS,
+  type Post,
   type Project,
 } from "@/lib/schemas";
 
@@ -99,4 +101,24 @@ export function getBodySections(body: string) {
 
 export function getExperience(): Experience[] {
   return readCollection("experience", experienceSchema).sort(byOrder);
+}
+
+function getAllPosts(): Post[] {
+  if (!fs.existsSync(path.join(CONTENT_DIR, "posts"))) return [];
+  return readCollection("posts", postSchema).sort((a, b) => b.date.localeCompare(a.date));
+}
+
+// published only, newest first: the blog page, the home block, nav, RSS, sitemap, llms.txt.
+// no published post means no blog at all
+export function getPosts() {
+  return getAllPosts().filter((post) => !post.draft);
+}
+
+// pages that get built; drafts open only in `pnpm dev`, so they can be read before publishing
+export function getPostPages() {
+  return process.env.NODE_ENV === "development" ? getAllPosts() : getPosts();
+}
+
+export function getPost(slug: string) {
+  return getPostPages().find((post) => post.slug === slug);
 }

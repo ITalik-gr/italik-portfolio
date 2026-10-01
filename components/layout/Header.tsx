@@ -1,4 +1,5 @@
-import { NAV, type Audience } from "@/lib/site";
+import { getPosts } from "@/lib/content";
+import { NAV, REPLY_NOTE, type Audience } from "@/lib/site";
 import { CvButton } from "./CvButton";
 import { ForAudience } from "./ForAudience";
 import { HomeLink, NavLink } from "./HomeLink";
@@ -11,7 +12,12 @@ type Props = { variant: "case" } | { variant?: "home"; audience: Audience };
 
 // case pages swap the nav for a way back; on mobile they drop the monogram and menu too
 export function Header(props: Props) {
-  const nav = props.variant === "case" ? null : NAV[props.audience];
+  // Blog shows up with the first published article
+  const hasBlog = getPosts().length > 0;
+  const nav =
+    props.variant === "case"
+      ? null
+      : NAV[props.audience].filter((item) => item.href !== "/blog" || hasBlog);
   const isCase = !nav;
 
   return (
@@ -58,14 +64,20 @@ export function Header(props: Props) {
 
         <div className="flex items-center justify-end gap-[8px] | md:col-start-3 md:gap-[24px]">
           <div className="hidden items-center gap-[24px] text-[14px] leading-[20px] text-muted | lg:flex">
-            <span>
-              Kyiv{" "}
-              <span className="font-mono text-[13px]">
-                <KyivTime />
-              </span>
-            </span>
             <ForAudience audience="employer">
+              <span>
+                Kyiv{" "}
+                <span className="font-mono text-[13px]">
+                  <KyivTime />
+                </span>
+              </span>
               <span>Open to work</span>
+            </ForAudience>
+            <ForAudience audience="client">
+              <span className="flex items-center gap-[8px]">
+                <span aria-hidden className="size-[7px] rounded-full bg-accent" />
+                {REPLY_NOTE}
+              </span>
             </ForAudience>
           </div>
           <CvButton

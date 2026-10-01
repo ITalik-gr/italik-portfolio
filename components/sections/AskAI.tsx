@@ -5,9 +5,9 @@ import { ASK, SECTIONS } from "@/lib/site";
 import { HowItWorks } from "./HowItWorks";
 
 // data-hides-fab: the chat itself is on screen here, so the floating Ask AI button steps aside
-type Props = { chips: readonly string[] };
+type Props = { chips: readonly string[]; sub: string };
 
-export function AskAI({ chips }: Props) {
+export function AskAI({ chips, sub }: Props) {
   const { meta } = SECTIONS.ask;
 
   return (
@@ -25,7 +25,7 @@ export function AskAI({ chips }: Props) {
               </span>
             ))}
           </h2>
-          <p className="max-w-[460px] text-fl-17/20 leading-[1.45] text-text-3">{ASK.sub}</p>
+          <p className="max-w-[460px] text-fl-17/20 leading-[1.45] text-text-3">{sub}</p>
           <HowItWorks className="| lg:mt-auto" />
         </div>
         <div data-hides-fab className="min-w-0 | lg:col-span-6 lg:col-start-7">

@@ -10,6 +10,7 @@ export function CaseCta() {
   return (
     <ForAudience audience="client">
       <aside
+        id="case-cta"
         aria-labelledby="case-cta-title"
         className="mt-fl-96/160 border-t border-line px-gutter pt-[20px] | md:pt-[24px]"
       >

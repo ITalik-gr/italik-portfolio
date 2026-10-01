@@ -8,27 +8,29 @@
 - Contact: italik.gr@gmail.com · Telegram @ITalik_gr · GitHub github.com/ITalik-gr · X @italikdev. CV: /cv.pdf
 - He doesn't use LinkedIn; email or Telegram is the best way to reach him.
 
+## Two kinds of visitors
+- The site has two sides. The home page (italik.dev) and /services are for founders and small product teams who want a product built. The pages /ai, /fullstack and /frontend are for employers hiring a developer.
+- Answer founders about building their product and employers about hiring him. Both are true at the same time: he takes client projects and is open to a role.
+
+## For founders: building your product
+- Who he helps: founders and small product teams. He works solo and takes a product from decision to production without step-by-step specs.
+- How he works: learns the product, the users and the goal himself; says early when a plan won't work, explains why and brings his own option (if the founder still wants it their way, he builds it and writes down the risks); tells you what to cut so it reaches users sooner; talks in results: money, conversion, cost, stability.
+- What he offers, with proof, and the process, terms and FAQ: see site/services.md.
+- How to start: write to him on Telegram (t.me/ITalik_gr) or by email (italik.gr@gmail.com) with the goal, not a spec. He replies the same day. Details: italik.dev/services.
+- Rates: on request; the chat never quotes prices.
+
 ## What he's looking for
 - Remote roles: full-time, contract or part-time. Office or hybrid in Kyiv also works.
 - Target roles: AI Engineer, Full-stack Developer (AI), Product Engineer; strong front-end roles too.
 - Most interested in: AI agents and LLM features inside real products, owning features end to end, product-focused teams.
 - Why he's looking: his recent roles have been contracts, and he wants stable, long-term work with one team.
 
-## Client projects (services)
-- Besides a role, he also takes client projects himself. Details: italik.dev/services.
-- What he builds for clients: AI agents and LLM features inside a product (tool use, MCP servers, answers grounded in the product's own data, evals, cost limits); full-stack web apps and MVPs (React, Next.js, Node.js, NestJS, auth, payments, deployment); fast marketing sites in Next.js or Astro (less of a focus).
-- Formats: fixed-scope project, monthly contract, or hourly / part-time.
-- Process: intro call, written scope and estimate, build with a weekly demo and a short written report every week (more detail on request), launch and handover.
-- Terms: everything stays with the client (code, repositories, accounts, data); NDA on request; B2B contract as a Ukrainian sole proprietor (FOP); can start within a few days.
-- Support: the first month after launch is free, then by agreement or by the hour.
-- Rates: on request, by email or Telegram; the chat does not quote prices.
-
 ## Availability and logistics
 - Can start within a few days.
 - Hours: flexible; he can commit as many hours per week as the role needs.
 - Time zones: full overlap with Europe. He can work until 22:00 Kyiv time, which gives about 6 hours of overlap with the US East Coast (until roughly 3 pm ET).
 - Relocation: open to moving within Ukraine, for example to Lviv.
-- Contracts: can work B2B as a Ukrainian sole proprietor (FOP); setting it up takes a few days.
+- Contracts: the contract and invoicing are agreed before the start.
 - Salary and rates are not discussed in the chat; visitors should write to him directly.
 
 ## Strengths
@@ -65,7 +67,7 @@
 - Builds agents himself: harnesses from scratch in TypeScript on Node.js, Hono or NestJS, with tools, subagents, memory and human-in-the-loop steps, no framework required. He can also work with popular agent frameworks when a project uses them.
 
 ## Experience
-- **Sollas**, Full-Stack Developer (Contract), 10/2023 – present, remote. A design agency. Web apps and marketing sites end to end with Next.js, React, TypeScript, Astro + Strapi, Node.js, PostgreSQL, Firebase, Stripe and Cloudflare Workers. Projects: ppc.io (built the front-end solo and migrated it from Strapi to MDX content collections himself; evolved it for about 22 months, his main long-running project), sollas.co (Figma to deploy, owns its SEO with automated pre- and post-deploy checks), Answerly (sole developer), the Backlinks site (sole developer, end to end, including the Strapi setup; no design work), the linkbuilder.io front-end (built solo, then took part in the client's migration to another stack), a real-time crypto/finance dashboard under NDA (front-end: live charts and bot management, Next.js + TypeScript), and WordPress pages for The HOTH and Authority Builders.
+- **Sollas**, Full-Stack Developer (Contract), 10/2023 – present, remote. A design agency. Web apps and marketing sites end to end with Next.js, React, TypeScript, Astro + Strapi, Node.js, PostgreSQL, Firebase, Stripe and Cloudflare Workers. Projects: ppc.io (built the front-end solo and migrated it from Strapi to MDX content collections himself; evolved it for about 22 months, his main long-running project), sollas.co (Figma to deploy, owns its SEO with automated pre- and post-deploy checks), Answerly (sole developer), the Backlinks site (sole developer, end to end, including the Strapi setup; no design work), the Linkbuilder front-end (built solo, then took part in the client's migration to another stack), a real-time crypto/finance dashboard under NDA (front-end: live charts and bot management, Next.js + TypeScript), and WordPress pages for The HOTH and Authority Builders.
 - **Metamorfosi Agency (client: Bold, UK)**, Front-End Developer (Contract), 06/2024 – 05/2026, remote. 25+ responsive marketing and landing sites for Bold's UK clients as part of a team, 1–2 production sites a week, pixel-perfect from Figma across breakpoints. Wrote reusable HTML, PostCSS and JavaScript that the back-end team integrated into WordPress; also worked on Bold's own agency site.
 - **Freelance Front-End Developer**, 03/2023 – 10/2023, remote. Front-ends, forms and landing pages for client websites; sped up and SEO-optimized existing sites; set up and customized WordPress where needed.
 - The Sollas and Metamorfosi contracts ran in parallel for about two years.
@@ -112,8 +114,9 @@ Full details are in each project's file; these lines are only a quick reference.
 - Q: Does he write tests? A: Yes. His own projects have unit tests where the logic matters, plus golden analytics snapshots in Money Track, browser and agent end-to-end checks in Lottie Theme, and Playwright end-to-end tests on this site. In commercial work he writes unit and integration tests with Jest.
 - Q: Is he open to front-end-only roles? A: Yes, although his focus is full-stack and AI.
 - Q: Office or remote? A: Remote first; office or hybrid in Kyiv also works, and he is open to moving within Ukraine.
-- Q: Can he work on a B2B contract? A: Yes, as a Ukrainian sole proprietor (FOP), which he can set up within a few days.
-- Q: Does he take freelance or client projects? A: Yes. He builds AI agents and LLM features, full-stack web apps and MVPs, and marketing sites for clients, as a fixed-scope project, a monthly contract or by the hour. See italik.dev/services; rates on request.
+- Q: Can he work on a contract? A: Yes. The contract and invoicing are agreed before the start.
+- Q: Does he take freelance or client projects? A: Yes. He builds products and MVPs solo, adds AI to existing products, builds agents for specific tasks, makes products faster and cheaper to run, and fixes vibe-coded apps. As a fixed-scope project, a monthly contract or by the hour. See italik.dev/services; rates on request.
+- Q: How do we start working together? A: Write to him on Telegram or by email with the goal, not a spec. He replies the same day, then comes back with what he'd build, what he'd cut and why, plus an estimate.
 - Q: Who owns the code on a client project? A: The client: code, repositories, accounts and data. He signs an NDA on request.
 - Q: Does he support a project after launch? A: Yes. The first month is free, then by agreement or by the hour.
 - Q: Why is he looking for a new role? A: His recent roles have been contracts, and he wants stable, long-term work with one team.

@@ -1,3 +1,5 @@
+import { HOMES } from "./site";
+
 type Data = Record<string, string | number | boolean>;
 type Umami = { track: (event: string, data?: Data) => void };
 
@@ -5,6 +7,17 @@ type Umami = { track: (event: string, data?: Data) => void };
 export const UMAMI_WEBSITE_ID = "5b0e66e7-ef65-4a39-9b99-0e93e6fab3cc";
 // the only hosts that report; localhost and preview deploys stay out of the numbers
 export const UMAMI_DOMAINS = "italik.dev,www.italik.dev";
+
+// which kind of page an event came from, so client and employer clicks can be told apart
+export function pageKind(pathname: string) {
+  if (pathname === "/") return "client-home";
+  if (pathname === "/services") return "services";
+  if (pathname === "/blog") return "blog";
+  if (pathname.startsWith("/blog/")) return "article";
+  if (pathname.startsWith("/work/")) return "case";
+  if (HOMES[pathname]?.audience === "employer") return "employer-home";
+  return "other";
+}
 
 // events fired before the script has loaded (it waits for an idle moment) are sent once it's ready
 const queue: [string, Data | undefined][] = [];

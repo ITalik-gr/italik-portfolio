@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { UMAMI_DOMAINS, UMAMI_WEBSITE_ID, flushAnalytics, track } from "@/lib/analytics";
+import { UMAMI_DOMAINS, UMAMI_WEBSITE_ID, flushAnalytics, pageKind, track } from "@/lib/analytics";
 
 // Umami (~2 KB) loads when the browser is idle and counts page views itself, client navigation included;
 // the click listener below turns the links that matter into named events
@@ -12,7 +12,11 @@ export function Analytics() {
       const link = (event.target as Element | null)?.closest?.("a[href]");
       if (!(link instanceof HTMLAnchorElement)) return;
       const named = classify(new URL(link.href, window.location.href));
-      if (named) track(named.event, { ...named.data, from: window.location.pathname });
+      if (!named) return;
+      const { pathname } = window.location;
+      // place: the block the link sits in (start = the CTA, contact = the footer, case-cta = the case bridge)
+      const place = link.closest("section[id], aside[id], footer[id], header")?.id || "header";
+      track(named.event, { ...named.data, from: pathname, page: pageKind(pathname), place });
     };
     document.addEventListener("click", onClick, { capture: true });
     return () => document.removeEventListener("click", onClick, { capture: true });

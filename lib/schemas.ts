@@ -120,6 +120,23 @@ export const experienceSchema = z.object({
   stack: z.array(z.string()),
 });
 
+// draft: true never reaches a listing, RSS, the sitemap or a production build; canonical: when the original lives elsewhere
+export const postSchema = z.object({
+  title: z.string().min(1),
+  slug: z.string().regex(/^[a-z0-9-]+$/),
+  // YAML reads an unquoted 2026-10-01 as a Date; both forms are accepted
+  date: z.preprocess(
+    (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
+    z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  ),
+  summary: z.string().min(1),
+  tags: z.array(z.string()).default([]),
+  draft: z.boolean().default(false),
+  cover: z.string().optional(),
+  canonical: optionalUrl,
+});
+
 export type Project = z.infer<typeof projectSchema> & { body: string };
+export type Post = z.infer<typeof postSchema> & { body: string };
 export type Experience = z.infer<typeof experienceSchema> & { body: string };
 export type ProjectStatus = z.infer<typeof statusSchema>;

@@ -8,6 +8,8 @@ const ROUTES = [
   { name: "frontend", path: "/frontend" },
   { name: "fullstack", path: "/fullstack" },
   { name: "services", path: "/services" },
+  // a draft: renders only on `pnpm dev`, which the shots run against
+  { name: "post-draft", path: "/blog/the-model-never-computes-a-number" },
   { name: "case-money-track", path: "/work/money-track" },
   { name: "case-lottie-theme", path: "/work/lottie-theme" },
   { name: "case-tg-assistant", path: "/work/tg-assistant" },

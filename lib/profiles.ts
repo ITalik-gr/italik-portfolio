@@ -12,6 +12,7 @@ export const HOME_SECTION_KEYS = [
   "ask",
   "skills",
   "howIWork",
+  "writing",
 ] as const;
 export type HomeSectionKey = (typeof HOME_SECTION_KEYS)[number];
 
@@ -31,8 +32,18 @@ export type Profile = {
   skillsOrder?: readonly string[];
   about: readonly string[];
   askChips: readonly string[];
+  // the line under "Ask my AI about me"; the employer pages keep ASK.sub
+  askSub?: string;
   heroQuestions: readonly string[];
 };
+
+// what founders ask: the chips under Ask AI and the questions typed out in the hero
+const CLIENT_QUESTIONS = [
+  "Can he build my MVP?",
+  "Can he cut our AI costs?",
+  "Our AI makes things up. Can he fix it?",
+  "How do we start?",
+];
 
 const CLIENT: Profile = {
   slug: "client",
@@ -49,7 +60,7 @@ const CLIENT: Profile = {
   },
   stack: HERO.stack,
   // short on purpose: what I do, proof, how I work; no Experience or Skills for founders
-  sections: ["offers", "featured", "howIWork", "about", "ask"],
+  sections: ["offers", "featured", "howIWork", "writing", "about", "ask"],
   featured: [
     { slug: "money-track" },
     { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." },
@@ -57,9 +68,9 @@ const CLIENT: Profile = {
   ],
   // the last paragraph of ABOUT is about looking for a role
   about: ABOUT.slice(0, 3),
-  // TODO phase 6: founder questions
-  askChips: [ASK.chips[0], ASK.chips[2], ASK.chips[3]],
-  heroQuestions: [HERO_QUESTIONS[0], HERO_QUESTIONS[2]],
+  askChips: CLIENT_QUESTIONS,
+  askSub: "It knows my projects and how I work. Ask anything about building your product with me.",
+  heroQuestions: CLIENT_QUESTIONS,
 };
 
 const AI: Profile = {

@@ -1,5 +1,5 @@
 import type { Profile } from "./profiles";
-import type { Project } from "./schemas";
+import type { Post, Project } from "./schemas";
 import { SERVICES, SERVICES_PAGE, SERVICE_FAQ } from "./services";
 import { HOMES, SITE } from "./site";
 
@@ -91,6 +91,37 @@ export function caseJsonLd(project: Project) {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
           { "@type": "ListItem", position: 2, name: project.title, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+export function postJsonLd(post: Post) {
+  const url = `${siteUrl}/blog/${post.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#post`,
+        url,
+        mainEntityOfPage: url,
+        headline: post.title,
+        description: post.summary,
+        datePublished: post.date,
+        author: person,
+        publisher: { "@id": person["@id"] },
+        image: `${url}/opengraph-image`,
+        keywords: post.tags.join(", "),
+        inLanguage: "en",
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+          { "@type": "ListItem", position: 2, name: "Writing", item: `${siteUrl}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
         ],
       },
     ],
