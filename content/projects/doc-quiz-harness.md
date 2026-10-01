@@ -8,7 +8,7 @@ order: 5
 status: building
 tags: [agent, tool, llm]
 typeLabel: Personal · agent
-summary: Discuss any document with an agent and get quizzed on it, grounded in the document's text.
+summary: Study any document with an agent that quizzes you on it. The model writes the questions, code grades the answers.
 description: A hand-written agent harness in TypeScript on the raw Anthropic SDK, with no agent framework. The model navigates a document through a section-reading tool, writes quiz questions as validated tool input, and code grades the answers.
 keyIdea: The model writes questions; code grades them.
 role: Solo · back-end, AI
@@ -62,7 +62,9 @@ aiSpecifics:
 
 ## Problem
 
-Reading documentation doesn't mean understanding it. Generic chatbots answer from training data, so for new or niche libraries they confidently mix in facts the docs never state.
+Generic chatbots answer from training data, so for new or niche libraries they confidently mix in facts the docs never state. Quiz Dock stays inside one document: the model reads it through a tool and writes the questions, and code grades the answers.
+
+Reading documentation doesn't mean understanding it.
 
 I wanted a study tool that stays inside one document: it explains what I ask, tests me on it and explains my mistakes from the exact section they come from.
 

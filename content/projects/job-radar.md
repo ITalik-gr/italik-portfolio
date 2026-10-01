@@ -8,7 +8,7 @@ order: 4
 status: live
 tags: [tool, automation, llm, web-app]
 typeLabel: Personal · AI tool
-summary: A job-search radar that shows at most 10 vacancies a day and remembers every decision.
+summary: "A job-search tool where code makes every decision and the model only reads new text: cost down from ~$15 to an estimated $1-2 a month."
 description: A personal tool that collects vacancies and company catalogues, filters them with plain code and calls a cheap model only on new text. The score is deterministic. I pick every company and send every letter myself; the tool only drafts a first paragraph, and code checks it before I see it.
 keyIdea: The model extracts facts. Code makes every decision.
 role: Solo · design, front-end, back-end, AI
@@ -63,6 +63,8 @@ aiSpecifics:
 ---
 
 ## Problem
+
+Model cost was about $15 a month. Now free code filters run first, the model only extracts facts from text it hasn't seen, and the score is plain code: an estimated $1-2 a month.
 
 Job boards optimise for volume, and a list of 40 positions leads to no letters at all. I wanted a short daily list of relevant vacancies and companies, with a memory of who I had already contacted or turned down.
 

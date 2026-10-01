@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Contact } from "@/components/sections/Contact";
+import { Cta } from "@/components/sections/Cta";
+import { HowIWork } from "@/components/sections/HowIWork";
 import { ServiceFacts } from "@/components/services/ServiceFacts";
 import { ServiceFaq } from "@/components/services/ServiceFaq";
 import { ServiceList } from "@/components/services/ServiceList";
@@ -34,8 +36,10 @@ export default function ServicesPage() {
         <ServicesHero />
         <ServiceList />
         <ServiceFacts />
+        <HowIWork />
         <ServiceProcess />
         <ServiceFaq />
+        <Cta />
       </main>
       <Contact audience="client" servicesLink={false} />
     </>

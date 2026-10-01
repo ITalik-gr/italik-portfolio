@@ -9,7 +9,7 @@ status: live
 statusNote: open source
 tags: [web-app, mcp, product, llm, bot, open-source]
 typeLabel: Personal · AI product
-summary: A personal finance tracker whose AI advisor is not allowed to invent a single figure.
+summary: "An AI finance app where every number comes from SQL: ~97% categorisation accuracy at ~80% lower cost."
 description: A multi-user finance app that syncs Monobank and CSV statements, categorises spending and answers questions about your money. Each user's data lives in its own Durable Object. A small judgment model and Claude share categorisation in a measured cascade. The same numbers are exposed to Claude over an MCP server with built-in OAuth 2.1.
 keyIdea: The model never computes a number.
 role: Solo · design, front-end, back-end, AI
@@ -114,9 +114,9 @@ aiSpecifics:
 
 ## Problem
 
-I wanted one place for my own money: Monobank, a sole-trader account, cash and subscriptions, with an assistant I could ask "can I afford this?"
+The AI advisor invented numbers on real bank data, and better prompts didn't stop it. In a finance app, a confidently wrong number is worse than a missing feature. So I moved every calculation into SQL, added a check that blocks any figure the database didn't produce, and let rules categorise spending before a model does: ~97% accuracy at ~80% lower cost.
 
-Bank apps show transactions but don't explain them. General chatbots will state a plausible total for anything. In a finance app, a confidently wrong number is worse than a missing feature.
+I wanted one place for my own money: Monobank, cash and subscriptions, with an assistant I could ask "can I afford this?" Bank apps show transactions but don't explain them, and general chatbots will state a plausible total for anything.
 
 ## What I'd do differently
 

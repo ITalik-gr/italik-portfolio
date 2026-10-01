@@ -8,9 +8,9 @@ order: 3
 status: v2-in-progress
 tags: [bot, rag, agent, llm, automation]
 typeLabel: Personal · AI bot
-summary: A group-chat bot that summarises, remembers who is who and answers in the chat's voice, for a few dollars a month.
+summary: "A group-chat AI bot where code decides when the model runs: an estimated $3-6 a month instead of $75-150."
 description: A serverless Telegram bot for a friends' group chat. It logs messages, summarises on demand and answers as a persona with semantic memory. An LLM intent classifier routes requests, and cheap deterministic gates decide whether a model is called at all.
-keyIdea: Deterministic gates decide when the model runs.
+keyIdea: Code decides when the model runs.
 role: Solo · design, back-end, AI, ops
 timeline: 2026 · ~2 months
 stack: [TypeScript, Cloudflare Workers, grammY, D1, xAI Grok, Workers AI, Vectorize, R2]
@@ -67,6 +67,8 @@ aiSpecifics:
 ---
 
 ## Problem
+
+Calling the model on every message in a busy group chat would cost an estimated $75-150 a month. Cheap code checks run first (is the bot addressed, cooldown, chance), so the model runs only when it's needed: about $3-6 a month.
 
 Our friends' group chat produces hundreds of messages a day, and anyone who steps away can't catch up. Existing bots are generic: they forget context and can't take the chat's tone. I wanted one that logs quietly, remembers who is who and answers in the chat's own voice.
 

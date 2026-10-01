@@ -10,7 +10,7 @@ statusNote: startup closed
 tags: [web-app]
 typeLabel: Client · startup web app
 via: Sollas
-summary: "A startup where creators get paid to answer their followers' questions: chat, accounts and payments."
+summary: "A creator startup built end to end by one developer: real-time chat, auth, Stripe Checkout and Connect, payouts."
 role: Sole developer, full stack
 timeline: "2023"
 stack: [React, Node.js, Firebase, Stripe]
@@ -31,7 +31,9 @@ highlights:
 
 ## Brief
 
-Answerly was an early-stage startup: creators share a link with their followers, and followers pay to ask them a question. The founders needed a working product end to end: accounts, chat and payments, with money flowing to the creators.
+The founders needed a working product with money flowing to creators: accounts, real-time chat and payments. I built all of it solo, with Stripe Checkout for askers, Stripe Connect payouts for creators and webhooks keeping orders and payouts in sync.
+
+Answerly was an early-stage startup: creators share a link with their followers, and followers pay to ask them a question.
 
 ## What I did
 

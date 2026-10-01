@@ -8,7 +8,7 @@ order: 7
 status: live
 tags: [agent, llm]
 typeLabel: Personal · AI feature
-summary: The AI chat on this site. It answers recruiters' questions from my real content and nothing else.
+summary: The AI chat on this site. It answers only from my real content, for under a cent a question.
 description: A streaming chat that knows my projects, experience and how I work. The whole knowledge base is built from this site's content at build time and sits in a cached system prompt, with rate limits, a daily budget and a golden-question eval set.
 keyIdea: It only knows what this site says.
 role: Solo · design, front-end, back-end, AI
@@ -58,6 +58,8 @@ aiSpecifics:
 ---
 
 ## Problem
+
+A visitor has one specific question and little time, and a generic chatbot would happily invent the answer. This chat answers only from the site's content, passes its whole eval set, and each question costs under a cent.
 
 A recruiter has 30 to 90 seconds and one specific question: has he used Stripe, can he start soon, does he know Python? Scanning a whole portfolio for that is slow, and a generic chatbot would happily invent the answer.
 

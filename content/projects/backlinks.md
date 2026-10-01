@@ -10,7 +10,7 @@ statusNote: my version
 tags: [marketing-site]
 typeLabel: Client · marketing site
 via: Sollas
-summary: A marketing site and blog for a link-building service, editable by the team without a developer.
+summary: "A marketing site and blog the team edits without a developer: 24 section types in the CMS, from Figma to finished build in ~6 weeks."
 role: "Sole developer: Next.js front-end and Strapi CMS"
 # TODO: team (designers)
 timeline: 2024 · ~6 weeks
@@ -41,7 +41,9 @@ outcome:
 
 ## Brief
 
-Backlinks offers link building and SEO services. It needed a marketing site with a blog, an examples page and an application form for prospective clients, all editable by the team through a CMS.
+The team needed to publish pages and posts without a developer. I built the site in Next.js with a Strapi CMS of 24 reusable section types, from Figma to a finished build in about 6 weeks.
+
+Backlinks offers link building and SEO services. The site has a blog, an examples page and an application form for prospective clients, all editable through the CMS.
 
 ## What I did
 

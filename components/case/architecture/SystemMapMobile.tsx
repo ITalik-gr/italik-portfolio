@@ -71,7 +71,7 @@ export function SystemMapMobile({ architecture, className }: Props) {
             {rest.map((edge, index) => (
               <li key={index} className={linkColor(edge.emphasis, isLlm(edge))}>
                 {title(edge.from)}
-                <span className="text-muted"> —{edge.label ?? ""}→ </span>
+                <span className="text-muted"> -{edge.label ?? ""}→ </span>
                 {title(edge.to)}
               </li>
             ))}

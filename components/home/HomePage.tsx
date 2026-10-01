@@ -4,13 +4,16 @@ import { About } from "@/components/sections/About";
 import { AskAI } from "@/components/sections/AskAI";
 import { ClientWork } from "@/components/sections/ClientWork";
 import { Contact } from "@/components/sections/Contact";
+import { Cta } from "@/components/sections/Cta";
 import { Experience } from "@/components/sections/Experience";
 import { Featured } from "@/components/sections/Featured";
 import { RememberHome } from "@/components/layout/HomeLink";
 import { Hero } from "@/components/sections/Hero";
+import { HowIWork } from "@/components/sections/HowIWork";
 import { Lab } from "@/components/sections/Lab";
 import { NowBuilding } from "@/components/sections/NowBuilding";
 import { Skills } from "@/components/sections/Skills";
+import { ServiceList } from "@/components/services/ServiceList";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getFeaturedProjects, getNowBuilding, getProject } from "@/lib/content";
 import type { HomeSectionKey, Profile } from "@/lib/profiles";
@@ -29,7 +32,11 @@ export function HomePage({ profile }: { profile: Profile }) {
     return true;
   });
   
+  const forClients = HOMES[profile.path].audience === "client";
+
   const render: Record<HomeSectionKey, () => ReactNode> = {
+    offers: () => <ServiceList compact />,
+    howIWork: () => <HowIWork />,
     featured: () => <Featured projects={featured} />,
     lab: () => <Lab featured={featuredSlugs} />,
     nowBuilding: () => <NowBuilding />,
@@ -50,9 +57,10 @@ export function HomePage({ profile }: { profile: Profile }) {
         {shown.map((key) => (
           <Fragment key={key}>{render[key]()}</Fragment>
         ))}
+        {forClients && <Cta />}
       </main>
       <script src="https://www.makermap.lol/badge/italikdev.js" data-position="corner" async></script>
-      <Contact audience={HOMES[profile.path].audience} />
+      <Contact audience={forClients ? "client" : "employer"} />
     </>
   );
 }

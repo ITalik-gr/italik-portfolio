@@ -48,3 +48,42 @@ test("the client footer has no Open to work and links employers to the portfolio
   await expect(page.locator("#contact").getByText("Open to work")).toBeVisible();
   await expect(page.locator("#contact").getByRole("link", { name: /Hiring\?/ })).toHaveCount(0);
 });
+
+test("client pages end with the CTA: Telegram first, then email", async ({ page }) => {
+  for (const path of ["/", "/services"]) {
+    await page.goto(path);
+    const cta = page.locator("#start");
+    await expect(cta.getByRole("heading", { level: 2 })).toHaveText("Have a product in mind?");
+    const links = cta.getByRole("link");
+    await expect(links.nth(0)).toHaveAttribute("href", /^https:\/\/t\.me\//);
+    await expect(links.nth(1)).toHaveAttribute("href", /^mailto:/);
+  }
+  await page.goto("/ai");
+  await expect(page.locator("#start")).toHaveCount(0);
+});
+
+test("the client home is short: offers, proof, how I work, no Experience or Skills", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const ids = await page.locator("main > section[id]").evaluateAll((els) => els.map((el) => el.id));
+  expect(ids.slice(0, 3)).toEqual(["services", "work", "how"]);
+  expect(ids).not.toContain("experience");
+  expect(ids).not.toContain("skills");
+  await expect(page.locator("#how li")).toHaveCount(4);
+});
+
+test("a case ends with the client bridge, unless the visitor came from an employer page", async ({
+  page,
+}) => {
+  const bridge = page.getByRole("heading", { name: "Need something like this?" });
+
+  await page.goto("/work/money-track");
+  await expect(bridge).toBeAttached();
+  await page.goto("/work/ppc-io");
+  await expect(bridge).toBeAttached();
+
+  await page.goto("/fullstack");
+  await page.goto("/work/money-track");
+  await expect(bridge).toHaveCount(0);
+});

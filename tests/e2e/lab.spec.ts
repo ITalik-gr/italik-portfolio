@@ -13,7 +13,8 @@ async function waitForStillScroll(page: Page) {
 
 test("only the text of a Lab row switches the preview", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  // Lab is on the employer pages
+  await page.goto("/ai");
   const rows = page.locator("#lab li");
   const previews = page.locator("[data-lab-preview]");
 

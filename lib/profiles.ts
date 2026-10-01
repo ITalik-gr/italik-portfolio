@@ -2,6 +2,7 @@ import { ABOUT, ASK, HERO, HERO_QUESTIONS } from "./site";
 
 // one home page, several angles: "/" for founders, the role pages for employers. Each profile overrides only what changes
 export const HOME_SECTION_KEYS = [
+  "offers",
   "featured",
   "lab",
   "nowBuilding",
@@ -10,6 +11,7 @@ export const HOME_SECTION_KEYS = [
   "about",
   "ask",
   "skills",
+  "howIWork",
 ] as const;
 export type HomeSectionKey = (typeof HOME_SECTION_KEYS)[number];
 
@@ -32,7 +34,6 @@ export type Profile = {
   heroQuestions: readonly string[];
 };
 
-// TODO phase 3: hero, sections and copy for founders; for now it reuses the existing sections
 const CLIENT: Profile = {
   slug: "client",
   path: "/",
@@ -42,13 +43,18 @@ const CLIENT: Profile = {
       "A solo developer for founders. I take your product from decision to production, without step-by-step specs. AI features, agents and full products. Remote from Kyiv.",
   },
   hero: {
-    title: "From idea to production",
-    lines: ["From idea", "to", "production"],
+    title: HERO.title,
+    lines: HERO.lines,
     sub: "A solo developer for founders. I take it from decision to production, without step-by-step specs.",
   },
   stack: HERO.stack,
-  sections: ["featured", "lab", "clientWork", "about", "ask"],
-  featured: [{ slug: "money-track" }, { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." }],
+  // short on purpose: what I do, proof, how I work; no Experience or Skills for founders
+  sections: ["offers", "featured", "howIWork", "about", "ask"],
+  featured: [
+    { slug: "money-track" },
+    { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." },
+    { slug: "tg-assistant" },
+  ],
   // the last paragraph of ABOUT is about looking for a role
   about: ABOUT.slice(0, 3),
   // TODO phase 6: founder questions

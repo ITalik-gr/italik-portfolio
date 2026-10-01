@@ -7,6 +7,7 @@ import { CaseHighlights } from "./CaseHighlights";
 import { CaseOutcome } from "./CaseOutcome";
 import { CaseProblem } from "./CaseProblem";
 import { CaseProse } from "./CaseProse";
+import { CaseCta } from "./CaseCta";
 import { CaseRelated } from "./CaseRelated";
 
 // template B: client projects
@@ -60,6 +61,7 @@ export function ClientCase({ project }: { project: Project }) {
   return (
     <>
       <CaseBlocks blocks={blocks} />
+      <CaseCta />
       {related.length > 0 && (
         <CaseRelated id="case-related" items={related} />
       )}

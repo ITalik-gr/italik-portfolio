@@ -9,7 +9,7 @@ status: live
 tags: [marketing-site]
 typeLabel: Client · marketing site
 via: Sollas
-summary: A PPC agency needed a fast marketing site and a free-tools library that turns visitors into email subscribers.
+summary: "A PPC agency's site and free-tools library, run solo for ~22 months: the library grew from 19 to ~78 tools."
 role: "Front-end developer: design to Astro and React, then new sections, tool pages and animations"
 # TODO: team (repo has 5 committers; roles unknown)
 timeline: 2024–2026 · ~22 months
@@ -39,7 +39,9 @@ outcome:
 
 ## Brief
 
-ppc.io is a paid-search (PPC) agency. It needed a marketing site that sells its services, plus a library of free tools, prompts and AI agents that collects email leads.
+The agency needed a site that sells its services and a free-tools library that collects email leads. I ran the front end solo for ~22 months: two home page rebuilds, 96 tool pages from one template, the content moved from Strapi into the Astro repo, and the library grew from 19 to about 78 tools.
+
+ppc.io is a paid-search (PPC) agency. Its library holds free tools, prompts and AI agents behind an email signup.
 
 ## What I did
 

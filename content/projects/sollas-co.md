@@ -9,7 +9,7 @@ status: live
 tags: [marketing-site]
 typeLabel: Client · agency site
 via: Sollas
-summary: A fast, animated site with case studies and a lead form, selling design services to Web3 and SaaS startups.
+summary: "A design agency's site, built solo from Figma to deploy and kept up for ~2.5 years, SEO included."
 role: "Sole developer: Figma to deploy, then redesigns, a framework migration and SEO"
 # TODO: team (designers)
 timeline: 2024–2026
@@ -39,7 +39,9 @@ outcome:
 
 ## Brief
 
-Sollas is a UI/UX design agency serving Web3, SaaS, AI and fintech startups. It needed a site that shows the quality of its design work and turns visitors into enquiries, with case studies, a booking flow and a free-audit request form.
+The agency needed a site that shows the quality of its design work and turns visitors into enquiries. I built it solo in Next.js from Figma to deploy, rebuilt it in a 2026 redesign and still own its SEO and upkeep: ~2.5 years, one template for every case study.
+
+Sollas is a UI/UX design agency serving Web3, SaaS, AI and fintech startups. The site has case studies, a booking flow and a free-audit request form.
 
 ## What I did
 

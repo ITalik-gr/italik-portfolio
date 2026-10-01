@@ -9,7 +9,7 @@ test("Ask AI button stays hidden on the first screen and near the page end", asy
   await expect(fab).toHaveCSS("opacity", "0");
   await expect(fab).toHaveAttribute("aria-hidden", "true");
 
-  await page.locator("#lab").scrollIntoViewIfNeeded();
+  await page.locator("#services").scrollIntoViewIfNeeded();
   await expect(fab).toHaveCSS("opacity", "1");
 
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
