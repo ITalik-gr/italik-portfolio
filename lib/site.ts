@@ -14,19 +14,24 @@ export const SITE = {
     x: "https://x.com/italikdev",
     // no LinkedIn yet; add it here when it exists
   },
-  meta: {
-    title: "Vitaliy Hrytsenko — Full-stack developer building AI agents",
-    description:
-      "Full-stack developer in Kyiv building AI agents and LLM products end to end with React, Next.js, Node.js and Cloudflare. Open to remote full-time or contract work.",
-  },
+  // who he is, for any audience: JSON-LD Person and llms.txt
+  description:
+    "Full-stack developer in Kyiv. Builds AI inside real products and whole products solo, with React, Next.js, Node.js and Cloudflare.",
 } as const;
 
-// each home page hands out its own CV; case pages use the one of the home page the visitor came from
-export const CV_BY_HOME: Record<string, string> = {
-  "/": SITE.cv,
-  "/frontend": "/cv/Vitaliy_Hrytsenko_Frontend.pdf",
-  "/fullstack": "/cv/Vitaliy_Hrytsenko_Fullstack.pdf",
+export type Audience = "client" | "employer";
+
+// every home page and who it's for; only employer pages hand out a CV.
+// case pages follow the home page the visitor came from, a direct visit counts as "/"
+export const HOMES: Record<string, { audience: Audience; cv?: string }> = {
+  "/": { audience: "client" },
+  "/ai": { audience: "employer", cv: SITE.cv },
+  "/frontend": { audience: "employer", cv: "/cv/Vitaliy_Hrytsenko_Frontend.pdf" },
+  "/fullstack": { audience: "employer", cv: "/cv/Vitaliy_Hrytsenko_Fullstack.pdf" },
 };
+
+// client pages that aren't home pages: they never remember a home and never show a CV
+export const CLIENT_PAGES = ["/services", "/blog"];
 
 // same-page anchors on home pages; elsewhere NavLink points them at the last home page seen.
 // no Services here on purpose: an employer on the home page shouldn't read "he takes clients"; it lives in the footers

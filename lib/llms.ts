@@ -1,11 +1,11 @@
 import { getKnowledge } from "@/lib/chat/knowledge";
 import { getExperience, getProjects } from "@/lib/content";
 import { STATUS_LABELS } from "@/lib/format";
-import { ROLE_PROFILES } from "@/lib/profiles";
+import { PROFILES, ROLE_PROFILES } from "@/lib/profiles";
 import { getProjectLinks, isExternal } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { siteUrl } from "@/lib/seo";
-import { ABOUT, CV_BY_HOME, HERO, SITE } from "@/lib/site";
+import { ABOUT, HERO, HOMES, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 
 // llms.txt (llmstxt.org): a plain Markdown index of the site for AI assistants and crawlers
@@ -32,17 +32,25 @@ export function buildLlmsTxt() {
   return [
     `# ${SITE.name} (${SITE.handle})`,
     "",
-    `> ${SITE.meta.description}`,
+    `> ${SITE.description}`,
     "",
-    `${SITE.roleLine}. Based in ${SITE.location.city}, ${SITE.location.country}; works remotely and is open to ${SITE.openTo.join(", ")} roles.`,
+    `${SITE.roleLine}. Based in ${SITE.location.city}, ${SITE.location.country}, works remotely.`,
     "",
     // plain answers for an assistant asked "who can build this?" or "is he available?"
-    "## Work with him",
+    "## For founders: build your product",
     "",
+    `- ${PROFILES.client.meta.description}`,
     "- Builds: AI agents and LLM features inside real products (tool use, MCP servers, grounding, evals); full-stack web apps with React, Next.js, Node.js and NestJS; fast marketing sites in Next.js or Astro.",
-    `- Open to: ${SITE.openTo.join(", ")}. Remote from ${SITE.location.city} (Europe/Kyiv time); can sign a B2B contract as a Ukrainian sole proprietor.`,
-    `- Client projects: ${siteUrl}/services. Fixed scope, monthly or hourly; weekly demo and report; the client owns all code and accounts; NDA on request; first month of support free; rates on request.`,
+    `- Details: ${siteUrl}/services. Weekly demo; the client owns all code and accounts; NDA on request; contract and invoicing agreed before the start; first month of support free; rates on request.`,
     `- Reach him: ${SITE.email} or Telegram ${SITE.socials.telegram}. The chat at ${siteUrl}/#ask answers questions about his work.`,
+    "",
+    "## For employers: hire him",
+    "",
+    `- Open to ${SITE.openTo.join(", ")} roles, remote from ${SITE.location.city} (Europe/Kyiv time).`,
+    ...ROLE_PROFILES.map((profile) => {
+      const cv = HOMES[profile.path]?.cv;
+      return `- [${profile.meta.title}](${siteUrl}${profile.path}): the portfolio for this role${cv ? `, [CV (PDF)](${absolute(cv)})` : ""}`;
+    }),
     "",
     "## About, in his words",
     "",
@@ -53,15 +61,9 @@ export function buildLlmsTxt() {
     "",
     `- Email: ${SITE.email}`,
     `- Telegram: ${SITE.socials.telegram}`,
+    `- X: ${SITE.socials.x}`,
     `- GitHub: ${SITE.socials.github}`,
-    `- [CV (PDF)](${absolute(SITE.cv)})`,
-    `- [Front-end CV (PDF)](${absolute(CV_BY_HOME["/frontend"])})`,
-    `- [Full-stack CV (PDF)](${absolute(CV_BY_HOME["/fullstack"])})`,
     `- [Ask the AI chat about him](${siteUrl}/#ask): answers from this site's content only`,
-    ...ROLE_PROFILES.map(
-      (profile) =>
-        `- [${profile.meta.title}](${siteUrl}${profile.path}): the same portfolio, focused on this role`,
-    ),
     "",
     "## AI and personal projects",
     "",
@@ -93,7 +95,7 @@ export function buildLlmsFullTxt() {
   return [
     `# ${SITE.name} (${SITE.handle}): full profile`,
     "",
-    `> ${SITE.meta.description} Source: ${siteUrl}. Short index: ${siteUrl}/llms.txt`,
+    `> ${SITE.description} Source: ${siteUrl}. Short index: ${siteUrl}/llms.txt`,
     "",
     getKnowledge().text,
     "",

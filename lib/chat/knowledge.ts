@@ -4,13 +4,14 @@ import { getExperience, getProjects } from "@/lib/content";
 import { getProjectLinks } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import type { Architecture } from "@/lib/schemas-architecture";
-import { ABOUT, CV_BY_HOME, HERO, SITE } from "@/lib/site";
+import { ABOUT, HERO, HOMES, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 import type { ChatSource } from "./types";
 
 type Doc = { id: string; text: string; source: ChatSource };
 
-const SECTION_ANCHOR = { featured: "/#work", lab: "/#lab", now: "/#now", clients: "/#clients" };
+// Experience, Skills and Now building live only on the employer pages; /ai has every section
+const SECTION_ANCHOR = { featured: "/#work", lab: "/#lab", now: "/ai#now", clients: "/#clients" };
 
 // unfinished or unconfirmed facts never reach the model
 const isDraft = (line: string) => /\[(TODO|verify)|^\s*TODO:?/i.test(line);
@@ -120,7 +121,7 @@ function buildDocs(): Doc[] {
         job.body,
       ].join("\n"),
     ),
-    source: { label: `${job.slug}.md`, href: "/#experience" },
+    source: { label: `${job.slug}.md`, href: "/ai#experience" },
   }));
   const knowledgeDir = path.join(process.cwd(), "content/knowledge");
   const knowledge = fs
@@ -143,7 +144,7 @@ function buildDocs(): Doc[] {
       text: getSkillGroups()
         .map((group) => `${group.label}: ${group.items.join(", ")}`)
         .join("\n"),
-      source: { label: "skills.md", href: "/#skills" },
+      source: { label: "skills.md", href: "/ai#skills" },
     },
     {
       id: "site/contact.md",
@@ -151,7 +152,7 @@ function buildDocs(): Doc[] {
         `email: ${SITE.email}`,
         `telegram: ${SITE.socials.telegram}`,
         `github: ${SITE.socials.github}`,
-        `cv: ${SITE.cv} (front-end version: ${CV_BY_HOME["/frontend"]}, full-stack version: ${CV_BY_HOME["/fullstack"]})`,
+        `cv: ${SITE.cv} (front-end version: ${HOMES["/frontend"].cv}, full-stack version: ${HOMES["/fullstack"].cv})`,
         `location: ${SITE.location.city}, ${SITE.location.country} (Europe/Kyiv: UTC+2 in winter, UTC+3 in summer)`,
         `open to: ${SITE.openTo.join(", ")}`,
       ].join("\n"),

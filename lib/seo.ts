@@ -1,7 +1,7 @@
 import type { Profile } from "./profiles";
 import type { Project } from "./schemas";
 import { SERVICES, SERVICES_PAGE, SERVICE_FAQ } from "./services";
-import { SITE } from "./site";
+import { HOMES, SITE } from "./site";
 
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? SITE.url).replace(/\/$/, "");
 
@@ -12,7 +12,7 @@ const person = {
   alternateName: SITE.handle,
   url: siteUrl,
   jobTitle: "Full-stack developer",
-  description: SITE.meta.description,
+  description: SITE.description,
   image: `${siteUrl}/about.jpg`,
   email: `mailto:${SITE.email}`,
   knowsLanguage: ["en", "uk"],
@@ -38,9 +38,11 @@ const person = {
   ],
 };
 
-// every home page is a profile of the same person; role pages differ only in the page node
+// every home page is about the same person; the client home points at the services,
+// the employer pages are profiles of the person
 export function homeJsonLd(profile: Profile) {
   const url = profile.path === "/" ? siteUrl : `${siteUrl}${profile.path}`;
+  const forClients = HOMES[profile.path]?.audience === "client";
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -53,13 +55,15 @@ export function homeJsonLd(profile: Profile) {
         author: { "@id": person["@id"] },
       },
       {
-        "@type": "ProfilePage",
+        "@type": forClients ? "WebPage" : "ProfilePage",
         "@id": `${url}#page`,
         url,
         name: profile.meta.title,
         description: profile.meta.description,
         isPartOf: { "@id": `${siteUrl}/#website` },
-        mainEntity: { "@id": person["@id"] },
+        ...(forClients
+          ? { about: { "@id": `${siteUrl}/services#service` }, author: { "@id": person["@id"] } }
+          : { mainEntity: { "@id": person["@id"] } }),
       },
     ],
   };

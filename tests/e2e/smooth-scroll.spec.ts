@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test("anchor links land the section just under the sticky header", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  await page.goto("/ai");
   await page
     .getByRole("navigation", { name: "Main" })
     .getByRole("link", { name: "Experience" })

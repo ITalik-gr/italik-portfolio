@@ -2,10 +2,11 @@ import { AskField } from "@/components/hero/AskField";
 import { HeroActions } from "@/components/hero/HeroActions";
 import { SplitHeading } from "@/components/motion/SplitHeading";
 import type { Profile } from "@/lib/profiles";
-import { HERO_QUESTIONS } from "@/lib/site";
 
 // the em widths make the title break like the design: three lines on mobile, two from md
-export function Hero({ hero }: { hero: Profile["hero"] }) {
+type Props = { hero: Profile["hero"]; questions: Profile["heroQuestions"] };
+
+export function Hero({ hero, questions }: Props) {
   return (
     <section
       aria-labelledby="hero-title"
@@ -20,7 +21,7 @@ export function Hero({ hero }: { hero: Profile["hero"] }) {
       <p className="mt-fl-16/24 max-w-[560px] text-fl-17/24 leading-[1.35] tracking-[-0.01em] text-text-3">
         {hero.sub}
       </p>
-      <AskField questions={HERO_QUESTIONS} className="mt-fl-40/72" />
+      <AskField questions={questions} className="mt-fl-40/72" />
       <HeroActions className="mt-fl-24/36 | md:self-start" />
     </section>
   );

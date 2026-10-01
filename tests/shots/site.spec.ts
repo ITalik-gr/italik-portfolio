@@ -4,6 +4,7 @@ import { OUTPUT_DIR, VIEWPORTS } from "./viewports";
 // add case slugs here as /work/[slug] pages appear
 const ROUTES = [
   { name: "home", path: "/" },
+  { name: "ai", path: "/ai" },
   { name: "frontend", path: "/frontend" },
   { name: "fullstack", path: "/fullstack" },
   { name: "services", path: "/services" },

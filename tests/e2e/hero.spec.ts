@@ -2,19 +2,21 @@ import { expect, test } from "@playwright/test";
 
 test("split hero title reads as one heading", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  await page.goto("/ai");
   await expect(
     page.getByRole("heading", { level: 1, name: "I build AI agents that ship" }),
   ).toBeVisible();
 });
 
 test("hero fits the first screen with its buttons", async ({ page }) => {
-  for (const size of [
-    { width: 1440, height: 900 },
-    { width: 390, height: 844 },
-  ]) {
+  for (const [path, size] of [
+    ["/", { width: 1440, height: 900 }],
+    ["/", { width: 390, height: 844 }],
+    ["/ai", { width: 1440, height: 900 }],
+    ["/ai", { width: 390, height: 844 }],
+  ] as const) {
     await page.setViewportSize(size);
-    await page.goto("/");
+    await page.goto(path);
     const button = page.locator("section[aria-labelledby=hero-title]").getByRole("link", { name: "View work" });
     const box = (await button.boundingBox())!;
     expect(box.y + box.height).toBeLessThanOrEqual(size.height);

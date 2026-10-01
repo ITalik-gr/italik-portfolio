@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 
-test("home order puts experience before client work and now-building after Ask AI", async ({
+test("AI page order puts experience before client work and now-building after Ask AI", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/ai");
   const ids = await page.locator("main > section[id]").evaluateAll((els) => els.map((el) => el.id));
   expect(ids.indexOf("experience")).toBeLessThan(ids.indexOf("clients"));
   expect(ids.indexOf("now")).toBeGreaterThan(ids.indexOf("ask"));

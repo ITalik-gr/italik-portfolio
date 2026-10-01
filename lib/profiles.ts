@@ -1,6 +1,6 @@
-import { ABOUT, ASK, HERO, SITE } from "./site";
+import { ABOUT, ASK, HERO, HERO_QUESTIONS } from "./site";
 
-// one home page, three angles: each profile overrides only what changes for that kind of role
+// one home page, several angles: "/" for founders, the role pages for employers. Each profile overrides only what changes
 export const HOME_SECTION_KEYS = [
   "featured",
   "lab",
@@ -14,7 +14,7 @@ export const HOME_SECTION_KEYS = [
 export type HomeSectionKey = (typeof HOME_SECTION_KEYS)[number];
 
 export type Profile = {
-  slug: "ai" | "frontend" | "fullstack";
+  slug: "client" | "ai" | "frontend" | "fullstack";
   path: string;
   meta: { title: string; description: string };
   hero: {
@@ -29,12 +29,41 @@ export type Profile = {
   skillsOrder?: readonly string[];
   about: readonly string[];
   askChips: readonly string[];
+  heroQuestions: readonly string[];
+};
+
+// TODO phase 3: hero, sections and copy for founders; for now it reuses the existing sections
+const CLIENT: Profile = {
+  slug: "client",
+  path: "/",
+  meta: {
+    title: "Vitaliy Hrytsenko · Solo developer for founders",
+    description:
+      "A solo developer for founders. I take your product from decision to production, without step-by-step specs. AI features, agents and full products. Remote from Kyiv.",
+  },
+  hero: {
+    title: "From idea to production",
+    lines: ["From idea", "to", "production"],
+    sub: "A solo developer for founders. I take it from decision to production, without step-by-step specs.",
+  },
+  stack: HERO.stack,
+  sections: ["featured", "lab", "clientWork", "about", "ask"],
+  featured: [{ slug: "money-track" }, { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." }],
+  // the last paragraph of ABOUT is about looking for a role
+  about: ABOUT.slice(0, 3),
+  // TODO phase 6: founder questions
+  askChips: [ASK.chips[0], ASK.chips[2], ASK.chips[3]],
+  heroQuestions: [HERO_QUESTIONS[0], HERO_QUESTIONS[2]],
 };
 
 const AI: Profile = {
   slug: "ai",
-  path: "/",
-  meta: SITE.meta,
+  path: "/ai",
+  meta: {
+    title: "Vitaliy Hrytsenko · Full-stack developer building AI agents",
+    description:
+      "Full-stack developer in Kyiv building AI agents and LLM products end to end with React, Next.js, Node.js and Cloudflare. Open to remote full-time or contract work.",
+  },
   hero: HERO,
   stack: HERO.stack,
   sections: [
@@ -49,13 +78,14 @@ const AI: Profile = {
   ],
   about: ABOUT,
   askChips: ASK.chips,
+  heroQuestions: HERO_QUESTIONS,
 };
 
 const FRONTEND: Profile = {
   slug: "frontend",
   path: "/frontend",
   meta: {
-    title: "Vitaliy Hrytsenko — Front-end developer (React, Next.js, Astro)",
+    title: "Vitaliy Hrytsenko · Front-end developer (React, Next.js, Astro)",
     description:
       "Front-end developer who turns Figma into fast, pixel-perfect sites and apps with React, Next.js and Astro. 30+ shipped, Core Web Vitals and SEO included. Remote.",
   },
@@ -101,13 +131,14 @@ const FRONTEND: Profile = {
     "What has he built with Next.js and Astro?",
     "Where is he based and how does he work?",
   ],
+  heroQuestions: HERO_QUESTIONS,
 };
 
 const FULLSTACK: Profile = {
   slug: "fullstack",
   path: "/fullstack",
   meta: {
-    title: "Vitaliy Hrytsenko — Full-stack developer (React, Node.js, NestJS)",
+    title: "Vitaliy Hrytsenko · Full-stack developer (React, Node.js, NestJS)",
     description:
       "Full-stack developer who owns features end to end: React and Next.js on the front, Node.js, NestJS and PostgreSQL on the back, AI features when a product needs them.",
   },
@@ -162,11 +193,12 @@ const FULLSTACK: Profile = {
     "How did he build Answerly's payments?",
     "Where is he based and how does he work?",
   ],
+  heroQuestions: HERO_QUESTIONS,
 };
 
-export const PROFILES = { ai: AI, frontend: FRONTEND, fullstack: FULLSTACK } as const;
-// the role pages; "/" stays the AI profile
-export const ROLE_PROFILES = [FRONTEND, FULLSTACK] as const;
+export const PROFILES = { client: CLIENT, ai: AI, frontend: FRONTEND, fullstack: FULLSTACK } as const;
+// the employer pages under app/(employer)/[profile]; "/" is the client profile
+export const ROLE_PROFILES = [AI, FULLSTACK, FRONTEND] as const;
 
 export function getRoleProfile(slug: string) {
   return ROLE_PROFILES.find((profile) => profile.slug === slug);

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
 
   // "Personal · AI product" → "AI product": says what the project is, right in the search result
   const kind = project.typeLabel.split(" · ")[1];
-  const title = `${project.title}${kind ? ` (${kind})` : ""} — case study · ${SITE.name}`;
+  const title = `${project.title}${kind ? ` (${kind})` : ""} case study · ${SITE.name}`;
   const description = `${project.summary} Built with ${project.stack.slice(0, 3).join(", ")}.`;
   const url = `/work/${project.slug}`;
   // openGraph and twitter replace the layout's objects whole, so every field is repeated here

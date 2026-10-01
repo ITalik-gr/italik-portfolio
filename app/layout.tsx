@@ -7,6 +7,7 @@ import { ChatDrawer } from "@/components/chat/ChatDrawer";
 import { AskFab } from "@/components/layout/AskFab";
 import { CursorLabel } from "@/components/motion/CursorLabel";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { PROFILES } from "@/lib/profiles";
 import { siteUrl } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import "./globals.css";
@@ -28,10 +29,13 @@ const dmMono = DM_Mono({
   adjustFontFallback: false,
 });
 
+// the defaults are the client home's; every other page sets its own
+const { title, description } = PROFILES.client.meta;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: SITE.meta.title,
-  description: SITE.meta.description,
+  title,
+  description,
   authors: [{ name: SITE.name, url: siteUrl }],
   creator: SITE.name,
   alternates: { canonical: "/" },
@@ -40,14 +44,10 @@ export const metadata: Metadata = {
     siteName: "italik.dev",
     type: "website",
     locale: "en_US",
-    title: SITE.meta.title,
-    description: SITE.meta.description,
+    title,
+    description,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE.meta.title,
-    description: SITE.meta.description,
-  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 type Props = { children: ReactNode };

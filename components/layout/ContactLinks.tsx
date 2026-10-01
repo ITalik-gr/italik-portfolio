@@ -19,7 +19,8 @@ const LINKS = [
 // none of these are routes (mailto, external, the CV file), so plain <a> and no prefetch
 export function ContactLinks({ variant, className }: Props) {
   const rows = variant === "rows";
-  const links = [...LINKS, { label: "CV", href: useCv(), arrow: "↓", inlineArrow: true } as const];
+  const cv = useCv();
+  const links = cv ? [...LINKS, { label: "CV", href: cv, arrow: "↓", inlineArrow: true } as const] : LINKS;
 
   return (
     <ul

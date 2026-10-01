@@ -44,7 +44,7 @@ export function HomePage({ profile }: { profile: Profile }) {
       <main id="main">
         <JsonLd data={homeJsonLd(profile)} />
         <RememberHome path={profile.path} />
-        <Hero hero={profile.hero} />
+        <Hero hero={profile.hero} questions={profile.heroQuestions} />
         <Marquee items={profile.stack} />
         {shown.map((key) => (
           <Fragment key={key}>{render[key]()}</Fragment>

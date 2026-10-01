@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test";
 
 test("sections below the fold reveal when scrolled into view", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  // Experience is on the employer pages only
+  await page.goto("/ai");
   const header = page.locator("#experience header").first();
   await expect(header).toHaveCSS("opacity", "0");
   await header.scrollIntoViewIfNeeded();
@@ -14,7 +15,7 @@ test("reduced motion shows every section without a reveal", async ({ browser }) 
     viewport: { width: 1440, height: 900 },
     reducedMotion: "reduce",
   });
-  await page.goto("/");
+  await page.goto("/ai");
   await expect(page.locator("#experience header").first()).toHaveCSS("opacity", "1");
   await page.close();
 });

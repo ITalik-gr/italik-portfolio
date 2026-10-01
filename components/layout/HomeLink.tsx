@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useSyncExternalStore, type ComponentProps } from "react";
-import { CV_BY_HOME, SITE } from "@/lib/site";
+import { CLIENT_PAGES, HOMES } from "@/lib/site";
 
-// the home page a visitor last saw ("/", "/frontend", "/fullstack"), so links back from a case return to it
+// the home page a visitor last saw ("/", "/ai", "/frontend", "/fullstack"), so links back from a case return to it
 const KEY = "italik:home";
 // the home section a case was opened from ("work", "lab", "clients", "now"), so "All work" lands back there
 const SECTION_KEY = "italik:from-section";
@@ -67,7 +67,7 @@ export function HomeLink({ hash = "", backToSection, ...props }: Props) {
 export function useNavHref(href: string) {
   const pathname = usePathname();
   const home = useSyncExternalStore(subscribe, readHome, () => "/");
-  const onHome = pathname in CV_BY_HOME;
+  const onHome = pathname in HOMES;
   return href.startsWith("#") && !onHome ? `${home}${href}` : href;
 }
 
@@ -75,11 +75,18 @@ export function NavLink({ href, ...props }: ComponentProps<typeof Link> & { href
   return <Link href={useNavHref(href)} {...props} />;
 }
 
-// a home page knows its role from the URL (already on the server); anywhere else, the last home seen decides
-export function useCv() {
+// a home page knows its audience from the URL (already on the server); client pages are always client;
+// anywhere else (case pages), the last home seen decides
+export function useHome() {
   const pathname = usePathname();
   const home = useSyncExternalStore(subscribe, readHome, () => "/");
-  // client work is the main, AI-focused CV, whatever role page the visitor came from
-  if (pathname === "/services") return SITE.cv;
-  return CV_BY_HOME[pathname] ?? CV_BY_HOME[home] ?? SITE.cv;
+  if (CLIENT_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`))) {
+    return HOMES["/"];
+  }
+  return HOMES[pathname] ?? HOMES[home] ?? HOMES["/"];
+}
+
+// the CV of the role the visitor is looking at; none for clients
+export function useCv() {
+  return useHome().cv;
 }

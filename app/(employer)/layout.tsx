@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Header } from "@/components/layout/Header";
 
-export default function MainLayout({ children }: { children: ReactNode }) {
+export default function EmployerLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />

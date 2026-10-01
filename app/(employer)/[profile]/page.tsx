@@ -9,7 +9,7 @@ export function generateStaticParams() {
   return ROLE_PROFILES.map((profile) => ({ profile: profile.slug }));
 }
 
-// each role page is its own search result, with its own title, description and og image
+// each employer page is its own search result, with its own title, description and og image
 export async function generateMetadata({ params }: PageProps<"/[profile]">): Promise<Metadata> {
   const profile = getRoleProfile((await params).profile);
   if (!profile) return {};
