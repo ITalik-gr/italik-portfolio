@@ -39,7 +39,7 @@ export default function ServicesPage() {
         <ServiceFaq />
         <Cta />
       </main>
-      <Contact audience="client" servicesLink={false} />
+      <Contact audience="client" />
     </>
   );
 }

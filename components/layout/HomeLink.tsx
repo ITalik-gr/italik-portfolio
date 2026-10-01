@@ -3,23 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useSyncExternalStore, type ComponentProps } from "react";
-import { HOMES, isClientPage } from "@/lib/site";
+import { HOME_KEY, HOMES, isClientPage } from "@/lib/site";
 
-// the home page a visitor last saw ("/", "/ai", "/frontend", "/fullstack"), so links back from a case return to it
-const KEY = "italik:home";
+// the home page a visitor last saw ("/", "/ai", "/frontend", "/fullstack"), so links back from a case return to it.
+// localStorage, so a case opened in a new tab still knows it; sessionStorage would start empty there
+const KEY = HOME_KEY;
 // the home section a case was opened from ("work", "lab", "clients", "now"), so "All work" lands back there
 const SECTION_KEY = "italik:from-section";
 const listeners = new Set<() => void>();
 
-function read(key: string, fallback: string) {
+function read(storage: () => Storage, key: string, fallback: string) {
   try {
-    return sessionStorage.getItem(key) ?? fallback;
+    return storage().getItem(key) ?? fallback;
   } catch {
     return fallback;
   }
 }
-const readHome = () => read(KEY, "/");
-const readSection = () => read(SECTION_KEY, "");
+const readHome = () => read(() => localStorage, KEY, "/");
+const readSection = () => read(() => sessionStorage, SECTION_KEY, "");
 
 const subscribe = (listener: () => void) => {
   listeners.add(listener);
@@ -30,7 +31,7 @@ const subscribe = (listener: () => void) => {
 export function RememberHome({ path }: { path: string }) {
   useEffect(() => {
     try {
-      sessionStorage.setItem(KEY, path);
+      localStorage.setItem(KEY, path);
     } catch {
       // private mode: links just fall back to "/"
     }
@@ -77,13 +78,18 @@ export function NavLink({ href, samePage, ...props }: NavLinkProps) {
   return <Link href={useNavHref(href, samePage)} {...props} />;
 }
 
-// a home page knows its audience from the URL (already on the server); client pages are always client;
-// anywhere else (case pages), the last home seen decides
-export function useHome() {
+// the home page this page belongs to: itself on a home page, "/" on client pages,
+// the last home seen anywhere else (case pages)
+export function useHomePath() {
   const pathname = usePathname();
   const home = useSyncExternalStore(subscribe, readHome, () => "/");
-  if (isClientPage(pathname)) return HOMES["/"];
-  return HOMES[pathname] ?? HOMES[home] ?? HOMES["/"];
+  if (pathname in HOMES) return pathname;
+  if (isClientPage(pathname)) return "/";
+  return home in HOMES ? home : "/";
+}
+
+export function useHome() {
+  return HOMES[useHomePath()];
 }
 
 // the CV of the role the visitor is looking at; none for clients

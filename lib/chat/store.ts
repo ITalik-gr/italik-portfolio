@@ -29,11 +29,15 @@ export function useChat() {
   );
 }
 
-export const openChatDrawer = () => {
-  track("chat_open", { from: window.location.pathname });
+// via: what opened it (fab, button, hero_field), so each entry point can be compared
+export const openChatDrawer = (via = "button") => {
+  track("chat_open", { via, messages: state.messages.length });
   set({ drawerOpen: true });
 };
-export const closeChatDrawer = () => set({ drawerOpen: false });
+export const closeChatDrawer = () => {
+  if (state.drawerOpen) track("chat_close", { messages: state.messages.length });
+  set({ drawerOpen: false });
+};
 
 const ERROR_TEXT: Record<ChatErrorCode, string> = {
   invalid: "That question didn't come through. Try a shorter one?",
@@ -69,8 +73,12 @@ export async function sendQuestion(question: string) {
     ],
   });
 
-  const failWith = (code: ChatErrorCode) =>
+  const started = Date.now();
+  const turn = history.filter((m) => m.role === "user").length + 1;
+  const failWith = (code: ChatErrorCode) => {
+    track("chat_error", { code, turn, ms: Date.now() - started });
     updateLast((m) => ({ ...m, status: "error", content: ERROR_TEXT[code] }));
+  };
 
   try {
     const response = await fetch("/api/chat", {
@@ -96,6 +104,15 @@ export async function sendQuestion(question: string) {
         if (event.type === "text") updateLast((m) => ({ ...m, content: m.content + event.text }));
         if (event.type === "error") return failWith(event.code);
         if (event.type === "done") {
+          const answer = state.messages.at(-1)?.content ?? "";
+          track("chat_answer", {
+            turn,
+            ms: Date.now() - started,
+            chars: answer.trim().length,
+            sources: event.sources.length,
+            source: event.sources.map((s) => s.label).join(", ").slice(0, 120),
+            link: event.link?.href ?? "",
+          });
           updateLast((m) => ({
             ...m,
             content: m.content.trimEnd(),

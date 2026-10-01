@@ -9,9 +9,10 @@ export const projectMailto = `mailto:${SITE.email}?subject=${encodeURIComponent(
 export function ServicesHero() {
   return (
     <section
+      data-place="hero"
       aria-labelledby="hero-title"
       data-hides-fab
-      className="flex min-h-[calc(100svh-64px)] flex-col justify-end px-gutter pt-[40px] pb-[28px] | md:min-h-[calc(100svh-72px)] md:pb-[64px]"
+      className="flex min-h-[calc(100svh-64px)] flex-col justify-end px-gutter pt-[40px] pb-[28px] | md:min-h-[calc(100svh-72px)] md:justify-center md:pb-[64px]"
     >
       <p className="text-[14px] leading-[20px] text-accent | md:text-[15px] md:leading-[21px]">
         Services
@@ -19,7 +20,7 @@ export function ServicesHero() {
       <SplitHeading
         id="hero-title"
         text={SERVICES_PAGE.title}
-        className="mt-fl-16/24 max-w-[11em] text-fl-48/128 leading-[0.9] font-semibold tracking-[-0.045em]"
+        className="mt-fl-16/24 max-w-[11em] text-fl-48/128 leading-[0.9] font-semibold tracking-[-0.045em] | 2xl:text-[148px]"
       />
       <div className="mt-fl-24/56 flex flex-col gap-[28px] | lg:flex-row lg:items-end lg:justify-between lg:gap-[40px]">
         <p className="max-w-[600px] text-fl-17/24 leading-[1.35] tracking-[-0.01em] text-text-3">

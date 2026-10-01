@@ -12,7 +12,7 @@ export function CaseCta() {
       <aside
         id="case-cta"
         aria-labelledby="case-cta-title"
-        className="mt-fl-96/160 border-t border-line px-gutter pt-[20px] | md:pt-[24px]"
+        className="mt-fl-96/160 border-t border-line px-gutter pt-[40px] | md:pt-[64px]"
       >
         <Reveal className="flex flex-col gap-[24px] | md:flex-row md:items-end md:justify-between">
           <div>

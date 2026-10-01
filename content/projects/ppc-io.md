@@ -11,7 +11,6 @@ typeLabel: Client · marketing site
 via: Sollas
 summary: "A PPC agency's site and free-tools library, run solo for ~22 months: the library grew from 19 to ~78 tools."
 role: "Front-end developer: design to Astro and React, then new sections, tool pages and animations"
-# TODO: team (repo has 5 committers; roles unknown)
 timeline: 2024–2026 · ~22 months
 stack: [Astro, React, TypeScript, Tailwind CSS, MDX, Cloudflare Workers]
 links:
@@ -34,7 +33,6 @@ outcome:
   - { value: ~22 mo, label: Front-end in my hands }
   - { value: "96", label: Tool pages on one template }
   - { value: "2", label: Home page rebuilds }
-  # TODO: Lighthouse / build time before → after
 ---
 
 ## Brief

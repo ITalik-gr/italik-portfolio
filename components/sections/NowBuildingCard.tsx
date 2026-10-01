@@ -11,16 +11,23 @@ export function NowBuildingCard({ project }: Props) {
   if (!now) return null;
 
   const { code } = getProjectLinks(project);
-  const phase = now.phase ? `Phase ${now.phase.current} of ${now.phase.total}` : "Not started";
+  // phases only when real ones are set; work in progress already says so in its status tag
+  const phase = now.phase
+    ? `Phase ${now.phase.current} of ${now.phase.total}`
+    : project.status === "next-up"
+      ? "Not started"
+      : null;
 
   return (
     // on lg the cards share row tracks (subgrid), so titles, bars and footers line up across columns
     <li className="flex flex-col gap-[12px] bg-surface p-[20px] | md:gap-[22px] md:px-fl-20/28 md:py-fl-24/32 | lg:row-span-5 lg:grid lg:grid-rows-subgrid">
       <div className="flex items-start justify-between gap-[12px]">
         <ProjectTags status={project.status} tags={project.tags} />
-        <span className="shrink-0 text-[13px] leading-[18px] text-muted | md:text-[14px] md:leading-[20px]">
-          {phase}
-        </span>
+        {phase && (
+          <span className="shrink-0 text-[13px] leading-[18px] text-muted | md:text-[14px] md:leading-[20px]">
+            {phase}
+          </span>
+        )}
       </div>
 
       <h3 className="text-fl-28/44 leading-[0.92] font-semibold tracking-[-0.035em]">

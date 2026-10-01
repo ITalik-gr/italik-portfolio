@@ -11,7 +11,6 @@ typeLabel: Client · agency site
 via: Sollas
 summary: "A design agency's site, built solo from Figma to deploy and kept up for ~2.5 years, SEO included."
 role: "Sole developer: Figma to deploy, then redesigns, a framework migration and SEO"
-# TODO: team (designers)
 timeline: 2024–2026
 stack: [Next.js, React, TypeScript, Tailwind CSS, GSAP, Vercel]
 links:

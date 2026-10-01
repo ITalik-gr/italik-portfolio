@@ -14,8 +14,10 @@ export function AskFab() {
   const [ctaSeenOn, setCtaSeenOn] = useState<string | null>(null);
   const { drawerOpen } = useChat();
   const pathname = usePathname();
+  // stays hidden until the hero check has run on this page; otherwise it flashes on load
+  const [checkedOn, setCheckedOn] = useState<string | null>(null);
   const ctaVisible = ctaSeenOn === pathname;
-  const hidden = nearBottom || ctaVisible || drawerOpen;
+  const hidden = checkedOn !== pathname || nearBottom || ctaVisible || drawerOpen;
 
   useEffect(() => {
     const update = () => {
@@ -34,13 +36,15 @@ export function AskFab() {
   // the first screen has its own "Ask my AI" button, so the FAB waits until the whole hero scrolls away
   useEffect(() => {
     const targets = document.querySelectorAll("[data-hides-fab]");
-    if (targets.length === 0) return;
+    const markChecked = () => setCheckedOn(pathname);
+    if (targets.length === 0) return markChecked();
     const visible = new Set<Element>();
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) =>
         entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target),
       );
       setCtaSeenOn(visible.size > 0 ? pathname : null);
+      markChecked();
     });
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
@@ -50,7 +54,7 @@ export function AskFab() {
   return (
     <button
       type="button"
-      onClick={openChatDrawer}
+      onClick={() => openChatDrawer("fab")}
       aria-haspopup="dialog"
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : undefined}

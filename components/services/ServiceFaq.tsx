@@ -10,7 +10,7 @@ export function ServiceFaq() {
       <div className="mt-fl-40/72 border-t border-line">
         {SERVICE_FAQ.map((item) => (
           <details key={item.q} className="faq-item group border-b border-line">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-[24px] py-fl-20/28 text-fl-20/28 leading-[1.2] font-semibold tracking-[-0.02em] transition-colors hover:text-accent [&::-webkit-details-marker]:hidden">
+            <summary data-track="faq_toggle" data-track-question={item.q} className="flex cursor-pointer list-none items-center justify-between gap-[24px] py-fl-20/28 text-fl-20/28 leading-[1.2] font-semibold tracking-[-0.02em] transition-colors hover:text-accent [&::-webkit-details-marker]:hidden">
               {item.q}
               <span
                 aria-hidden

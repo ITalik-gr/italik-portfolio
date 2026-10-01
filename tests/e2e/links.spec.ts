@@ -11,7 +11,8 @@ for (const path of ["/", "/ai", "/work/money-track", "/work/ppc-io"]) {
       );
 
     for (const { text, href } of links) {
-      if (/case study/i.test(text)) expect(href, text).toMatch(/^\/work\/[a-z0-9-]+$/);
+      // a label that starts with it; a blog card with the "Case study" tag is not a case-study button
+      if (/^case study/i.test(text)) expect(href, text).toMatch(/^\/work\/[a-z0-9-]+$/);
       if (/^live( demo)?\s*↗?$/i.test(text)) expect(href, text).toMatch(/^https?:\/\//);
     }
 

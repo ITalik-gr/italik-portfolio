@@ -7,10 +7,8 @@ import { MemojiSticker } from "@/components/ui/MemojiSticker";
 import { TextLink } from "@/components/ui/TextLink";
 import { FOOTER, HIRING, SITE, type Audience } from "@/lib/site";
 
-type Props = { audience: Audience; servicesLink?: boolean };
-
-// clients see no "Open to work"; servicesLink: off on /services itself
-export function Contact({ audience, servicesLink = true }: Props) {
+// employers get the status line and a way to /services; clients already have Services in the nav and the CTA
+export function Contact({ audience }: { audience: Audience }) {
   const forClients = audience === "client";
   return (
     <footer
@@ -19,8 +17,8 @@ export function Contact({ audience, servicesLink = true }: Props) {
       className="mt-fl-96/180 border-t border-line px-gutter pt-[18px] pb-[32px] | md:pt-[24px]"
     >
       <Reveal>
-        <div className="flex flex-col gap-[28px] empty:hidden | md:flex-row md:items-center md:justify-between md:gap-[24px]">
-          {!forClients && (
+        {!forClients && (
+          <div className="flex flex-col gap-[28px] | md:flex-row md:items-center md:justify-between md:gap-[24px]">
             <p className="flex items-center gap-[10px] text-fl-17/22 leading-[1.35] tracking-[-0.01em] text-text | md:gap-[12px]">
               <span
                 aria-hidden
@@ -35,15 +33,13 @@ export function Contact({ audience, servicesLink = true }: Props) {
                 ))}
               </span>
             </p>
-          )}
-          {servicesLink && (
             <TextLink href="/services" className="w-fit">
               Have a project? See services
             </TextLink>
-          )}
-        </div>
+          </div>
+        )}
 
-        <div className="relative mt-[28px] | md:mt-[40px]">
+        <div className={forClients ? "relative" : "relative mt-[28px] | md:mt-[40px]"}>
           <MemojiSticker
             href={`mailto:${SITE.email}`}
             label={`Email ${SITE.email}`}
@@ -62,7 +58,7 @@ export function Contact({ audience, servicesLink = true }: Props) {
           </h2>
         </div>
 
-        <div className="mt-[56px] flex flex-col gap-[12px] | md:mt-[72px] md:flex-row md:items-center md:justify-between md:gap-[24px]">
+        <div className="mt-[72px] flex flex-col gap-[12px] | md:mt-[96px] md:flex-row md:items-center md:justify-between md:gap-[24px]">
           <ContactLinks variant="rows" className="md:hidden" />
           <ContactLinks variant="inline" className="hidden | md:flex" />
           <p className="font-mono text-[12px] leading-[16px] text-text-3 | md:text-[14px] md:leading-[18px]">

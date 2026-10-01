@@ -11,7 +11,7 @@ test("services page: one h1, nav anchors lead to the client home, the project CT
   const nav = page.getByRole("navigation", { name: "Main" });
   await expect(nav.getByRole("link", { name: "Work" })).toHaveAttribute("href", "/#work");
   await expect(nav.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "#contact");
-  await expect(page.getByRole("link", { name: /Tell me about your project/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /Send me the goal/ })).toHaveAttribute(
     "href",
     /^mailto:.+\?subject=/,
   );
@@ -42,6 +42,7 @@ test("the client footer has no Open to work and links employers to the portfolio
   await page.goto("/");
   const footer = page.locator("#contact");
   await expect(footer.getByText("Open to work")).toHaveCount(0);
+  await expect(footer.getByRole("link", { name: /See services/ })).toHaveCount(0);
   await expect(footer.getByRole("link", { name: /Hiring\?/ })).toHaveAttribute("href", "/ai");
 
   await page.goto("/ai");
@@ -86,4 +87,13 @@ test("a case ends with the client bridge, unless the visitor came from an employ
   await page.goto("/fullstack");
   await page.goto("/work/money-track");
   await expect(bridge).toHaveCount(0);
+});
+
+test("the employer footer's services link really opens /services", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/ai");
+  const link = page.locator("#contact").getByRole("link", { name: /See services/ });
+  await link.scrollIntoViewIfNeeded();
+  await link.click();
+  await expect(page).toHaveURL(/\/services$/);
 });

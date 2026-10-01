@@ -9,7 +9,7 @@ status: live
 statusNote: open source
 tags: [mcp, open-source, tool, agent, llm, web-app]
 typeLabel: Personal · tool · MCP
-summary: A dark Lottie animation becomes a light one, by hand, by script or by an agent that checks its result by rendering it.
+summary: Recolours a Lottie animation into any palette or theme, by hand, by script or by an agent that checks its result by rendering it.
 description: A browser editor, a CLI, an MCP server and a live editor–agent bridge that find every colour in a Lottie file, remap it and render the result to check it. All four are thin shells over one core package, published to npm, so a hand edit, a script and an agent come out identical.
 keyIdea: The agent must look at what it rendered.
 role: Solo · design, front-end, tooling, AI
@@ -67,7 +67,7 @@ aiSpecifics:
 
 ## Problem
 
-A designer who needed the light version of a dark Lottie animation had no tool short of After Effects. I built one core with three ways in: a web editor, a CLI and an MCP server with 12 tools, published as 4 npm packages. The agent recolours a file, renders it and checks the result before it hands it back.
+A designer who needed the same animation in another theme or palette, light instead of dark or in brand colours, had no tool short of After Effects. I built one core with three ways in: a web editor, a CLI and an MCP server with 12 tools, published as 4 npm packages. The agent recolours a file, renders it and checks the result before it hands it back.
 
 Dark-theme Lottie animations often have no source file left, and exporters scatter colour across eight different JSON shapes. Simply inverting lightness gives washed-out greys and dark halos on a white page.
 

@@ -43,6 +43,8 @@ export function MobileMenu({ nav }: { nav: readonly NavItem[] }) {
       <button
         type="button"
         aria-expanded={open}
+        data-track="menu_toggle"
+        data-track-open={String(!open)}
         aria-controls="mobile-menu"
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((value) => !value)}

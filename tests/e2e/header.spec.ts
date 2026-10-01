@@ -32,7 +32,13 @@ test("client pages get the client nav, without Open to work or a CV", async ({ p
   await page.setViewportSize({ width: 1440, height: 900 });
   for (const path of ["/", "/services"]) {
     await page.goto(path);
-    expect(await navLabels(page, "Main")).toEqual(["Work", "Services", "About", "Contact"]);
+    // Blog joins with the first published article; blog.spec checks that part
+    expect((await navLabels(page, "Main")).filter((label) => label !== "Blog")).toEqual([
+      "Work",
+      "Services",
+      "About",
+      "Contact",
+    ]);
     await expect(page.locator("header").getByText("Open to work")).toHaveCount(0);
     await expect(page.locator("header").getByRole("link", { name: "CV" })).toHaveCount(0);
   }
@@ -40,7 +46,12 @@ test("client pages get the client nav, without Open to work or a CV", async ({ p
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page.getByRole("button", { name: "Open menu" }).click();
-  expect(await navLabels(page, "Mobile")).toEqual(["Work", "Services", "About", "Contact"]);
+  expect((await navLabels(page, "Mobile")).filter((label) => label !== "Blog")).toEqual([
+    "Work",
+    "Services",
+    "About",
+    "Contact",
+  ]);
   await expect(page.locator("#mobile-menu").getByText("Open to work")).toHaveCount(0);
 });
 
@@ -70,4 +81,30 @@ test("a case page follows the home page the visitor came from", async ({ page })
   await page.goto("/ai");
   await page.goto("/work/money-track");
   await expect(status).toBeVisible();
+});
+
+test("a case opened in a new tab still follows the home page the visitor came from", async ({
+  context,
+}) => {
+  const home = await context.newPage();
+  await home.setViewportSize({ width: 1440, height: 900 });
+  await home.goto("/fullstack");
+
+  // a fresh tab starts with empty sessionStorage, so the last home has to live in localStorage
+  const tab = await context.newPage();
+  await tab.setViewportSize({ width: 1440, height: 900 });
+  await tab.goto("/work/money-track");
+  await expect(tab.locator("header").getByText("Open to work").first()).toBeVisible();
+  await expect(tab.getByRole("link", { name: "← All work" })).toHaveAttribute("href", "/fullstack#work");
+  await expect(tab.locator("header").getByRole("link", { name: "CV" })).toHaveAttribute(
+    "href",
+    "/cv/Vitaliy_Hrytsenko_Fullstack.pdf",
+  );
+
+  // going back to the client home switches every tab that opens a case afterwards
+  await home.goto("/");
+  const next = await context.newPage();
+  await next.goto("/work/money-track");
+  await expect(next.getByRole("link", { name: "← All work" })).toHaveAttribute("href", "/#work");
+  await expect(next.locator("header").getByText("Open to work")).toHaveCount(0);
 });

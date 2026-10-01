@@ -7,7 +7,7 @@ import { ChatDrawer } from "@/components/chat/ChatDrawer";
 import { AskFab } from "@/components/layout/AskFab";
 import { CursorLabel } from "@/components/motion/CursorLabel";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { PROFILES } from "@/lib/profiles";
+import { PROFILES, ROLE_PROFILES } from "@/lib/profiles";
 import { siteUrl } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import "./globals.css";
@@ -28,6 +28,10 @@ const dmMono = DM_Mono({
   fallback: ["ui-monospace", "Menlo", "monospace"],
   adjustFontFallback: false,
 });
+
+const chipsByHome = Object.fromEntries(
+  [PROFILES.client, ...ROLE_PROFILES].map((profile) => [profile.path, profile.askChips]),
+);
 
 // the defaults are the client home's; every other page sets its own
 const { title, description } = PROFILES.client.meta;
@@ -70,7 +74,7 @@ export default function RootLayout({ children }: Props) {
         <SmoothScroll />
         {children}
         <AskFab />
-        <ChatDrawer />
+        <ChatDrawer chipsByHome={chipsByHome} />
         <CursorLabel />
         <Analytics />
       </body>

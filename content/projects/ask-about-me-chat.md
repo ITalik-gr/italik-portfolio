@@ -14,7 +14,8 @@ keyIdea: It only knows what this site says.
 role: Solo · design, front-end, back-end, AI
 timeline: "2026"
 stack: [Next.js, TypeScript, Anthropic API, Upstash Redis, Zod]
-# TODO: code link once the site repo is public
+links:
+  code: https://github.com/ITalik-gr/italik-portfolio
 frameUrl: italik.dev/#ask
 internalLink: /#ask
 cover: /work/ask-about-me-chat/cover.png

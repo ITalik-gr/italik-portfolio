@@ -33,9 +33,15 @@ export function ChatPanel({ variant = "section", className, suggestions = ASK.ch
     if (nearBottom || busy) log.scrollTop = log.scrollHeight;
   }, [shown.length, lastLength, busy]);
 
-  const send = (question = input) => {
-    // only the fact and the size of a question are tracked, never its text
-    track("chat_message", { place: variant, chars: question.trim().length });
+  // a typed question is tracked only by its length, never its text; a chip is our own copy, so it's named
+  const send = (question = input, chip?: string) => {
+    track("chat_message", {
+      place: variant,
+      source: chip ? "chip" : "typed",
+      chars: question.trim().length,
+      turn: messages.filter((message) => message.role === "user").length + 1,
+      ...(chip && { chip }),
+    });
     void sendQuestion(question);
     setInput("");
   };
@@ -78,7 +84,7 @@ export function ChatPanel({ variant = "section", className, suggestions = ASK.ch
       <SuggestionChips
         suggestions={suggestions}
         active={lastQuestion}
-        onPick={(question) => (busy ? setInput(question) : send(question))}
+        onPick={(question) => (busy ? setInput(question) : send(question, question))}
       />
       <ChatInput value={input} onChange={setInput} onSubmit={() => send()} disabled={busy} />
     </div>

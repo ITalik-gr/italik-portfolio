@@ -1,14 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useHomePath } from "@/components/layout/HomeLink";
 import { closeChatDrawer, useChat } from "@/lib/chat/store";
 import { ASK } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ChatPanel } from "./ChatPanel";
 
+// chipsByHome: each home page's own questions, so the drawer asks what the section on that page asks
+type Props = { chipsByHome: Record<string, readonly string[]> };
+
 // the chat on every page: a sheet on the right on desktop, full screen on mobile
-export function ChatDrawer() {
+export function ChatDrawer({ chipsByHome }: Props) {
   const { drawerOpen } = useChat();
+  const chips = chipsByHome[useHomePath()];
   const returnFocus = useRef<HTMLElement | null>(null);
   const dialog = useRef<HTMLDivElement>(null);
 
@@ -79,7 +84,9 @@ export function ChatDrawer() {
             ✕
           </button>
         </div>
-        {drawerOpen && <ChatPanel variant="drawer" className="min-h-0 flex-1" />}
+        {drawerOpen && (
+          <ChatPanel variant="drawer" suggestions={chips} className="min-h-0 flex-1" />
+        )}
       </div>
     </div>
   );

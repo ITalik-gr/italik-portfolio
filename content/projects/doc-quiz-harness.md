@@ -18,8 +18,6 @@ cover: /work/doc-quiz-harness/cover.png
 links:
   code: https://github.com/ITalik-gr/quiz-dock
 nowBuilding:
-  # TODO verify: phase numbers come from the design mock
-  phase: { current: 2, total: 4 }
   lastUpdate: 2026-09
   updateNote: "CLI works; building the web version: Next.js, Hono, sessions in SQLite"
 features:

@@ -1,13 +1,14 @@
-// /services: client work, next to the hiring-focused home pages. No prices on purpose: rates are on request.
+// /services: the detailed page for founders. No prices on purpose: rates are on request.
 export const SERVICES_PAGE = {
-  title: "AI features and web apps, built and shipped",
-  sub: "I take your product from idea to production: AI agents inside your app, full-stack web apps and fast marketing sites. Remote from Kyiv, on European hours.",
-  cta: "Tell me about your project",
+  title: "Your product, built and shipped",
+  sub: "Solo, from decision to production, without step-by-step specs. New products, AI features and agents, and making what you have faster and cheaper.",
+  cta: "Send me the goal",
   mailSubject: "Project enquiry",
+  og: { lines: ["Your product,", "built and shipped"], lead: "Solo, from decision to production. Rates on request." },
   meta: {
-    title: "Services: AI agents, full-stack apps and sites · Vitaliy Hrytsenko",
+    title: "Services: products, AI features and agents · Vitaliy Hrytsenko",
     description:
-      "Hire Vitaliy Hrytsenko to build AI agents and LLM features, full-stack web apps and MVPs, or fast marketing sites. Remote from Kyiv, NDA on request, you own the code.",
+      "A solo developer for founders: new products and MVPs, AI features and agents, and making what you have faster and cheaper. NDA on request, you own the code.",
   },
 } as const;
 
@@ -42,8 +43,8 @@ export const SERVICES = [
     proof: ["tg-assistant", "job-radar", "ppc-io", "sollas-co"],
   },
   {
-    title: "Fix what's vibe-coded",
-    short: "Things that broke or can't handle load or real data.",
+    title: "Fix what breaks under real users",
+    short: "Code that broke, can't handle the load or falls over on real data.",
     text: "Code that broke, can't handle the load or falls over on real data. I find the cause and fix it in the architecture.",
     result:
       "Money Track: the model invented numbers. Every calculation moved into SQL, and a check blocks any figure the database didn't produce.",

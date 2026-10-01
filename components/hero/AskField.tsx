@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { track } from "@/lib/analytics";
 import { openChatDrawer, sendQuestion, useChat } from "@/lib/chat/store";
 import { cn } from "@/lib/utils";
 
@@ -77,10 +78,19 @@ export function AskField({ questions, className }: Props) {
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    openChatDrawer();
+    openChatDrawer("hero_field");
     // while an answer is still streaming the chat drops new questions, so keep the text for a second try
     if (busy) return;
-    void sendQuestion(value.trim() || questions[current.current]);
+    const typed = value.trim();
+    const question = typed || questions[current.current];
+    // a suggested question is our own copy, so it can be sent as is; a typed one only by its length
+    track("chat_message", {
+      place: "hero",
+      source: typed ? "typed" : "suggested",
+      chars: question.length,
+      ...(!typed && { chip: question }),
+    });
+    void sendQuestion(question);
     setValue("");
   };
 

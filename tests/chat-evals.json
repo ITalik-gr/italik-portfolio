@@ -179,6 +179,7 @@
       "question": "Does he have commercial experience with Python?",
       "includeAny": [
         "don't have",
+        "hasn't",
         "doesn't",
         "not mentioned",
         "no information",
@@ -372,6 +373,17 @@
         "Telegram",
         "t.me",
         "italik.gr@gmail.com"
+      ]
+    },
+    {
+      "id": "founder-vibe-coded",
+      "question": "We vibe-coded our app and it breaks with real users. Can he fix it?",
+      "includeAny": [
+        "Money Track",
+        "Telegram",
+        "architecture",
+        "rewrote",
+        "by hand"
       ]
     }
   ]

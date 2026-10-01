@@ -23,8 +23,6 @@ cover: /work/tg-assistant/cover.png
 nowBuilding:
   title: AI Telegram Assistant v2
   summary: "A ground-up rewrite: function calling instead of a hardcoded router, tests, and smarter memory recall."
-  # TODO verify: phase numbers come from the design mock
-  phase: { current: 1, total: 3 }
   lastUpdate: "2026"
   updateNote: v1 runs in a live chat; rewrite underway
 features:

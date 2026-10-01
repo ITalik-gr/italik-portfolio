@@ -12,7 +12,6 @@ typeLabel: Client · marketing site
 via: Sollas
 summary: "A marketing site and blog the team edits without a developer: 24 section types in the CMS, from Figma to finished build in ~6 weeks."
 role: "Sole developer: Next.js front-end and Strapi CMS"
-# TODO: team (designers)
 timeline: 2024 · ~6 weeks
 stack: [Next.js, React, Strapi, SCSS, ConvertKit]
 # only the vercel build is mine; the production domain runs an older build and is never linked

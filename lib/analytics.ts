@@ -1,4 +1,4 @@
-import { HOMES } from "./site";
+import { HOME_KEY, HOMES } from "./site";
 
 type Data = Record<string, string | number | boolean>;
 type Umami = { track: (event: string, data?: Data) => void };
@@ -19,15 +19,41 @@ export function pageKind(pathname: string) {
   return "other";
 }
 
+function lastHome() {
+  try {
+    return localStorage.getItem(HOME_KEY) ?? "/";
+  } catch {
+    return "/";
+  }
+}
+
+// sent with every event, so any event can be split by page, audience, article, case and device
+function context(): Data {
+  const { pathname } = window.location;
+  const page = pageKind(pathname);
+  const home = HOMES[pathname] ? pathname : ["client-home", "services", "blog", "article"].includes(page) ? "/" : lastHome();
+  const slug = pathname.split("/")[2];
+  return {
+    page,
+    from: pathname,
+    audience: HOMES[home]?.audience ?? "client",
+    home,
+    device: window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "desktop",
+    ...(page === "article" && slug && { post: slug }),
+    ...(page === "case" && slug && { project: slug }),
+  };
+}
+
 // events fired before the script has loaded (it waits for an idle moment) are sent once it's ready
-const queue: [string, Data | undefined][] = [];
+const queue: [string, Data][] = [];
 
 const umami = () => (window as unknown as { umami?: Umami }).umami;
 
 export function track(event: string, data?: Data) {
+  const payload = { ...context(), ...data };
   const client = umami();
-  if (client) client.track(event, data);
-  else if (queue.length < 20) queue.push([event, data]);
+  if (client) client.track(event, payload);
+  else if (queue.length < 30) queue.push([event, payload]);
 }
 
 export function flushAnalytics() {

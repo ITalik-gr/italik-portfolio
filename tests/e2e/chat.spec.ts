@@ -55,3 +55,17 @@ test("limits and outages show a friendly message with the email", async ({ page 
   await expect(section.getByText("The chat is resting for today")).toBeVisible();
   await expect(section.getByText("Something broke")).toBeVisible();
 });
+
+test("the drawer suggests the questions of the page's audience", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/blog/the-model-never-computes-a-number");
+  await page.getByRole("button", { name: "Ask AI" }).last().click({ force: true });
+  const drawer = page.getByRole("dialog", { name: "Ask AI about Vitaliy" });
+  await expect(drawer.getByRole("button", { name: "How do we start?" })).toBeVisible();
+  await page.keyboard.press("Escape");
+
+  await page.goto("/fullstack");
+  await page.evaluate(() => window.scrollTo(0, 2500));
+  await page.getByRole("button", { name: "Ask AI" }).last().click({ force: true });
+  await expect(drawer.getByRole("button", { name: "How did he build Answerly's payments?" })).toBeVisible();
+});
