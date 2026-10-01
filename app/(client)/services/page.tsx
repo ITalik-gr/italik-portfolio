@@ -37,7 +37,7 @@ export default function ServicesPage() {
         <ServiceProcess />
         <ServiceFaq />
       </main>
-      <Contact servicesLink={false} />
+      <Contact audience="client" servicesLink={false} />
     </>
   );
 }

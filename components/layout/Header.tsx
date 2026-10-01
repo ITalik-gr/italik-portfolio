@@ -1,15 +1,18 @@
-import { NAV } from "@/lib/site";
+import { NAV, type Audience } from "@/lib/site";
 import { CvButton } from "./CvButton";
+import { ForAudience } from "./ForAudience";
 import { HomeLink, NavLink } from "./HomeLink";
 import { KyivTime } from "./KyivTime";
 import { MobileMenu } from "./MobileMenu";
 import { Monogram } from "./Monogram";
 
-type Props = { variant?: "home" | "case" };
+// group layouts pass their audience; case pages have no nav and follow the home page the visitor came from
+type Props = { variant: "case" } | { variant?: "home"; audience: Audience };
 
 // case pages swap the nav for a way back; on mobile they drop the monogram and menu too
-export function Header({ variant = "home" }: Props) {
-  const isCase = variant === "case";
+export function Header(props: Props) {
+  const nav = props.variant === "case" ? null : NAV[props.audience];
+  const isCase = !nav;
 
   return (
     <header className="sticky top-0 z-40 bg-bg">
@@ -35,13 +38,14 @@ export function Header({ variant = "home" }: Props) {
           <Monogram />
         )}
 
-        {!isCase && (
+        {nav && (
           <nav aria-label="Main" className="hidden | md:block">
             <ul className="flex gap-[32px]">
-              {NAV.map((item) => (
+              {nav.map((item) => (
                 <li key={item.href}>
                   <NavLink
                     href={item.href}
+                    samePage={item.samePage}
                     className="text-[16px] leading-[20px] font-medium text-text transition-colors duration-150 hover:text-accent"
                   >
                     {item.label}
@@ -60,7 +64,9 @@ export function Header({ variant = "home" }: Props) {
                 <KyivTime />
               </span>
             </span>
-            <span>Open to work</span>
+            <ForAudience audience="employer">
+              <span>Open to work</span>
+            </ForAudience>
           </div>
           <CvButton
             size="sm"
@@ -70,7 +76,7 @@ export function Header({ variant = "home" }: Props) {
           >
             CV
           </CvButton>
-          {!isCase && <MobileMenu />}
+          {nav && <MobileMenu nav={nav} />}
         </div>
       </div>
     </header>

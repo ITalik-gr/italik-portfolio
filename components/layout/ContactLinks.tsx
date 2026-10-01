@@ -13,6 +13,7 @@ type Props = {
 const LINKS = [
   { label: SITE.email, href: `mailto:${SITE.email}`, arrow: "→", inlineArrow: false },
   { label: "Telegram", href: SITE.socials.telegram, arrow: "↗", inlineArrow: true },
+  { label: "X", href: SITE.socials.x, arrow: "↗", inlineArrow: true },
   { label: "GitHub", href: SITE.socials.github, arrow: "↗", inlineArrow: true },
 ] as const;
 

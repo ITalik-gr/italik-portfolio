@@ -1,5 +1,4 @@
 import { AskChatButton } from "@/components/chat/AskChatButton";
-import { CvButton } from "@/components/layout/CvButton";
 import { SplitHeading } from "@/components/motion/SplitHeading";
 import { Button } from "@/components/ui/Button";
 import { SERVICES_PAGE } from "@/lib/services";
@@ -30,15 +29,9 @@ export function ServicesHero() {
           <Button href={projectMailto} size="lg" arrow="→" className="col-span-2 justify-center">
             {SERVICES_PAGE.cta}
           </Button>
-          <AskChatButton className="justify-center border-text">Ask my AI about me</AskChatButton>
-          <CvButton
-            variant="ghost"
-            size="lg"
-            external={false}
-            className="justify-center | md:border-transparent md:hover:border-transparent"
-          >
-            CV
-          </CvButton>
+          <AskChatButton className="col-span-2 justify-center border-text">
+            Ask my AI about me
+          </AskChatButton>
         </div>
       </div>
     </section>

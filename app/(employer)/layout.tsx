@@ -4,7 +4,7 @@ import { Header } from "@/components/layout/Header";
 export default function EmployerLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Header />
+      <Header audience="employer" />
       {children}
     </>
   );

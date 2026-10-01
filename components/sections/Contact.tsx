@@ -1,13 +1,17 @@
+import Link from "next/link";
 import { Fragment } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactLinks } from "@/components/layout/ContactLinks";
 import { KyivOffset, KyivTime } from "@/components/layout/KyivTime";
 import { MemojiSticker } from "@/components/ui/MemojiSticker";
 import { TextLink } from "@/components/ui/TextLink";
-import { FOOTER, SITE } from "@/lib/site";
+import { FOOTER, HIRING, SITE, type Audience } from "@/lib/site";
 
-// servicesLink: off on /services itself
-export function Contact({ servicesLink = true }: { servicesLink?: boolean }) {
+type Props = { audience: Audience; servicesLink?: boolean };
+
+// clients see no "Open to work"; servicesLink: off on /services itself
+export function Contact({ audience, servicesLink = true }: Props) {
+  const forClients = audience === "client";
   return (
     <footer
       id="contact"
@@ -15,21 +19,23 @@ export function Contact({ servicesLink = true }: { servicesLink?: boolean }) {
       className="mt-fl-96/180 border-t border-line px-gutter pt-[18px] pb-[32px] | md:pt-[24px]"
     >
       <Reveal>
-        <div className="flex flex-col gap-[28px] | md:flex-row md:items-center md:justify-between md:gap-[24px]">
-          <p className="flex items-center gap-[10px] text-fl-17/22 leading-[1.35] tracking-[-0.01em] text-text | md:gap-[12px]">
-            <span
-              aria-hidden
-              className="size-[8px] shrink-0 rounded-full bg-accent | md:size-[9px]"
-            />
-            <span>
-              {["Open to work", ...SITE.openTo].map((item, index) => (
-                <Fragment key={item}>
-                  {index > 0 && " · "}
-                  <span className="whitespace-nowrap">{item}</span>
-                </Fragment>
-              ))}
-            </span>
-          </p>
+        <div className="flex flex-col gap-[28px] empty:hidden | md:flex-row md:items-center md:justify-between md:gap-[24px]">
+          {!forClients && (
+            <p className="flex items-center gap-[10px] text-fl-17/22 leading-[1.35] tracking-[-0.01em] text-text | md:gap-[12px]">
+              <span
+                aria-hidden
+                className="size-[8px] shrink-0 rounded-full bg-accent | md:size-[9px]"
+              />
+              <span>
+                {["Open to work", ...SITE.openTo].map((item, index) => (
+                  <Fragment key={item}>
+                    {index > 0 && " · "}
+                    <span className="whitespace-nowrap">{item}</span>
+                  </Fragment>
+                ))}
+              </span>
+            </p>
+          )}
           {servicesLink && (
             <TextLink href="/services" className="w-fit">
               Have a project? See services
@@ -66,6 +72,11 @@ export function Contact({ servicesLink = true }: { servicesLink?: boolean }) {
 
         <div className="mt-[56px] flex flex-col gap-[8px] font-mono text-[11px] leading-[14px] tracking-[0.04em] text-muted | md:flex-row md:justify-between">
           <span>{FOOTER.credit}</span>
+          {forClients && (
+            <Link href={HIRING.href} className="transition-colors duration-150 hover:text-accent">
+              {HIRING.label} →
+            </Link>
+          )}
           <span>{FOOTER.copyright}</span>
         </div>
       </Reveal>

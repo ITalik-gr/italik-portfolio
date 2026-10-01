@@ -22,3 +22,11 @@ for (const path of ["/", "/ai", "/work/money-track", "/work/ppc-io"]) {
     for (const href of casePages) expect((await request.get(href)).status(), href).toBe(200);
   });
 }
+
+// X is how founders find me, so every page links to it
+for (const path of ["/", "/services", "/ai", "/fullstack", "/frontend", "/work/money-track", "/missing-page"]) {
+  test(`${path} links to X`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('footer a[href="https://x.com/italikdev"]').first()).toBeAttached();
+  });
+}

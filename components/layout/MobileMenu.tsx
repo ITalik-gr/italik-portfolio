@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { NAV } from "@/lib/site";
+import type { NavItem } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { BurgerIcon } from "./BurgerIcon";
 import { ContactLinks } from "./ContactLinks";
+import { ForAudience } from "./ForAudience";
 import { NavLink, useNavHref } from "./HomeLink";
 import { KyivTime } from "./KyivTime";
 
@@ -17,7 +18,7 @@ const stagger = (open: boolean, index: number) => ({
 const REVEAL =
   "transition-[opacity,translate] duration-500 ease-out-expo motion-reduce:transition-none";
 
-export function MobileMenu() {
+export function MobileMenu({ nav }: { nav: readonly NavItem[] }) {
   const [open, setOpen] = useState(false);
   const askHref = useNavHref("#ask");
 
@@ -60,10 +61,11 @@ export function MobileMenu() {
       >
         <nav aria-label="Mobile">
           <ul className="flex flex-col gap-[8px]">
-            {NAV.map((item, index) => (
+            {nav.map((item, index) => (
               <li key={item.href} style={stagger(open, index)} className={cn(REVEAL, shown)}>
                 <NavLink
                   href={item.href}
+                  samePage={item.samePage}
                   onClick={() => setOpen(false)}
                   className="block py-[6px] text-fl-56/80 leading-[0.9] font-semibold tracking-[-0.045em] text-text transition-colors hover:text-accent"
                 >
@@ -75,7 +77,7 @@ export function MobileMenu() {
         </nav>
 
         <div
-          style={stagger(open, NAV.length)}
+          style={stagger(open, nav.length)}
           className={cn("mt-[40px]", REVEAL, shown)}
           onClick={(event) => (event.target as HTMLElement).closest("a") && setOpen(false)}
         >
@@ -85,7 +87,7 @@ export function MobileMenu() {
         </div>
 
         <div
-          style={stagger(open, NAV.length + 1)}
+          style={stagger(open, nav.length + 1)}
           className={cn("mt-auto pt-[40px]", REVEAL, shown)}
         >
           <ContactLinks variant="rows" className="border-t border-line" />
@@ -93,7 +95,9 @@ export function MobileMenu() {
             <span>
               Kyiv · <KyivTime /> · UTC+3
             </span>
-            <span className="text-muted">Open to work</span>
+            <ForAudience audience="employer">
+              <span className="text-muted">Open to work</span>
+            </ForAudience>
           </p>
         </div>
       </div>

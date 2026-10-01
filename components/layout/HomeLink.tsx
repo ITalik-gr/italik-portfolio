@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useSyncExternalStore, type ComponentProps } from "react";
-import { CLIENT_PAGES, HOMES } from "@/lib/site";
+import { HOMES, isClientPage } from "@/lib/site";
 
 // the home page a visitor last saw ("/", "/ai", "/frontend", "/fullstack"), so links back from a case return to it
 const KEY = "italik:home";
@@ -63,16 +63,18 @@ export function HomeLink({ hash = "", backToSection, ...props }: Props) {
   return <Link href={`${home}${target}`} {...props} />;
 }
 
-// home pages have the sections a same-page anchor points at; any other page sends it to the last home seen
-export function useNavHref(href: string) {
+// home pages have the sections an anchor points at; client pages send it to "/", case pages to the last home seen
+export function useNavHref(href: string, samePage = false) {
   const pathname = usePathname();
   const home = useSyncExternalStore(subscribe, readHome, () => "/");
-  const onHome = pathname in HOMES;
-  return href.startsWith("#") && !onHome ? `${home}${href}` : href;
+  if (!href.startsWith("#") || samePage || pathname in HOMES) return href;
+  return `${isClientPage(pathname) ? "/" : home}${href}`;
 }
 
-export function NavLink({ href, ...props }: ComponentProps<typeof Link> & { href: string }) {
-  return <Link href={useNavHref(href)} {...props} />;
+type NavLinkProps = ComponentProps<typeof Link> & { href: string; samePage?: boolean };
+
+export function NavLink({ href, samePage, ...props }: NavLinkProps) {
+  return <Link href={useNavHref(href, samePage)} {...props} />;
 }
 
 // a home page knows its audience from the URL (already on the server); client pages are always client;
@@ -80,9 +82,7 @@ export function NavLink({ href, ...props }: ComponentProps<typeof Link> & { href
 export function useHome() {
   const pathname = usePathname();
   const home = useSyncExternalStore(subscribe, readHome, () => "/");
-  if (CLIENT_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`))) {
-    return HOMES["/"];
-  }
+  if (isClientPage(pathname)) return HOMES["/"];
   return HOMES[pathname] ?? HOMES[home] ?? HOMES["/"];
 }
 

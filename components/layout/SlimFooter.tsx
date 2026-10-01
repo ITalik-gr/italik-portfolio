@@ -8,6 +8,14 @@ export function SlimFooter() {
       <a href={`mailto:${SITE.email}`} className="transition-colors duration-150 hover:text-accent">
         {SITE.email}
       </a>
+      <a
+        href={SITE.socials.x}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="transition-colors duration-150 hover:text-accent"
+      >
+        X ↗
+      </a>
       <Link href="/services" className="transition-colors duration-150 hover:text-accent">
         Services →
       </Link>

@@ -32,15 +32,32 @@ export const HOMES: Record<string, { audience: Audience; cv?: string }> = {
 
 // client pages that aren't home pages: they never remember a home and never show a CV
 export const CLIENT_PAGES = ["/services", "/blog"];
+export const isClientPage = (pathname: string) =>
+  CLIENT_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`));
 
-// same-page anchors on home pages; elsewhere NavLink points them at the last home page seen.
-// no Services here on purpose: an employer on the home page shouldn't read "he takes clients"; it lives in the footers
-export const NAV = [
-  { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
-  { label: "About", href: "#about" },
-  { label: "Ask AI", href: "#ask" },
-] as const;
+// anchors point at home page sections; elsewhere NavLink sends them to the right home page.
+// samePage: the section is on every page with this nav (the contact footer), so the anchor stays as is
+export type NavItem = { label: string; href: string; samePage?: boolean };
+
+// employers get no Services on purpose: they shouldn't read "he takes clients"; it lives in the footers
+// TODO phase 5: Blog in the client nav once an article is published
+export const NAV: Record<Audience, readonly NavItem[]> = {
+  client: [
+    { label: "Work", href: "#work" },
+    { label: "Services", href: "/services" },
+    { label: "About", href: "#about" },
+    { label: "Contact", href: "#contact", samePage: true },
+  ],
+  employer: [
+    { label: "Work", href: "#work" },
+    { label: "Experience", href: "#experience" },
+    { label: "About", href: "#about" },
+    { label: "Ask AI", href: "#ask" },
+  ],
+};
+
+// the employer portfolio linked from client pages: old links in applications and CVs land on "/"
+export const HIRING = { label: "Hiring? See my developer portfolio", href: "/ai" } as const;
 
 export const HERO = {
   title: "I build AI agents that ship",

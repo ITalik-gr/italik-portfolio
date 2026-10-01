@@ -16,6 +16,7 @@ import { getFeaturedProjects, getNowBuilding, getProject } from "@/lib/content";
 import type { HomeSectionKey, Profile } from "@/lib/profiles";
 import type { Project } from "@/lib/schemas";
 import { homeJsonLd } from "@/lib/seo";
+import { HOMES } from "@/lib/site";
 
 export function HomePage({ profile }: { profile: Profile }) {
   const featured = getFeatured(profile);
@@ -51,7 +52,7 @@ export function HomePage({ profile }: { profile: Profile }) {
         ))}
       </main>
       <script src="https://www.makermap.lol/badge/italikdev.js" data-position="corner" async></script>
-      <Contact />
+      <Contact audience={HOMES[profile.path].audience} />
     </>
   );
 }
