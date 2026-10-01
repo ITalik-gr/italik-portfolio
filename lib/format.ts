@@ -9,16 +9,13 @@ const TAG_LABELS: Record<string, string> = {
   "web-app": "Web app",
 };
 
-const dateFormatter = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
+// fixed three-letter months: en-GB writes September as "Sept"
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 // "2026-10-01" → "1 Oct 2026"
 export function formatDate(date: string) {
-  return dateFormatter.format(new Date(`${date}T00:00:00Z`));
+  const [year, month, day] = date.split("-").map(Number);
+  return `${day} ${MONTHS[month - 1]} ${year}`;
 }
 
 export function formatTag(tag: string) {

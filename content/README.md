@@ -63,3 +63,53 @@ A title or card leads to the first that exists: case page → `internalLink` →
 - Template A (`kind: personal`): `keyIdea`, `features`, `architecture`, `decisions`, `aiSpecifics` in the frontmatter; `## Problem`, `## What I'd do differently`, `## Results`, `## Next` in the body.
 - Template B (`kind: client`): `highlights`, `outcome`, `gallery` in the frontmatter; `## Brief`, `## What I did` in the body.
 - Text that starts with `TODO` renders greyed out as `[TODO · …]`, so drafts stay visible without passing as real claims. `draft: true` marks a case whose copy is not final.
+
+## Blog posts
+
+Every article is one Markdown file in `posts/`; the file name must equal `slug`. The blog (`/blog`, the nav link, the home "Writing" block, RSS, the sitemap) appears only once at least one post has `draft: false`. Drafts open only in `pnpm dev`, marked "Draft" and `noindex`.
+
+```yaml
+---
+title: The model never computes a number      # under ~70 characters, a claim or a number
+slug: the-model-never-computes-a-number
+date: "2026-10-01"
+summary: One sentence, a claim plus a number. Shown under the title, on cards and in search results.
+tags: [AI, LLM, Case study]                   # display names; the first one is the breadcrumb
+draft: true                                   # Claude drafts, Vitaliy publishes
+audience: founders                            # founders | developers (labels hidden until BLOG.showAudience)
+project: money-track                          # optional: adds "Live demo / Code / Case study" at the end
+projectLinks: [demo, case]                    # optional: only these buttons; leave out for all that exist
+keys:                                         # optional, up to 3: the key-numbers block and the cover
+  - { value: "~97%", caption: categorisation accuracy }
+  - { value: "~80%", caption: lower AI cost }
+cover: /blog/<slug>/cover.png                 # optional 16:10 image; without it the first key number is the cover
+canonical: https://dev.to/...                 # optional, only when the original lives elsewhere
+---
+```
+
+Read time is counted from the text (about 220 words a minute).
+
+### What the article page does on its own
+
+- **Contents.** Every `##` heading becomes an item in the contents: a sticky list in the right margin on wide screens, a "Contents" bar under the header on phones. The current section is highlighted. Keep `##` headings short (2 to 6 words) so the list reads well; use `###` for sub-points, they stay out of the contents.
+- **Key numbers.** `keys` render right under the title in large accent type, wider than the text. Put the one result a founder should remember first; it also becomes the cover.
+- **Reading progress** line at the top, the project row (`project`; a general article without a project simply has none; `projectLinks` picks the buttons), the author block with Copy link and Share on X, related posts (most shared tags first) and previous / next. Each part hides itself when there is nothing to show.
+- The site's CTA and footer close every article.
+
+### Blocks you can use in the text
+
+| Write | Get | Use it for |
+| --- | --- | --- |
+| `## Heading` | 40px section heading, in the contents | One per step of the story: problem, what failed, fix, result |
+| `### Heading` | 24px sub-heading | A detail inside a section |
+| `> One sentence.` | Large white pull quote | The one line people should quote. Once per article |
+| `:::fail` … `:::` | Dark box labelled "✕ What didn't work" | The failed attempt and how you noticed. Every "how I solved it" post should have one |
+| `:::note Title` … `:::` | Dark box labelled "Note", optional bold title | A side remark that would break the flow |
+| `:::takeaway Title` … `:::` | Dark box with an H2 title, in the contents | "What this means for your product" at the end: 2 to 4 bullets in money, cost or reliability terms |
+| `![alt](/path.png "Caption")` | Figure wider than the text, numbered "FIG. 1, 2…" | Screenshots and diagrams. Always write the caption: what to look at |
+| ```` ```ts title="advisor/context.ts" ```` | Code with a file tab, language, Copy button, line numbers, grey highlighting | 5 to 25 lines that show the idea, with one sentence before it saying why it matters. TS, JS, SQL and shell are highlighted |
+| A Markdown table | Rows with a mono label column; the last column is bright, the middle ones grey | Before → after comparisons: `\| \| Before \| After \|` |
+| `1.` / `-` lists | Numbered `01 02 03` or dotted items | Steps and short lists |
+| `` `code` ``, `**bold**`, `*italic*`, `[link](url)` | Inline styles; links in accent | Links to `/work/…` open on the site, the rest in a new tab |
+
+Boxes can hold any of the other blocks (paragraphs, lists, code). Avoid em dashes everywhere, including captions and tables.

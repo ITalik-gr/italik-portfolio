@@ -9,8 +9,10 @@ import {
   type Experience,
   type HOME_SECTIONS,
   type Post,
+  type PostCardData,
   type Project,
 } from "@/lib/schemas";
+import { readingMinutes } from "@/lib/markdown";
 
 type HomeSection = (typeof HOME_SECTIONS)[number];
 
@@ -105,7 +107,14 @@ export function getExperience(): Experience[] {
 
 function getAllPosts(): Post[] {
   if (!fs.existsSync(path.join(CONTENT_DIR, "posts"))) return [];
-  return readCollection("posts", postSchema).sort((a, b) => b.date.localeCompare(a.date));
+  const posts = readCollection("posts", postSchema).sort((a, b) => b.date.localeCompare(a.date));
+  // a typo in `project` would silently drop the links at the end of the article
+  for (const post of posts) {
+    if (post.project && !getProject(post.project)) {
+      throw new Error(`content/posts/${post.slug}.md: unknown project "${post.project}"`);
+    }
+  }
+  return posts;
 }
 
 // published only, newest first: the blog page, the home block, nav, RSS, sitemap, llms.txt.
@@ -121,4 +130,25 @@ export function getPostPages() {
 
 export function getPost(slug: string) {
   return getPostPages().find((post) => post.slug === slug);
+}
+
+export function toPostCard({ body, ...post }: Post): PostCardData {
+  return { ...post, minutes: readingMinutes(body) };
+}
+
+// up to three other published posts, the ones sharing most tags first
+export function getRelatedPosts(post: Post, limit = 3) {
+  const shared = (other: Post) => other.tags.filter((tag) => post.tags.includes(tag)).length;
+  return getPosts()
+    .filter((other) => other.slug !== post.slug)
+    .sort((a, b) => shared(b) - shared(a) || b.date.localeCompare(a.date))
+    .slice(0, limit);
+}
+
+// the published neighbours by date: older is "previous", newer is "next"
+export function getPostNeighbours(post: Post) {
+  const posts = getPosts();
+  const index = posts.findIndex((other) => other.slug === post.slug);
+  if (index === -1) return { prev: undefined, next: undefined };
+  return { prev: posts[index + 1], next: index > 0 ? posts[index - 1] : undefined };
 }

@@ -28,11 +28,19 @@
   --animate-spin-slow: spin 20s linear infinite;
   --animate-marquee: marquee 90s linear infinite;
   --animate-letter-in: letter-in 0.7s var(--ease-out-expo) both;
+  --animate-word-up: word-up 0.8s var(--ease-out-expo) both;
 
   @keyframes letter-in {
     from {
       transform: translateY(60%);
       opacity: 0;
+    }
+  }
+
+  /* article titles: each word rises from behind its own mask */
+  @keyframes word-up {
+    from {
+      transform: translateY(105%);
     }
   }
 
@@ -238,9 +246,10 @@
   );
 }
 
-/* page side padding: 20px on phones, 40px at 1440 */
+/* page side padding: 20px on phones, 40px at 1440; past 1520 it grows so content stays 1440 wide and centred,
+   while borders on the same element still run edge to edge */
 @utility px-gutter {
-  padding-inline: clamp(20px, calc(20px + 20 * (100vw - 390px) / 1050), 40px);
+  padding-inline: max(clamp(20px, calc(20px + 20 * (100vw - 390px) / 1050), 40px), calc((100% - 1440px) / 2));
 }
 
 @layer base {

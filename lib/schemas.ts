@@ -130,13 +130,26 @@ export const postSchema = z.object({
     z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   ),
   summary: z.string().min(1),
+  // display names ("AI", "Case study"); the URL uses their slug
   tags: z.array(z.string()).default([]),
   draft: z.boolean().default(false),
+  // who it's for; the switch on /blog stays hidden until BLOG.showAudience is on
+  audience: z.enum(["founders", "developers"]).default("founders"),
+  // up to three headline numbers: the article's key-numbers block and its cover when there's no image
+  keys: z.array(z.object({ value: z.string(), caption: z.string() })).max(3).default([]),
+  // slug of the case study the article is about: adds its live, code and case links at the end
+  project: z.string().optional(),
+  // which of the project's buttons to show; all that exist when left out
+  projectLinks: z.array(z.enum(["demo", "code", "case"])).optional(),
   cover: z.string().optional(),
+  // the number on a cover without an image turns accent; use it now and then, not on every post
+  coverAccent: z.boolean().default(false),
   canonical: optionalUrl,
 });
 
 export type Project = z.infer<typeof projectSchema> & { body: string };
 export type Post = z.infer<typeof postSchema> & { body: string };
+// what a card needs: no body, so lists don't ship whole articles to the browser
+export type PostCardData = Omit<Post, "body"> & { minutes: number };
 export type Experience = z.infer<typeof experienceSchema> & { body: string };
 export type ProjectStatus = z.infer<typeof statusSchema>;

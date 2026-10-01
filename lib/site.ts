@@ -21,6 +21,9 @@ export const SITE = {
 
 export type Audience = "client" | "employer";
 
+// localStorage key for the last home page seen; read by the nav, the CV, the chat and analytics
+export const HOME_KEY = "italik:home";
+
 // every home page and who it's for; only employer pages hand out a CV.
 // case pages follow the home page the visitor came from, a direct visit counts as "/"
 export const HOMES: Record<string, { audience: Audience; cv?: string }> = {
@@ -131,11 +134,16 @@ export const ASK = {
 } as const;
 
 export const BLOG = {
-  kicker: "Blog",
-  title: "Writing",
+  title: "Blog",
+  // flip on once both audiences have posts: the switch on /blog and the labels on cards and articles
+  showAudience: false,
+  audiences: { founders: "For founders", developers: "For developers" },
+  author:
+    "Vitaliy Hrytsenko, full-stack developer building AI products. Solo, from decision to production.",
+  perPage: 9,
   sub: "How I solve problems in real products: what didn't work, what did, and the numbers.",
   meta: {
-    title: "Writing · Vitaliy Hrytsenko",
+    title: "Blog · Vitaliy Hrytsenko",
     description:
       "Articles by Vitaliy Hrytsenko on building AI features and products: the problem, what didn't work, the fix and the numbers.",
   },

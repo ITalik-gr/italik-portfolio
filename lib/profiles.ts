@@ -60,7 +60,7 @@ const CLIENT: Profile = {
   },
   stack: HERO.stack,
   // short on purpose: what I do, proof, how I work; no Experience or Skills for founders
-  sections: ["offers", "featured", "howIWork", "writing", "about", "ask"],
+  sections: ["offers", "featured", "howIWork", "about", "writing", "ask"],
   featured: [
     { slug: "money-track" },
     { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." },

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PostList } from "@/components/blog/PostList";
+import { Suspense } from "react";
+import { BlogList } from "@/components/blog/index/BlogList";
+import { BlogListView } from "@/components/blog/index/BlogListView";
+import { SplitHeading } from "@/components/motion/SplitHeading";
 import { Contact } from "@/components/sections/Contact";
 import { Cta } from "@/components/sections/Cta";
-import { getPosts } from "@/lib/content";
+import { getPosts, toPostCard } from "@/lib/content";
 import { BLOG } from "@/lib/site";
 
 const { title, description } = BLOG.meta;
@@ -17,29 +20,29 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getPosts();
+  const posts = getPosts().map(toPostCard);
   // no published article, no blog
   if (posts.length === 0) notFound();
+  const unfiltered = { tag: null, audience: null, page: 1 };
 
   return (
     <>
       <main id="main">
-        <section aria-labelledby="blog-title" className="px-gutter pt-fl-56/120">
-          <p className="text-[14px] leading-[20px] text-accent | md:text-[15px] md:leading-[21px]">
-            {BLOG.kicker}
-          </p>
-          <h1
-            id="blog-title"
-            className="mt-fl-16/24 font-display text-fl-56/144 leading-[0.85] font-semibold tracking-[-0.045em]"
-          >
-            {BLOG.title}
-          </h1>
-          <p className="mt-fl-16/24 max-w-[600px] text-fl-17/24 leading-[1.35] tracking-[-0.01em] text-text-3">
-            {BLOG.sub}
-          </p>
-          <div className="mt-fl-40/72">
-            <PostList posts={posts} />
+        <section aria-labelledby="blog-title" className="px-gutter">
+          <div className="grid items-end gap-[16px] pt-fl-40/96 | md:grid-cols-[minmax(0,1fr)_minmax(0,560px)] md:gap-[40px]">
+            <SplitHeading
+              id="blog-title"
+              text={BLOG.title}
+              className="text-fl-64/112 leading-[0.88] font-semibold tracking-[-0.055em]"
+            />
+            <p className="max-w-[560px] text-fl-18/22 leading-[1.4] tracking-[-0.01em] text-pretty text-text-3">
+              {BLOG.sub}
+            </p>
           </div>
+          {/* the server renders the unfiltered list; ?tag= and ?page= are applied once the browser reads the URL */}
+          <Suspense fallback={<BlogListView posts={posts} query={unfiltered} />}>
+            <BlogList posts={posts} />
+          </Suspense>
         </section>
         <Cta />
       </main>

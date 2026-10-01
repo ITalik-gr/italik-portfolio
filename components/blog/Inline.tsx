@@ -8,7 +8,7 @@ export function Inline({ text }: { text: string }) {
   return text.split(TOKEN).map((part, index) => {
     if (part.startsWith("`")) {
       return (
-        <code key={index} className="bg-surface px-[6px] py-[2px] font-mono text-[0.85em] text-text">
+        <code key={index} className="bg-surface-2 px-[6px] py-[2px] font-mono text-[0.84em] text-text">
           {part.slice(1, -1)}
         </code>
       );
@@ -26,8 +26,8 @@ export function Inline({ text }: { text: string }) {
     const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
     if (link) {
       const [, label, href] = link;
-      const className =
-        "text-text underline decoration-line-strong underline-offset-[4px] transition-colors duration-150 hover:text-accent hover:decoration-accent";
+      // the one place the accent shows up in running text
+      const className = "text-accent underline-offset-[3px] hover:underline";
       return href.startsWith("/") || href.startsWith("#") ? (
         <Link key={index} href={href} className={className}>
           {label}
