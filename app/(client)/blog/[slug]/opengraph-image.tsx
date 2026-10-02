@@ -42,6 +42,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     lines: toLines(post.title, size),
     titleSize: size,
     lead: post.summary,
-    path: `/blog/${post.slug}`,
   });
 }

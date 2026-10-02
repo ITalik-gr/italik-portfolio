@@ -40,7 +40,8 @@ type Props = {
   titleSize: number;
   lead?: string;
   leadAccent?: boolean;
-  path: string;
+  // no path = no footer line (blog cards stay minimal)
+  path?: string;
 };
 
 // og images take inline styles only (satori), so Tailwind classes can't be used here
@@ -134,20 +135,22 @@ export async function renderOgCard({
         )}
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          paddingTop: 24,
-          borderTop: `1px solid ${OG_COLORS.line}`,
-          fontFamily: "DM Mono",
-          fontSize: 20,
-          color: OG_COLORS.muted,
-        }}
-      >
-        <div>{`${SITE.name} · Full-stack developer`}</div>
-        <div>{`italik.dev${url}`}</div>
-      </div>
+      {url && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            paddingTop: 24,
+            borderTop: `1px solid ${OG_COLORS.line}`,
+            fontFamily: "DM Mono",
+            fontSize: 20,
+            color: OG_COLORS.muted,
+          }}
+        >
+          <div>{`${SITE.name} · Full-stack developer`}</div>
+          <div>{`italik.dev${url}`}</div>
+        </div>
+      )}
     </div>,
     {
       ...OG_SIZE,
