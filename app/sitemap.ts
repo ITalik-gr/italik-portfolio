@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
     { url: `${siteUrl}/services`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     ...ROLE_PROFILES.map((profile) => ({
       url: `${siteUrl}${profile.path}`,
       changeFrequency: "weekly" as const,

@@ -97,6 +97,25 @@ export function caseJsonLd(project: Project) {
   };
 }
 
+// an opengraph-image inside a route group is served at a hashed path; same djb2 as Next, checked by tests/e2e/seo.spec.ts
+function ogImageUrl(url: string, segmentDir: string) {
+  let hash = 5381;
+  for (const char of segmentDir) hash = ((hash << 5) + hash + char.charCodeAt(0)) & 0xffffffff;
+  return `${url}/opengraph-image-${(hash >>> 0).toString(36).slice(0, 6)}`;
+}
+
+// a post has only a date; Google wants a full datetime with an offset, so it's midnight in Kyiv
+export function kyivDateTime(date: string) {
+  const offset = new Intl.DateTimeFormat("en-US", {
+    timeZone: SITE.location.timeZone,
+    timeZoneName: "longOffset",
+  })
+    .formatToParts(new Date(`${date}T12:00:00Z`))
+    .find((part) => part.type === "timeZoneName")!
+    .value.replace("GMT", "");
+  return `${date}T00:00:00${offset || "+00:00"}`;
+}
+
 export function postJsonLd(post: Post) {
   const url = `${siteUrl}/blog/${post.slug}`;
   return {
@@ -109,10 +128,10 @@ export function postJsonLd(post: Post) {
         mainEntityOfPage: url,
         headline: post.title,
         description: post.summary,
-        datePublished: post.date,
+        datePublished: kyivDateTime(post.date),
         author: person,
         publisher: { "@id": person["@id"] },
-        image: `${url}/opengraph-image`,
+        image: ogImageUrl(url, "/(client)/blog/[slug]"),
         keywords: post.tags.join(", "),
         inLanguage: "en",
       },
@@ -145,6 +164,7 @@ export function servicesJsonLd() {
         areaServed: "Worldwide",
         address: person.address,
         email: SITE.email,
+        image: ogImageUrl(url, "/(client)/services"),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Services",

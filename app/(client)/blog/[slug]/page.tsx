@@ -22,7 +22,7 @@ import {
   toPostCard,
 } from "@/lib/content";
 import { getToc, parseMarkdown, readingMinutes, slugify } from "@/lib/markdown";
-import { postJsonLd } from "@/lib/seo";
+import { kyivDateTime, postJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
       locale: "en_US",
       title,
       description: post.summary,
-      publishedTime: post.date,
+      publishedTime: kyivDateTime(post.date),
       authors: [SITE.name],
       tags: post.tags,
     },

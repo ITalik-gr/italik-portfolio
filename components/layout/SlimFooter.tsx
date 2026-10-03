@@ -19,6 +19,9 @@ export function SlimFooter() {
       <Link href="/services" className="transition-colors duration-150 hover:text-accent">
         Services →
       </Link>
+      <Link href="/privacy" className="transition-colors duration-150 hover:text-accent">
+        Privacy
+      </Link>
       <p>
         Kyiv · <KyivTime /> · <KyivOffset />
       </p>

@@ -7,6 +7,8 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: `Page not found · ${SITE.name}`,
   robots: { index: false },
+  // the root layout points canonical at "/", which a missing page must not claim
+  alternates: { canonical: null },
 };
 
 // lives outside the route groups, so it brings its own header and footer

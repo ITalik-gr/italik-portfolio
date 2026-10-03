@@ -11,7 +11,9 @@ export function SplitHeading({ id, text, className }: Props) {
   let index = 0;
 
   return (
-    <h1 id={id} aria-label={text} className={className}>
+    // real text in sr-only, so crawlers that skip aria-hidden still read a non-empty h1
+    <h1 id={id} className={className}>
+      <span className="sr-only">{text}</span>
       {text.split(" ").map((word, wordIndex) => (
         <span key={wordIndex} aria-hidden>
           {wordIndex > 0 && " "}

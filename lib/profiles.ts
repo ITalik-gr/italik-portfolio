@@ -51,7 +51,7 @@ const CLIENT: Profile = {
   meta: {
     title: "Vitaliy Hrytsenko · Solo developer for founders",
     description:
-      "A solo developer for founders. I take your product from decision to production, without step-by-step specs. AI features, agents and full products. Remote from Kyiv.",
+      "A solo developer for founders. I take your product from decision to production without step-by-step specs. AI features, agents, full products. Remote from Kyiv.",
   },
   hero: {
     title: HERO.title,
@@ -79,7 +79,7 @@ const AI: Profile = {
   meta: {
     title: "Vitaliy Hrytsenko · Full-stack developer building AI agents",
     description:
-      "Full-stack developer in Kyiv building AI agents and LLM products end to end with React, Next.js, Node.js and Cloudflare. Open to remote full-time or contract work.",
+      "Full-stack developer in Kyiv building AI agents and LLM products end to end with React, Next.js, Node.js and Cloudflare. Remote, full-time or contract.",
   },
   hero: HERO,
   stack: HERO.stack,
@@ -104,7 +104,7 @@ const FRONTEND: Profile = {
   meta: {
     title: "Vitaliy Hrytsenko · Front-end developer (React, Next.js, Astro)",
     description:
-      "Front-end developer who turns Figma into fast, pixel-perfect sites and apps with React, Next.js and Astro. 30+ shipped, Core Web Vitals and SEO included. Remote.",
+      "Front-end developer who turns Figma into fast, pixel-perfect sites and apps with React, Next.js, Astro. 30+ shipped, Core Web Vitals and SEO included. Remote.",
   },
   hero: {
     title: "Every pixel, every ms.",
@@ -157,7 +157,7 @@ const FULLSTACK: Profile = {
   meta: {
     title: "Vitaliy Hrytsenko · Full-stack developer (React, Node.js, NestJS)",
     description:
-      "Full-stack developer who owns features end to end: React and Next.js on the front, Node.js, NestJS and PostgreSQL on the back, AI features when a product needs them.",
+      "Full-stack developer who owns features end to end: React, Next.js on the front, Node.js, NestJS, PostgreSQL on the back, AI features when a product needs them.",
   },
   hero: {
     title: "I build products end to end",

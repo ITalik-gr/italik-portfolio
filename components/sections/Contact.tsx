@@ -73,7 +73,12 @@ export function Contact({ audience }: { audience: Audience }) {
               {HIRING.label} →
             </Link>
           )}
-          <span>{FOOTER.copyright}</span>
+          <span>
+            {FOOTER.copyright} ·{" "}
+            <Link href="/privacy" className="transition-colors duration-150 hover:text-accent">
+              Privacy
+            </Link>
+          </span>
         </div>
       </Reveal>
     </footer>
