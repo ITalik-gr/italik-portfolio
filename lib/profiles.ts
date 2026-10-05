@@ -123,7 +123,7 @@ const FRONTEND: Profile = {
   ],
   sections: ["featured", "clientWork", "experience", "about", "lab", "ask", "skills"],
   featured: [
-    { slug: "ppc-io", keyIdea: "One front-end, 22 months, two home rebuilds." },
+    { slug: "ppc-io", keyIdea: "One front end, 22 months, two home rebuilds." },
     { slug: "sollas-co", keyIdea: "Figma to deploy, then every redesign since." },
   ],
   skillsOrder: [
@@ -140,7 +140,7 @@ const FRONTEND: Profile = {
     ABOUT[0],
     "I care about the details on the front end: layouts that match Figma to the pixel, animation that feels right, and pages that load fast and rank. For two years I shipped 1–2 marketing sites a week for an agency, and I still maintain sites I first built in 2024. When a product needs AI, I can build that too.",
     ABOUT[2],
-    "Next, I want to own the front end of a product or a site that matters to a team. Full-time, contract or part-time all work for me.",
+    "Next, I want to own the front end of a product or a site that matters to a team. Full-time, contract or part-time: all work for me.",
   ],
   askChips: [
     "Is he a fit for a front-end role?",
@@ -202,7 +202,7 @@ const FULLSTACK: Profile = {
     ABOUT[0],
     "I work on both halves: the schema, the API, the payments and the interface. I was the only developer on Answerly, from real-time chat to Stripe payouts, and I run my own products on Cloudflare Workers, with each user's data in its own Durable Object. AI goes in where it actually helps.",
     ABOUT[2],
-    "Next, I want to own features end to end in a product team. Full-time, contract or part-time all work for me.",
+    "Next, I want to own features end to end in a product team. Full-time, contract or part-time: all work for me.",
   ],
   askChips: [
     "Is he a fit for a full-stack role?",

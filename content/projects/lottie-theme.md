@@ -12,7 +12,7 @@ typeLabel: Personal · tool · MCP
 summary: Recolours a Lottie animation into any palette or theme, by hand, by script or by an agent that checks its result by rendering it.
 description: A browser editor, a CLI, an MCP server and a live editor–agent bridge that find every colour in a Lottie file, remap it and render the result to check it. All four are thin shells over one core package, published to npm, so a hand edit, a script and an agent come out identical.
 keyIdea: The agent must look at what it rendered.
-role: Solo · design, front-end, tooling, AI
+role: Solo · design, front end, tooling, AI
 timeline: 2026 · ~1 month
 stack: [TypeScript, Next.js, React, Zustand, lottie-web, Tailwind CSS, shadcn/ui, MCP SDK, Anthropic SDK, GitHub Actions]
 shipsAs: [Web app, CLI on npm, MCP server, Live sync bridge]

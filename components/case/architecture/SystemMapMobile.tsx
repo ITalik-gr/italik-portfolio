@@ -106,18 +106,26 @@ function NodeGrid({ nodes, columns }: { nodes: Node[]; columns: 2 | 3 }) {
     <ul
       className={cn(
         "mt-[10px] grid gap-[8px]",
-        columns === 3 ? "grid-cols-3" : "grid-cols-1 | sm:grid-cols-2",
+        // three columns at 320 leave room for "Telegram" only with the tighter gap, padding and title
+        columns === 3 ? "grid-cols-3 gap-[6px] | md:gap-[8px]" : "grid-cols-1 | sm:grid-cols-2",
       )}
     >
       {nodes.map((node) => (
         <li
           key={node.id}
           className={cn(
-            "flex flex-col gap-[4px] p-[10px] | md:p-[12px]",
+            "flex flex-col gap-[4px] px-[8px] py-[10px] | md:p-[12px]",
             kindBox(node.kind, "map"),
           )}
         >
-          <span className="text-[15px] leading-[19px] font-semibold text-text">{node.title}</span>
+          <span
+            className={cn(
+              "text-[15px] leading-[19px] font-semibold text-text",
+              columns === 3 && "text-[14px] | md:text-[15px]",
+            )}
+          >
+            {node.title}
+          </span>
           {node.sub && (
             <span className="font-mono text-[10px] leading-[14px] tracking-[0.06em] text-text-3 uppercase">
               {node.sub}

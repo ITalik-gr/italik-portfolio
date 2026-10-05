@@ -30,7 +30,7 @@ highlights:
   - title: Strapi → content collections
     text: "I migrated the content from Strapi to typed Astro collections: no external CMS to run, faster builds, and a bad entry fails the build."
 outcome:
-  - { value: ~22 mo, label: Front-end in my hands }
+  - { value: ~22 mo, label: Front end in my hands }
   - { value: "96", label: Tool pages on one template }
   - { value: "2", label: Home page rebuilds }
 ---

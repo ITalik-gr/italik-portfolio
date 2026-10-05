@@ -74,7 +74,7 @@ export function getSkillGroups() {
 }
 
 export const MORE_PROJECTS = {
-  caption: "+25 marketing sites for agency clients",
+  caption: "25+ marketing sites for agency clients",
   items: [
     { name: "Bold", category: "Agency site + our work", href: "https://www.boldgrp.io" },
     { name: "Axioma Search", category: "Marketing site", href: "https://www.axiomasearch.com" },

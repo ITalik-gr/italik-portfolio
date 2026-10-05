@@ -19,13 +19,14 @@ export function CodeBlock({ lang, title, code }: { lang: string; title?: string;
       <figure className="border border-line bg-surface">
         <div className="flex items-stretch justify-between border-b border-line bg-bg font-mono text-[12px]">
           {title ? (
-            <span className="-mb-px flex h-[42px] items-center border-r border-line bg-surface px-[16px] whitespace-nowrap text-text">
-              {title}
+            <span className="-mb-px flex h-[42px] min-w-0 items-center border-r border-line bg-surface px-[12px] text-text | md:px-[16px]">
+              {/* a long path is cut on narrow phones so Copy stays on screen */}
+              <span className="truncate">{title}</span>
             </span>
           ) : (
             <span />
           )}
-          <span className="flex items-center gap-[14px] pr-[6px] pl-[12px] tracking-[0.06em] text-muted uppercase">
+          <span className="flex shrink-0 items-center gap-[10px] pr-[6px] pl-[10px] tracking-[0.06em] text-muted uppercase | md:gap-[14px] md:pl-[12px]">
             {lang}
             <CopyButton text={code} event="code_copy" data={{ file: title ?? "", lang }} />
           </span>

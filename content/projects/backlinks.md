@@ -11,7 +11,7 @@ tags: [marketing-site]
 typeLabel: Client · marketing site
 via: Sollas
 summary: "A marketing site and blog the team edits without a developer: 24 section types in the CMS, from Figma to finished build in ~6 weeks."
-role: "Sole developer: Next.js front-end and Strapi CMS"
+role: "Sole developer: Next.js front end and Strapi CMS"
 timeline: 2024 · ~6 weeks
 stack: [Next.js, React, Strapi, SCSS, ConvertKit]
 # only the vercel build is mine; the production domain runs an older build and is never linked
@@ -46,6 +46,6 @@ Backlinks offers link building and SEO services. The site has a blog, an example
 
 ## What I did
 
-I built the front-end in Next.js (App Router) and the back-end in Strapi. In Strapi I modelled the pages, 24 reusable section components and a blog with posts, authors and categories. On the front-end, a section renderer turns the API response into pages, and I flattened Strapi's nested response format so components get plain data.
+I built the front end in Next.js (App Router) and the back end in Strapi. In Strapi I modelled the pages, 24 reusable section components and a blog with posts, authors and categories. On the front end, a section renderer turns the API response into pages, and I flattened Strapi's nested response format so components get plain data.
 
 I also built the blog (pagination, category filters, related posts, sharing, a contents list from headings), SEO fields per page, and the apply form with validation and ConvertKit submission.

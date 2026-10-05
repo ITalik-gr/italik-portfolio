@@ -39,7 +39,7 @@ export const SERVICES = [
     title: "Make what you have faster and cheaper",
     short: "Speed, AI cost, reliability, SEO.",
     text: "Speed, AI cost, reliability and SEO. I find where the money and the time go and fix that first.",
-    result: "AI Telegram Assistant: running cost down from $75-150 to $3-6 a month.",
+    result: "AI Telegram Assistant: running cost down from $75–150 to $3–6 a month.",
     proof: ["tg-assistant", "job-radar", "ppc-io", "sollas-co"],
   },
   {
@@ -67,12 +67,12 @@ export const HOW_I_WORK = [
   {
     title: "I tell you what to cut",
     text: "Fewer features, faster to users.",
-    proof: "Job Radar: the model only where it's needed, cost down from ~$15 to $1-2 a month.",
+    proof: "Job Radar: the model only where it's needed, cost down from ~$15 to $1–2 a month.",
   },
   {
     title: "I talk in results",
     text: "Money, conversion, cost, stability.",
-    proof: "AI Telegram Assistant: running cost down from $75-150 to $3-6 a month.",
+    proof: "AI Telegram Assistant: running cost down from $75–150 to $3–6 a month.",
   },
 ] as const;
 

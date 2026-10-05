@@ -11,7 +11,7 @@ typeLabel: Personal · AI feature
 summary: The AI chat on this site. It answers only from my real content, for under a cent a question.
 description: A streaming chat that knows my projects, experience and how I work. The whole knowledge base is built from this site's content at build time and sits in a cached system prompt, with rate limits, a daily budget and a golden-question eval set.
 keyIdea: It only knows what this site says.
-role: Solo · design, front-end, back-end, AI
+role: Solo · design, front end, back end, AI
 timeline: "2026"
 stack: [Next.js, TypeScript, Anthropic API, Upstash Redis, Zod]
 links:
@@ -45,7 +45,7 @@ decisions:
     because: "it is about 19k tokens, so everything fits. Prompt caching makes repeat reads cost a tenth, and there is no retrieval step that could miss the right fact."
   - chose: building the knowledge from site content
     over: a separate hand-written chat document
-    because: one definition of every fact. When I edit a project page, the chat knows it on the next build.
+    because: it keeps one definition of every fact. When I edit a project page, the chat knows it on the next build.
   - chose: a budget in input-token equivalents
     over: counting requests
     because: "output, cache writes and cache reads cost different amounts. One weighted number caps the real daily spend, whichever model runs: about $3 a day on Sonnet 5.5."

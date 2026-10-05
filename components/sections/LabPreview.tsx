@@ -22,7 +22,7 @@ export function LabPreview({ items, active }: Props) {
             active && "opacity-0",
           )}
         >
-          Hover a project
+          Hover over a project
         </div>
         {items.map((item) => (
           <div

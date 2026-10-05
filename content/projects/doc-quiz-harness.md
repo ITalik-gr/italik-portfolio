@@ -11,7 +11,7 @@ typeLabel: Personal · agent
 summary: Study any document with an agent that quizzes you on it. The model writes the questions, code grades the answers.
 description: A hand-written agent harness in TypeScript on the raw Anthropic SDK, with no agent framework. The model navigates a document through a section-reading tool, writes quiz questions as validated tool input, and code grades the answers.
 keyIdea: The model writes questions; code grades them.
-role: Solo · back-end, AI
+role: Solo · back end, AI
 timeline: 2026 · since September
 stack: [TypeScript, Node.js, Anthropic SDK, Zod, tsx]
 cover: /work/doc-quiz-harness/cover.png

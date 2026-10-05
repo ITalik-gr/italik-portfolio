@@ -12,7 +12,7 @@ typeLabel: Personal · AI product
 summary: "An AI finance app where every number comes from SQL: ~97% categorisation accuracy at ~80% lower cost."
 description: A multi-user finance app that syncs Monobank and CSV statements, categorises spending and answers questions about your money. Each user's data lives in its own Durable Object. A small judgment model and Claude share categorisation in a measured cascade. The same numbers are exposed to Claude over an MCP server with built-in OAuth 2.1.
 keyIdea: The model never computes a number.
-role: Solo · design, front-end, back-end, AI
+role: Solo · design, front end, back end, AI
 timeline: 2026 · ~3 months
 stack: [TypeScript, React, RTK Query, Cloudflare Workers, Durable Objects (SQLite), D1, Hono, Anthropic API, TypeSafe Jev]
 shipsAs: [Web app (PWA), MCP server, Telegram bot + Mini App]
@@ -124,7 +124,7 @@ I'd write the eval set before the first prompt. A judgment model tuned on my dat
 
 ## Results
 
-Live in production with open Google sign-up and a public demo. `npm run check` runs lint and the tests, including golden analytics snapshots. Latest held-out eval: Haiku gets 35 of 36 root categories right, for $0.03 per run.
+Live in production with open Google sign-up and a public demo. One command, npm run check, runs lint and the tests, including golden analytics snapshots. Latest held-out eval: Haiku gets 35 of 36 root categories right, for $0.03 per run.
 
 ## Next
 

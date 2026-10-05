@@ -7,8 +7,8 @@ order: 6
 status: next-up
 tags: [agent]
 typeLabel: Personal · agent
-summary: An agent-mentor that builds a personalised learning course.
+summary: A mentor agent that builds a personalised learning course.
 nowBuilding:
   lastUpdate: Next
-  updateNote: Starts after Doc Quiz
+  updateNote: Starts after Quiz Dock
 ---
