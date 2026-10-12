@@ -2,7 +2,7 @@
 title: Lottie Theme
 slug: lottie-theme
 kind: personal
-show: [featured, lab]
+show: [lab]
 caseStudy: true
 order: 2
 status: live

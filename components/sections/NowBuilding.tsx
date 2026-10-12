@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getNowBuilding } from "@/lib/content";
 import { SECTIONS } from "@/lib/site";
+import { cn } from "@/lib/utils";
 import { NowBuildingCard } from "./NowBuildingCard";
 
 export function NowBuilding() {
@@ -13,7 +14,13 @@ export function NowBuilding() {
   return (
     <Section id="now" labelledBy="now-title">
       <SectionHeader id="now-title" meta={meta} title={title} />
-      <ul className="mt-fl-24/40 grid gap-[12px] | lg:grid-cols-3 lg:gap-x-fl-16/24 lg:gap-y-0">
+      <ul
+        className={cn(
+          "mt-fl-24/40 grid gap-[12px] | lg:gap-x-fl-16/24 lg:gap-y-0",
+          // columns follow the count, so two cards split the row in half
+          projects.length >= 3 ? "lg:grid-cols-3" : projects.length === 2 && "lg:grid-cols-2",
+        )}
+      >
         {projects.map((project) => (
           <NowBuildingCard key={project.slug} project={project} />
         ))}

@@ -2,7 +2,7 @@
 title: Agent Mentor
 slug: agent-mentor
 kind: personal
-show: [now]
+show: []
 order: 6
 status: next-up
 tags: [agent]

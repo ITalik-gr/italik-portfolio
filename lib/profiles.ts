@@ -62,9 +62,9 @@ const CLIENT: Profile = {
   // short on purpose: what I do, proof, how I work; no Experience or Skills for founders
   sections: ["offers", "featured", "howIWork", "about", "writing", "ask"],
   featured: [
+    { slug: "keyline" },
     { slug: "money-track" },
     { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." },
-    { slug: "tg-assistant" },
   ],
   // the last paragraph of ABOUT is about looking for a role
   about: ABOUT.slice(0, 3),
@@ -185,6 +185,7 @@ const FULLSTACK: Profile = {
     "skills",
   ],
   featured: [
+    { slug: "keyline" },
     { slug: "money-track" },
     { slug: "answerly", keyIdea: "Sole developer: chat, auth and Stripe payouts." },
   ],

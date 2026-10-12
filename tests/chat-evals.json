@@ -5,11 +5,21 @@
       "id": "agents-built",
       "question": "What AI agents has he built?",
       "includeAny": [
+        "Keyline",
         "Money Track",
         "Telegram",
         "Lottie",
         "Doc Quiz",
         "harness"
+      ]
+    },
+    {
+      "id": "keyline-undo",
+      "question": "How does Claude edit animations in Keyline without breaking them?",
+      "includeAny": [
+        "op",
+        "undo",
+        "validat"
       ]
     },
     {
@@ -97,8 +107,10 @@
     {
       "id": "mcp",
       "question": "Has he built an MCP server?",
-      "includeAll": [
-        "Lottie"
+      "includeAny": [
+        "Keyline",
+        "Lottie",
+        "Money Track"
       ]
     },
     {

@@ -13,10 +13,6 @@ export function PhoneFrame({ label, children, className }: Props) {
             {label ?? "Screenshot"}
           </div>
         )}
-        <span
-          aria-hidden
-          className="absolute top-[8px] left-1/2 h-[14px] w-[65px] -translate-x-1/2 rounded-full bg-bg"
-        />
       </div>
     </figure>
   );

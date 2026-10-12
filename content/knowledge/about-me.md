@@ -39,7 +39,7 @@
 - Front-end: React, Next.js, Astro, TypeScript; pixel-perfect, fast, animated interfaces; Core Web Vitals and SEO.
 - Back-end, and where he used it:
   - Node.js, Firebase, Stripe Checkout and Connect: Answerly, where he was the sole developer (realtime chat, auth, payments, payouts, webhooks).
-  - Cloudflare Workers, Durable Objects, D1, Hono: Money Track (per-user data isolation with Durable Objects, D1 as the shared directory of users, shared rates and OAuth clients, bank sync through Monobank webhooks).
+  - Cloudflare Workers, Durable Objects, D1, Hono: Keyline (one Durable Object per project holds the live scene and broadcasts every commit over WebSocket; R2 for assets and fonts; Workers AI for Clef routing and checks) and Money Track (per-user data isolation with Durable Objects, D1 as the shared directory of users, shared rates and OAuth clients, bank sync through Monobank webhooks).
   - Cloudflare Workers, D1, grammY: the AI Telegram Assistant.
   - Strapi as a headless CMS: ppc.io and the Backlinks site.
   - PostgreSQL and Express in client work at Sollas; NestJS in his personal back-end projects.
@@ -85,6 +85,7 @@ Years of experience with each technology overall, not strictly commercial time.
 
 ## Projects at a glance
 Full details are in each project's file; these lines are only a quick reference.
+- **Keyline** (his main project, launched 2026-10): a motion-graphics editor where the user's own Claude builds animations on a live scene and the user points at an exact element and second to fix them. Claude connects through a remote MCP server (31 tools, OAuth 2.1) or an in-app chat on the user's own Anthropic key; Cloudflare Clef models route chat messages and check rendered frames. Every edit, human or AI, is a validated, invertible op batch committed by one Durable Object per project, so each Claude edit is one undo step. Next.js, React, TypeScript, Cloudflare Workers, Durable Objects, D1, R2, Hono, better-auth, WebCodecs video export. Built solo in about a week with Claude Code as his coding partner. Free, Google or GitHub sign-in; the repo is private for now. keyline.italik.dev
 - **Money Track**: AI personal-finance tracker; a deterministic core owns the numbers and the LLM advises. React, TypeScript, Cloudflare Workers, Durable Objects, D1, Hono, Anthropic API, RTK Query, PWA. Open source. Live demo with a demo account: money.italik.dev/demo · code: github.com/ITalik-gr/money-track
 - **Lottie Theme**: recolours Lottie animations into any palette or theme (dark to light and back, brand colours), without After Effects. One core with four shells: a browser editor, a CLI, an MCP server with 12 tools, and a live editor–agent bridge; all published to npm. Open source, with unit tests plus browser and agent end-to-end checks. lottie.italik.dev · code: github.com/ITalik-gr/lottie-theme
 - **Quiz Dock (agent harness)**: discuss a document with an agent and get quizzed on it; the model writes the questions, code grades them. Hand-written agent loop in TypeScript on the raw Anthropic SDK, no framework. The CLI works; a web version is in progress, then subagents for multi-page docs. Code: github.com/ITalik-gr/quiz-dock
@@ -110,7 +111,7 @@ Full details are in each project's file; these lines are only a quick reference.
 - Q: Does he know Python? A: He understands the syntax and can read it, but his commercial work is in TypeScript and JavaScript.
 - Q: Has he worked in a team? A: Yes. He has worked in teams of up to 20 people, including the agency team for Bold and with designers and client developers at Sollas. He has also been the sole developer on several products.
 - Q: Can he own a project alone? A: Yes. Answerly, sollas.co and the Backlinks site were built solo, from Figma to deploy. On ppc.io he owned the whole front-end for about 22 months and did the Strapi-to-MDX migration himself while other people handled content and other parts.
-- Q: Has he shipped AI features? A: Yes, in his own live products: Money Track's LLM advisor, the AI Telegram Assistant, and this chat.
+- Q: Has he shipped AI features? A: Yes, in his own live products: Keyline's Claude editing agent and MCP server, Money Track's LLM advisor, the AI Telegram Assistant, and this chat.
 - Q: How does he use AI for coding? A: Claude Code every day with his own skills. He plans the work with the agent, delegates the repetitive parts, and reviews and verifies everything it produces.
 - Q: Does he write tests? A: Yes. His own projects have unit tests where the logic matters, plus golden analytics snapshots in Money Track, browser and agent end-to-end checks in Lottie Theme, and Playwright end-to-end tests on this site. In commercial work he writes unit and integration tests with Jest.
 - Q: Is he open to front-end-only roles? A: Yes, although his focus is full-stack and AI.
