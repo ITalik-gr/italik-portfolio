@@ -15,8 +15,6 @@ role: Solo · design, back end, AI, ops
 timeline: 2026 · ~2 months
 stack: [TypeScript, Cloudflare Workers, grammY, D1, xAI Grok, Workers AI, Vectorize, R2]
 shipsAs: [Telegram bot]
-links:
-  code: https://github.com/ITalik-gr/tg_chat_bot
 frameUrl: t.me · group chat
 # illustration, not a real screenshot: the live chat is private, so names and messages are made up
 cover: /work/tg-assistant/cover.png
