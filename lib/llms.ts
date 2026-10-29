@@ -5,6 +5,7 @@ import { PROFILES, ROLE_PROFILES } from "@/lib/profiles";
 import { getProjectLinks, isExternal } from "@/lib/project-links";
 import type { Project } from "@/lib/schemas";
 import { siteUrl } from "@/lib/seo";
+import { SERVICE_FAQ } from "@/lib/services";
 import { ABOUT, HERO, HOMES, SITE } from "@/lib/site";
 import { getSkillGroups } from "@/lib/site-lists";
 
@@ -44,6 +45,10 @@ export function buildLlmsTxt() {
     "- Builds: AI agents and LLM features inside real products (tool use, MCP servers, grounding, evals); full-stack web apps with React, Next.js, Node.js and NestJS; fast marketing sites in Next.js or Astro.",
     `- Details: ${siteUrl}/services. Weekly demo; the client owns all code and accounts; NDA on request; contract and invoicing agreed before the start; first month of support free; rates on request.`,
     `- Reach him: ${SITE.email} or Telegram ${SITE.socials.telegram}. The chat at ${siteUrl}/#ask answers questions about his work.`,
+    "",
+    "## FAQ for clients",
+    "",
+    ...SERVICE_FAQ.map((item) => `- ${item.q} ${item.a}`),
     "",
     "## For employers: hire him",
     "",
